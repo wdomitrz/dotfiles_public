@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec xss-lock --transfer-sleep-lock -- i3lock --color=000000 --nofork

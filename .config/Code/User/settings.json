@@ -1,0 +1,341 @@
+{
+    "[latex]": {
+        "files.trimTrailingWhitespace": false
+    },
+    "breadcrumbs.enabled": true,
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4 }",
+    "C_Cpp.debugger.useBacktickCommandSubstitution": true,
+    "C_Cpp.errorSquiggles": "Enabled",
+    "C_Cpp.loggingLevel": "Debug",
+    "cSpell.language": "en,pl",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.cursorBlinking": "solid",
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "editor.rulers": [
+        80,
+        100,
+        120
+    ],
+    "editor.tabCompletion": "on",
+    "editor.wordWrap": "on",
+    "explorer.confirmDelete": false,
+    "files.associations": {
+        "**/.ssh/config": "ssh_config",
+        "**/.ssh/configs/*.conf": "ssh_config",
+        "**/i3/config": "i3",
+        "*.rmd": "markdown"
+    },
+    "files.autoSave": "onFocusChange",
+    "files.exclude": {
+        "**.o": true,
+        "**/__pycache__": true,
+        "**/.*": true,
+        "**/.vscode": true,
+        "**/*.acn": true,
+        "**/*.acr": true,
+        "**/*.alg": true,
+        "**/*.aux": true,
+        "**/*.bbl": true,
+        "**/*.bcf": true,
+        "**/*.blg": true,
+        "**/*.fls": true,
+        "**/*.glg": true,
+        "**/*.glo": true,
+        "**/*.gls": true,
+        "**/*.idx": true,
+        "**/*.ind": true,
+        "**/*.ist": true,
+        "**/*.lof": true,
+        "**/*.lot": true,
+        "**/*.nav": true,
+        "**/*.snm": true,
+        "**/*.synctex.gz": true,
+        "**/*.toc": true
+    },
+    "files.insertFinalNewline": true,
+    "files.restoreUndoStack": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "git.autofetch": true,
+    "keyboard.dispatch": "keyCode",
+    "latex-workshop.intellisense.file.exclude": [
+        "**/*.aux",
+        "**/*.bbl",
+        "**/*.bcf",
+        "**/*.blg",
+        "**/*.idx",
+        "**/*.ind",
+        "**/*.lof",
+        "**/*.lot",
+        "**/*.out",
+        "**/*.toc",
+        "**/*.acn",
+        "**/*.acr",
+        "**/*.alg",
+        "**/*.glg",
+        "**/*.glo",
+        "**/*.gls",
+        "**/*.ist",
+        "**/*.fls",
+        "**/*.log",
+        "**/*.nav",
+        "**/*.snm",
+        "**/*.fdb_latexmk",
+        "**/*.synctex.gz",
+        "**/*.run.xml",
+    ],
+    "latex-workshop.view.pdf.viewer": "tab",
+    "markdownlint.config": {
+        "MD007": {
+            "indent": 4
+        }
+    },
+    "path-autocomplete.triggerOutsideStrings": true,
+    "python.formatting.autopep8Args": [
+        "--aggressive",
+        "--aggressive"
+    ],
+    "python.languageServer": "Pylance",
+    "search.useIgnoreFiles": true,
+    "security.workspace.trust.untrustedFiles": "newWindow",
+    "settingsSync.keybindingsPerPlatform": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "telemetry.telemetryLevel": "off",
+    "terminal.integrated.copyOnSelection": true,
+    "update.showReleaseNotes": false,
+    "vim.enableNeovim": true,
+    "vim.handleKeys": {
+        "<C-l>": true,
+        "<C-a>": true,
+        "<C-o>": true,
+        "<C-r>": true,
+        "<C-i>": true,
+        "<C-[>": true,
+        "<C-]>": true,
+        "<C-d>": true,
+        "<C-u>": true,
+    },
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "C-a"
+            ],
+            "commands": [
+                "editor.action.selectAll"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                " ",
+                " "
+            ],
+            "commands": [
+                "workbench.action.nextEditor"
+            ]
+        },
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "g",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "g",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "u"
+            ],
+            "commands": [
+                "undo"
+            ]
+        },
+        {
+            "before": [
+                "shift+u"
+            ],
+            "commands": [
+                "reundo"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.goToDeclaration"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "k"
+            ],
+            "commands": [
+                "editor.action.showHover"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "k"
+            ],
+            "commands": [
+                "editor.action.peekDefinition"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.peekImplementation"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "g",
+                "t"
+            ],
+            "commands": [
+                "editor.action.goToTypeDefinition"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "r"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "g",
+                "r"
+            ],
+            "commands": [
+                "editor.action.showReferences"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "}"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "{"
+            ],
+            "commands": [
+                "editor.action.marker.prevInFiles"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "]"
+            ],
+            "commands": [
+                "editor.action.marker.next"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "["
+            ],
+            "commands": [
+                "editor.action.marker.prev"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "f"
+            ],
+            "commands": [
+                "editor.action.formatDocument"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "o",
+                "i"
+            ],
+            "commands": [
+                "editor.action.organizeImports",
+            ]
+        },
+    ],
+    "vim.useCtrlKeys": false,
+    "vim.useSystemClipboard": true,
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "g",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "g",
+                "k"
+            ]
+        }
+    ],
+    "window.menuBarVisibility": "toggle",
+    "window.zoomLevel": 0,
+    "workbench.activityBar.visible": false,
+    "workbench.editor.focusRecentEditorAfterClose": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "workbench.iconTheme": "file-icons",
+    "workbench.startupEditor": "none",
+    "workbench.tips.enabled": false,
+}

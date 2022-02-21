@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set-display
+i3-res
+set-background

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+boltctl list
+
+read -p "Enter uuid: " uuid
+
+boltctl enroll --policy=auto $uuid

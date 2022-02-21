@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+mn=$(pwd)
+while [ ! -z "$mn" ]; do
+    [ -r .venv/bin/activate ] && source .venv/bin/activate && break
+    mn=${mn%/*}
+done

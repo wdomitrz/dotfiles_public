@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=System;
+Comment=ssh connections menu
+Exec=rofi -show ssh
+Icon=network-receive
+Name=ssh menu
+NoDisplay=false
+StartupNotify=false
+Terminal=false
+Type=Application

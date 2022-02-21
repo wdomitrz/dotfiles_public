@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+ping -c 1 8.8.8.8
+if [ "$?" -ne "0" ]; then
+    reboot
+fi

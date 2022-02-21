@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=System;
+Comment=Application finder
+Exec=sh -c "rofi -show drun || i3-dmenu-desktop"
+Icon=edit-find
+Name=Rofi run
+NoDisplay=false
+StartupNotify=false
+Terminal=false
+Type=Application

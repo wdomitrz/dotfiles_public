@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+################################################################
+# Copyright (c) 2021 Witalis Domitrz <witekdomitrz@gmail.com>
+# MIT License
+################################################################
+
+set -u
+
+CONFIG_LOCATION="$HOME/.config/displays"
+
+# Disable disconnected displays
+for display in $(xrandr -q | grep " disconnected" | awk '{ print $1 }'); do
+    xrandr --output $display --off
+done
+
+displays=$(xrandr -q | grep " connected " | awk '{ print $1 }')
+priority_file="${CONFIG_LOCATION}/priority.txt"
+[ -f "${priority_file}" ] && priority=($(cat "${priority_file}")) || priority=("screen" "rdp0" "HDMI" "DP" "eDP")
+display_number=0
+for display in ${priority[@]}; do
+    full_name=$(echo $displays | tr " " "\n" | grep "^$display")
+    if [ $? -eq 0 ]; then
+        if [ $display_number -eq 0 ]; then
+            xrdb -remove
+            [ -f "$HOME/.Xresources" ] && xrdb -merge "$HOME/.Xresources"
+            display_xresources="${CONFIG_LOCATION}/${full_name}.Xresources"
+            [ -f "$display_xresources" ] && xrdb -merge "$display_xresources"
+            xrandr --output $full_name --auto --primary && ((display_number++))
+        else
+            xrandr --output $full_name --off && ((display_number++))
+        fi
+    fi
+done

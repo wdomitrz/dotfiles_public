@@ -1,0 +1,18 @@
+#!/bin/bash
+
+################################################################
+# Copyright (c) 2021 Witalis Domitrz <witekdomitrz@gmail.com>
+# MIT License
+################################################################
+
+# Dependencies: tesseract-ocr tesseract-ocr-chi-sim gnome-screenshot
+
+image_file="$(mktemp --suffix .png)"
+text_file="$(mktemp)"
+
+gnome-screenshot --area --file="${image_file}"
+
+tesseract -l chi_sim "${image_file}" "${text_file}" &> /dev/null
+cat "${text_file}.txt" | xclip -selection clipboard
+
+rm "${image_file}" "${text_file}.txt" "${text_file}"

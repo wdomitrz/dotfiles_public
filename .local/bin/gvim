@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+if [ -v "$TERMINAL" ]; then
+    exec $TERMINAL vim "$@"
+else
+    exec x-terminal-emulator vim "$@"
+fi

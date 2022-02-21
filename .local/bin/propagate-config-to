@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+[ -z "$1" ] && return
+destination="$1"
+
+ssh-copy-id "$destination"
+scp ~/.ssh/authorized_keys "$destination:~/.ssh/authorized_keys"
+scp ~/.bashrc ~/.bash_aliases ~/.profile ~/.local/bin/.config-sshd "$destination":

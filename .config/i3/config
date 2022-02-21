@@ -1,0 +1,198 @@
+# i3 config file (v4)
+# Author: Witalis Domitrz <witekdomitrz@gmail.com>
+
+set $mod Mod4
+set $mod2 Mod1
+
+# Movement keys
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Fira Code 9
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# change focus
+bindsym $mod+$left          focus left
+bindsym $mod+semicolon      focus left
+bindsym $mod+Left           focus left
+bindsym $mod+$down          focus down
+bindsym $mod+Down           focus down
+bindsym $mod+$up            focus up
+bindsym $mod+Up             focus up
+bindsym $mod+$right         focus right
+bindsym $mod+Right          focus right
+
+# move focused window
+bindsym $mod+Shift+$left    move left
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+$down    move down
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+$up      move up
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+$right   move right
+bindsym $mod+Shift+Right    move right
+
+# toggle split direction
+bindsym $mod+v              split toggle
+# enter fullscreen mode for the focused container
+bindsym $mod+f              fullscreen toggle
+# toggle tiling / floating
+bindsym $mod+Shift+space    floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+space          focus mode_toggle
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus    move scratchpad
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus          scratchpad show
+
+# switch to workspace
+bindsym $mod+1              workspace 1
+bindsym $mod+2              workspace 2
+bindsym $mod+3              workspace 3
+bindsym $mod+4              workspace 4
+bindsym $mod+5              workspace 5
+bindsym $mod+6              workspace 6
+bindsym $mod+7              workspace 7
+bindsym $mod+8              workspace 8
+bindsym $mod+9              workspace 9
+bindsym $mod+0              workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1        move container to workspace 1
+bindsym $mod+Shift+2        move container to workspace 2
+bindsym $mod+Shift+3        move container to workspace 3
+bindsym $mod+Shift+4        move container to workspace 4
+bindsym $mod+Shift+5        move container to workspace 5
+bindsym $mod+Shift+6        move container to workspace 6
+bindsym $mod+Shift+7        move container to workspace 7
+bindsym $mod+Shift+8        move container to workspace 8
+bindsym $mod+Shift+9        move container to workspace 9
+bindsym $mod+Shift+0        move container to workspace 10
+
+# Switch workspace
+bindsym $mod+Tab            workspace back_and_forth
+bindsym $mod2+Tab           workspace back_and_forth
+# reset i3
+bindsym $mod+Shift+r        exec --no-startup-id    i3-msg reload && i3-msg restart
+# exit i3
+bindsym $mod+Shift+e        exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+    bindsym $left           resize shrink width 1 px or 1 ppt
+    bindsym Left            resize shrink width 1 px or 1 ppt
+    bindsym $down           resize grow height 1 px or 1 ppt
+    bindsym Down            resize grow height 1 px or 1 ppt
+    bindsym $up             resize shrink height 1 px or 1 ppt
+    bindsym Up              resize shrink height 1 px or 1 ppt
+    bindsym $right          resize grow width 1 px or 1 ppt
+    bindsym Right           resize grow width 1 px or 1 ppt
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return          mode "default"
+    bindsym Escape          mode "default"
+    bindsym $mod+r          mode "default"
+}
+
+mode "mouse" {
+    bindsym $left           exec --no-startup-id xdotool mousemove_relative -- -10 0
+    bindsym $down           exec --no-startup-id xdotool mousemove_relative -- 0 +10
+    bindsym $up             exec --no-startup-id xdotool mousemove_relative -- 0 -10
+    bindsym $right          exec --no-startup-id xdotool mousemove_relative -- +10 0
+    bindsym Shift+$left     exec --no-startup-id xdotool mousemove_relative -- -100 0
+    bindsym Shift+$down     exec --no-startup-id xdotool mousemove_relative -- 0 +100
+    bindsym Shift+$up       exec --no-startup-id xdotool mousemove_relative -- 0 -100
+    bindsym Shift+$right    exec --no-startup-id xdotool mousemove_relative -- +100 0
+    bindsym Ctrl+$left      exec --no-startup-id xdotool mousemove_relative -- -1 0
+    bindsym Ctrl+$down      exec --no-startup-id xdotool mousemove_relative -- 0 +1
+    bindsym Ctrl+$up        exec --no-startup-id xdotool mousemove_relative -- 0 -1
+    bindsym Ctrl+$right     exec --no-startup-id xdotool mousemove_relative -- +1 0
+
+    bindsym space           exec --no-startup-id xdotool click 1
+    bindsym Shift+space     exec --no-startup-id xdotool click 2
+    bindsym Ctrl+space      exec --no-startup-id xdotool click 3
+
+    bindsym Escape          mode "default"
+}
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    status_command i3status-wrapper
+    position top
+    modifier none
+}
+
+# No title bar
+new_window none
+
+# Borders
+default_border pixel
+default_floating_border none
+hide_edge_borders smart
+
+# mouse mode
+bindsym $mod+Shift+m        mode "mouse"
+# resize mode
+bindsym $mod+r              mode "resize"
+# bar toggle, hide or show
+bindsym $mod+b              bar mode toggle
+# kill focused window
+bindsym $mod+Shift+q        kill
+# Adjust display
+bindsym $mod+x              exec --no-startup-id    i3-xrl
+# Pogram launcher
+bindsym $mod+d              exec --no-startup-id    gtk-launch run-menu
+# Global search
+bindsym $mod+slash          exec --no-startup-id    gtk-launch search-menu
+# Lock screen
+bindsym $mod+n              exec --no-startup-id    lock
+# Suspend
+bindsym $mod+End            exec --no-startup-id    systemctl suspend
+# Copy Chinese characters
+bindsym $mod+c              exec --no-startup-id    copy-chi-sim
+# Change background
+bindsym $mod+y              exec --no-startup-id    set-background
+# Screenshot
+bindsym Print               exec --no-startup-id    flameshot gui
+bindsym Ctrl+Print          exec --no-startup-id    flameshot full --clipboard
+# Terminal
+bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
+# Text editor
+bindsym $mod+Shift+Return   exec --no-startup-id    $TERMINAL -e $EDITOR
+
+# Apps
+bindsym XF86Display         exec --no-startup-id    arandr
+bindsym XF86Explorer        exec --no-startup-id    xdg-open ~/
+bindsym $mod+e              exec --no-startup-id    xdg-open ~/
+bindsym XF86HomePage        exec --no-startup-id    x-www-browser
+bindsym XF86Mail            exec --no-startup-id    x-www-browser "https://gmail.com"
+bindsym XF86Calculator      exec --no-startup-id    gnome-calculator
+
+# Use pactl to adjust volume in PulseAudio.
+bindsym XF86AudioRaiseVolume        exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym Ctrl+XF86AudioRaiseVolume   exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym XF86AudioLowerVolume        exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym Ctrl+XF86AudioLowerVolume   exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym XF86AudioMute               exec --no-startup-id    pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+m                      exec --no-startup-id    pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute            exec --no-startup-id    pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Handle media keys
+bindsym XF86AudioPlay       exec --no-startup-id    playerctl play-pause
+bindsym XF86AudioPause      exec --no-startup-id    playerctl pause
+bindsym XF86AudioNext       exec --no-startup-id    playerctl next
+bindsym XF86AudioPrev       exec --no-startup-id    playerctl prev
+bindsym XF86AudioStop       exec --no-startup-id    playerctl stop
+
+# Autostart
+exec --no-startup-id            ~/.config/i3/my-auto-run.sh
+exec_always --no-startup-id     autotiling

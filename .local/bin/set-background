@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+nitrogen --set-scaled --random "$HOME/.config/backgrounds" || xsetroot -solid "#000000"

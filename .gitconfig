@@ -1,0 +1,19 @@
+[user]
+
+[core]
+    excludesfile = ~/.config/git/gitignore
+
+[merge]
+    conflictstyle = diff3
+
+[alias]
+    la = log --all --graph --oneline --decorate
+
+[include]
+    path = ~/.config/git/gitconfig.local
+
+[credential]
+    helper = cache --timeout 7200
+
+[advice]
+    detachedHead = false

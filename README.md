@@ -35,6 +35,8 @@ git checkout -- <path_to_the_first_file> <path_to_the_second_file>
 
 The main installation is done using `~/.config/scripts/install.sh` script. Just run the script.
 
+Before you do it note that it will also remove some packages in script `~/.config/scripts/install-scripts/clear-packages.sh`. To avoid it, you can overwrite this script `echo "" > ~/.config/scripts/install-scripts/clear-packages.sh`.
+
 ```bash
 ~/.config/scripts/install.sh
 ```

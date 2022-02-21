@@ -15,7 +15,7 @@ mv dotfiles-public/.git ~/
 
 ### Installing
 
-The main installation is done using `` script. Just run:
+The main installation is done using `~/.config/scripts/install.sh` script. Just run:
 
 ```bash
 ~/.config/scripts/install.sh

@@ -2,7 +2,7 @@
 set -xue
 
 # apt configuration files
-sudo cp ~/.config/apt.conf.d/* /etc/apt/apt.conf.d/
+sudo cp $HOME/.config/apt.conf.d/* /etc/apt/apt.conf.d/
 
 # Enable 32 bit architecture
 sudo dpkg --add-architecture i386

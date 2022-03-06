@@ -9,25 +9,25 @@ function install-haskell-ghcup {
 }
 
 function install-nvim-appimage {
-    mkeir -p ~/.local/bin
-    wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O ~/.local/bin/nvim
-    chmod +x ~/.local/bin/nvim
+    mkeir -p $HOME/.local/bin
+    wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O $HOME/.local/bin/nvim
+    chmod +x $HOME/.local/bin/nvim
 }
 
 function install-nvim-tar-gz {
-    mkdir -p ~/.local/opt ~/.local/bin ~/.local/share/applications ~/.local/share/icons
-    curl -L https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz | tar xz -C ~/.local/opt/
-    ln -srf ~/.local/opt/nvim-linux64/bin/nvim ~/.local/bin/
-    ln -srf ~/.local/opt/nvim-linux64/share/applications/nvim.desktop ~/.local/share/applications/
-    ln -srf ~/.local/opt/nvim-linux64/share/pixmaps/nvim.png ~/.local/share/icons/
+    mkdir -p $HOME/.local/opt $HOME/.local/bin $HOME/.local/share/applications $HOME/.local/share/icons
+    curl -L https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz | tar xz -C $HOME/.local/opt/
+    ln -srf $HOME/.local/opt/nvim-linux64/bin/nvim $HOME/.local/bin/
+    ln -srf $HOME/.local/opt/nvim-linux64/share/applications/nvim.desktop $HOME/.local/share/applications/
+    ln -srf $HOME/.local/opt/nvim-linux64/share/pixmaps/nvim.png $HOME/.local/share/icons/
 }
 
 function install-kitty {
-    mkdir -p ~/.local/opt ~/.local/bin ~/.local/share/applications ~/.local/share/icons
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest=~/.local/opt/
-    ln -srf ~/.local/opt/kitty.app/bin/kitty ~/.local/bin/
-    ln -srf ~/.local/opt/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-    ln -srf ~/.local/opt/kitty.app/share/icons/hicolor/256x256/apps/kitty.png ~/.local/share/icons/
+    mkdir -p $HOME/.local/opt $HOME/.local/bin $HOME/.local/share/applications $HOME/.local/share/icons
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest=$HOME/.local/opt/
+    ln -srf $HOME/.local/opt/kitty.app/bin/kitty $HOME/.local/bin/
+    ln -srf $HOME/.local/opt/kitty.app/share/applications/kitty.desktop $HOME/.local/share/applications/
+    ln -srf $HOME/.local/opt/kitty.app/share/icons/hicolor/256x256/apps/kitty.png $HOME/.local/share/icons/
 }
 
 function install-fira-code {
@@ -50,16 +50,16 @@ function install-fira-code {
 }
 
 function install-moonlight-appimage {
-    mkdir -p ~/.local/bin ~/.local/share/applications ~/.local/share/icons
-    wget https://github.com/moonlight-stream/moonlight-qt/releases/download/v3.2.0/Moonlight-3.2.0-x86_64.AppImage -O ~/.local/bin/moonlight
-    chmod +x ~/.local/bin/moonlight
-    wget https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/deploy/linux/com.moonlight_stream.Moonlight.desktop -O ~/.local/share/applications/moonlight.desktop
-    wget https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/moonlight_wix.png -O ~/.local/share/icons/moonlight.png
-    sed -i "s|Icon=moonlight|Icon=$(ls ~/.local/share/icons/moonlight.png)|g" ~/.local/share/applications/moonlight.desktop
+    mkdir -p $HOME/.local/bin $HOME/.local/share/applications $HOME/.local/share/icons
+    wget https://github.com/moonlight-stream/moonlight-qt/releases/download/v3.2.0/Moonlight-3.2.0-x86_64.AppImage -O $HOME/.local/bin/moonlight
+    chmod +x $HOME/.local/bin/moonlight
+    wget https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/deploy/linux/com.moonlight_stream.Moonlight.desktop -O $HOME/.local/share/applications/moonlight.desktop
+    wget https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/moonlight_wix.png -O $HOME/.local/share/icons/moonlight.png
+    sed -i "s|Icon=moonlight|Icon=$(ls $HOME/.local/share/icons/moonlight.png)|g" $HOME/.local/share/applications/moonlight.desktop
 }
 
 function install-youtube-music {
-    mkdir -p ~/.local/share/applications ~/.local/share/icons
+    mkdir -p $HOME/.local/share/applications $HOME/.local/share/icons
     echo -n """\
 #!/usr/bin/env xdg-open
 [Desktop Entry]
@@ -69,8 +69,8 @@ Type=Application
 Name=YouTube Music
 Exec=/opt/google/chrome/google-chrome -app=https://music.youtube.com/
 Icon=youtube-music
-""" | tee ~/.local/share/applications/youtube-music.desktop
-    wget https://music.youtube.com/img/favicon_32.png -O ~/.local/share/icons/youtube-music.png
+""" | tee $HOME/.local/share/applications/youtube-music.desktop
+    wget https://music.youtube.com/img/favicon_32.png -O $HOME/.local/share/icons/youtube-music.png
 }
 
 function main {

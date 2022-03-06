@@ -2,13 +2,13 @@
 export XSESSIONRC_LOADED=1
 
 # Load profile
-[ -r ~/.profile ] && . ~/.profile
+[ -r $HOME/.profile ] && . $HOME/.profile
 
 # Unlock gnome-keyring
 [ -n "$DESKTOP_SESSION" ] && eval $(gnome-keyring-daemon --start) && export SSH_AUTH_SOCK
 
 # Set keymap
-[ -x ~/.local/bin/set-keymap ] && ~/.local/bin/set-keymap
+[ -x $HOME/.local/bin/set-keymap ] && $HOME/.local/bin/set-keymap
 
 # Set display
-[ -x ~/.local/bin/set-display ] && ~/.local/bin/set-display
+[ -x $HOME/.local/bin/set-display ] && $HOME/.local/bin/set-display

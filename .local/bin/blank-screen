@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -ue
+
+trap "tput cnorm" EXIT
+tput civis
+
+clear
+while read -n1 -s ; do
+    clear
+done

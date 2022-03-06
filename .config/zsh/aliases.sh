@@ -1,2 +1,2 @@
 # Use bash alises
-source ~/.bash_aliases
+source $HOME/.bash_aliases

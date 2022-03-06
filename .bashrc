@@ -9,7 +9,7 @@ shopt -s globstar     # Enable **
 shopt -s histappend   # Append to the history file
 shopt -u failglob     # Unmatched patterns don't cause errors
 
-export HISTFILE=~/.cache/bash_history # History file
+export HISTFILE=$HOME/.cache/bash_history # History file
 
 HISTCONTROL=ignorespace # don't save lines with leading space
 HISTSIZE=2097152        # Size of history
@@ -82,4 +82,4 @@ if ! shopt -oq posix; then
 fi
 
 # Aliases
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f $HOME/.bash_aliases ] && source $HOME/.bash_aliases

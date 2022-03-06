@@ -1,34 +1,291 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
 ################################################################
-# Copyright (c) 2021 Witalis Domitrz <witekdomitrz@gmail.com>
+# Copyright (c) 2022 Witalis Domitrz <witekdomitrz@gmail.com>
 # MIT License
 ################################################################
 
-set -u
+import glob
+import os
+import re
+import subprocess
+import sys
+import tempfile
+from enum import Enum, auto
+from math import gcd
+from subprocess import PIPE, CalledProcessError
 
-CONFIG_LOCATION="$HOME/.config/displays"
 
-# Disable disconnected displays
-for display in $(xrandr -q | grep " disconnected" | awk '{ print $1 }'); do
-    xrandr --output $display --off
-done
+class LookingFor(Enum):
+    RESOLUTION = auto()
+    WIDTH = auto()
+    HEIGHT = auto()
+    DONE = auto()
 
-displays=$(xrandr -q | grep " connected " | awk '{ print $1 }')
-priority_file="${CONFIG_LOCATION}/priority.txt"
-[ -f "${priority_file}" ] && priority=($(cat "${priority_file}")) || priority=("screen" "rdp0" "HDMI" "DP" "eDP")
-display_number=0
-for display in ${priority[@]}; do
-    full_name=$(echo $displays | tr " " "\n" | grep "^$display")
-    if [ $? -eq 0 ]; then
-        if [ $display_number -eq 0 ]; then
-            xrdb -remove
-            [ -f "$HOME/.Xresources" ] && xrdb -merge "$HOME/.Xresources"
-            display_xresources="${CONFIG_LOCATION}/${full_name}.Xresources"
-            [ -f "$display_xresources" ] && xrdb -merge "$display_xresources"
-            xrandr --output $full_name --auto --primary && ((display_number++))
-        else
-            xrandr --output $full_name --off && ((display_number++))
-        fi
-    fi
-done
+
+PRIMARY_ORDER_DEFAULT = ["screen", "rdp", "HDMI", "DP", "eDP"]
+
+
+class DefaultScreenExternal():
+    DIAMETER_INCH = 24
+    WIDTH_MM = 531
+    RESOLUTION_X = 1920
+    DPI = 96
+
+
+class DefaultScreenLaptop():
+    DIAMETER_INCH = 14
+    WIDTH_MM = 310
+    RESOLUTION_X = 1920
+    DPI = 114
+
+
+def get_displays_info():
+    try:
+        res = subprocess.run(
+            'xrandr',
+            text=True,
+            check=True,
+            stdout=PIPE,
+            stderr=PIPE)
+    except CalledProcessError as e:
+        print("xrandr failed:", e.stderr, sep="\n")
+
+    return list(map(lambda x: x.split(), res.stdout.splitlines()))
+
+
+def is_laptop_display(display):
+    return "eDP" == display[:3]
+
+
+def is_laptop_display_open():
+    state_files = glob.glob("/proc/acpi/button/lid/LID*/state")
+    if len(state_files) == 0:
+        raise Exception("No laptop screen")
+
+    for fn in state_files:
+        with open(fn) as f:
+            if f.read().split()[1] == "open":
+                return True
+    return False
+
+
+def get_all_displays_names():
+    connected, disconnected = [], []
+    for line in get_displays_info():
+        if len(line) >= 2:
+            display = line[0]
+            state = line[1]
+
+            if "connected" == state:
+                if is_laptop_display(display):
+                    if is_laptop_display_open():
+                        connected.append(display)
+                    else:
+                        disconnected.append(display)
+                else:
+                    connected.append(display)
+            elif "disconnected" == state:
+                disconnected.append(display)
+
+    return connected, disconnected
+
+
+def get_primary_display(displays, primary_order=None):
+    if primary_order is None:
+        primary_order = PRIMARY_ORDER_DEFAULT
+
+    for requirement in primary_order:
+        for display in displays:
+            if isinstance(requirement, str):
+                if requirement in display:
+                    return display
+            else:
+                if requirement(display):
+                    return display
+
+    return displays[0]
+
+
+def set_display_primary(display):
+    subprocess.run(["xrandr", "--output", display, "--auto", "--primary"])
+    set_dpi_based_on(display)
+
+
+def set_display_auto(
+        display,
+        same_as=None,
+        left_of=None,
+        right_of=None,
+        above=None,
+        below=None,
+        **_):
+    cmd = ["xrandr", "--output", display, "--auto"]
+    if same_as is not None:
+        cmd += ["--same-as", same_as]
+    elif left_of is not None:
+        cmd += ["--left-of", left_of]
+    elif right_of is not None:
+        cmd += ["--right-of", left_of]
+    elif above is not None:
+        cmd += ["--above", above]
+    elif below is not None:
+        cmd += ["--below", below]
+
+    subprocess.run(cmd)
+
+
+def set_display_off(display, **_):
+    subprocess.run(["xrandr", "--output", display, "--off"])
+
+
+def set_display_other(display, **kwargs):
+    if os.getenv("SINGLE_DISPLAY") == "1":
+        other_display_action = set_display_off
+    else:
+        other_display_action = set_display_auto
+
+    other_display_action(display, **kwargs)
+
+
+def get_display_info(display):
+    """
+    assumes that the selected display is turned on
+    """
+    displays_info = get_displays_info()
+
+    this_display_info = None
+    for line in displays_info:
+        if display == line[0]:
+            this_display_info = line
+            break
+
+    RESOLUTION_REGEX = re.compile("(\\d+)i?x(\\d+)i?(\\+(\\d+)\\+(\\d+))?")
+    DIMENSION_REGEX = re.compile("(\\d+)mm")
+
+    if this_display_info is None:
+        raise KeyError(display, "display info not found")
+
+    result = {"name": display}
+    result["connected"] = this_display_info[1] == "connected"
+    result["primary"] = this_display_info[2] == "primary"
+
+    result["is_laptop"] = is_laptop_display(display)
+
+    looking_for = LookingFor.RESOLUTION
+    for data in this_display_info:
+        if looking_for == LookingFor.RESOLUTION:
+            res = RESOLUTION_REGEX.fullmatch(data)
+            if res is None:
+                continue
+
+            result["resolution"] = {
+                "x": int(
+                    res.group(1)), "y": int(
+                    res.group(2))}
+            if len(res.groups()) >= 5:
+                result["position"] = {
+                    "x": int(
+                        res.group(4)), "y": int(
+                        res.group(5))}
+
+            looking_for = LookingFor.WIDTH
+        elif looking_for == LookingFor.WIDTH:
+            res = DIMENSION_REGEX.fullmatch(data)
+            if res is None:
+                continue
+
+            result["size"] = {"width": int(res.group(1))}
+
+            looking_for = LookingFor.HEIGHT
+        elif looking_for == LookingFor.HEIGHT:
+            res = DIMENSION_REGEX.fullmatch(data)
+            if res is None:
+                continue
+
+            result["size"].update({"height": int(res.group(1))})
+
+            looking_for = LookingFor.DONE
+        else:
+            break
+
+    return result
+
+
+def set_dpi(dpi):
+    config_file = tempfile.NamedTemporaryFile("w+")
+    config_file.write(f"""\\
+Xft.dpi: {dpi}
+rofi.dpi: {dpi}
+""")
+    config_file.seek(0)
+    subprocess.run(["xrdb", "-override", config_file.name])
+
+
+def set_dpi_based_on(display, check_connected=True, check_primary=True):
+    dpi = get_forced_dpi()
+
+    if dpi is not None:
+        set_dpi(dpi)
+        return
+
+    display_info = get_display_info(display)
+
+    if check_connected and not display_info["connected"]:
+        raise RuntimeError(display, "not connected", display_info)
+    if check_primary and not display_info["primary"]:
+        raise RuntimeError(display, "not primary", display_info)
+
+    display_info["dpi"] = get_my_dpi(**display_info)
+    set_dpi(display_info["dpi"])
+
+
+def get_my_dpi(resolution, size, is_laptop=False, **_):
+
+    if is_laptop:
+        DefaultScreen = DefaultScreenLaptop
+    else:
+        DefaultScreen = DefaultScreenExternal
+
+    if resolution["x"] * size["height"] == resolution["y"] * \
+            size["width"] and gcd(size["height"], size["width"]) == 1:
+        return DefaultScreen.DPI  # If cannot get the dpi, return the default
+
+    dpi = round(DefaultScreen.DPI * resolution["x"] * DefaultScreen.WIDTH_MM /
+                (size["width"] * DefaultScreen.RESOLUTION_X))
+
+    return dpi
+
+
+def get_forced_dpi():
+    # Check argument of the programme
+    if len(sys.argv) >= 2:
+        return int(sys.argv[1])
+
+    # Check the environmental variable
+    env_dpi = os.getenv("DPI")
+    if env_dpi is not None and env_dpi != "":
+        return int(env_dpi)
+
+    return None
+
+
+def main():
+    connected_displays, disconnected_display = get_all_displays_names()
+
+    # Turn primary display on
+    primary_display = get_primary_display(connected_displays)
+    set_display_primary(primary_display)
+
+    # Turn off all disconnected display
+    for display in disconnected_display:
+        set_display_off(display)
+
+    # Deal with other connected displays
+    for display in connected_displays:
+        if display != primary_display:
+            set_display_other(display)
+
+
+if __name__ == "__main__":
+    main()

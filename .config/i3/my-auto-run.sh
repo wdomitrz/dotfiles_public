@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
+(check-if-remote || dex --autostart --environment i3) &
 (check-if-remote || nm-applet) &
 (check-if-remote || redshift-gtk) &
 compton &
-dex --autostart --environment i3 &
 fusuma &
 geoclue-2-agent &
 gtk-launch org.kde.kdeconnect.nonplasma &

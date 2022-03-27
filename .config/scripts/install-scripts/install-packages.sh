@@ -26,6 +26,7 @@ sudo apt-get install --yes --no-install-recommends \
     bash-completion \
     blueman \
     bolt \
+    breeze-icon-theme \
     brightnessctl \
     build-essential \
     cheese \
@@ -33,6 +34,7 @@ sudo apt-get install --yes --no-install-recommends \
     cmake \
     command-not-found \
     compton \
+    cron \
     cups \
     curl \
     desktop-file-utils \
@@ -51,7 +53,6 @@ sudo apt-get install --yes --no-install-recommends \
     extlinux \
     file \
     file-roller \
-    firefox \
     flameshot \
     fonts-arphic-ukai \
     fonts-arphic-uming \
@@ -62,6 +63,7 @@ sudo apt-get install --yes --no-install-recommends \
     gdb \
     geoclue-2.0 \
     git \
+    gnome-backgrounds \
     gnome-calculator \
     gnome-disk-utility \
     gnome-keyring \
@@ -190,5 +192,4 @@ sudo apt-get install --yes --install-recommends \
 sudo apt-get autoremove --purge --yes \
     ubuntu-wallpapers
 sudo apt-get install --yes --install-suggests \
-    gnome-backgrounds \
     ubuntu-wallpapers

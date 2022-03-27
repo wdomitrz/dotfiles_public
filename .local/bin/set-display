@@ -48,10 +48,10 @@ def get_displays_info():
             check=True,
             stdout=PIPE,
             stderr=PIPE)
+        return list(map(lambda x: x.split(), res.stdout.splitlines()))
     except CalledProcessError as e:
         print("xrandr failed:", e.stderr, sep="\n")
-
-    return list(map(lambda x: x.split(), res.stdout.splitlines()))
+        return None
 
 
 def is_laptop_display(display):
@@ -98,7 +98,7 @@ def get_primary_display(displays, primary_order=None):
     for requirement in primary_order:
         for display in displays:
             if isinstance(requirement, str):
-                if requirement in display:
+                if display.startswith(requirement):
                     return display
             else:
                 if requirement(display):
@@ -108,12 +108,13 @@ def get_primary_display(displays, primary_order=None):
 
 
 def set_display_primary(display):
-    subprocess.run(["xrandr", "--output", display, "--auto", "--primary"])
+    set_display_auto(display, primary=True)
     set_dpi_based_on(display)
 
 
 def set_display_auto(
         display,
+        primary=False,
         same_as=None,
         left_of=None,
         right_of=None,
@@ -121,6 +122,10 @@ def set_display_auto(
         below=None,
         **_):
     cmd = ["xrandr", "--output", display, "--auto"]
+
+    if primary:
+        cmd += ["--primary"]
+
     if same_as is not None:
         cmd += ["--same-as", same_as]
     elif left_of is not None:
@@ -131,6 +136,9 @@ def set_display_auto(
         cmd += ["--above", above]
     elif below is not None:
         cmd += ["--below", below]
+
+    if display.startswith("DP"):
+        cmd += ["--set", "Broadcast RGB", "Full"]
 
     subprocess.run(cmd)
 
@@ -247,8 +255,12 @@ def get_my_dpi(resolution, size, is_laptop=False, **_):
     else:
         DefaultScreen = DefaultScreenExternal
 
-    if resolution["x"] * size["height"] == resolution["y"] * \
-            size["width"] and gcd(size["height"], size["width"]) == 1:
+    if size["height"] == 0 or size["width"] == 0 or (
+        resolution["x"] *
+        size["height"] == resolution["y"] *
+        size["width"] and gcd(
+            size["height"],
+            size["width"]) == 1):
         return DefaultScreen.DPI  # If cannot get the dpi, return the default
 
     dpi = round(DefaultScreen.DPI * resolution["x"] * DefaultScreen.WIDTH_MM /
@@ -272,6 +284,10 @@ def get_forced_dpi():
 
 def main():
     connected_displays, disconnected_display = get_all_displays_names()
+
+    # No connected_displays found
+    if connected_displays == []:
+        return 1
 
     # Turn primary display on
     primary_display = get_primary_display(connected_displays)

@@ -14,19 +14,33 @@ function install_gcloud {
     sudo apt-get update --yes && sudo apt-get install --yes google-cloud-sdk
 }
 
+function install_signal {
+    # 1. Install our official public software signing key
+    wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg >/dev/null
+
+    # 2. Add our repository to your list of repositories
+    echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |
+        sudo tee /etc/apt/sources.list.d/signal-xenial.list
+
+    # 3. Update your package database and install signal
+    sudo apt-get update --yes && sudo apt-get install --yes signal-desktop
+}
+
+function add_google_public_key {
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+}
+
 function main {
     set -xue
 
     # Google Chrome
     install_deb_from_url "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-    # Add google public key
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
     # VSCode
     install_deb_from_url "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
 
-    # Google Cloud SDK
-    install_gcloud
+    # Signal
+    install_signal
 
     # Check for updates and upgrades
     sudo apt-get update --yes && sudo apt-get dist-upgrade --yes

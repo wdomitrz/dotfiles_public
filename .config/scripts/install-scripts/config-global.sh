@@ -1,24 +1,39 @@
 #!/usr/bin/env bash
 set -xue
 
+function copy_configs_from_to {
+    source_dir="$1"
+    target_dir="$2"
+    if [ ! -d "$source_dir" ]; then
+        echo "No directory $source_dir"
+        return 1
+    fi
+    sudo mkdir -p "$target_dir"
+    sudo cp "$source_dir"/* "$target_dir"
+}
+
 # ssh server config
 if [ -f "$HOME/.local/bin/.config-sshd" ]; then
     sudo apt-get update --yes && sudo apt-get install --yes openssh-server
     $HOME/.local/bin/.config-sshd
 fi
 
+# Copy set-display script
+sudo cp ~/.local/bin/set-display /usr/bin/
+
 # keybord options - map caps lock to ctrl
 sudo sed -i -E "s/^(XKBOPTIONS)\s*=\s*\"\"/\1=\"ctrl:nocaps\"/g" /etc/default/keyboard
 
 # lightdm configuration files
 sudo sed -i -E "s/^(greeter-hide-users)\s*=\s*/#\1=/g" /usr/share/lightdm/*/*.conf
-[ -d "$HOME/.config/lightdm-gtk-greeter.conf.d/" ] && sudo cp $HOME/.config/lightdm-gtk-greeter.conf.d/* /usr/share/lightdm/lightdm-gtk-greeter.conf.d/
+copy_configs_from_to $HOME/.config/lightdm-gtk-greeter.conf.d/ /usr/share/lightdm/lightdm-gtk-greeter.conf.d/
+copy_configs_from_to $HOME/.config/lightdm.conf.d/ /usr/share/lightdm/lightdm.conf.d/
 
 # Fix problem with network manager
 sudo touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
 
 # get certificates
-[ -d "$HOME/.config/ca-certificates/" ] && sudo cp $HOME/.config/ca-certificates/* /usr/share/ca-certificates/
+copy_configs_from_to $HOME/.config/ca-certificates/ /usr/share/ca-certificates/
 
 # Disable problematic redshift autostart
 sudo rm -f /etc/systemd/user/default.target.wants/redshift*.service
@@ -47,7 +62,7 @@ update-alternatives --query newt-palette &&
 
 # Configure grub defaults
 # Custom colors
-[ -f "$HOME/.config/grub/custom.cfg" ] && sudo cp $HOME/.config/grub/custom.cfg /boot/grub/
+copy_configs_from_to $HOME/.config/grub/ /boot/grub/
 # 1 second timeout
 sudo sed -i -E "s/^(GRUB_TIMEOUT)\s*=\s*[0-9]+$/\1=1/" /etc/default/grub
 # No splash screen

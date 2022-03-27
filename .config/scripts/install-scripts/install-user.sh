@@ -99,7 +99,6 @@ function main {
     install-kitty
     install-fira-code
     install-moonlight-appimage
-    install-youtube-music
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

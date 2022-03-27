@@ -17,4 +17,4 @@ grep --quiet -E '^Include /etc/ssh/sshd_config.d/[\*,my_sshd].conf$' /etc/ssh/ss
 Include /etc/ssh/sshd_config.d/my_sshd.conf
 """ | sudo tee -a /etc/ssh/sshd_config
 
-sudo systemctl restart ssh.service
+sudo systemctl restart sshd.service || sudo systemctl restart ssh.service

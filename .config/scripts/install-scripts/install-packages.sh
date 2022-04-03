@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -xue
 
-# apt configuration files
-sudo cp $HOME/.config/apt.conf.d/* /etc/apt/apt.conf.d/
-
 # Enable 32 bit architecture
 sudo dpkg --add-architecture i386
 
@@ -89,6 +86,7 @@ sudo apt-get install --yes --no-install-recommends \
     kdeconnect \
     kitty \
     libgtk-3-bin \
+    libimage-exiftool-perl \
     libinput-tools \
     lightdm \
     lightdm-gtk-greeter \

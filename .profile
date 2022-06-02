@@ -20,5 +20,6 @@ export QT_STYLE_OVERRIDE=adwaita-dark
 export GTK_THEME=Adwaita:dark
 export LANG="en_US.UTF-8"
 export LANGUAGE="en_US"
+export SINGLE_DISPLAY=1
 
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"

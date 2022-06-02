@@ -47,10 +47,20 @@ bindsym $mod+Shift+space    floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space          focus mode_toggle
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus    move scratchpad
+bindsym $mod+Shift+s        move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus          scratchpad show
+bindsym $mod+s              scratchpad show
+
+# Move to next/prev workspace
+bindsym $mod+Ctrl+$left     workspace prev
+bindsym $mod+Ctrl+Left      workspace prev
+bindsym $mod+Ctrl+$down     workspace prev
+bindsym $mod+Ctrl+Down      workspace prev
+bindsym $mod+Ctrl+$up       workspace next
+bindsym $mod+Ctrl+Up        workspace next
+bindsym $mod+Ctrl+$right    workspace next
+bindsym $mod+Ctrl+Right     workspace next
 
 # switch to workspace
 bindsym $mod+1              workspace 1
@@ -131,10 +141,7 @@ bar {
     modifier none
 }
 
-# No title bar
-new_window none
-
-# Borders
+# Borders - no title bars
 default_border pixel
 default_floating_border none
 hide_edge_borders smart
@@ -158,7 +165,7 @@ bindsym $mod+n              exec --no-startup-id    lock
 # Suspend
 bindsym $mod+End            exec --no-startup-id    systemctl suspend
 # Copy Chinese characters
-bindsym $mod+c              exec --no-startup-id    copy-chi-sim
+bindsym $mod+Shift+c        exec --no-startup-id    copy-chi-sim
 # Change background
 bindsym $mod+y              exec --no-startup-id    set-background
 # Screenshot
@@ -170,24 +177,31 @@ bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
 bindsym $mod+Shift+Return   exec --no-startup-id    $TERMINAL -e $EDITOR
 
 # Apps
-bindsym XF86Display         exec --no-startup-id    arandr
+bindsym XF86Display         exec --no-startup-id    i3-xrl
 bindsym XF86Explorer        exec --no-startup-id    xdg-open ~/
 bindsym $mod+e              exec --no-startup-id    xdg-open ~/
-bindsym XF86HomePage        exec --no-startup-id    x-www-browser
-bindsym XF86Mail            exec --no-startup-id    x-www-browser "https://gmail.com"
+bindsym XF86HomePage        exec --no-startup-id    xdg-open https://
+bindsym $mod+w              exec --no-startup-id    xdg-open https://
+bindsym XF86Mail            exec --no-startup-id    xdg-open "https://gmail.com"
 bindsym XF86Calculator      exec --no-startup-id    gnome-calculator
+bindsym $mod+c              exec --no-startup-id    code
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume        exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $mod+equal                  exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym Ctrl+XF86AudioRaiseVolume   exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym $mod+Ctrl+equal             exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +1%
 bindsym XF86AudioLowerVolume        exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+minus                  exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym Ctrl+XF86AudioLowerVolume   exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym $mod+Ctrl+minus             exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ -1%
 bindsym XF86AudioMute               exec --no-startup-id    pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+m                      exec --no-startup-id    pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute            exec --no-startup-id    pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Handle media keys
 bindsym XF86AudioPlay       exec --no-startup-id    playerctl play-pause
+bindsym XF86AudioPlayPause  exec --no-startup-id    playerctl play-pause
 bindsym XF86AudioPause      exec --no-startup-id    playerctl pause
 bindsym XF86AudioNext       exec --no-startup-id    playerctl next
 bindsym XF86AudioPrev       exec --no-startup-id    playerctl prev

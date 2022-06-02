@@ -30,20 +30,33 @@ function add_google_public_key {
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 }
 
+function install_google_chrome {
+    install_deb_from_url "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+}
+
+function install_vscode {
+    install_deb_from_url "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+}
+
+function install_chrome_remote_desktop {
+    install_deb_from_url "https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb"
+    # Configure Chrome Remote Desktop
+    echo "Configure Chrome Remote Desktop at" "https://remotedesktop.google.com/headless"
+}
+
+function install_slack {
+    install_deb_from_url "https://downloads.slack-edge.com/releases/linux/4.26.1/prod/x64/slack-desktop-4.26.1-amd64.deb"
+}
+
 function main {
     set -xue
+    source "$HOME"/.config/scripts/install-scripts/install-packages.sh --source-only
 
-    # Google Chrome
-    install_deb_from_url "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-
-    # VSCode
-    install_deb_from_url "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-
-    # Signal
+    install_google_chrome
+    install_vscode
     install_signal
-
-    # Check for updates and upgrades
-    sudo apt-get update --yes && sudo apt-get dist-upgrade --yes
+    install_slack
+    update_and_upgrade
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

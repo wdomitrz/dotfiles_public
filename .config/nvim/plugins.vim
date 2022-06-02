@@ -1,16 +1,10 @@
 " vim:foldmethod=marker
 
 " {{{ Install vim-plug automatically
-if has('nvim')
-    if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-        !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall --sync
-    endif
-else
-    if empty(glob('~/.vim/autoload/plug.vim'))
-        !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall --sync
-    endif
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " }}}
 
@@ -24,6 +18,10 @@ Plug 'vim-airline/vim-airline'
 " }}}
 
 " {{{ Basics
+" Replace with register
+Plug 'vim-scripts/ReplaceWithRegister'
+" CalmeCaseMotion
+Plug 'bkad/CamelCaseMotion'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -85,25 +83,25 @@ if has('nvim') | let g:terminal_key = "<C-Space>" |
 else | let g:terminal_key = "<Nul>" | endif
 " tabline config
 let g:airline#extensions#tabline#enabled = 1
-" easymotion
-" Disable default mappings
-let g:EasyMotion_do_mapping = 0
 " }}}
 
 " {{{ Plugins key mappings
 " Comment
 "" Vim registers <C-/> as <C-_>
 map <C-_> :Commentary<CR>
+" CamelCaseMotion
+map <silent> \w <Plug>CamelCaseMotion_w
+map <silent> \b <Plug>CamelCaseMotion_b
+map <silent> \e <Plug>CamelCaseMotion_e
+map <silent> \ge <Plug>CamelCaseMotion_ge
+" Easy motion
+map  f          <Plug>(easymotion-jumptoanywhere)
 " Git Gutter
 nmap <leader>G[ :GitGutterPrevHunk<CR>
 nmap <leader>G] :GitGutterNextHunk<CR>
 nmap <leader>Gi :GitGutterPreviewHunk<CR>
 nmap <leader>Gs :GitGutterStageHunk<CR>
 nmap <leader>Gu :GitGutterUndoHunk<CR>
-" Easy motion
-nmap s          <Plug>(easymotion-overwin-f)
-xmap s          <Plug>(easymotion-bd-f)
-omap s          <Plug>(easymotion-bd-f)
 " Toggle Tagbar
 nmap <leader>t  :TagbarToggle<CR>
 " Toogle NERDTree

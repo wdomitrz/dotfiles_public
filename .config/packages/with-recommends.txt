@@ -1,0 +1,4 @@
+nvidia-driver-510
+qemu-kvm
+qemu-system-x86
+virt-manager

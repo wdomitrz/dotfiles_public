@@ -1,39 +1,38 @@
 {
-    "[latex]": {
-        "files.trimTrailingWhitespace": false
-    },
-    "breadcrumbs.enabled": true,
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4 }",
-    "C_Cpp.debugger.useBacktickCommandSubstitution": true,
-    "C_Cpp.errorSquiggles": "Enabled",
     "C_Cpp.loggingLevel": "Debug",
+    "breadcrumbs.enabled": true,
     "cSpell.language": "en,pl",
+    "cmake.configureOnOpen": true,
+    "diffEditor.codeLens": true,
     "editor.bracketPairColorization.enabled": true,
     "editor.cursorBlinking": "solid",
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
+    "editor.mouseWheelZoom": true,
+    "editor.parameterHints.cycle": true,
     "editor.rulers": [
         80,
         100,
         120
     ],
     "editor.tabCompletion": "on",
+    "editor.unfoldOnClickAfterEndOfLine": true,
     "editor.wordWrap": "on",
     "explorer.confirmDelete": false,
     "files.associations": {
         "**/.ssh/config": "ssh_config",
         "**/.ssh/configs/*.conf": "ssh_config",
         "**/i3/config": "i3",
+        "*.ipynb": "jupyter.notebook.ipynb",
         "*.rmd": "markdown"
     },
+    "files.autoGuessEncoding": true,
     "files.autoSave": "onFocusChange",
     "files.exclude": {
         "**.o": true,
-        "**/__pycache__": true,
-        "**/.*": true,
-        "**/.vscode": true,
         "**/*.acn": true,
         "**/*.acr": true,
         "**/*.alg": true,
@@ -53,41 +52,18 @@
         "**/*.nav": true,
         "**/*.snm": true,
         "**/*.synctex.gz": true,
-        "**/*.toc": true
+        "**/*.toc": true,
+        "**/.*": true,
+        "**/.vscode": true,
+        "**/__pycache__": true
     },
     "files.insertFinalNewline": true,
     "files.restoreUndoStack": true,
+    "files.simpleDialog.enable": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "git.autofetch": true,
     "keyboard.dispatch": "keyCode",
-    "latex-workshop.intellisense.file.exclude": [
-        "**/*.aux",
-        "**/*.bbl",
-        "**/*.bcf",
-        "**/*.blg",
-        "**/*.idx",
-        "**/*.ind",
-        "**/*.lof",
-        "**/*.lot",
-        "**/*.out",
-        "**/*.toc",
-        "**/*.acn",
-        "**/*.acr",
-        "**/*.alg",
-        "**/*.glg",
-        "**/*.glo",
-        "**/*.gls",
-        "**/*.ist",
-        "**/*.fls",
-        "**/*.log",
-        "**/*.nav",
-        "**/*.snm",
-        "**/*.fdb_latexmk",
-        "**/*.synctex.gz",
-        "**/*.run.xml",
-    ],
-    "latex-workshop.view.pdf.viewer": "tab",
     "markdownlint.config": {
         "MD007": {
             "indent": 4
@@ -95,29 +71,32 @@
     },
     "path-autocomplete.triggerOutsideStrings": true,
     "python.formatting.autopep8Args": [
-        "--aggressive",
         "--aggressive"
     ],
     "python.languageServer": "Pylance",
+    "remote.SSH.lockfilesInTmp": true,
     "search.useIgnoreFiles": true,
+    "security.workspace.trust.banner": "always",
+    "security.workspace.trust.startupPrompt": "always",
     "security.workspace.trust.untrustedFiles": "newWindow",
     "settingsSync.keybindingsPerPlatform": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.inheritEnv": false,
     "update.showReleaseNotes": false,
+    "vim.camelCaseMotion.enable": true,
+    "vim.easymotion": true,
+    "vim.easymotionDimBackground": false,
     "vim.enableNeovim": true,
     "vim.handleKeys": {
-        "<C-l>": true,
-        "<C-a>": true,
-        "<C-o>": true,
-        "<C-r>": true,
-        "<C-i>": true,
         "<C-[>": true,
-        "<C-]>": true,
+        "<C-a>": true,
         "<C-d>": true,
-        "<C-u>": true,
+        "<C-o>": true,
+        "<C-u>": true
     },
     "vim.insertModeKeyBindings": [
         {
@@ -140,20 +119,20 @@
             ]
         },
         {
-            "before": [
-                "j"
-            ],
             "after": [
                 "g",
+                "j"
+            ],
+            "before": [
                 "j"
             ]
         },
         {
-            "before": [
-                "k"
-            ],
             "after": [
                 "g",
+                "k"
+            ],
+            "before": [
                 "k"
             ]
         },
@@ -170,7 +149,16 @@
                 "shift+u"
             ],
             "commands": [
-                "reundo"
+                "redo"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "d"
+            ],
+            "commands": [
+                "editor.action.peekDeclaration"
             ]
         },
         {
@@ -195,7 +183,7 @@
         {
             "before": [
                 " ",
-                "k"
+                "shift+k"
             ],
             "commands": [
                 "editor.action.peekDefinition"
@@ -214,7 +202,6 @@
         {
             "before": [
                 " ",
-                "g",
                 "i"
             ],
             "commands": [
@@ -229,6 +216,15 @@
             ],
             "commands": [
                 "editor.action.goToTypeDefinition"
+            ]
+        },
+        {
+            "before": [
+                " ",
+                "t"
+            ],
+            "commands": [
+                "editor.action.peekTypeDefinition"
             ]
         },
         {
@@ -288,6 +284,14 @@
         },
         {
             "before": [
+                "/"
+            ],
+            "commands": [
+                "actions.find"
+            ]
+        },
+        {
+            "before": [
                 " ",
                 "f"
             ],
@@ -302,41 +306,68 @@
                 "i"
             ],
             "commands": [
-                "editor.action.organizeImports",
+                "editor.action.organizeImports"
             ]
         },
+        {
+            "after": [
+                "leader",
+                "leader",
+                "leader",
+                "j"
+            ],
+            "before": [
+                "f"
+            ]
+        }
     ],
+    "vim.replaceWithRegister": true,
     "vim.useCtrlKeys": false,
     "vim.useSystemClipboard": true,
     "vim.visualModeKeyBindingsNonRecursive": [
         {
-            "before": [
-                "j"
-            ],
             "after": [
                 "g",
+                "j"
+            ],
+            "before": [
                 "j"
             ]
         },
         {
-            "before": [
-                "k"
-            ],
             "after": [
                 "g",
                 "k"
+            ],
+            "before": [
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "/"
+            ],
+            "commands": [
+                "actions.find"
+            ]
+        },
+        {
+            "after": [
+                "leader",
+                "leader",
+                "leader",
+                "j"
+            ],
+            "before": [
+                "f"
             ]
         }
     ],
     "window.menuBarVisibility": "toggle",
-    "window.zoomLevel": 0,
     "workbench.activityBar.visible": false,
     "workbench.editor.focusRecentEditorAfterClose": false,
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
-    },
-    "workbench.iconTheme": "file-icons",
+    "workbench.enableExperiments": false,
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
-    "workbench.tips.enabled": false,
-    "terminal.integrated.inheritEnv": false,
+    "workbench.tips.enabled": false
 }

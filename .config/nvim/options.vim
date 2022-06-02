@@ -83,7 +83,7 @@ highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NON
 " }}}
 
 " {{{ Set undodir for nvim and vim
-if has('nvim') | set undodir=~/.config/nvim/undodir | else | set undodir=~/.vim/undodir | endif
+if has('nvim') | set undodir=~/.cache/vim-undodir | endif
 " Disable spellcheck in terminal
 if has('nvim') | autocmd TermOpen * setlocal nospell nonumber norelativenumber
 else | autocmd TerminalOpen * setlocal nospell nonumber norelativenumber

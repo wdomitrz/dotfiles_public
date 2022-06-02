@@ -220,14 +220,56 @@ def get_display_info(display):
     return result
 
 
-def set_dpi(dpi):
+def set_rofi_dpi_legacy(dpi):
     config_file = tempfile.NamedTemporaryFile("w+")
-    config_file.write(f"""\\
-Xft.dpi: {dpi}
+    config_file.write(f"""\
 rofi.dpi: {dpi}
 """)
     config_file.seek(0)
     subprocess.run(["xrdb", "-override", config_file.name])
+
+
+def set_rofi_dpi(dpi):
+    set_rofi_dpi_legacy
+    CONFIG_DIR = os.path.expanduser("~/.config/rofi")
+    if not os.path.isdir(CONFIG_DIR):
+        return
+
+    # Check if config imports dpi.rasi
+    add_dpi_import = False
+    try:
+        with open(os.path.join(CONFIG_DIR, "config.rasi"), "r") as rofi_config_file:
+            for line in rofi_config_file.readlines():
+                if line == '@import "dpi"\n':
+                    break
+            else:
+                add_dpi_import = True
+    except FileNotFoundError:
+        add_dpi_import = True
+    if add_dpi_import:
+        with open(os.path.join(CONFIG_DIR, "config.rasi"), "r+") as rofi_config_file:
+            rofi_config_contents = rofi_config_file.read()
+            rofi_config_file.seek(0)
+            rofi_config_file.write(f"""\
+@import "dpi"
+""" + rofi_config_contents)
+
+    with open(os.path.join(CONFIG_DIR, "dpi.rasi"), "w+") as rofi_dpi_config_file:
+        rofi_dpi_config_file.write(f"""\
+configuration {{
+    dpi: {dpi};
+}}
+""")
+
+
+def set_dpi(dpi):
+    config_file = tempfile.NamedTemporaryFile("w+")
+    config_file.write(f"""\
+Xft.dpi: {dpi}
+""")
+    config_file.seek(0)
+    subprocess.run(["xrdb", "-override", config_file.name])
+    set_rofi_dpi(dpi)
 
 
 def set_dpi_based_on(display, check_connected=True, check_primary=True):

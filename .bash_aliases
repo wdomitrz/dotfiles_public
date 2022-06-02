@@ -51,26 +51,27 @@ alias nv='nt -e nvim'
 # Not all machines support xterm-kitty
 command -v kitty >/dev/null && alias ssh='TERM=xterm-256color ssh'
 
-# Some package manager aliases
-alias pcm='apt'
+# Package manager aliases
+alias pcin='sudo apt-get install'
 
-alias pcin='sudo pcm install'
+alias pcud='sudo apt-get update'
+alias pcug='sudo apt-get dist-upgrade'
 
-alias pcrn='sudo pcm remove'
-alias pcpn='sudo pcm purge'
-alias pcar='sudo pcm autoremove --purge'
+alias pcar='sudo apt-get autoremove --purge'
+alias pcpn='sudo apt-get purge'
 alias pcum='sudo apt-mark auto'
 
-alias pcsa='pcm search'
-alias pcsi='pcm list --installed'
-alias pcls='pcm list'
+alias pccl='sudo apt-get clean'
+alias pccal='sudo apt-get autoclean'
 
-alias pcud='sudo pcm update'
-alias pcug='sudo pcm full-upgrade'
-
-# Specific package manager alias
-alias pcwhy='aptitude why'
-alias pcdep='apt-cache depends'
-alias pcrdep='apt-cache rdepends'
+alias pcsa='apt search'
 alias pcsf='apt-file search'
 alias pclf='apt-file list'
+
+alias pcwhy='aptitude why'
+alias pcwhynot='aptitude why-not'
+alias pcdep='apt-cache depends'
+alias pcrdep='apt-cache rdepends'
+alias pcsi='apt list --installed'
+alias pcls='apt list'
+alias pcsim='apt-mark showmanual'

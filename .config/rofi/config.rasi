@@ -1,0 +1,7 @@
+@import "dpi"
+configuration {
+    modi: "drun,window,ssh,combi";
+    show-icons: true;
+    font: "Fira Code 13";
+}
+@theme "royal-sky"

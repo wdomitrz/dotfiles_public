@@ -1,5 +1,6 @@
 [Default Applications]
 application/pdf=org.gnome.Evince.desktop;
+application/x-shellscript=code.desktop;
 application/zip=org.gnome.FileRoller.desktop
 image/gif=org.gnome.eog.desktop;
 image/jpeg=org.gnome.eog.desktop;
@@ -10,6 +11,7 @@ text/csv=code.desktop;
 text/html=google-chrome.desktop
 text/plain=code.desktop;
 text/x-csrc=code.desktop;
+text/x-makefile=code.desktop;
 text/x-python=code.desktop;
 video/mp4=vlc.desktop;
 x-scheme-handler/about=google-chrome.desktop

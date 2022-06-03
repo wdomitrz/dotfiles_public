@@ -43,7 +43,7 @@ function install_fira_code {
         echo "Found fonts dir $fonts_dir"
     fi
 
-    version=5.2
+    version=6.2
     zip=Fira_Code_v${version}.zip
     curl --fail --location --show-error https://github.com/tonsky/FiraCode/releases/download/${version}/${zip} --output ${zip}
     unzip -o -q -d ${fonts_dir} ${zip}
@@ -95,7 +95,6 @@ function main {
     install_multi_touch_gestures_fusuma
     install_nvim_tar_gz
     install_kitty
-    install_fira_code
     install_moonlight
 }
 

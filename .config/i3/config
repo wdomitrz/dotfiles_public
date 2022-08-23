@@ -164,8 +164,6 @@ bindsym $mod+slash          exec --no-startup-id    gtk-launch search-menu
 bindsym $mod+n              exec --no-startup-id    lock
 # Suspend
 bindsym $mod+End            exec --no-startup-id    systemctl suspend
-# Copy Chinese characters
-bindsym $mod+Shift+c        exec --no-startup-id    copy-chi-sim
 # Change background
 bindsym $mod+y              exec --no-startup-id    set-background
 # Screenshot
@@ -174,7 +172,7 @@ bindsym Ctrl+Print          exec --no-startup-id    flameshot full --clipboard
 # Terminal
 bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
 # Text editor
-bindsym $mod+Shift+Return   exec --no-startup-id    $TERMINAL -e $EDITOR
+bindsym $mod+Shift+Return   exec --no-startup-id    code
 
 # Apps
 bindsym XF86Display         exec --no-startup-id    i3-xrl

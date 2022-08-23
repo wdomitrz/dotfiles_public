@@ -12,9 +12,7 @@ i3-xrl &&
             blueman-applet &
             nm-applet &
             redshift-gtk &
-            signal-desktop --use-tray-icon --start-in-tray &
-            telegram-desktop -startintray &
-            slack -u &
+            env LANGUAGE=pl_PL.utf-8 signal-desktop --use-tray-icon --start-in-tray &
         )) &
         gtk-launch org.kde.kdeconnect.nonplasma &
         ibus-daemon --daemonize --replace &

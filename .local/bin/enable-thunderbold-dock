@@ -2,6 +2,6 @@
 
 boltctl list
 
-read -p "Enter uuid: " uuid
+read -rp "Enter uuid: " uuid
 
-boltctl enroll --policy=auto $uuid
+boltctl enroll --policy=auto "$uuid"

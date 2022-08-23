@@ -18,10 +18,10 @@ Plug 'vim-airline/vim-airline'
 " }}}
 
 " {{{ Basics
-" Replace with register
-Plug 'vim-scripts/ReplaceWithRegister'
-" CalmeCaseMotion
-Plug 'bkad/CamelCaseMotion'
+" LSP and other
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -37,10 +37,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sleuth'
 " Lines showing indention
 Plug 'Yggdroot/indentLine'
-" Multiple coursors
-Plug 'terryma/vim-multiple-cursors'
-" Delete buffers without closing windows
-Plug 'moll/vim-bbye'
 " Edit file as sudo
 Plug 'lambdalisue/suda.vim'
 " Terminal options
@@ -51,19 +47,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'preservim/tagbar'
 " NERDTree
 Plug 'preservim/nerdtree'
-" }}}
-
-" {{{ Syntax highlighting
-" Markdown
-Plug 'tpope/vim-markdown'
-" Haskell
-Plug 'neovimhaskell/haskell-vim'
-" Prolog
-Plug 'mxw/vim-prolog'
-" BNFC
-Plug 'neapel/vim-bnfc-syntax'
-" i3
-Plug 'PotatoesMaster/i3-vim-syntax'
 " }}}
 call plug#end()
 " }}}
@@ -83,31 +66,31 @@ if has('nvim') | let g:terminal_key = "<C-Space>" |
 else | let g:terminal_key = "<Nul>" | endif
 " tabline config
 let g:airline#extensions#tabline#enabled = 1
+" mason - LSP
+if has('nvim-0.7')
+lua << EOF
+require("mason").setup()
+require("mason-lspconfig").setup()
+EOF
+endif
 " }}}
 
 " {{{ Plugins key mappings
 " Comment
 "" Vim registers <C-/> as <C-_>
-map <C-_> :Commentary<CR>
-" CamelCaseMotion
-map <silent> \w <Plug>CamelCaseMotion_w
-map <silent> \b <Plug>CamelCaseMotion_b
-map <silent> \e <Plug>CamelCaseMotion_e
-map <silent> \ge <Plug>CamelCaseMotion_ge
+map <C-_> <cmd>Commentary<CR>
 " Easy motion
-map  f          <Plug>(easymotion-jumptoanywhere)
+map  s          <Plug>(easymotion-jumptoanywhere)
 " Git Gutter
-nmap <leader>G[ :GitGutterPrevHunk<CR>
-nmap <leader>G] :GitGutterNextHunk<CR>
-nmap <leader>Gi :GitGutterPreviewHunk<CR>
-nmap <leader>Gs :GitGutterStageHunk<CR>
-nmap <leader>Gu :GitGutterUndoHunk<CR>
+nmap <leader>G[ <cmd>GitGutterPrevHunk<CR>
+nmap <leader>G] <cmd>GitGutterNextHunk<CR>
+nmap <leader>Gi <cmd>GitGutterPreviewHunk<CR>
+nmap <leader>Gs <cmd>GitGutterStageHunk<CR>
+nmap <leader>Gu <cmd>GitGutterUndoHunk<CR>
 " Toggle Tagbar
-nmap <leader>t  :TagbarToggle<CR>
+nmap <leader>t  <cmd>TagbarToggle<CR>
 " Toogle NERDTree
-nmap <C-b>      :NERDTreeToggle<CR>
-" fzf
-nmap <C-p>      :Files<CR>
-" bbye
-nmap <leader>q  :Bdelete<CR>
+nmap <C-b>      <cmd>NERDTreeToggle<CR>
+" telescope
+nmap <C-p>      <cmd>Files<cr>
 " }}}

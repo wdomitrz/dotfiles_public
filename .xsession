@@ -1,2 +1,2 @@
-source $HOME/.xsessionrc
+source "$HOME/.xsessionrc"
 exec i3

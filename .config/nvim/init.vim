@@ -4,10 +4,6 @@
 source ~/.config/nvim/options.vim
 " }}}
 
-" {{{ Filetypes
-source ~/.config/nvim/filetypes.vim
-" }}}
-
 " {{{ Keymap
 source ~/.config/nvim/keymap.vim
 " }}}

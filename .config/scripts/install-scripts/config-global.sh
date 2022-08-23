@@ -30,6 +30,10 @@ function create_global_set_display_script {
     sudo cp ~/.local/bin/set-display /usr/bin/
 }
 
+function fix_screen_tearing {
+    copy_configs_from_to "$HOME"/.config/xorg.conf.d/ /etc/X11/xorg.conf.d/
+}
+
 function set_global_keymap {
     # keybord options - map caps lock to ctrl
     sudo sed -i -E "s/^(XKBOPTIONS)\s*=\s*\"\"/\1=\"ctrl:nocaps\"/g" /etc/default/keyboard
@@ -37,8 +41,8 @@ function set_global_keymap {
 
 function configure_lightdm {
     sudo sed -i -E "s/^(greeter-hide-users)\s*=\s*/#\1=/g" /usr/share/lightdm/*/*.conf
-    copy_configs_from_to "$HOME"/.config/lightdm-gtk-greeter.conf.d/ /usr/share/lightdm/lightdm-gtk-greeter.conf.d/
-    copy_configs_from_to "$HOME"/.config/lightdm.conf.d/ /usr/share/lightdm/lightdm.conf.d/
+    copy_configs_from_to "$HOME"/.config/lightdm-gtk-greeter.conf.d/ /etc/lightdm/lightdm-gtk-greeter.conf.d/
+    copy_configs_from_to "$HOME"/.config/lightdm.conf.d/ /etc/lightdm/lightdm.conf.d/
 }
 
 function fix_network_manager {
@@ -121,12 +125,13 @@ function create_swap_file {
     fi
 }
 function configure_touchpad {
+    config_file="/usr/share/X11/xorg.conf.d/40-libinput.conf"
     # Tap to click
-    grep --quiet 'Option "Tapping" "on"' /usr/share/X11/xorg.conf.d/40-libinput.conf ||
-        sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i /usr/share/X11/xorg.conf.d/40-libinput.conf
+    grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
+        sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"
 
     # Fix touchpad after sleep
-    echo '\
+    echo '
 #!/bin/sh
 
 case $1 in
@@ -143,7 +148,8 @@ function configure_tlp {
 }
 
 function remove_backgrounds {
-    cat "$HOME"/.config/backgrounds/backgrounds-to-remove.txt | xargs sudo rm -f
+    xargs sudo rm -f < \
+        "$HOME"/.config/backgrounds/backgrounds-to-remove.txt
 }
 
 function remove_snap_directories {
@@ -157,6 +163,7 @@ function main {
     create_global_set_display_script
     set_global_keymap
     configure_lightdm
+    fix_screen_tearing
     fix_network_manager
     get_certificates
     fix_redshift

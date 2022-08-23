@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 if [ -v "$TERMINAL" ]; then
     exec $TERMINAL vim "$@"
 else

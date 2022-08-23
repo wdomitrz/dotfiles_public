@@ -5,7 +5,7 @@
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
 # homebrew
-[ -d "$HOME/.linuxbrew" ] && eval $("$HOME/.linuxbrew/bin/brew" shellenv)
+[ -d "$HOME/.linuxbrew" ] && eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 
 # ghcup-env
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"

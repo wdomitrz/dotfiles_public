@@ -6,13 +6,13 @@ function update_and_upgrade {
 }
 
 function install_packages {
-    cat "$HOME/.config/packages/packages.txt" |
-        xargs sudo apt-get install --yes --no-install-recommends
+    xargs sudo apt-get install --yes --no-install-recommends < \
+        "$HOME/.config/packages/packages.txt"
 }
 
 function install_with_recommended {
-    cat "$HOME/.config/packages/with-recommends.txt" |
-        xargs sudo apt-get install --yes --install-recommends
+    xargs sudo apt-get install --yes --install-recommends < \
+        "$HOME/.config/packages/with-recommends.txt"
 }
 
 function install_wallpapers {

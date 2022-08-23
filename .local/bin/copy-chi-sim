@@ -12,7 +12,7 @@ text_file="$(mktemp)"
 
 gnome-screenshot --area --file="${image_file}"
 
-tesseract -l chi_sim "${image_file}" "${text_file}" &> /dev/null
-cat "${text_file}.txt" | xclip -selection clipboard
+tesseract -l chi_sim "${image_file}" "${text_file}" &>/dev/null
+xclip -selection clipboard <"${text_file}.txt"
 
 rm "${image_file}" "${text_file}.txt" "${text_file}"

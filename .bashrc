@@ -25,14 +25,11 @@ bind 'TAB':menu-complete
 # Perform partial completion on the first Tab
 bind "set menu-complete-display-prefix on"
 
-# Use 256 colors
-[ "$TERM" != "xterm-kitty" ] && export TERM=xterm-256color || true
-
 # Prompt
 ## Detect no color support
 ([ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null) || NO_COLORS=1
 
-if [ -z "${NO_COLORS}"]; then
+if [ -z "${NO_COLORS}" ]; then
     # Colors
     USER_COLOR="\[$(tput setaf 10)\]"       # green
     AT_COLOR="\[$(tput setaf 11)\]"         # yellow
@@ -45,16 +42,16 @@ if [ -z "${NO_COLORS}"]; then
     CLEAR="\[$(tput sgr0)\]"                # clear color
 fi
 
-export PROMPT_FRONT=""$(
-)"${USER_COLOR}\u${CLEAR}"$(
-)"${AT_COLOR}@${CLEAR}"$(
-)"${HOST_COLOR}\h${CLEAR} "$(
-)"[${EXIT_STATUS_COLOR}\$?${CLEAR}]"
-export PROMPT_BACK=""$(
-)" {${DATE_COLOR}\D{%F %A}${CLEAR} "$(
-)"${TIME_COLOR}\t${CLEAR}} "$(
-)"${PATH_COLOR}\w${CLEAR}\n"$(
-)"${PROMPT_COLOR}\$${CLEAR} "
+export PROMPT_FRONT="\
+${USER_COLOR}\u${CLEAR}\
+${AT_COLOR}@${CLEAR}\
+${HOST_COLOR}\h${CLEAR} \
+[${EXIT_STATUS_COLOR}\$?${CLEAR}]"
+export PROMPT_BACK=" \
+{${DATE_COLOR}\D{%F %A}${CLEAR} \
+${TIME_COLOR}\t${CLEAR}} \
+${PATH_COLOR}\w${CLEAR}\n\
+${PROMPT_COLOR}\$${CLEAR} "
 
 export PS1="${PROMPT_FRONT}${PROMPT_BACK}"
 
@@ -82,4 +79,4 @@ if ! shopt -oq posix; then
 fi
 
 # Aliases
-[ -f $HOME/.bash_aliases ] && source $HOME/.bash_aliases
+[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"

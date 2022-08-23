@@ -55,7 +55,6 @@ function main {
     install_google_chrome
     install_vscode
     install_signal
-    install_slack
     update_and_upgrade
 }
 

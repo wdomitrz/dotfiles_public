@@ -3,7 +3,7 @@
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
+    test -r "$HOME/.dircolors" && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -38,18 +38,19 @@ alias pint='ping 8.8.8.8'
 
 # Ignore errors
 I() {
-    ($@) 2>/dev/null
+    ("$@") 2>/dev/null
 }
+alias I='I '
 # Run command independently
 DT() {
-    ($@) &
+    ("$@") &
     disown
 }
+alias DT='DT '
 alias nt='DT $TERMINAL'
 alias nv='nt -e nvim'
 
-# Not all machines support xterm-kitty
-command -v kitty >/dev/null && alias ssh='TERM=xterm-256color ssh'
+alias tmux='TERM=screen-256color tmux'
 
 # Package manager aliases
 alias pcin='sudo apt-get install'
@@ -75,3 +76,5 @@ alias pcrdep='apt-cache rdepends'
 alias pcsi='apt list --installed'
 alias pcls='apt list'
 alias pcsim='apt-mark showmanual'
+
+alias pcyall='sudo apt-get update --yes && sudo apt-get dist-upgrade --yes && sudo apt-get autoremove --purge --yes'

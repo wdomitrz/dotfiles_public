@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function add_user_to_groups {
-    sudo usermod -aG docker,input,kvm,lpadmin,audio,netdev,video,libvirt "$USER"
+    sudo usermod -aG docker,input,kvm,lpadmin,audio,netdev,video "$USER"
 }
 
 function set_shell {
@@ -36,7 +36,7 @@ function create_default_directories {
     if [ -f "$default_dirs_location" ]; then
         cd "$HOME"
         unzip "$default_dirs_location"
-        [ -f "$HOME/.config/gtk-3.0/bookmarks" ] || touch "$HOME"/.config/gtk-3.0/bookmarks
+        [ -f "$HOME/.config/gtk-3.0/bookmarks" ] || (mkdir -p "$HOME"/.config/gtk-3.0 && touch "$HOME"/.config/gtk-3.0/bookmarks)
         for d in $(zipinfo -1 "$default_dirs_location"); do
             grep --quiet "$d" "$HOME"/.config/gtk-3.0/bookmarks || echo "file://$(pwd)/$d" \
                 >>"$HOME"/.config/gtk-3.0/bookmarks
@@ -56,7 +56,7 @@ function configure_transmission {
 }
 
 function set_bacground_switcher {
-    if !(crontab -l 2>/dev/null | grep --quiet set-background); then
+    if ! (crontab -l 2>/dev/null | grep --quiet set-background); then
         (
             crontab -l 2>/dev/null
             echo -n "

@@ -1,9 +1,8 @@
 {
-    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4 }",
-    "C_Cpp.loggingLevel": "Debug",
     "breadcrumbs.enabled": true,
+    "C_Cpp.loggingLevel": "Debug",
     "cSpell.language": "en,pl",
-    "cmake.configureOnOpen": true,
+    "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
     "editor.bracketPairColorization.enabled": true,
     "editor.cursorBlinking": "solid",
@@ -25,9 +24,7 @@
     "files.associations": {
         "**/.ssh/config": "ssh_config",
         "**/.ssh/configs/*.conf": "ssh_config",
-        "**/i3/config": "i3",
-        "*.ipynb": "jupyter.notebook.ipynb",
-        "*.rmd": "markdown"
+        "**/i3/config": "i3"
     },
     "files.autoGuessEncoding": true,
     "files.autoSave": "onFocusChange",
@@ -63,17 +60,17 @@
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "git.autofetch": true,
+    "git.mergeEditor": true,
+    "jupyter.askForKernelRestart": false,
     "keyboard.dispatch": "keyCode",
-    "markdownlint.config": {
-        "MD007": {
-            "indent": 4
-        }
-    },
     "path-autocomplete.triggerOutsideStrings": true,
+    "python.analysis.inlayHints.functionReturnTypes": true,
     "python.formatting.autopep8Args": [
         "--aggressive"
     ],
     "python.languageServer": "Pylance",
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintEnabled": true,
     "remote.SSH.lockfilesInTmp": true,
     "search.useIgnoreFiles": true,
     "security.workspace.trust.banner": "always",
@@ -87,16 +84,14 @@
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.inheritEnv": false,
     "update.showReleaseNotes": false,
-    "vim.camelCaseMotion.enable": true,
     "vim.easymotion": true,
-    "vim.easymotionDimBackground": false,
     "vim.enableNeovim": true,
     "vim.handleKeys": {
         "<C-[>": true,
         "<C-a>": true,
         "<C-d>": true,
         "<C-o>": true,
-        "<C-u>": true
+        "<C-u>": true,
     },
     "vim.insertModeKeyBindings": [
         {
@@ -111,28 +106,19 @@
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [
-                " ",
-                " "
+                "j"
             ],
-            "commands": [
-                "workbench.action.nextEditor"
-            ]
-        },
-        {
             "after": [
                 "g",
                 "j"
-            ],
+            ]
+        },
+        {
             "before": [
-                "j"
-            ]
-        },
-        {
-            "after": [
-                "g",
                 "k"
             ],
-            "before": [
+            "after": [
+                "g",
                 "k"
             ]
         },
@@ -155,6 +141,16 @@
         {
             "before": [
                 " ",
+                "g",
+                "r"
+            ],
+            "commands": [
+                "references-view.findReferences"
+            ]
+        },
+        {
+            "before": [
+                " ",
                 "d"
             ],
             "commands": [
@@ -163,7 +159,6 @@
         },
         {
             "before": [
-                " ",
                 "g",
                 "d"
             ],
@@ -191,7 +186,6 @@
         },
         {
             "before": [
-                " ",
                 "g",
                 "i"
             ],
@@ -210,7 +204,6 @@
         },
         {
             "before": [
-                " ",
                 "g",
                 "t"
             ],
@@ -238,7 +231,6 @@
         },
         {
             "before": [
-                " ",
                 "g",
                 "r"
             ],
@@ -302,26 +294,24 @@
         {
             "before": [
                 " ",
-                "o",
-                "i"
+                "o"
             ],
             "commands": [
                 "editor.action.organizeImports"
             ]
         },
         {
+            "before": [
+                "s"
+            ],
             "after": [
                 "leader",
                 "leader",
                 "leader",
                 "j"
-            ],
-            "before": [
-                "f"
             ]
         }
     ],
-    "vim.replaceWithRegister": true,
     "vim.useCtrlKeys": false,
     "vim.useSystemClipboard": true,
     "vim.visualModeKeyBindingsNonRecursive": [
@@ -359,15 +349,27 @@
                 "j"
             ],
             "before": [
+                "s"
+            ]
+        },
+        {
+            "before": [
+                " ",
                 "f"
+            ],
+            "commands": [
+                "editor.action.formatSelection"
             ]
         }
     ],
     "window.menuBarVisibility": "toggle",
+    "window.openFoldersInNewWindow": "off",
     "workbench.activityBar.visible": false,
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.enableExperiments": false,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.startupEditor": "none",
-    "workbench.tips.enabled": false
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.tips.enabled": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideTabs": false
 }

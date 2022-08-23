@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 function uninstall_packages_and_cleanup {
-    cat "$HOME/.config/packages/to-remove.txt" |
-        sudo apt-get autoremove --purge --yes
+    xargs sudo apt-get autoremove --purge --yes < \
+        "$HOME/.config/packages/to-remove.txt"
 }
 
 function main {

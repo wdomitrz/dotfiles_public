@@ -5,6 +5,6 @@ trap "tput cnorm" EXIT
 tput civis
 
 clear
-while read -n1 -s ; do
+while read -rn1 -s; do
     clear
 done

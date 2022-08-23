@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 sudo mkdir -p /etc/ssh/sshd_config.d
 

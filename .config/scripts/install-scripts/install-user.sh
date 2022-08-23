@@ -44,9 +44,9 @@ function install_fira_code {
     fi
 
     version=6.2
-    zip=Fira_Code_v${version}.zip
-    curl --fail --location --show-error https://github.com/tonsky/FiraCode/releases/download/${version}/${zip} --output ${zip}
-    unzip -o -q -d ${fonts_dir} ${zip}
+    zip="Fira_Code_v${version}.zip"
+    curl --fail --location --show-error "https://github.com/tonsky/FiraCode/releases/download/${version}/${zip}" --output "${zip}"
+    unzip -o -q -d "${fonts_dir}" "${zip}"
     rm ${zip}
 
     echo "fc-cache -f"
@@ -59,11 +59,6 @@ function enable_flathub {
 
 function install_moonlight {
     flatpak install --user --assumeyes flathub com.moonlight_stream.Moonlight
-    echo '\
-#!/usr/bin/env sh
-exec flatpak run com.moonlight_stream.Moonlight
-' | tee "$HOME"/.local/bin/moonlight
-    chmod +x "$HOME"/.local/bin/moonlight
 }
 
 function install_python_packages {
@@ -71,7 +66,6 @@ function install_python_packages {
     pip3 install --user -U pip
     ## pip modules
     pip3 install --user -U \
-        autopep8 \
         autotiling \
         ipython \
         matplotlib \
@@ -90,12 +84,9 @@ function main {
     set -xue
 
     enable_flathub
-    install_python_packages
-    update_node_and_npm
-    install_multi_touch_gestures_fusuma
-    install_nvim_tar_gz
-    install_kitty
     install_moonlight
+    install_python_packages
+    install_multi_touch_gestures_fusuma
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

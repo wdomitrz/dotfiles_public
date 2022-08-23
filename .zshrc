@@ -1,5 +1,5 @@
 # source .profile
-[ -f $HOME/.zprofile ] && source $HOME/.zprofile
+[ -f "$HOME/.zprofile" ] && source "$HOME/.zprofile"
 
 # Set up the prompt
 autoload -Uz promptinit
@@ -31,12 +31,12 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^H" backward-kill-word
 
 # History
-HISTFILE=$HOME/.cache/zsh_history
+HISTFILE="$HOME/.cache/zsh_history"
 HISTSIZE=2097152
 SAVEHIST=2097152
 
 # Copy (in vi mode) to the system clipboard
-source $HOME/.config/zsh/clipboard.sh
+source "$HOME/.config/zsh/clipboard.zsh"
 
 # Completion
 zstyle :compinstall filename '$HOME/.zshrc'
@@ -44,18 +44,13 @@ autoload -Uz compinit
 compinit
 
 # Prompt
-source $HOME/.config/zsh/prompt.sh
+source "$HOME/.config/zsh/prompt.zsh"
 
 # Aliases
-source $HOME/.config/zsh/aliases.sh
+source "$HOME/.config/zsh/aliases.zsh"
 
 # Git
-source $HOME/.config/zsh/git.sh
-
-# Use 256 colors
-if [ "$TERM" != "xterm-kitty" ]; then
-    export TERM=xterm-256color
-fi
+source "$HOME/.config/zsh/git.zsh"
 
 # Command not found
 [ -r /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found

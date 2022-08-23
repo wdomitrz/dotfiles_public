@@ -12,8 +12,6 @@ if has("syntax") | syntax enable | endif
 " }}}
 
 " {{{ set options
-" Automatically reload file content
-set autoread
 " Automatically set working
 set autochdir
 " Use system clipboard
@@ -24,14 +22,14 @@ set complete=.,w,b,u,U,k,kspell,s,i,t
 set completeopt=menuone,noinsert,noselect
 " Fold using syntax and dont fold by default
 set foldmethod=syntax nofoldenable
-" Hide buffers
-set hidden
 " Always show status line and tab line
-set laststatus=2 showtabline=2
+set showtabline=2
+" Global statusline
+if has('nvim-0.7') | set laststatus=3 | endif
 " Do not update when not needed
 set lazyredraw
 " Show extra spaces
-set list listchars=tab:>-,trail:!
+set list
 " Support mouse
 set mouse=a
 " Do not use swap files and backups
@@ -48,8 +46,6 @@ set shortmess=IAc
 if has('nvim-0.5') | set signcolumn=number | else | set signcolumn=auto | endif
 " Smartcase
 set smartcase
-" Smart tab insertion
-set smarttab
 " Add spell checking
 set spell spelllang=en,pl
 " Split to the right and to the bottom
@@ -66,8 +62,6 @@ set undofile
 set updatetime=100
 " Wrap cursor
 set whichwrap+=<,>,h,l,[,]
-" Better command line completion
-set wildmenu
 " Soft wrapping
 set wrap linebreak breakindent
 " }}}

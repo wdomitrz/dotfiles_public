@@ -6,6 +6,7 @@
     "diffEditor.codeLens": true,
     "editor.bracketPairColorization.enabled": true,
     "editor.cursorBlinking": "solid",
+    "editor.experimental.stickyScroll.enabled": true,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
@@ -68,7 +69,6 @@
     "python.formatting.autopep8Args": [
         "--aggressive"
     ],
-    "python.languageServer": "Pylance",
     "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": true,
     "remote.SSH.lockfilesInTmp": true,

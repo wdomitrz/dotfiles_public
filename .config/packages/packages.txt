@@ -38,6 +38,7 @@ e-wrapper
 exfat-fuse
 exfatprogs
 extlinux
+feh
 file
 file-roller
 fish
@@ -95,7 +96,6 @@ nautilus-image-converter
 neovim
 network-manager
 network-manager-gnome
-nitrogen
 nmap
 notify-osd
 ntfs-3g
@@ -174,5 +174,3 @@ xss-lock
 xterm
 zathura
 zip
-zsh
-zsh-syntax-highlighting

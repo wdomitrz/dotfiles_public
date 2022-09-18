@@ -1,6 +1,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [ -f /etc/bashrc ]; then
+    source /etc/bashrc
+fi
+
 # Options
 shopt -s autocd       # Automatically change directory
 shopt -s checkwinsize # Detect resize
@@ -12,8 +16,8 @@ shopt -u failglob     # Unmatched patterns don't cause errors
 export HISTFILE=$HOME/.cache/bash_history # History file
 
 HISTCONTROL=ignorespace # don't save lines with leading space
-HISTSIZE=2097152        # Size of history
-HISTFILESIZE=0          # Size of history file
+HISTSIZE=               # unlimited bash history
+HISTFILESIZE=           # unlimited bash history
 
 # Key bindings
 ## vi keybindings
@@ -24,6 +28,17 @@ bind '"\x08":backward-kill-word'
 bind 'TAB':menu-complete
 # Perform partial completion on the first Tab
 bind "set menu-complete-display-prefix on"
+
+yank_line_to_clipboard() {
+    echo "${READLINE_LINE}" | xclip -in -selection clipboard
+}
+bind -m vi-command -x '"yy": yank_line_to_clipboard'
+
+kill_line_to_clipboard() {
+    yank_line_to_clipboard
+    READLINE_LINE=""
+}
+bind -m vi-command -x '"dd": kill_line_to_clipboard'
 
 # Prompt
 ## Detect no color support
@@ -80,3 +95,5 @@ fi
 
 # Aliases
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+# Profile
+[ -f "$HOME/.profile" ] && [ -z "${PROFILE_LOADED}" ] && source "$HOME/.bash_aliases"

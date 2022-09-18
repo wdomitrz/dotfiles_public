@@ -6,7 +6,6 @@
     "diffEditor.codeLens": true,
     "editor.bracketPairColorization.enabled": true,
     "editor.cursorBlinking": "solid",
-    "editor.experimental.stickyScroll.enabled": true,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
@@ -16,8 +15,10 @@
     "editor.rulers": [
         80,
         100,
+        115,
         120
     ],
+    "editor.stickyScroll.enabled": true,
     "editor.tabCompletion": "on",
     "editor.unfoldOnClickAfterEndOfLine": true,
     "editor.wordWrap": "on",

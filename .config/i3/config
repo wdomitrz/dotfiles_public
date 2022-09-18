@@ -167,8 +167,8 @@ bindsym $mod+End            exec --no-startup-id    systemctl suspend
 # Change background
 bindsym $mod+y              exec --no-startup-id    set-background
 # Screenshot
-bindsym Print               exec --no-startup-id    flameshot gui
-bindsym Ctrl+Print          exec --no-startup-id    flameshot full --clipboard
+bindsym Print               exec --no-startup-id    gnome-screenshot --interactive
+bindsym $mod+p              exec --no-startup-id    gnome-screenshot --interactive
 # Terminal
 bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
 # Text editor

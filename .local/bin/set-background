@@ -1,9 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-nitrogen_display_options=(--set-scaled --random "$HOME/.config/backgrounds")
-number_of_displays="$(xrandr --listactivemonitors | grep '^Monitors: ' | grep --only-matching --perl-regexp '\d+')"
-
-for display in $(seq 0 $((number_of_displays - 1))); do
-    nitrogen --head="$display" "${nitrogen_display_options[@]}" ||
-        xsetroot -solid "#000000"
-done
+find -L "$HOME/.config/backgrounds/" -type f -iname "*.png" -or -iname "*.jpg" | xargs feh --no-fehbg --bg-scale --randomize ||
+    xsetroot -solid "#000000"

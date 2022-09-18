@@ -71,7 +71,7 @@ function main {
     set -xue
 
     add_user_to_groups
-    set_shell_zsh
+    set_shell_bash
     disable_core_file
     create_default_directories
     configure_nautilus

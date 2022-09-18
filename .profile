@@ -1,3 +1,5 @@
+export PROFILE_LOADED=1
+
 [ -f "$HOME/.bash_profile" ] && . "$HOME/.bash_profile"
 
 # set PATH so it includes user's private bin if it exists

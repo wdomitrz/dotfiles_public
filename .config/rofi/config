@@ -1,4 +1,0 @@
-rofi.theme:         royal-sky
-rofi.modi:          drun,window,ssh,combi
-rofi.show-icons:    true
-rofi.font:          Fira Code 13

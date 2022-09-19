@@ -96,4 +96,4 @@ fi
 # Aliases
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
 # Profile
-[ -f "$HOME/.profile" ] && [ -z "${PROFILE_LOADED}" ] && source "$HOME/.bash_aliases"
+[ -f "$HOME/.profile" ] && [ -z "${PROFILE_LOADED}" ] && source "$HOME/.profile"

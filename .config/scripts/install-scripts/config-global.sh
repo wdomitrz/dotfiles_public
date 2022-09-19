@@ -147,11 +147,6 @@ function configure_tlp {
     sudo sed -i 's/#\([A-Z]*_CHARGE_THRESH_BAT0=[0-9]*\)$/\1/' /etc/tlp.conf
 }
 
-function remove_backgrounds {
-    xargs sudo rm -f < \
-        "$HOME"/.config/backgrounds/backgrounds-to-remove.txt
-}
-
 function remove_snap_directories {
     sudo rm -rf /snap "$HOME"/snap
 }
@@ -169,7 +164,6 @@ function main {
     fix_redshift
     configure_bluetooth
     fix_keychron
-    remove_backgrounds
     configure_newt_palette
     configure_grub
     fix_iwlwifi

@@ -50,6 +50,7 @@ fonts-dejavu
 fonts-firacode
 fonts-noto-color-emoji
 fwupd
+fzf
 gdb
 geoclue-2.0
 git

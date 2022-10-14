@@ -24,6 +24,7 @@ HISTFILESIZE=           # unlimited bash history
 set -o vi
 ## Search backward
 bind '"\x08":backward-kill-word'
+[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash
 ## Tab completion
 bind 'TAB':menu-complete
 # Perform partial completion on the first Tab

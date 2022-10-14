@@ -29,6 +29,8 @@ alias ix='curl -F '"'"'f:1=<-'"'"' ix.io'
 
 alias copy='xclip -selection clipboard'
 
+alias fzfcommandsearch="compgen -c | sort -u | fzf --preview 'shopt -s expand_aliases; source ~/.bashrc; type {}'"
+
 # some more ls aliases
 alias ll='ls -Al'
 alias la='ls -A'

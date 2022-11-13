@@ -9,6 +9,7 @@
     "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
     "editor.parameterHints.cycle": true,
@@ -26,7 +27,9 @@
     "files.associations": {
         "**/.ssh/config": "ssh_config",
         "**/.ssh/configs/*.conf": "ssh_config",
-        "**/i3/config": "i3"
+        "**/i3/config": "i3",
+        "*.task": "json",
+        "*.build": "json"
     },
     "files.autoGuessEncoding": true,
     "files.autoSave": "onFocusChange",
@@ -64,26 +67,29 @@
     "git.autofetch": true,
     "git.mergeEditor": true,
     "jupyter.askForKernelRestart": false,
+    "jupyter.sendSelectionToInteractiveWindow": true,
     "keyboard.dispatch": "keyCode",
+    "notebook.lineNumbers": "on",
     "path-autocomplete.triggerOutsideStrings": true,
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.formatting.autopep8Args": [
         "--aggressive"
     ],
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
     "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": true,
     "remote.SSH.lockfilesInTmp": true,
     "search.useIgnoreFiles": true,
     "security.workspace.trust.banner": "always",
     "security.workspace.trust.startupPrompt": "always",
-    "security.workspace.trust.untrustedFiles": "newWindow",
     "settingsSync.keybindingsPerPlatform": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "terminal.integrated.inheritEnv": false,
+    "todo-tree.tree.autoRefresh": true,
     "update.showReleaseNotes": false,
     "vim.easymotion": true,
     "vim.enableNeovim": true,
@@ -277,14 +283,6 @@
         },
         {
             "before": [
-                "/"
-            ],
-            "commands": [
-                "actions.find"
-            ]
-        },
-        {
-            "before": [
                 " ",
                 "f"
             ],
@@ -335,14 +333,6 @@
             ]
         },
         {
-            "before": [
-                "/"
-            ],
-            "commands": [
-                "actions.find"
-            ]
-        },
-        {
             "after": [
                 "leader",
                 "leader",
@@ -369,8 +359,8 @@
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.enableExperiments": false,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.startupEditor": "newUntitledFile",
+    "workbench.startupEditor": "none",
     "workbench.tips.enabled": false,
     "zenMode.hideLineNumbers": false,
-    "zenMode.hideTabs": false
+    "zenMode.hideTabs": false,
 }

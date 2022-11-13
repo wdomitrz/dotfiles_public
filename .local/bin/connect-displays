@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+# xrandr --setmonitor bigger_monitor auto monitor1,monitor2

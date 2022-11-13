@@ -173,6 +173,8 @@ bindsym Ctrl+Print          exec --no-startup-id    flameshot full --clipboard
 bindsym $mod+Ctrl+p         exec --no-startup-id    flameshot full --clipboard
 # Terminal
 bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
+# Terminal on local machine
+bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
 # Text editor
 bindsym $mod+Shift+Return   exec --no-startup-id    code
 
@@ -185,6 +187,7 @@ bindsym $mod+w              exec --no-startup-id    xdg-open https://
 bindsym XF86Mail            exec --no-startup-id    xdg-open "https://gmail.com"
 bindsym XF86Calculator      exec --no-startup-id    gnome-calculator
 bindsym $mod+c              exec --no-startup-id    code
+bindsym $mod+Shift+c        exec --no-startup-id    connect-displays
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume        exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +5%

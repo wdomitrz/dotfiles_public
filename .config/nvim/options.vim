@@ -66,11 +66,6 @@ set whichwrap+=<,>,h,l,[,]
 set wrap linebreak breakindent
 " }}}
 
-" {{{ Change popup menu color
-highlight Pmenu ctermbg=none guibg=none
-highlight PmenuSel ctermbg=gray guibg=gray
-" }}}
-
 " {{{ Set nicer spelling highlighting
 highlight SpellCap guisp=yellow  gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl

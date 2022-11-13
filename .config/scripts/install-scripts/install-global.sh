@@ -48,6 +48,12 @@ function install_slack {
     install_deb_from_url "https://downloads.slack-edge.com/releases/linux/4.26.1/prod/x64/slack-desktop-4.26.1-amd64.deb"
 }
 
+function install_nordvpn {
+    install_deb_from_url "https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb"
+    sudo apt-get update --yes
+    sudo apt-get install --yes nordvpn
+}
+
 function main {
     set -xue
     source "$HOME"/.config/scripts/install-scripts/install-packages.sh --source-only
@@ -55,6 +61,7 @@ function main {
     install_google_chrome
     install_vscode
     install_signal
+    install_nordvpn
     update_and_upgrade
 }
 

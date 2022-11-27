@@ -23,7 +23,7 @@ class LookingFor(Enum):
     DONE = auto()
 
 
-PRIMARY_ORDER_DEFAULT = ["screen", "rdp", "HDMI", "DP", "eDP"]
+PRIMARY_ORDER_DEFAULT = ["screen", "rdp", "DP", "HDMI", "eDP"]
 
 
 class DefaultScreenExternal():

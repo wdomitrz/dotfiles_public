@@ -113,6 +113,10 @@ mode "resize" {
 }
 
 mode "mouse" {
+    bindsym Ctrl+$left      exec --no-startup-id xdotool mousemove_relative -- -1 0
+    bindsym Ctrl+$down      exec --no-startup-id xdotool mousemove_relative -- 0 +1
+    bindsym Ctrl+$up        exec --no-startup-id xdotool mousemove_relative -- 0 -1
+    bindsym Ctrl+$right     exec --no-startup-id xdotool mousemove_relative -- +1 0
     bindsym $left           exec --no-startup-id xdotool mousemove_relative -- -10 0
     bindsym $down           exec --no-startup-id xdotool mousemove_relative -- 0 +10
     bindsym $up             exec --no-startup-id xdotool mousemove_relative -- 0 -10
@@ -121,14 +125,12 @@ mode "mouse" {
     bindsym Shift+$down     exec --no-startup-id xdotool mousemove_relative -- 0 +100
     bindsym Shift+$up       exec --no-startup-id xdotool mousemove_relative -- 0 -100
     bindsym Shift+$right    exec --no-startup-id xdotool mousemove_relative -- +100 0
-    bindsym Ctrl+$left      exec --no-startup-id xdotool mousemove_relative -- -1 0
-    bindsym Ctrl+$down      exec --no-startup-id xdotool mousemove_relative -- 0 +1
-    bindsym Ctrl+$up        exec --no-startup-id xdotool mousemove_relative -- 0 -1
-    bindsym Ctrl+$right     exec --no-startup-id xdotool mousemove_relative -- +1 0
 
     bindsym space           exec --no-startup-id xdotool click 1
-    bindsym Shift+space     exec --no-startup-id xdotool click 2
-    bindsym Ctrl+space      exec --no-startup-id xdotool click 3
+    bindsym Shift+space     exec --no-startup-id xdotool mousedown 1
+    bindsym Ctrl+space      exec --no-startup-id xdotool mousedown 1
+    bindsym Shift+Return    exec --no-startup-id xdotool click 2
+    bindsym Ctrl+Return     exec --no-startup-id xdotool click 3
 
     bindsym Escape          mode "default"
 }

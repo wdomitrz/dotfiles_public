@@ -46,6 +46,9 @@ bind -m vi-command -x '"dd": kill_line_to_clipboard'
 ([ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null) || NO_COLORS=1
 
 if [ -z "${NO_COLORS}" ]; then
+    # Trick to make colors work well in tmux and in other scenarios
+    TERM=xterm-256color
+
     # Colors
     USER_COLOR="\[$(tput setaf 10)\]"       # green
     AT_COLOR="\[$(tput setaf 11)\]"         # yellow
@@ -98,3 +101,6 @@ fi
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
 # Profile
 [ -f "$HOME/.profile" ] && [ -z "${PROFILE_LOADED}" ] && source "$HOME/.profile"
+
+# Loading completed successfully
+true

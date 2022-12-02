@@ -89,6 +89,7 @@
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.localEchoEnabled": "off",
     "todo-tree.tree.autoRefresh": true,
     "update.showReleaseNotes": false,
     "vim.easymotion": true,

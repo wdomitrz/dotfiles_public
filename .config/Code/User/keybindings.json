@@ -91,7 +91,8 @@
     },
     {
         "key": "ctrl+space",
-        "command": "workbench.action.togglePanel",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
     },
     {
         "key": "ctrl+l",

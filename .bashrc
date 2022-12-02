@@ -24,7 +24,6 @@ HISTFILESIZE=           # unlimited bash history
 set -o vi
 ## Search backward
 bind '"\x08":backward-kill-word'
-[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash
 ## Tab completion
 bind 'TAB':menu-complete
 # Perform partial completion on the first Tab
@@ -96,6 +95,13 @@ if ! shopt -oq posix; then
         source /etc/bash_completion
     fi
 fi
+
+# Improved search backwards
+([ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash) ||
+    ([ -f "/usr/share/fzf/key-bindings.bash" ] && source /usr/share/fzf/key-bindings.bash)
+# Searching files and other completions (for example with `cat **<Tab>`, and processes with `kill -9 <Tab>`)
+([ -f "/usr/share/bash-completion/completions/fzf" ] && source /usr/share/bash-completion/completions/fzf) ||
+    ([ -f "/usr/share/fzf/completion.bash" ] && source /usr/share/fzf/completion.bash)
 
 # Aliases
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"

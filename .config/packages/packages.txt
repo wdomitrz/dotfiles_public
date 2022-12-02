@@ -94,6 +94,7 @@ nautilus
 nautilus-admin
 nautilus-gtkhash
 nautilus-image-converter
+ncdu
 neovim
 network-manager
 network-manager-gnome

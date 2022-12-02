@@ -97,11 +97,11 @@ if ! shopt -oq posix; then
 fi
 
 # Improved search backwards
-([ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash) ||
-    ([ -f "/usr/share/fzf/key-bindings.bash" ] && source /usr/share/fzf/key-bindings.bash)
+[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash
+[ -f "/usr/share/fzf/key-bindings.bash" ] && source /usr/share/fzf/key-bindings.bash
 # Searching files and other completions (for example with `cat **<Tab>`, and processes with `kill -9 <Tab>`)
-([ -f "/usr/share/bash-completion/completions/fzf" ] && source /usr/share/bash-completion/completions/fzf) ||
-    ([ -f "/usr/share/fzf/completion.bash" ] && source /usr/share/fzf/completion.bash)
+[ -f "/usr/share/bash-completion/completions/fzf" ] && source /usr/share/bash-completion/completions/fzf
+[ -f "/usr/share/fzf/completion.bash" ] && source /usr/share/fzf/completion.bash
 
 # Aliases
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"

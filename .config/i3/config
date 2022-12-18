@@ -147,6 +147,7 @@ bar {
 default_border pixel
 default_floating_border none
 hide_edge_borders smart
+for_window [class="^.*"] border pixel
 
 # mouse mode
 bindsym $mod+Shift+m        mode "mouse"

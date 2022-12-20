@@ -112,29 +112,30 @@
         "<C-a>": true,
         "<C-d>": true,
         "<C-o>": true,
-        "<C-w>": true,
-        "<C-u>": true
+        "<C-u>": true,
+        "<C-w>": true
     },
     "vim.insertModeKeyBindings": [
         {
             "before": [
-                "C-a"
+                "<C-a>"
             ],
             "commands": [
                 "editor.action.selectAll"
             ]
         }
     ],
+    "vim.leader": "<space>",
     "vim.normalModeKeyBindings": [
         {
             "after": [
                 "<C-w>"
             ],
             "before": [
-                " ",
+                "<leader>",
                 "w"
             ]
-        },
+        }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
@@ -173,7 +174,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "g",
                 "r"
             ],
@@ -183,7 +184,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "d"
             ],
             "commands": [
@@ -201,7 +202,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "k"
             ],
             "commands": [
@@ -210,7 +211,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "shift+k"
             ],
             "commands": [
@@ -228,7 +229,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "i"
             ],
             "commands": [
@@ -246,7 +247,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "t"
             ],
             "commands": [
@@ -255,7 +256,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "r"
             ],
             "commands": [
@@ -273,7 +274,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "}"
             ],
             "commands": [
@@ -282,7 +283,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "{"
             ],
             "commands": [
@@ -291,7 +292,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "]"
             ],
             "commands": [
@@ -300,7 +301,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "["
             ],
             "commands": [
@@ -309,7 +310,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "f"
             ],
             "commands": [
@@ -318,7 +319,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "o"
             ],
             "commands": [
@@ -327,9 +328,9 @@
         },
         {
             "after": [
-                "leader",
-                "leader",
-                "leader",
+                "<leader>",
+                "<leader>",
+                "<leader>",
                 "j"
             ],
             "before": [
@@ -342,6 +343,17 @@
     "vim.visualModeKeyBindingsNonRecursive": [
         {
             "after": [
+                "p",
+                "g",
+                "v",
+                "y"
+            ],
+            "before": [
+                "p"
+            ]
+        },
+        {
+            "after": [
                 "g",
                 "j"
             ],
@@ -360,9 +372,9 @@
         },
         {
             "after": [
-                "leader",
-                "leader",
-                "leader",
+                "<leader>",
+                "<leader>",
+                "<leader>",
                 "j"
             ],
             "before": [
@@ -371,7 +383,7 @@
         },
         {
             "before": [
-                " ",
+                "<leader>",
                 "f"
             ],
             "commands": [

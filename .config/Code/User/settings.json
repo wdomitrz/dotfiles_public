@@ -112,6 +112,7 @@
         "<C-a>": true,
         "<C-d>": true,
         "<C-o>": true,
+        "<C-w>": true,
         "<C-u>": true
     },
     "vim.insertModeKeyBindings": [
@@ -123,6 +124,17 @@
                 "editor.action.selectAll"
             ]
         }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "after": [
+                "<C-w>"
+            ],
+            "before": [
+                " ",
+                "w"
+            ]
+        },
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {

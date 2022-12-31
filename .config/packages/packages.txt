@@ -24,6 +24,7 @@ compton
 cron
 cups
 curl
+dbus-x11
 desktop-file-utils
 dex
 dmenu
@@ -90,6 +91,7 @@ lxappearance
 lxpolkit
 mobile-broadband-provider-info
 modemmanager
+mpv
 nautilus
 nautilus-admin
 nautilus-gtkhash

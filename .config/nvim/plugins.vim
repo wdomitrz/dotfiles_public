@@ -47,6 +47,11 @@ Plug 'easymotion/vim-easymotion'
 Plug 'preservim/tagbar'
 " NERDTree
 Plug 'preservim/nerdtree'
+" Notebooks and python
+Plug 'goerz/jupytext.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'GCBallesteros/vim-textobj-hydrogen'
+Plug 'hkupty/iron.nvim'
 " }}}
 call plug#end()
 " }}}
@@ -73,6 +78,9 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 EOF
 endif
+" jupytext
+" python notebook text format
+let g:jupytext_fmt='py:percent'
 " }}}
 
 " {{{ Plugins key mappings
@@ -94,3 +102,19 @@ nmap <C-b>      <cmd>NERDTreeToggle<CR>
 " telescope
 nmap <C-p>      <cmd>Files<cr>
 " }}}
+
+" Running python in ipython
+if has('nvim-0.7')
+lua << EOF
+require("iron.core").setup {
+  config = {
+    repl_open_cmd = "vertical split"
+  },
+  keymaps = {
+    send_motion = "<space>sc",
+    visual_send = "<space>sc",
+    send_file = "<space>sf",
+  },
+}
+EOF
+endif

@@ -22,6 +22,7 @@
         115,
         120
     ],
+    "editor.semanticHighlighting.enabled": true,
     "editor.stickyScroll.enabled": true,
     "editor.tabCompletion": "on",
     "editor.unfoldOnClickAfterEndOfLine": true,

@@ -6,4 +6,4 @@ else
     extensions_file="$1"
 fi
 
-xargs --max-lines=1 code --install-extension <"$extensions_file"
+xargs --max-lines=1 code --force --install-extension <"$extensions_file"

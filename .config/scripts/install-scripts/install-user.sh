@@ -87,6 +87,7 @@ function main {
     install_moonlight
     install_python_packages
     install_multi_touch_gestures_fusuma
+    install_nvim_appimage
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

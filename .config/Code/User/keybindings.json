@@ -1,51 +1,51 @@
 [
     // Vim
     {
-        "key": "capslock",
         "command": "extension.vim_escape",
+        "key": "capslock",
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     // Multi cursors
     {
-        "key": "ctrl+shift+k",
         "command": "editor.action.insertCursorAbove",
+        "key": "ctrl+shift+k",
         "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+shift+j",
         "command": "editor.action.insertCursorBelow",
+        "key": "ctrl+shift+j",
         "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+k",
         "command": "editor.action.addSelectionToNextFindMatch",
+        "key": "ctrl+k",
         "when": "editorFocus"
     },
     // Scroll suggestions
     {
-        "key": "shift+tab",
         "command": "selectPrevSuggestion",
+        "key": "shift+tab",
         "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
     {
-        "key": "tab",
         "command": "selectNextSuggestion",
+        "key": "tab",
         "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
     // Trigger suggestions
     {
-        "key": "alt+space",
         "command": "editor.action.triggerSuggest",
+        "key": "alt+space",
         "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
     },
     // Open drop-down terminal
     {
-        "key": "ctrl+space",
-        "command": "workbench.action.togglePanel"
+        "command": "workbench.action.togglePanel",
+        "key": "ctrl+space"
     },
     // Fix spelling
     {
-        "key": "ctrl+l",
-        "command": "cSpell.goToPreviousSpellingIssueAndSuggest"
+        "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
+        "key": "ctrl+l"
     }
 ]

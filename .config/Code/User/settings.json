@@ -87,6 +87,7 @@
         "--disable=missing-class-docstring,missing-function-docstring"
     ],
     "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.formatting.provider": "none",
     "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": true,
     "remote.SSH.lockfilesInTmp": true,

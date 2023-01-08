@@ -55,7 +55,7 @@ function configure_transmission {
     [ -f "$HOME/.config/transmission/settings.bck.json" ] && cp "$HOME"/.config/transmission/settings.bck.json "$HOME"/.config/transmission/settings.json
 }
 
-function set_bacground_switcher {
+function set_background_switcher {
     if ! (crontab -l 2>/dev/null | grep --quiet set-background); then
         (
             crontab -l 2>/dev/null
@@ -76,7 +76,7 @@ function main {
     create_default_directories
     configure_nautilus
     configure_transmission
-    set_bacground_switcher
+    set_background_switcher
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

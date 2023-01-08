@@ -38,6 +38,8 @@ alias l='ls -C'
 
 alias pint='ping 8.8.8.8'
 
+alias today='date -I'
+
 # Ignore errors
 I() {
     ("$@") 2>/dev/null

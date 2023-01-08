@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 set-display
+connect-displays
 i3-res
 set-background

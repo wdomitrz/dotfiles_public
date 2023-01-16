@@ -48,7 +48,8 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      python
-     helm
+     (ivy :variables
+          ivy-initial-inputs-alist nil)
      lsp
      markdown
      multiple-cursors
@@ -58,6 +59,7 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom)
      spell-checking
      syntax-checking
+     shell-scripts
      version-control
      treemacs)
 
@@ -331,7 +333,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil, the paste transient-state is enabled. While enabled, after you
    ;; paste something, pressing `C-j' and `C-k' several times cycles through the
    ;; elements in the `kill-ring'. (default nil)
-   dotspacemacs-enable-paste-transient-state nil
+   dotspacemacs-enable-paste-transient-state t
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
@@ -426,7 +428,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -453,7 +455,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server nil
+   dotspacemacs-enable-server t
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -548,7 +550,7 @@ This function defines the environment variables for your Emacs session. By
 default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
-  (spacemacs/load-spacemacs-env)
+  ;; (spacemacs/load-spacemacs-env)
 )
 
 (defun dotspacemacs/user-init ()
@@ -575,7 +577,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (evil-define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-word-0)
+  (define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-word-0)
   (evil-define-key evil-visual-state-map (kbd "s") 'evil-avy-goto-word-0)
   (evil-define-key evil-normal-state-map (kbd "C-j") 'evil-mc-make-cursor-move-next-line)
   (evil-define-key evil-normal-state-map (kbd "C-k") 'evil-mc-make-cursor-move-prev-line)

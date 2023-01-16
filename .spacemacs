@@ -72,7 +72,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(ligature)
+   dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -582,20 +582,6 @@ before packages are loaded."
   (evil-define-key evil-normal-state-map (kbd "C-j") 'evil-mc-make-cursor-move-next-line)
   (evil-define-key evil-normal-state-map (kbd "C-k") 'evil-mc-make-cursor-move-prev-line)
   (evil-define-key evil-normal-state-map (kbd "SPC <escape>") 'evil-mc-undo-all-cursors)
-
-  ;; Enable ligatures in every possible major mode
-  (ligature-set-ligatures 't '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
-                               ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
-                               "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
-                               "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
-                               "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
-                               "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
-                               "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
-                               "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
-                               "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
-                               "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
-
-  (global-ligature-mode 't)
 )
 
 

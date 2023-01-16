@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 
 find -L "$HOME/.config/backgrounds/" -type f -iname "*.png" -or -iname "*.jpg" |
-    (grep --fixed-strings --invert-match --file="$HOME/.config/backgrounds/backgrounds-to-remove.txt" || cat)
+    (grep --fixed-strings --invert-match --file="$HOME/.config/backgrounds/backgrounds-to-remove.txt" || cat) |
+    awk '{print "\"" $0 "\""}'

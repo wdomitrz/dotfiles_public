@@ -40,6 +40,8 @@ alias pint='ping 8.8.8.8'
 
 alias today='date -I'
 
+alias emacs='emacs --no-window-system'
+
 # Ignore errors
 I() {
     ("$@") 2>/dev/null

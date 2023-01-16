@@ -46,7 +46,7 @@ bind -m vi-command -x '"dd": kill_line_to_clipboard'
 
 if [ -z "${NO_COLORS}" ]; then
     # Trick to make colors work well in tmux and in other scenarios
-    TERM=xterm-256color
+    [ "$TERM" != "xterm-kitty" ] && TERM=xterm-256color
 
     # Colors
     USER_COLOR="\[$(tput setaf 10)\]"       # green

@@ -3,6 +3,9 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
     "breadcrumbs.enabled": true,
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,

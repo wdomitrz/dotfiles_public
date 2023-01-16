@@ -128,6 +128,7 @@ rlwrap
 rofi
 rsync
 ruby
+shellcheck
 simple-scan
 simplescreenrecorder
 software-properties-gtk

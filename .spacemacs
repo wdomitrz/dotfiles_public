@@ -577,11 +577,11 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (evil-define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-word-0)
-  (evil-define-key evil-visual-state-map (kbd "s") 'evil-avy-goto-word-0)
-  (evil-define-key evil-normal-state-map (kbd "C-j") 'evil-mc-make-cursor-move-next-line)
-  (evil-define-key evil-normal-state-map (kbd "C-k") 'evil-mc-make-cursor-move-prev-line)
-  (evil-define-key evil-normal-state-map (kbd "SPC <escape>") 'evil-mc-undo-all-cursors)
+  (define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-word-0)
+  (define-key evil-visual-state-map (kbd "s") 'evil-avy-goto-word-0)
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-mc-make-cursor-move-next-line)
+  (define-key evil-normal-state-map (kbd "C-k") 'evil-mc-make-cursor-move-prev-line)
+  (define-key evil-normal-state-map (kbd "SPC <escape>") 'evil-mc-undo-all-cursors)
 )
 
 

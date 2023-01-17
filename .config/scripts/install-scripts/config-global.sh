@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+function add_user_to_groups {
+    sudo usermod -aG docker,input,kvm,lpadmin,audio,netdev,video "$USER"
+}
+
 function copy_configs_from_to {
     source_dir="$1"
     target_dir="$2"
@@ -155,6 +159,7 @@ function main {
     set -xue
 
     install_and_config_ssh_server
+    add_user_to_groups
     create_global_set_display_script
     set_global_keymap
     configure_lightdm

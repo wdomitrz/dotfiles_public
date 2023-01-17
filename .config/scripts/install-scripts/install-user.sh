@@ -83,8 +83,6 @@ function update_node_and_npm {
 function main {
     set -xue
 
-    enable_flathub
-    install_moonlight
     install_python_packages
     install_multi_touch_gestures_fusuma
     install_nvim_appimage

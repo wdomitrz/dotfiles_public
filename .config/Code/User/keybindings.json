@@ -47,5 +47,11 @@
     {
         "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
         "key": "ctrl+l"
+    },
+    // Todo
+    {
+        "command": "workbench.view.extension.todo-tree-container",
+        "key": "ctrl+shift+t",
+        "when": "viewContainer.workbench.view.explorer.enabled"
     }
 ]

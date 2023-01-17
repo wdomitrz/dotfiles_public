@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-function add_user_to_groups {
-    sudo usermod -aG docker,input,kvm,lpadmin,audio,netdev,video "$USER"
-}
-
 function set_shell {
     shell="$1"
 
@@ -61,7 +57,7 @@ function set_background_switcher {
             crontab -l 2>/dev/null
             echo -n "
 # Change background 1 minute
-*/1 * * * * DISPLAY=:0 .local/bin/set-background
+*/1 * * * * DISPLAY=:0 .local/bin/set-background 2> /dev/null || true
 "
         ) | crontab -
     fi
@@ -70,7 +66,6 @@ function set_background_switcher {
 function main {
     set -xue
 
-    add_user_to_groups
     set_shell_bash
     disable_core_file
     create_default_directories

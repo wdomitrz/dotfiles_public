@@ -1,2 +1,10 @@
-#!/usr/bin/env sh
-# xrandr --setmonitor bigger_monitor auto monitor1,monitor2
+#!/usr/bin/env bash
+
+function join_with_comma {
+    local IFS=","
+    echo "$*"
+}
+
+DISPLAYS_TO_CONNECT=(DP1 DP2-3)
+
+xrandr --setmonitor bigger_display auto "$(join_with_comma "${DISPLAYS_TO_CONNECT[@]}")"

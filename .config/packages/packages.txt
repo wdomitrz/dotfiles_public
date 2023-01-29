@@ -73,7 +73,7 @@ htop
 hwinfo
 i3
 i3status
-ibus-pinyin
+ibus
 intel-microcode
 iputils-ping
 ipython3
@@ -87,8 +87,7 @@ libpam-gnome-keyring
 lightdm
 lightdm-gtk-greeter
 linux-generic
-lxappearance
-lxpolkit
+mate-polkit-bin
 mobile-broadband-provider-info
 modemmanager
 mpv

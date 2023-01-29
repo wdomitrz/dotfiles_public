@@ -16,6 +16,6 @@ i3-xrl &&
         )) &
         gtk-launch org.kde.kdeconnect.nonplasma &
         ibus-daemon --daemonize --replace &
-        lxpolkit &
+        mate-polkit &
         /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
     )

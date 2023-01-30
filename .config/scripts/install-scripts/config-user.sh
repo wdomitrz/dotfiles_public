@@ -53,13 +53,15 @@ function configure_transmission {
 
 function set_background_switcher {
     if ! (crontab -l 2>/dev/null | grep --quiet set-background); then
-        (
-            crontab -l 2>/dev/null
-            echo -n "
+        for display in :0; do
+            (
+                crontab -l 2>/dev/null
+                echo -n "
 # Change background 1 minute
 */1 * * * * DISPLAY=:0 .local/bin/set-background 2> /dev/null || true
 "
-        ) | crontab -
+            ) | crontab -
+        done
     fi
 }
 

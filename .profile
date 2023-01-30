@@ -23,6 +23,8 @@ export GTK_THEME=Adwaita:dark
 export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
 export LANG="en_US.UTF-8"
 export LANGUAGE="en_US"
+export XSECURELOCK_SHOW_DATETIME=1
+export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 

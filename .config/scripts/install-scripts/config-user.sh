@@ -58,7 +58,7 @@ function set_background_switcher {
                 crontab -l 2>/dev/null
                 echo -n "
 # Change background 1 minute
-*/1 * * * * DISPLAY=:0 .local/bin/set-background 2> /dev/null || true
+*/1 * * * * DISPLAY=$display .local/bin/set-background 2> /dev/null || true
 "
             ) | crontab -
         done

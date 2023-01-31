@@ -18,10 +18,6 @@ Plug 'vim-airline/vim-airline'
 " }}}
 
 " {{{ Basics
-" LSP and other
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -47,11 +43,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'preservim/tagbar'
 " NERDTree
 Plug 'preservim/nerdtree'
-" Notebooks and python
-Plug 'goerz/jupytext.vim'
-Plug 'kana/vim-textobj-user'
-Plug 'GCBallesteros/vim-textobj-hydrogen'
-Plug 'hkupty/iron.nvim'
 " }}}
 call plug#end()
 " }}}
@@ -65,56 +56,24 @@ highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NON
 " suda config
 " If editing file with no permission to write open it with sudo
 let g:suda_smart_edit = 1
-" airline config
-" Open terminal using ctrl + space, which also works as ctrl + tilde
-if has('nvim') | let g:terminal_key = "<C-Space>" |
-else | let g:terminal_key = "<Nul>" | endif
+" Start terminal with <C-Space> = <C-~>
+let g:terminal_key = "<C-space>"
 " tabline config
 let g:airline#extensions#tabline#enabled = 1
-" mason - LSP
-if has('nvim-0.7')
-lua << EOF
-require("mason").setup()
-require("mason-lspconfig").setup()
-EOF
-endif
-" jupytext
-" python notebook text format
-let g:jupytext_fmt='py:percent'
+" Easymotion don't map things
+let g:EasyMotion_do_mapping = 0
 " }}}
 
 " {{{ Plugins key mappings
-" Comment
-"" Vim registers <C-/> as <C-_>
-map <C-_> <cmd>Commentary<CR>
+" Comment with <C-_> = <C-/>
+map <C-_>               :Commentary<CR>
 " Easy motion
-map  s          <Plug>(easymotion-jumptoanywhere)
-" Git Gutter
-nmap <leader>G[ <cmd>GitGutterPrevHunk<CR>
-nmap <leader>G] <cmd>GitGutterNextHunk<CR>
-nmap <leader>Gi <cmd>GitGutterPreviewHunk<CR>
-nmap <leader>Gs <cmd>GitGutterStageHunk<CR>
-nmap <leader>Gu <cmd>GitGutterUndoHunk<CR>
+map  s                  <Plug>(easymotion-jumptoanywhere)
 " Toggle Tagbar
-nmap <leader>t  <cmd>TagbarToggle<CR>
+map <leader>t           :TagbarToggle<CR>
 " Toogle NERDTree
-nmap <C-b>      <cmd>NERDTreeToggle<CR>
-" telescope
-nmap <C-p>      <cmd>Files<cr>
+map <C-b>               :NERDTreeToggle<CR>
+" fzf
+map <C-p>               :Files<CR>
+map <leader><leader>    :Commands<CR>
 " }}}
-
-" Running python in ipython
-if has('nvim-0.7')
-lua << EOF
-require("iron.core").setup {
-  config = {
-    repl_open_cmd = "vertical split"
-  },
-  keymaps = {
-    send_motion = "<space>sc",
-    visual_send = "<space>sc",
-    send_file = "<space>sf",
-  },
-}
-EOF
-endif

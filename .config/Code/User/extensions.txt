@@ -1,6 +1,5 @@
 DavidAnson.vscode-markdownlint
 dcasella.i3
-eamodio.gitlens
 eamodio.toggle-excluded-files
 foxundermoon.shell-format
 GitHub.remotehub

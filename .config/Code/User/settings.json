@@ -140,6 +140,15 @@
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
+            "before": [
+                "leader",
+                "leader"
+            ],
+            "commands": [
+                "workbench.action.showCommands"
+            ]
+        },
+        {
             "after": [
                 "g",
                 "j"
@@ -342,6 +351,15 @@
     "vim.useCtrlKeys": false,
     "vim.useSystemClipboard": true,
     "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "leader",
+                "leader"
+            ],
+            "commands": [
+                "workbench.action.showCommands"
+            ]
+        },
         {
             "after": [
                 "p",

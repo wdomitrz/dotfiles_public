@@ -51,20 +51,6 @@ function configure_transmission {
     [ -f "$HOME/.config/transmission/settings.bck.json" ] && cp "$HOME"/.config/transmission/settings.bck.json "$HOME"/.config/transmission/settings.json
 }
 
-function set_background_switcher {
-    if ! (crontab -l 2>/dev/null | grep --quiet set-background); then
-        for display in :0; do
-            (
-                crontab -l 2>/dev/null
-                echo -n "
-# Change background 1 minute
-*/1 * * * * DISPLAY=$display .local/bin/set-background 2> /dev/null || true
-"
-            ) | crontab -
-        done
-    fi
-}
-
 function main {
     set -xue
 
@@ -73,7 +59,6 @@ function main {
     create_default_directories
     configure_nautilus
     configure_transmission
-    set_background_switcher
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

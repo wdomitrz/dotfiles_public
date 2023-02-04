@@ -10,12 +10,13 @@ i3-xrl &&
     (
         (check-if-remote || (
             blueman-applet &
+            env LANGUAGE=pl_PL.utf-8 signal-desktop --use-tray-icon --start-in-tray &
             nm-applet &
             redshift-gtk &
-            env LANGUAGE=pl_PL.utf-8 signal-desktop --use-tray-icon --start-in-tray &
         )) &
         gtk-launch org.kde.kdeconnect.nonplasma &
         ibus-daemon --daemonize --replace &
         mate-polkit &
         /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
+        watch --interval 60 set-background &
     )

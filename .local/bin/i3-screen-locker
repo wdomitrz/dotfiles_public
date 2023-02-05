@@ -1,7 +1,2 @@
 #!/usr/bin/env sh
-
-export XSECURELOCK_SAVER=saver_mpv
-export XSECURELOCK_LIST_VIDEOS_COMMAND=list-backgrounds
-export XSECURELOCK_IMAGE_DURATION_SECONDS=60
-
 exec xss-lock --transfer-sleep-lock -- xsecurelock

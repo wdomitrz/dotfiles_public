@@ -25,6 +25,7 @@ export LANG="en_US.UTF-8"
 export LANGUAGE="en_US"
 export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
+export XSECURELOCK_BLANK_TIMEOUT=0
 
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 

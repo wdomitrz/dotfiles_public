@@ -44,7 +44,6 @@ file
 file-roller
 fish
 flameshot
-flatpak
 fonts-arphic-ukai
 fonts-arphic-uming
 fonts-dejavu

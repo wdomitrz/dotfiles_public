@@ -5,6 +5,11 @@
         "key": "capslock",
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
+    {
+        "command": "workbench.action.navigateBack",
+        "key": "ctrl+o",
+        "when": "canNavigateBack"
+    },
     // Multi cursors
     {
         "command": "editor.action.insertCursorAbove",

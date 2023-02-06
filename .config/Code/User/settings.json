@@ -83,6 +83,9 @@
     "jupyter.askForKernelRestart": false,
     "jupyter.sendSelectionToInteractiveWindow": true,
     "keyboard.dispatch": "keyCode",
+    "markdownlint.config": {
+        "no-duplicate-header": false
+    },
     "notebook.lineNumbers": "on",
     "path-autocomplete.triggerOutsideStrings": true,
     "pylint.args": [
@@ -111,7 +114,6 @@
         "<C-[>": true,
         "<C-a>": true,
         "<C-d>": true,
-        "<C-o>": true,
         "<C-u>": true,
         "<C-w>": true,
         "<C-x>": true

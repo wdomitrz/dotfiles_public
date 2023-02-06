@@ -93,7 +93,6 @@ modemmanager
 mpv
 nautilus
 nautilus-admin
-nautilus-gtkhash
 nautilus-image-converter
 ncdu
 neovim

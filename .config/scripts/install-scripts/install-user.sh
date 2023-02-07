@@ -80,12 +80,31 @@ function update_node_and_npm {
     npm install --global node@lts npm
 }
 
+function download_ubuntu_wallpapers {
+    wallpapers_directory="$HOME/Pictures/backgrounds/ubuntu"
+    wallpapers_url="http://archive.ubuntu.com/ubuntu/pool/main/u/ubuntu-wallpapers/ubuntu-wallpapers_22.04.4.orig.tar.gz"
+    mkdir -p "$wallpapers_directory"
+    wget -O- "$wallpapers_url" |
+        tar xz --directory="$wallpapers_directory"
+
+    # Cleanup
+    # Remove files that are not pictures
+    find "$wallpapers_directory" -type f -not -iname "*.png" -and -not -iname "*.jpg" -print0 | xargs --null rm
+    # Remove backgrounds to remove
+    backgrounds_to_remove_file="$HOME/.config/backgrounds/backgrounds-to-remove.txt"
+    [ -f "$backgrounds_to_remove_file" ] &&
+        xargs -L 1 find "$wallpapers_directory" -name <"$backgrounds_to_remove_file" | xargs rm
+    # Remove empty directories
+    find "$wallpapers_directory" -type d -empty -print0 | xargs --null rmdir
+}
+
 function main {
     set -xue
 
     install_python_packages
     install_multi_touch_gestures_fusuma
     install_nvim_appimage
+    download_ubuntu_wallpapers
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

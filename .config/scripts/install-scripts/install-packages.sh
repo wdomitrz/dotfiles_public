@@ -15,18 +15,6 @@ function install_with_recommended {
         "$HOME/.config/packages/with-recommends.txt"
 }
 
-function install_wallpapers {
-    sudo apt-get install --yes \
-        ubuntu-wallpapers*
-    sudo apt-mark auto ubuntu-wallpapers-*
-    sudo apt-get autoremove --purge --yes
-}
-
-function install_restricted_extras {
-    sudo apt-get install --yes \
-        ubuntu-restricted-extras
-}
-
 function main {
     set -xue
     source "$HOME"/.config/scripts/install-scripts/config-global.sh --source-only
@@ -36,8 +24,6 @@ function main {
     update_and_upgrade
     install_packages
     install_with_recommended
-    install_wallpapers
-    install_restricted_extras
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

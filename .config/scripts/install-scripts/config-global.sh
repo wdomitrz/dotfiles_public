@@ -165,7 +165,6 @@ function main {
     configure_lightdm
     fix_screen_tearing
     fix_network_manager
-    get_certificates
     fix_redshift
     configure_bluetooth
     fix_keychron

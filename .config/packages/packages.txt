@@ -148,6 +148,7 @@ tpb
 tp-smapi-dkms
 transmission
 tree
+ubuntu-restricted-extras
 unattended-upgrades
 universal-ctags
 unzip

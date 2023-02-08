@@ -81,7 +81,7 @@ function update_node_and_npm {
 }
 
 function download_ubuntu_wallpapers {
-    wallpapers_directory="$HOME/Pictures/backgrounds/ubuntu"
+    wallpapers_directory="$HOME/.local/share/backgrounds/ubuntu"
     wallpapers_url="http://archive.ubuntu.com/ubuntu/pool/main/u/ubuntu-wallpapers/ubuntu-wallpapers_22.04.4.orig.tar.gz"
     mkdir -p "$wallpapers_directory"
     wget -O- "$wallpapers_url" |

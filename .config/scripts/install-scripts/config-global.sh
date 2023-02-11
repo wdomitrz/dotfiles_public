@@ -149,6 +149,7 @@ esac
 function configure_tlp {
     # Enable charge threshold for tlp
     sudo sed -i 's/#\([A-Z]*_CHARGE_THRESH_BAT0=[0-9]*\)$/\1/' /etc/tlp.conf
+    sudo systemctl restart tlp
 }
 
 function remove_snap_directories {

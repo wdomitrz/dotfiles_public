@@ -30,6 +30,7 @@ dex
 dmenu
 docker-compose
 docker.io
+dosfstools
 drawing
 dunst
 eog
@@ -79,13 +80,13 @@ ipython3
 kazam
 kdeconnect
 kitty
+libavcodec-extra
 libgtk-3-bin
 libimage-exiftool-perl
 libinput-tools
 libpam-gnome-keyring
 lightdm
 lightdm-gtk-greeter
-linux-generic
 mate-polkit-bin
 mobile-broadband-provider-info
 modemmanager
@@ -107,6 +108,7 @@ pandoc
 pavucontrol
 pdftk
 playerctl
+policykit-1-gnome
 preload
 printer-driver-all
 progress
@@ -148,9 +150,10 @@ tpb
 tp-smapi-dkms
 transmission
 tree
-ubuntu-restricted-extras
+ttf-mscorefonts-installer
 unattended-upgrades
 universal-ctags
+unrar
 unzip
 update-notifier
 vim-tiny
@@ -173,6 +176,7 @@ xorg
 xournalpp
 xsecurelock
 xsel
+xserver-xorg-video-intel
 xss-lock
 xterm
 zathura

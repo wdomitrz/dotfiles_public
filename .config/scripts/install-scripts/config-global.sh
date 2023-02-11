@@ -98,7 +98,7 @@ function configure_grub {
     sudo sed -i -E "s/^(GRUB_TIMEOUT)\s*=\s*[0-9]+$/\1=1/" /etc/default/grub
     # Enable OS prober
     grep --quiet "GRUB_DISABLE_OS_PROBER" /etc/default/grub &&
-        sudo sed -i -E "s/^(GRUB_DISABLE_OS_PROBER)\s*=\s*[0-9a-z]+$/\1=false/" /etc/default/grub ||
+        sudo sed -i -E "s/^#?(GRUB_DISABLE_OS_PROBER)\s*=\s*[0-9a-z]+$/\1=false/" /etc/default/grub ||
         (echo -n "
 # Enable OS prober
 GRUB_DISABLE_OS_PROBER=false

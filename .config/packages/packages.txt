@@ -85,6 +85,7 @@ libgtk-3-bin
 libimage-exiftool-perl
 libinput-tools
 libpam-gnome-keyring
+libspa-0.2-bluetooth
 lightdm
 lightdm-gtk-greeter
 mate-polkit-bin
@@ -112,8 +113,6 @@ policykit-1-gnome
 preload
 printer-driver-all
 progress
-pulseaudio
-pulseaudio-module-bluetooth
 pv
 python3
 python3-dev

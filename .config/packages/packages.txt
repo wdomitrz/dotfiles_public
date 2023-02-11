@@ -90,7 +90,6 @@ lightdm-gtk-greeter
 mate-polkit-bin
 mobile-broadband-provider-info
 modemmanager
-mpv
 nautilus
 nautilus-admin
 nautilus-image-converter
@@ -107,6 +106,7 @@ openssh-client
 pandoc
 pavucontrol
 pdftk
+pipewire
 playerctl
 policykit-1-gnome
 preload

@@ -19,6 +19,16 @@ function enable_32_bit_architecture {
     sudo dpkg --add-architecture i386
 }
 
+function configure_debian_sources_list {
+    grep --quiet "/deb.debian.org" /etc/apt/sources.list &&
+        sudo cp "$HOME"/.config/debian/sources.list /etc/apt/sources.list ||
+        echo "Not using debian"
+}
+
+function update_locales {
+    sudo update-locale LANG=en_US.UTF-8 LANGUAGE=en_US
+}
+
 function configure_apt {
     copy_configs_from_to "$HOME"/.config/apt/preferences.d/ /etc/apt/preferences.d/
 }
@@ -156,9 +166,15 @@ function remove_snap_directories {
     sudo rm -rf /snap "$HOME"/snap
 }
 
+function configure_modprobe {
+    # At least disable nouveau
+    copy_configs_from_to "$HOME"/.config/modprobe.d/ /etc/modprobe.d/
+}
+
 function main {
     set -xue
 
+    update_locales
     install_and_config_ssh_server
     add_user_to_groups
     create_global_set_display_script

@@ -32,7 +32,6 @@ docker-compose
 docker.io
 dosfstools
 drawing
-dunst
 eog
 ethtool
 evince
@@ -43,6 +42,7 @@ extlinux
 feh
 file
 file-roller
+firmware-linux
 fish
 flameshot
 fonts-arphic-ukai
@@ -88,7 +88,6 @@ libpam-gnome-keyring
 libspa-0.2-bluetooth
 lightdm
 lightdm-gtk-greeter
-mate-polkit-bin
 mobile-broadband-provider-info
 modemmanager
 nautilus

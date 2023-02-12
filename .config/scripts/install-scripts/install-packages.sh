@@ -19,6 +19,8 @@ function main {
     set -xue
     source "$HOME"/.config/scripts/install-scripts/config-global.sh --source-only
 
+    update_locales
+    configure_debian_sources_list
     configure_apt
     enable_32_bit_architecture
     update_and_upgrade

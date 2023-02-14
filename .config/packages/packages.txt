@@ -40,9 +40,12 @@ exfat-fuse
 exfatprogs
 extlinux
 feh
+ffmpeg
 file
 file-roller
+firmware-iwlwifi
 firmware-linux
+firmware-realtek
 fish
 flameshot
 fonts-arphic-ukai
@@ -62,6 +65,7 @@ gnome-keyring
 gnome-multi-writer
 gnome-screenshot
 gnome-sound-recorder
+gnome-system-monitor
 gnome-themes-extra
 gparted
 gpg
@@ -107,11 +111,13 @@ pandoc
 pavucontrol
 pdftk
 pipewire
+pipewire-pulse
 playerctl
 policykit-1-gnome
 preload
 printer-driver-all
 progress
+pulseaudio
 pv
 python3
 python3-dev

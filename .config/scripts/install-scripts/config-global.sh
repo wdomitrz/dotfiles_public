@@ -169,6 +169,7 @@ function remove_snap_directories {
 function configure_modprobe {
     # At least disable nouveau
     copy_configs_from_to "$HOME"/.config/modprobe.d/ /etc/modprobe.d/
+    sudo update-initramfs -u
 }
 
 function main {
@@ -178,6 +179,7 @@ function main {
     install_and_config_ssh_server
     add_user_to_groups
     create_global_set_display_script
+    configure_modprobe
     set_global_keymap
     configure_lightdm
     fix_screen_tearing

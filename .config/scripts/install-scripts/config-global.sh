@@ -27,7 +27,7 @@ function configure_debian_sources_list {
 
 function update_locales {
     echo "locales locales/default_environment_locale select en_US.UTF-8" | sudo debconf-set-selections
-    echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8" | sudo debconf-set-selections
+    echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, en_GB.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" | sudo debconf-set-selections
     sudo rm "/etc/locale.gen"
     sudo dpkg-reconfigure --frontend noninteractive locales
 }

@@ -4,6 +4,7 @@ adwaita-icon-theme
 adwaita-icon-theme-full
 adwaita-qt
 amd64-microcode
+apparmor
 apt
 apt-file
 aptitude
@@ -12,6 +13,7 @@ arandr
 bash
 bash-completion
 blueman
+bluetooth
 bolt
 breeze-icon-theme
 brightnessctl
@@ -33,6 +35,7 @@ docker-compose
 docker.io
 dosfstools
 drawing
+efibootmgr
 eog
 ethtool
 evince
@@ -109,6 +112,7 @@ ntfs-3g
 onboard
 openconnect
 openssh-client
+os-prober
 pandoc
 pavucontrol
 pdftk
@@ -116,6 +120,7 @@ pipewire
 pipewire-pulse
 playerctl
 policykit-1-gnome
+powertop
 preload
 printer-driver-all
 progress
@@ -169,7 +174,9 @@ wget
 wine
 wine32
 winetricks
+wireless-tools
 wireplumber
+wpasupplicant
 x11-xkb-utils
 xcape
 xclip

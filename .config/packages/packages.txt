@@ -27,6 +27,7 @@ curl
 dbus-x11
 desktop-file-utils
 dex
+dkms
 dmenu
 docker-compose
 docker.io
@@ -92,6 +93,7 @@ libpam-gnome-keyring
 libspa-0.2-bluetooth
 lightdm
 lightdm-gtk-greeter
+linux-headers-amd64
 mobile-broadband-provider-info
 modemmanager
 nautilus
@@ -167,6 +169,7 @@ wget
 wine
 wine32
 winetricks
+wireplumber
 x11-xkb-utils
 xcape
 xclip

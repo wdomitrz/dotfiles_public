@@ -6,12 +6,12 @@ function update_and_upgrade {
 }
 
 function install_packages {
-    xargs sudo apt-get install --yes --no-install-recommends < \
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends < \
         "$HOME/.config/packages/packages.txt"
 }
 
 function install_with_recommended {
-    xargs sudo apt-get install --yes --install-recommends < \
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends < \
         "$HOME/.config/packages/with-recommends.txt"
 }
 

@@ -26,10 +26,14 @@ function configure_debian_sources_list {
 }
 
 function update_locales {
-    sudo update-locale LANG=en_US.UTF-8 LANGUAGE=en_US
+    echo "locales locales/default_environment_locale select en_US.UTF-8" | sudo debconf-set-selections
+    echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8" | sudo debconf-set-selections
+    sudo rm "/etc/locale.gen"
+    sudo dpkg-reconfigure --frontend noninteractive locales
 }
 
 function configure_apt {
+    copy_configs_from_to "$HOME"/.config/apt/apt.conf.d/ /etc/apt/apt.conf.d/
     copy_configs_from_to "$HOME"/.config/apt/preferences.d/ /etc/apt/preferences.d/
 }
 
@@ -166,34 +170,28 @@ function remove_snap_directories {
     sudo rm -rf /snap "$HOME"/snap
 }
 
-function configure_modprobe {
-    # At least disable nouveau
-    copy_configs_from_to "$HOME"/.config/modprobe.d/ /etc/modprobe.d/
-    sudo update-initramfs -u
-}
-
 function main {
     set -xue
 
-    update_locales
-    install_and_config_ssh_server
     add_user_to_groups
-    create_global_set_display_script
-    configure_modprobe
-    set_global_keymap
+    configure_apt
+    configure_bluetooth
+    configure_grub
     configure_lightdm
-    fix_screen_tearing
+    configure_newt_palette
+    configure_tlp
+    configure_touchpad
+    create_global_set_display_script
+    create_swap_file
+    fix_iwlwifi
+    fix_keychron
     fix_network_manager
     fix_redshift
-    configure_bluetooth
-    fix_keychron
-    configure_newt_palette
-    configure_grub
-    fix_iwlwifi
-    create_swap_file
-    configure_touchpad
-    configure_tlp
+    fix_screen_tearing
+    install_and_config_ssh_server
     remove_snap_directories
+    set_global_keymap
+    update_locales
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

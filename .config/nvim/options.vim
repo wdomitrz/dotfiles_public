@@ -39,7 +39,7 @@ set number norelativenumber
 " Set ruler after 80 line
 set ruler colorcolumn=81
 " Keep distance from the border
-set scrolloff=3
+set scrolloff=1024
 " set no start message, no existing swap file info, no completion-menu message
 set shortmess=IAc
 " Automatically hide and show sign column

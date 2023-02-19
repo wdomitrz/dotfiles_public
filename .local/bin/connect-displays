@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-function join_with_comma {
-    local IFS=","
-    echo "$*"
-}
+DISPLAYS_TO_CONNECT="DP1,DP2-3" # Comma separated list
 
-DISPLAYS_TO_CONNECT=(DP1 DP2-3)
-
-xrandr --setmonitor bigger_display auto "$(join_with_comma "${DISPLAYS_TO_CONNECT[@]}")"
+xrandr --setmonitor bigger_display auto "${DISPLAYS_TO_CONNECT}"

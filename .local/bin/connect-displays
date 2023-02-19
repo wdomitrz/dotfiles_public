@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-DISPLAYS_TO_CONNECT="DP1,DP2-3" # Comma separated list
+DISPLAYS_TO_CONNECT="" # Comma separated list
 
 xrandr --setmonitor bigger_display auto "${DISPLAYS_TO_CONNECT}"

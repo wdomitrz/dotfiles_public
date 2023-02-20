@@ -115,6 +115,7 @@
         "<C-[>": true,
         "<C-a>": true,
         "<C-d>": true,
+        "<C-r>": true,
         "<C-u>": true,
         "<C-w>": true,
         "<C-x>": true
@@ -175,6 +176,14 @@
             ],
             "commands": [
                 "undo"
+            ]
+        },
+        {
+            "before": [
+                "C-r"
+            ],
+            "commands": [
+                "redo"
             ]
         },
         {

@@ -43,6 +43,7 @@ e-wrapper
 exfat-fuse
 exfatprogs
 extlinux
+fd-find
 feh
 ffmpeg
 file
@@ -89,6 +90,7 @@ kazam
 kdeconnect
 kitty
 libavcodec-extra
+libblockdev-crypto2
 libgtk-3-bin
 libimage-exiftool-perl
 libinput-tools
@@ -134,6 +136,7 @@ python3-venv
 python-is-python3
 redshift-gtk
 rename
+ripgrep
 rlwrap
 rofi
 rsync

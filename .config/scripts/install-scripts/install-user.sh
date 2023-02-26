@@ -63,9 +63,9 @@ function install_moonlight {
 
 function install_python_packages {
     ## Update pip
-    pip3 install --user -U pip
+    pip3 install --break-system-packages --user --upgrade pip
     ## pip modules
-    pip3 install --user -U \
+    pip3 install --break-system-packages --user --upgrade \
         autotiling \
         ipython \
         matplotlib \
@@ -103,7 +103,6 @@ function main {
 
     install_python_packages
     install_multi_touch_gestures_fusuma
-    install_nvim_appimage
     download_ubuntu_wallpapers
 }
 

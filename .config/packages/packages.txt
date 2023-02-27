@@ -109,7 +109,6 @@ neovim
 network-manager
 network-manager-gnome
 nmap
-notify-osd
 ntfs-3g
 onboard
 openconnect

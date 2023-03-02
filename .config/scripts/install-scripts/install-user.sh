@@ -16,19 +16,22 @@ function install_nvim_appimage {
 
 function install_nvim_tar_gz {
     mkdir -p "$HOME"/.local/opt "$HOME"/.local/bin "$HOME"/.local/share/applications "$HOME"/.local/share/icons/hicolor/128x128/apps
-    curl -L https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz | tar xz -C "$HOME"/.local/opt/
+    curl -L https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz |
+        tar xz -C "$HOME"/.local/opt/
     ln -srf "$HOME"/.local/opt/nvim-linux64/bin/nvim "$HOME"/.local/bin/
     ln -srf "$HOME"/.local/opt/nvim-linux64/share/applications/nvim.desktop "$HOME"/.local/share/applications/
     ln -srf "$HOME"/.local/opt/nvim-linux64/share/icons/hicolor/128x128/apps/nvim.png "$HOME"/.local/share/icons/hicolor/128x128/apps/
 }
 
 function use_system_nvim {
-    ln -s /usr/bin/nvim "$HOME"/.local/bin/ || echo "nvim file/link already exists"
+    ln -s /usr/bin/nvim "$HOME"/.local/bin/ ||
+        echo "nvim file/link already exists"
 }
 
 function install_kitty {
     mkdir -p "$HOME"/.local/opt "$HOME"/.local/bin "$HOME"/.local/share/applications "$HOME"/.local/share/icons
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest="$HOME"/.local/opt/
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh |
+        sh /dev/stdin launch=n dest="$HOME"/.local/opt/
     ln -srf "$HOME"/.local/opt/kitty.app/bin/kitty "$HOME"/.local/bin/
     ln -srf "$HOME"/.local/opt/kitty.app/share/applications/kitty.desktop "$HOME"/.local/share/applications/
     ln -srf "$HOME"/.local/opt/kitty.app/share/icons/hicolor/256x256/apps/kitty.png "$HOME"/.local/share/icons/
@@ -89,13 +92,16 @@ function download_ubuntu_wallpapers {
 
     # Cleanup
     # Remove files that are not pictures
-    find "$wallpapers_directory" -type f -not -iname "*.png" -and -not -iname "*.jpg" -print0 | xargs --null rm
+    find "$wallpapers_directory" -type f -not -iname "*.png" -and -not -iname "*.jpg" -print0 |
+        xargs --null rm
     # Remove backgrounds to remove
     backgrounds_to_remove_file="$HOME/.config/backgrounds/backgrounds-to-remove.txt"
     [ -f "$backgrounds_to_remove_file" ] &&
-        xargs -L 1 find "$wallpapers_directory" -name <"$backgrounds_to_remove_file" | xargs rm
+        xargs -L 1 find "$wallpapers_directory" -name <"$backgrounds_to_remove_file" |
+        xargs rm
     # Remove empty directories
-    find "$wallpapers_directory" -type d -empty -print0 | xargs --null rmdir
+    find "$wallpapers_directory" -type d -empty -print0 |
+        xargs --null rmdir
 }
 
 function main {

@@ -23,22 +23,19 @@ function disable_core_file {
     ulimit -c 0
 }
 
-function disable_core_file {
+function update_tldr {
     tldr --update
 }
 
 function create_default_directories {
-    default_dirs_location="$HOME/.config/default-dirs/default-dirs.zip"
-    if [ -f "$default_dirs_location" ]; then
-        cd "$HOME"
-        unzip "$default_dirs_location"
-        [ -f "$HOME/.config/gtk-3.0/bookmarks" ] || (mkdir -p "$HOME"/.config/gtk-3.0 && touch "$HOME"/.config/gtk-3.0/bookmarks)
-        for d in $(zipinfo -1 "$default_dirs_location"); do
-            grep --quiet "$d" "$HOME"/.config/gtk-3.0/bookmarks || echo "file://$(pwd)/$d" \
-                >>"$HOME"/.config/gtk-3.0/bookmarks
-        done
-        cd -
-    fi
+    [ -f "$HOME/.config/gtk-3.0/bookmarks" ] ||
+        (mkdir -p "$HOME"/.config/gtk-3.0 &&
+            touch "$HOME"/.config/gtk-3.0/bookmarks)
+
+    for d in Documents Downloads Music Pictures Videos; do
+        grep --quiet "$d" "$HOME"/.config/gtk-3.0/bookmarks ||
+            echo "file://$(pwd)/$d" >>"$HOME"/.config/gtk-3.0/bookmarks
+    done
 }
 
 function configure_nautilus {
@@ -48,14 +45,15 @@ function configure_nautilus {
 }
 
 function configure_transmission {
-    [ -f "$HOME/.config/transmission/settings.bck.json" ] && cp "$HOME"/.config/transmission/settings.bck.json "$HOME"/.config/transmission/settings.json
+    [ -f "$HOME/.config/transmission/settings.bck.json" ] &&
+        cp "$HOME"/.config/transmission/settings.bck.json "$HOME"/.config/transmission/settings.json
 }
 
 function main {
     set -xue
 
     set_shell_bash
-    disable_core_file
+    update_tldr
     create_default_directories
     configure_nautilus
     configure_transmission

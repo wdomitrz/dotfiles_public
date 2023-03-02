@@ -43,7 +43,6 @@ e-wrapper
 exfat-fuse
 exfatprogs
 extlinux
-fd-find
 feh
 ffmpeg
 file
@@ -135,7 +134,6 @@ python3-venv
 python-is-python3
 redshift-gtk
 rename
-ripgrep
 rlwrap
 rofi
 rsync

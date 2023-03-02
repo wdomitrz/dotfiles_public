@@ -6,13 +6,13 @@ function update_and_upgrade {
 }
 
 function install_packages {
-    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends < \
-        "$HOME/.config/packages/packages.txt"
+    packages_file="$HOME/.config/packages/packages.txt"
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends <"$packages_file"
 }
 
 function install_with_recommended {
-    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends < \
-        "$HOME/.config/packages/with-recommends.txt"
+    packages_file="$HOME/.config/packages/with-recommends.txt"
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"$packages_file"
 }
 
 function main {

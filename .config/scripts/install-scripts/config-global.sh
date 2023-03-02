@@ -26,8 +26,10 @@ function configure_debian_sources_list {
 }
 
 function update_locales {
-    echo "locales locales/default_environment_locale select en_US.UTF-8" | sudo debconf-set-selections
-    echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, en_GB.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" | sudo debconf-set-selections
+    echo "locales locales/default_environment_locale select en_US.UTF-8" |
+        sudo debconf-set-selections
+    echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, en_GB.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" |
+        sudo debconf-set-selections
     sudo rm "/etc/locale.gen"
     sudo dpkg-reconfigure --frontend noninteractive locales
 }
@@ -39,7 +41,8 @@ function configure_apt {
 
 function install_and_config_ssh_server {
     if [ -f "$HOME/.local/bin/.config-sshd" ]; then
-        sudo apt-get update --yes && sudo apt-get install --yes openssh-server
+        sudo apt-get update --yes &&
+            sudo apt-get install --yes openssh-server
         "$HOME"/.local/bin/.config-sshd
     fi
 }
@@ -92,7 +95,8 @@ function configure_bluetooth {
 
 function fix_keychron {
     # Keychron make Fn+f-keys work
-    echo "options hid_apple fnmode=2" | sudo tee /etc/modprobe.d/hid_apple.conf
+    echo "options hid_apple fnmode=2" |
+        sudo tee /etc/modprobe.d/hid_apple.conf
     sudo update-initramfs -u
 }
 
@@ -139,7 +143,8 @@ function create_swap_file {
         sudo chmod 600 "${SWAPFILE_LOCATION}"
         sudo mkswap "${SWAPFILE_LOCATION}"
         sudo swapon "${SWAPFILE_LOCATION}"
-        echo "${SWAPFILE_LOCATION} none    swap    sw    0   0" | sudo tee -a /etc/fstab
+        echo "${SWAPFILE_LOCATION} none    swap    sw    0   0" |
+            sudo tee -a /etc/fstab
     fi
 }
 function configure_touchpad {

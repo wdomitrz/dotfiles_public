@@ -9,25 +9,32 @@ function install_deb_from_url {
 }
 
 function install_gcloud {
-    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-    sudo apt-get update --yes && sudo apt-get install --yes google-cloud-sdk
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" |
+        sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg |
+        sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+    sudo apt-get update --yes &&
+        sudo apt-get install --yes google-cloud-sdk
 }
 
 function install_signal {
     # 1. Install our official public software signing key
-    wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg >/dev/null
+    wget -O- https://updates.signal.org/desktop/apt/keys.asc |
+        gpg --dearmor |
+        sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg >/dev/null
 
     # 2. Add our repository to your list of repositories
     echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |
         sudo tee /etc/apt/sources.list.d/signal-xenial.list
 
     # 3. Update your package database and install signal
-    sudo apt-get update --yes && sudo apt-get install --yes signal-desktop
+    sudo apt-get update --yes &&
+        sudo apt-get install --yes signal-desktop
 }
 
 function add_google_public_key {
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |
+        sudo apt-key add -
 }
 
 function install_google_chrome {

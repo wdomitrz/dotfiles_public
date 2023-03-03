@@ -15,10 +15,6 @@ function set_shell_zsh {
     set_shell /usr/bin/zsh
 }
 
-function set_shell_fish {
-    set_shell /usr/bin/fish
-}
-
 function disable_core_file {
     ulimit -c 0
 }
@@ -27,7 +23,7 @@ function update_tldr {
     tldr --update
 }
 
-function create_default_directories {
+function add_bookmarks {
     [ -f "$HOME/.config/gtk-3.0/bookmarks" ] ||
         (mkdir -p "$HOME"/.config/gtk-3.0 &&
             touch "$HOME"/.config/gtk-3.0/bookmarks)
@@ -38,10 +34,10 @@ function create_default_directories {
     done
 }
 
-function configure_nautilus {
+function configure_nautilus_open_terminal {
     # Open kitty from nautilus
     glib-compile-schemas "$HOME"/.local/share/glib-2.0/schemas/
-    DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal kitty
+    DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "$TERMINAL"
 }
 
 function configure_transmission {
@@ -54,8 +50,7 @@ function main {
 
     set_shell_bash
     update_tldr
-    create_default_directories
-    configure_nautilus
+    configure_nautilus_open_terminal
     configure_transmission
 }
 

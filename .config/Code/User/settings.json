@@ -421,6 +421,26 @@
             "commands": [
                 "editor.action.formatSelection"
             ]
+        },
+        {
+            "after": [
+                "<",
+                "g",
+                "v"
+            ],
+            "before": [
+                "<"
+            ]
+        },
+        {
+            "after": [
+                ">",
+                "g",
+                "v"
+            ],
+            "before": [
+                ">"
+            ]
         }
     ],
     "window.menuBarVisibility": "toggle",

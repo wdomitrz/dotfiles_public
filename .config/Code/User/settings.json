@@ -6,11 +6,9 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
-    "breadcrumbs.enabled": true,
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
-    "editor.bracketPairColorization.enabled": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": true
     },
@@ -22,7 +20,6 @@
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
-    "editor.parameterHints.cycle": true,
     "editor.rulers": [
         80,
         88,
@@ -30,10 +27,8 @@
         115,
         120
     ],
-    "editor.semanticHighlighting.enabled": true,
     "editor.stickyScroll.enabled": true,
     "editor.tabCompletion": "on",
-    "editor.unfoldOnClickAfterEndOfLine": true,
     "editor.wordWrap": "on",
     "explorer.confirmDelete": false,
     "files.associations": {
@@ -72,14 +67,12 @@
         "**/__pycache__": true
     },
     "files.insertFinalNewline": true,
-    "files.restoreUndoStack": true,
     "files.simpleDialog.enable": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "flake8.args": [
         "--ignore=W503,E501"
     ],
-    "git.autofetch": true,
     "git.mergeEditor": true,
     "jupyter.askForKernelRestart": false,
     "jupyter.sendSelectionToInteractiveWindow": true,
@@ -96,19 +89,15 @@
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.formatting.provider": "none",
     "python.linting.mypyEnabled": true,
-    "python.linting.pylintEnabled": true,
     "remote.SSH.lockfilesInTmp": true,
-    "search.useIgnoreFiles": true,
     "security.workspace.trust.banner": "always",
     "security.workspace.trust.startupPrompt": "always",
     "settingsSync.keybindingsPerPlatform": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
-    "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.localEchoEnabled": "off",
-    "todo-tree.tree.autoRefresh": true,
     "update.showReleaseNotes": false,
     "vim.easymotion": true,
     "vim.enableNeovim": true,
@@ -450,7 +439,5 @@
     "workbench.enableExperiments": false,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
-    "workbench.tips.enabled": false,
-    "zenMode.hideLineNumbers": false,
-    "zenMode.hideTabs": false
+    "workbench.tips.enabled": false
 }

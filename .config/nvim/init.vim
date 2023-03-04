@@ -104,8 +104,10 @@ highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NON
 
 let g:airline#extensions#tabline#enabled = 1
 let g:EasyMotion_do_mapping = 0
+let g:markdown_syntax_conceal=0
 let g:suda_smart_edit = 1
 let g:terminal_key = "<C-space>"
+let g:vim_json_conceal=0
 
 " Plugins key mappings
 map <C-b>               :NERDTreeToggle<CR>

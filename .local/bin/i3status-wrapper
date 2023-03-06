@@ -19,8 +19,7 @@ REFRESH_STATUS_CMD = ["killall", "-SIGUSR1", "i3status"]
 def run_command(cmd, block=False):
     if not block:
         return Popen(cmd, stdout=PIPE, stderr=PIPE)
-    else:
-        return run(cmd, stdout=PIPE, stderr=PIPE)
+    return run(cmd, stdout=PIPE, stderr=PIPE, check=False)
 
 
 # Config {{{
@@ -29,7 +28,7 @@ BLOCKS = [
     {"name": "editor", "full_text": "✍️"},
     {"name": "terminal", "full_text": "📄"},
     {"name": "menu", "full_text": "🔍"},
-    {"name": "close", "full_text": "❌"}
+    {"name": "close", "full_text": "❌"},
 ]
 
 
@@ -43,13 +42,16 @@ class MEDIA_CONTROL_BLOCKS:
 def media_blocks():
     try:
         playerctl_title_process = run_command(
-            ["playerctl", "metadata", "title"], block=True)
-        playerctl_status_process = run_command(
-            ["playerctl", "status"], block=True)
+            ["playerctl", "metadata", "title"], block=True
+        )
+        playerctl_status_process = run_command(["playerctl", "status"], block=True)
     except FileNotFoundError:
         return []
 
-    if playerctl_title_process.returncode != 0 or playerctl_status_process.returncode != 0:
+    if (
+        playerctl_title_process.returncode != 0
+        or playerctl_status_process.returncode != 0
+    ):
         return []
 
     title = playerctl_title_process.stdout.decode().strip()
@@ -59,28 +61,27 @@ def media_blocks():
     info_block = {
         "name": "media_info",
         "full_text": f"{title} {control_icon}",
-        "color": "#BBFFBB" if status == "Playing" else "#BBBBFF"
+        "color": "#BBFFBB" if status == "Playing" else "#BBBBFF",
     }
 
     return [info_block]
 
 
 def add_no_internet_info(old_blocks):
-
     def is_internet_block(block):
-        return block['name'] in ["ipv6", "wireless", "ethernet"]
+        return block["name"] in ["ipv6", "wireless", "ethernet"]
 
     internet_blocks = list(filter(is_internet_block, old_blocks))
 
     if len(internet_blocks) == 0:
         return old_blocks
 
-    if any(map(lambda x: len(x['full_text']) > 0, internet_blocks)):
+    if any(map(lambda x: len(x["full_text"]) > 0, internet_blocks)):
         return old_blocks
 
-    for i in range(len(old_blocks)):
-        if is_internet_block(old_blocks[i]):
-            old_blocks[i]['full_text'] = "⛔"
+    for i, old_block in enumerate(old_blocks):
+        if is_internet_block(old_block):
+            old_blocks[i]["full_text"] = "⛔"
             break
 
     return old_blocks
@@ -99,6 +100,7 @@ def run_command_on_click(cmd, accepted_button=1, refresh=False):
         else:
             run_command(cmd, block=True)
             run_command(REFRESH_STATUS_CMD)
+
     return helper
 
 
@@ -106,7 +108,7 @@ def handle_volume(button, **_):
     if button == 3:
         run_command("pavucontrol")
         return
-    elif button in [1, 2]:
+    if button in [1, 2]:
         cmd = ["pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle"]
     elif button in [4, 7]:
         cmd = ["pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%"]
@@ -144,21 +146,23 @@ HEADER = {"version": 1, "click_events": True}
 
 
 def show_status_text():
-    i3status = Popen('i3status', stdout=PIPE)
+    with Popen("i3status", stdout=PIPE) as i3status:
+        print(json.dumps(HEADER, separators=(",", ":")), flush=True)
+        print("[", flush=True)
 
-    print(json.dumps(HEADER, separators=(',', ':')), flush=True)
-    print('[', flush=True)
-
-    # Discard the first two lines
-    for line in map(bytes.decode, islice(i3status.stdout, 2, None)):
-        data = process_blocks(json.loads(line.strip(',')))
-        print((',' if line[0] == ',' else '') +
-              json.dumps(data, separators=(',', ':')), flush=True)
-    print(']', flush=True)
+        # Discard the first two lines
+        for line in map(bytes.decode, islice(i3status.stdout, 2, None)):
+            data = process_blocks(json.loads(line.strip(",")))
+            print(
+                ("," if line[0] == "," else "")
+                + json.dumps(data, separators=(",", ":")),
+                flush=True,
+            )
+    print("]", flush=True)
 
 
 def handle_click(line):
-    data = json.loads(line.strip(','))
+    data = json.loads(line.strip(","))
     name = data["name"]
     if name in BUTTONS:
         BUTTONS[name](**data)
@@ -176,6 +180,6 @@ def main():
     process.join()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 # }}}

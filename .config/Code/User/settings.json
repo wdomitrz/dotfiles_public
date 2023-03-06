@@ -71,7 +71,7 @@
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "flake8.args": [
-        "--ignore=W503,E501"
+        "--ignore=E501,W503"
     ],
     "git.mergeEditor": true,
     "jupyter.askForKernelRestart": false,
@@ -84,8 +84,14 @@
     "notebook.output.textLineLimit": 8192,
     "path-autocomplete.triggerOutsideStrings": true,
     "pylint.args": [
-        "--disable=missing-class-docstring,missing-function-docstring,line-too-long,redefined-outer-name"
+        "--disable=missing-class-docstring,missing-function-docstring,line-too-long,redefined-outer-name",
+        "--generated-members=numpy.*,torch.*"
     ],
+    "pylint.severity": {
+        "convention": "Warning",
+        "info": "Warning",
+        "refactor": "Warning"
+    },
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.formatting.provider": "none",
     "python.linting.mypyEnabled": true,

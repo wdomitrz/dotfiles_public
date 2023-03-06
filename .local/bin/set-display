@@ -26,14 +26,14 @@ class LookingFor(Enum):
 PRIMARY_ORDER_DEFAULT = ["screen", "rdp", "DP", "HDMI", "eDP"]
 
 
-class DefaultScreenExternal():
+class DefaultScreenExternal:
     DIAMETER_INCH = 24
     WIDTH_MM = 531
     RESOLUTION_X = 1920
     DPI = 96
 
 
-class DefaultScreenLaptop():
+class DefaultScreenLaptop:
     DIAMETER_INCH = 14
     WIDTH_MM = 310
     RESOLUTION_X = 1920
@@ -42,12 +42,7 @@ class DefaultScreenLaptop():
 
 def get_displays_info():
     try:
-        res = subprocess.run(
-            'xrandr',
-            text=True,
-            check=True,
-            stdout=PIPE,
-            stderr=PIPE)
+        res = subprocess.run("xrandr", text=True, check=True, stdout=PIPE, stderr=PIPE)
         return list(map(lambda x: x.split(), res.stdout.splitlines()))
     except CalledProcessError as e:
         print("xrandr failed:", e.stderr, sep="\n")
@@ -61,10 +56,10 @@ def is_laptop_display(display):
 def is_laptop_display_open():
     state_files = glob.glob("/proc/acpi/button/lid/LID*/state")
     if len(state_files) == 0:
-        raise Exception("No laptop screen")
+        raise RuntimeError("No laptop screen")
 
     for fn in state_files:
-        with open(fn) as f:
+        with open(fn, encoding="utf-8") as f:
             if f.read().split()[1] == "open":
                 return True
     return False
@@ -97,13 +92,8 @@ def get_primary_display(displays, primary_order=None):
 
     for requirement in primary_order:
         for display in displays:
-            if isinstance(requirement, str):
-                if display.startswith(requirement):
-                    return display
-            else:
-                if requirement(display):
-                    return display
-
+            if display.startswith(requirement):
+                return display
     return displays[0]
 
 
@@ -113,14 +103,15 @@ def set_display_primary(display):
 
 
 def set_display_auto(
-        display,
-        primary=False,
-        same_as=None,
-        left_of=None,
-        right_of=None,
-        above=None,
-        below=None,
-        **_):
+    display,
+    primary=False,
+    same_as=None,
+    left_of=None,
+    right_of=None,
+    above=None,
+    below=None,
+    **_,
+):
     cmd = ["xrandr", "--output", display, "--auto"]
 
     if primary:
@@ -140,11 +131,11 @@ def set_display_auto(
     if display.startswith("DP"):
         cmd += ["--set", "Broadcast RGB", "Full"]
 
-    subprocess.run(cmd)
+    subprocess.run(cmd, check=False)
 
 
 def set_display_off(display, **_):
-    subprocess.run(["xrandr", "--output", display, "--off"])
+    subprocess.run(["xrandr", "--output", display, "--off"], check=False)
 
 
 def set_display_other(display, **kwargs):
@@ -187,15 +178,9 @@ def get_display_info(display):
             if res is None:
                 continue
 
-            result["resolution"] = {
-                "x": int(
-                    res.group(1)), "y": int(
-                    res.group(2))}
+            result["resolution"] = {"x": int(res.group(1)), "y": int(res.group(2))}
             if len(res.groups()) >= 5:
-                result["position"] = {
-                    "x": int(
-                        res.group(4)), "y": int(
-                        res.group(5))}
+                result["position"] = {"x": int(res.group(4)), "y": int(res.group(5))}
 
             looking_for = LookingFor.WIDTH
         elif looking_for == LookingFor.WIDTH:
@@ -221,16 +206,17 @@ def get_display_info(display):
 
 
 def set_rofi_dpi_legacy(dpi):
-    config_file = tempfile.NamedTemporaryFile("w+")
-    config_file.write(f"""\
+    with tempfile.NamedTemporaryFile("w+") as config_file:
+        config_file.write(
+            f"""\
 rofi.dpi: {dpi}
-""")
-    config_file.seek(0)
-    subprocess.run(["xrdb", "-override", config_file.name])
+"""
+        )
+        config_file.seek(0)
+        subprocess.run(["xrdb", "-override", config_file.name], check=True)
 
 
 def set_rofi_dpi(dpi):
-    set_rofi_dpi_legacy
     CONFIG_DIR = os.path.expanduser("~/.config/rofi")
     if not os.path.isdir(CONFIG_DIR):
         return
@@ -238,7 +224,9 @@ def set_rofi_dpi(dpi):
     # Check if config imports dpi.rasi
     add_dpi_import = False
     try:
-        with open(os.path.join(CONFIG_DIR, "config.rasi"), "r") as rofi_config_file:
+        with open(
+            os.path.join(CONFIG_DIR, "config.rasi"), "r", encoding="utf-8"
+        ) as rofi_config_file:
             for line in rofi_config_file.readlines():
                 if line == '@import "dpi"\n':
                     break
@@ -247,28 +235,39 @@ def set_rofi_dpi(dpi):
     except FileNotFoundError:
         add_dpi_import = True
     if add_dpi_import:
-        with open(os.path.join(CONFIG_DIR, "config.rasi"), "r+") as rofi_config_file:
+        with open(
+            os.path.join(CONFIG_DIR, "config.rasi"), "r+", encoding="utf-8"
+        ) as rofi_config_file:
             rofi_config_contents = rofi_config_file.read()
             rofi_config_file.seek(0)
-            rofi_config_file.write(f"""\
+            rofi_config_file.write(
+                f"""\
 @import "dpi"
-""" + rofi_config_contents)
+{rofi_config_contents}
+"""
+            )
 
-    with open(os.path.join(CONFIG_DIR, "dpi.rasi"), "w+") as rofi_dpi_config_file:
-        rofi_dpi_config_file.write(f"""\
+    with open(
+        os.path.join(CONFIG_DIR, "dpi.rasi"), "w+", encoding="utf-8"
+    ) as rofi_dpi_config_file:
+        rofi_dpi_config_file.write(
+            f"""\
 configuration {{
     dpi: {dpi};
 }}
-""")
+"""
+        )
 
 
 def set_dpi(dpi):
-    config_file = tempfile.NamedTemporaryFile("w+")
-    config_file.write(f"""\
+    with tempfile.NamedTemporaryFile("w+") as config_file:
+        config_file.write(
+            f"""\
 Xft.dpi: {dpi}
-""")
-    config_file.seek(0)
-    subprocess.run(["xrdb", "-override", config_file.name])
+"""
+        )
+        config_file.seek(0)
+        subprocess.run(["xrdb", "-override", config_file.name], check=False)
     set_rofi_dpi(dpi)
 
 
@@ -297,16 +296,22 @@ def get_my_dpi(resolution, size, is_laptop=False, **_):
     else:
         DefaultScreen = DefaultScreenExternal
 
-    if size["height"] == 0 or size["width"] == 0 or (
-        resolution["x"] *
-        size["height"] == resolution["y"] *
-        size["width"] and gcd(
-            size["height"],
-            size["width"]) == 1):
+    if (
+        size["height"] == 0
+        or size["width"] == 0
+        or (
+            resolution["x"] * size["height"] == resolution["y"] * size["width"]
+            and gcd(size["height"], size["width"]) == 1
+        )
+    ):
         return DefaultScreen.DPI  # If cannot get the dpi, return the default
 
-    dpi = round(DefaultScreen.DPI * resolution["x"] * DefaultScreen.WIDTH_MM /
-                (size["width"] * DefaultScreen.RESOLUTION_X))
+    dpi = round(
+        DefaultScreen.DPI
+        * resolution["x"]
+        * DefaultScreen.WIDTH_MM
+        / (size["width"] * DefaultScreen.RESOLUTION_X)
+    )
 
     return dpi
 
@@ -328,8 +333,8 @@ def main():
     connected_displays, disconnected_display = get_all_displays_names()
 
     # No connected_displays found
-    if connected_displays == []:
-        return 1
+    if not connected_displays:
+        return
 
     # Turn primary display on
     primary_display = get_primary_display(connected_displays)

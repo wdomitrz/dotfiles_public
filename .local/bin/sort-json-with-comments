@@ -49,7 +49,7 @@ def assemble_json_with_comments(comments, json_parts):
 def main():
     if len(sys.argv) - 1 != 1:
         print("Exactly one parameter required")
-        exit(1)
+        sys.exit(1)
     file_name = sys.argv[1]
 
     with open(file_name, "r", encoding="utf8") as f:

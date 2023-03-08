@@ -66,9 +66,9 @@ function install_moonlight {
 
 function install_python_packages {
     ## Update pip
-    pip3 install --break-system-packages --user --upgrade pip
+    pip3 install --user --upgrade pip
     ## pip modules
-    pip3 install --break-system-packages --user --upgrade \
+    pip3 install --user --upgrade \
         autotiling \
         ipython \
         matplotlib \

@@ -61,14 +61,19 @@ function install_nordvpn {
     sudo apt-get install --yes nordvpn
 }
 
+function install_tailscale {
+    curl -fsSL https://tailscale.com/install.sh | sh
+}
+
 function main {
     set -xue
     source "$HOME"/.config/scripts/install-scripts/install-packages.sh --source-only
 
     install_google_chrome
-    install_vscode
-    install_signal
     install_nordvpn
+    install_signal
+    install_tailscale
+    install_vscode
     update_and_upgrade
 }
 

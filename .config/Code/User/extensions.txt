@@ -1,6 +1,6 @@
+amodio.toggle-excluded-files
 DavidAnson.vscode-markdownlint
 dcasella.i3
-eamodio.toggle-excluded-files
 foxundermoon.shell-format
 GitHub.remotehub
 Gruntfuggly.todo-tree

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 (check-if-remote || dex --autostart --environment i3) &
-compton --backend glx --paint-on-overlay --mark-ovredir-focused &
+compton &
 fusuma &
 geoclue-2-agent &
 i3-screen-locker &

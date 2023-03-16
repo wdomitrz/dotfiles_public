@@ -12,6 +12,11 @@
     },
     // Multi cursors
     {
+        "command": "removeSecondaryCursors",
+        "key": "shift+escape",
+        "when": "editorHasMultipleSelections && textInputFocus"
+    },
+    {
         "command": "editor.action.insertCursorAbove",
         "key": "ctrl+shift+k",
         "when": "editorTextFocus"

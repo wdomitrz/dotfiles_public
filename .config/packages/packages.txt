@@ -173,6 +173,7 @@ wakeonlan
 wget
 wine
 wine32
+wine64
 winetricks
 wireless-tools
 wireplumber

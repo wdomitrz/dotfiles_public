@@ -10,6 +10,17 @@
         "key": "ctrl+o",
         "when": "canNavigateBack"
     },
+    // VSpaceCode
+    {
+        "command": "vspacecode.space",
+        "key": "space",
+        "when": "activeEditorGroupEmpty && focusedView == '' && !whichkeyActive && !inputFocus"
+    },
+    {
+        "command": "vspacecode.space",
+        "key": "space",
+        "when": "sideBarFocus && !inputFocus && !whichkeyActive"
+    },
     // Multi cursors
     {
         "command": "removeSecondaryCursors",

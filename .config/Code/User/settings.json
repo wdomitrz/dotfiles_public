@@ -6,6 +6,7 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
+    "cSpell.diagnosticLevel": "Hint",
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
@@ -127,25 +128,25 @@
         }
     ],
     "vim.leader": "<space>",
-    "vim.normalModeKeyBindings": [
-        {
-            "after": [
-                "<C-w>"
-            ],
-            "before": [
-                "<leader>",
-                "w"
-            ]
-        }
-    ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [
-                "leader",
-                "leader"
+                "<leader>"
             ],
             "commands": [
-                "workbench.action.showCommands"
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "args": "m",
+                    "command": "whichkey.triggerKey"
+                }
             ]
         },
         {
@@ -176,37 +177,10 @@
         },
         {
             "before": [
-                "C-r"
+                "<C-r>"
             ],
             "commands": [
                 "redo"
-            ]
-        },
-        {
-            "before": [
-                "shift+u"
-            ],
-            "commands": [
-                "redo"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "g",
-                "r"
-            ],
-            "commands": [
-                "references-view.findReferences"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "d"
-            ],
-            "commands": [
-                "editor.action.peekDeclaration"
             ]
         },
         {
@@ -220,7 +194,7 @@
         },
         {
             "before": [
-                "<leader>",
+                "g",
                 "k"
             ],
             "commands": [
@@ -229,7 +203,7 @@
         },
         {
             "before": [
-                "<leader>",
+                "g",
                 "shift+k"
             ],
             "commands": [
@@ -242,15 +216,6 @@
                 "i"
             ],
             "commands": [
-                "editor.action.goToImplementation"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "i"
-            ],
-            "commands": [
                 "editor.action.peekImplementation"
             ]
         },
@@ -260,25 +225,7 @@
                 "t"
             ],
             "commands": [
-                "editor.action.goToTypeDefinition"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "t"
-            ],
-            "commands": [
                 "editor.action.peekTypeDefinition"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "r"
-            ],
-            "commands": [
-                "editor.action.rename"
             ]
         },
         {
@@ -292,7 +239,7 @@
         },
         {
             "before": [
-                "<leader>",
+                "g",
                 "}"
             ],
             "commands": [
@@ -301,7 +248,7 @@
         },
         {
             "before": [
-                "<leader>",
+                "g",
                 "{"
             ],
             "commands": [
@@ -310,7 +257,7 @@
         },
         {
             "before": [
-                "<leader>",
+                "g",
                 "]"
             ],
             "commands": [
@@ -319,29 +266,11 @@
         },
         {
             "before": [
-                "<leader>",
+                "g",
                 "["
             ],
             "commands": [
                 "editor.action.marker.prev"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "f"
-            ],
-            "commands": [
-                "editor.action.formatDocument"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "o"
-            ],
-            "commands": [
-                "editor.action.organizeImports"
             ]
         },
         {
@@ -361,11 +290,22 @@
     "vim.visualModeKeyBindingsNonRecursive": [
         {
             "before": [
-                "leader",
-                "leader"
+                "<leader>"
             ],
             "commands": [
-                "workbench.action.showCommands"
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "args": "m",
+                    "command": "whichkey.triggerKey"
+                }
             ]
         },
         {
@@ -406,15 +346,6 @@
             ],
             "before": [
                 "s"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "f"
-            ],
-            "commands": [
-                "editor.action.formatSelection"
             ]
         },
         {

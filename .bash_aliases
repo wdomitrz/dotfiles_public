@@ -56,7 +56,8 @@ alias DT='DT '
 alias nt='DT $TERMINAL'
 alias nv='nt -e nvim'
 
-alias tmux='TERM=screen-256color tmux'
+[ "$TERM" != "xterm-kitty" ] && alias tmux='TERM=screen-256color tmux'
+[ "$TERM" == "xterm-kitty" ] && alias ssh='kitty +kitten ssh'
 
 # Package manager aliases
 alias pcin='sudo apt-get install'

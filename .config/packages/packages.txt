@@ -140,7 +140,6 @@ rsync
 ruby
 shellcheck
 simple-scan
-simplescreenrecorder
 software-properties-gtk
 speedtest-cli
 sshfs

@@ -60,7 +60,7 @@ function! TabComplete()
     " File
     if match(current_word, '\/') != -1 | return "\<C-X>\<C-F>" | endif
     " Omni completion
-    " if match(current_word, '\.') != -1 | return "\<C-X>\<C-O>" | endif
+    if match(current_word, '\.') != -1 | return "\<C-X>\<C-O>" | endif
     " Default completion
     return "\<C-X>\<C-P>"
 endfunction
@@ -111,7 +111,7 @@ let g:vim_json_conceal=0
 
 " Plugins key mappings
 map <C-b>               :NERDTreeToggle<CR>
-map <C-_>               :Commentary<CR>
+map <C-/>               :Commentary<CR>
 map <C-p>               :Files<CR>
 map <leader><leader>    :Commands<CR>
 map <leader>t           :TagbarToggle<CR>

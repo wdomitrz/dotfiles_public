@@ -137,7 +137,7 @@ function fix_iwlwifi {
 }
 
 function create_swap_file {
-    SWAPFILE_LOCATION="/swapfile"
+    SWAPFILE_LOCATION="/home/swapfile"
     if ! [ -f "${SWAPFILE_LOCATION}" ]; then
         sudo fallocate -l 2G "${SWAPFILE_LOCATION}"
         sudo chmod 600 "${SWAPFILE_LOCATION}"

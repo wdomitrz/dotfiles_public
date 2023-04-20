@@ -45,6 +45,10 @@ function configure_transmission {
         cp "$HOME"/.config/transmission/settings.bck.json "$HOME"/.config/transmission/settings.json
 }
 
+function set_dark_gtk4_theme {
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+}
+
 function main {
     set -xue
 
@@ -52,6 +56,7 @@ function main {
     update_tldr
     configure_nautilus_open_terminal
     configure_transmission
+    set_dark_gtk4_theme
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

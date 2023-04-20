@@ -3,6 +3,7 @@ acpi-call-dkms
 adwaita-icon-theme
 adwaita-icon-theme-full
 adwaita-qt
+adwaita-qt6
 amd64-microcode
 apparmor
 apt
@@ -86,7 +87,6 @@ intel-microcode
 iputils-ping
 ipython3
 kazam
-kdeconnect
 kitty
 libavcodec-extra
 libblockdev-crypto2

@@ -8,6 +8,7 @@ Gruntfuggly.todo-tree
 ionutvmi.path-autocomplete
 KevinRose.vsc-python-indent
 mechatroner.rainbow-csv
+ms-pyright.pyright
 ms-python.black-formatter
 ms-python.flake8
 ms-python.gather

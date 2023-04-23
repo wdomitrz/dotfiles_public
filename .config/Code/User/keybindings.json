@@ -10,6 +10,12 @@
         "key": "ctrl+o",
         "when": "canNavigateBack"
     },
+    // Overwrite "interactive.input.clear"
+    {
+        "command": "extension.vim_escape",
+        "key": "escape",
+        "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'"
+    },
     // VSpaceCode
     {
         "command": "vspacecode.space",

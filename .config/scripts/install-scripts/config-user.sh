@@ -49,6 +49,10 @@ function set_dark_gtk4_theme {
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 }
 
+function install_code_extensions {
+    "$HOME"/.local/bin/install-code-extensions
+}
+
 function main {
     set -xue
 
@@ -57,6 +61,7 @@ function main {
     configure_nautilus_open_terminal
     configure_transmission
     set_dark_gtk4_theme
+    install_code_extensions
 }
 
 if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then

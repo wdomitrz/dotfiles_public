@@ -290,7 +290,6 @@ def set_dpi_based_on(display, check_connected=True, check_primary=True):
 
 
 def get_my_dpi(resolution, size, is_laptop=False, **_):
-
     if is_laptop:
         DefaultScreen = DefaultScreenLaptop
     else:
@@ -308,7 +307,7 @@ def get_my_dpi(resolution, size, is_laptop=False, **_):
 
     dpi = round(
         DefaultScreen.DPI
-        * resolution["x"]
+        * max(resolution["x"], resolution["y"])
         * DefaultScreen.WIDTH_MM
         / (size["width"] * DefaultScreen.RESOLUTION_X)
     )

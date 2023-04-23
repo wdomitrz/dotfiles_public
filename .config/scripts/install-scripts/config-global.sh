@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 function add_user_to_groups {
-    sudo usermod -aG docker,input,kvm,lpadmin,audio,netdev,video "$USER"
+    for group in docker input kvm lpadmin audio netdev video libvirt; do
+        getent group "$group" &&
+            sudo usermod -aG "$group" "$USER" ||
+            echo "Adding to $group failed"
+    done
 }
 
 function copy_configs_from_to {

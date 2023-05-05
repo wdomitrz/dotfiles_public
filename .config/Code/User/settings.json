@@ -140,7 +140,7 @@
         "timonwong.shellcheck",
         "tomoki1207.pdf",
         "vscodevim.vim",
-        "XadillaX.viml",
+        "XadillaX.viml"
     ],
     "remote.SSH.lockfilesInTmp": true,
     "security.workspace.trust.banner": "always",

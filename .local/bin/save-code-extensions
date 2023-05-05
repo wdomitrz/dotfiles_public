@@ -1,9 +1,42 @@
-#!/usr/bin/env sh
+#!/usr/bin/env python3
+import os
+import subprocess
+import sys
 
-if [ $# -eq 0 ]; then
-    extensions_file="$HOME/.config/Code/User/extensions.txt"
-else
-    extensions_file="$1"
-fi
+extensions_field_bg = '''\
+    "remote.SSH.defaultExtensions": [
+        "'''
+extensions_field_ed = """"
+    ],"""
+extensions_separator = '''",
+        "'''
 
-code --list-extensions >"$extensions_file"
+settings_file = os.path.expandvars("$HOME/.config/Code/User/settings.json")
+if len(sys.argv) > 1:
+    settings_file = sys.argv[1]
+
+extensions = (
+    subprocess.run(["code", "--list-extensions"], stdout=subprocess.PIPE, check=True)
+    .stdout.decode()
+    .splitlines()
+)
+
+with open(settings_file, encoding="utf-8") as f:
+    settings = f.read()
+assert extensions_field_bg in settings and extensions_field_ed in settings
+
+settings_bg, settings_ed = settings.split(extensions_field_bg, maxsplit=1)
+settings_ed = settings_ed.split(extensions_field_ed, maxsplit=1)[1]
+
+settings = "".join(
+    [
+        settings_bg,
+        extensions_field_bg,
+        extensions_separator.join(extensions),
+        extensions_field_ed,
+        settings_ed,
+    ]
+)
+
+with open(settings_file, "w+", encoding="utf-8") as f:
+    f.write(settings)

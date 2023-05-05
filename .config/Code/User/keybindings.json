@@ -16,15 +16,15 @@
         "key": "escape",
         "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'"
     },
-    // VSpaceCode
+    // 2x space triggers menu
     {
-        "command": "vspacecode.space",
-        "key": "space",
+        "command": "workbench.action.showCommands",
+        "key": "space space",
         "when": "activeEditorGroupEmpty && focusedView == '' && !whichkeyActive && !inputFocus"
     },
     {
-        "command": "vspacecode.space",
-        "key": "space",
+        "command": "workbench.action.showCommands",
+        "key": "space space",
         "when": "sideBarFocus && !inputFocus && !whichkeyActive"
     },
     // Multi cursors

@@ -74,8 +74,8 @@ ${PROMPT_COLOR}\$${CLEAR} "
 export PS1="${PROMPT_FRONT}${PROMPT_BACK}"
 
 ## Git
-if [ -f /usr/lib/git-core/git-sh-prompt ]; then
-    source /usr/lib/git-core/git-sh-prompt
+if source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
+    source /usr/share/git-core/contrib/completion/git-prompt.sh 2>/dev/null; then
 
     export GIT_PS1_SHOWDIRTYSTATE=true     # staged '+', unstaged '*'
     export GIT_PS1_SHOWSTASHSTATE=true     # '$' something is stashed

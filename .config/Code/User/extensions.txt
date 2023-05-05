@@ -40,6 +40,4 @@ streetsidesoftware.code-spell-checker-polish
 timonwong.shellcheck
 tomoki1207.pdf
 vscodevim.vim
-VSpaceCode.vspacecode
-VSpaceCode.whichkey
 XadillaX.viml

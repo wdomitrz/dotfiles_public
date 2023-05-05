@@ -95,8 +95,53 @@
         "refactor": "Warning"
     },
     "python.analysis.inlayHints.functionReturnTypes": true,
-    "python.formatting.provider": "none",
+    "python.formatting.provider": "black",
     "python.linting.mypyEnabled": true,
+    "remote.SSH.defaultExtensions": [
+        "amodio.toggle-excluded-files",
+        "DavidAnson.vscode-markdownlint",
+        "dcasella.i3",
+        "edonet.vscode-command-runner",
+        "foxundermoon.shell-format",
+        "GitHub.remotehub",
+        "Gruntfuggly.todo-tree",
+        "ionutvmi.path-autocomplete",
+        "KevinRose.vsc-python-indent",
+        "mechatroner.rainbow-csv",
+        "ms-pyright.pyright",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "ms-python.gather",
+        "ms-python.isort",
+        "ms-python.pylint",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "ms-toolsai.vscode-jupyter-cell-tags",
+        "ms-toolsai.vscode-jupyter-powertoys",
+        "ms-toolsai.vscode-jupyter-slideshow",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode.cpptools",
+        "ms-vscode.hexeditor",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.remote-explorer",
+        "ms-vscode.remote-repositories",
+        "nico-castell.linux-desktop-file",
+        "njpwerner.autodocstring",
+        "PKief.material-icon-theme",
+        "shawtung.vscode-commentlinedown",
+        "sleistner.vscode-fileutils",
+        "stkb.rewrap",
+        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-polish",
+        "timonwong.shellcheck",
+        "tomoki1207.pdf",
+        "vscodevim.vim",
+        "XadillaX.viml",
+    ],
     "remote.SSH.lockfilesInTmp": true,
     "security.workspace.trust.banner": "always",
     "security.workspace.trust.startupPrompt": "always",
@@ -132,22 +177,11 @@
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [
+                "<leader>",
                 "<leader>"
             ],
             "commands": [
-                "vspacecode.space"
-            ]
-        },
-        {
-            "before": [
-                ","
-            ],
-            "commands": [
-                "vspacecode.space",
-                {
-                    "args": "m",
-                    "command": "whichkey.triggerKey"
-                }
+                "workbench.action.showCommands"
             ]
         },
         {
@@ -291,22 +325,11 @@
     "vim.visualModeKeyBindingsNonRecursive": [
         {
             "before": [
+                "<leader>",
                 "<leader>"
             ],
             "commands": [
-                "vspacecode.space"
-            ]
-        },
-        {
-            "before": [
-                ","
-            ],
-            "commands": [
-                "vspacecode.space",
-                {
-                    "args": "m",
-                    "command": "whichkey.triggerKey"
-                }
+                "workbench.action.showCommands"
             ]
         },
         {

@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
 
 if [ $# -eq 0 ]; then
-    extensions_file="$HOME/.config/Code/User/extensions.txt"
+    settings_file="$HOME/.config/Code/User/settings.json"
 else
-    extensions_file="$1"
+    settings_file="$1"
 fi
 
-xargs --max-lines=1 code --force --install-extension <"$extensions_file"
+sed -n '/"remote.SSH.defaultExtensions"/,${p;/]/q}' "$settings_file" |
+    sed '1d;$d' | sed "s/,//" |
+    xargs --max-lines=1 code --force --install-extension

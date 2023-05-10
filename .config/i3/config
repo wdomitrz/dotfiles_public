@@ -165,8 +165,6 @@ bindsym $mod+d              exec --no-startup-id    gtk-launch run-menu
 bindsym $mod+slash          exec --no-startup-id    gtk-launch search-menu
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
-# Suspend
-bindsym $mod+End            exec --no-startup-id    systemctl suspend
 # Change background
 bindsym $mod+y              exec --no-startup-id    set-background
 # Screenshot

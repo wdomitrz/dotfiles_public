@@ -1,9 +1,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ -f /etc/bashrc ]; then
-    source /etc/bashrc
-fi
+[ -f "/etc/bashrc" ] && source /etc/bashrc
 
 # Options
 shopt -s autocd       # Automatically change directory

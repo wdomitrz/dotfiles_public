@@ -10,6 +10,7 @@
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
+    "editor.accessibilitySupport": "off",
     "editor.codeActionsOnSave": {
         "source.organizeImports": true
     },
@@ -95,6 +96,8 @@
         "refactor": "Warning"
     },
     "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.inlayHints.variableTypes": true,
     "python.formatting.provider": "black",
     "python.linting.mypyEnabled": true,
     "remote.SSH.defaultExtensions": [
@@ -229,7 +232,16 @@
         },
         {
             "before": [
-                "g",
+                "<leader>",
+                "d"
+            ],
+            "commands": [
+                "editor.action.peekDeclaration"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
                 "k"
             ],
             "commands": [
@@ -238,7 +250,6 @@
         },
         {
             "before": [
-                "g",
                 "shift+k"
             ],
             "commands": [
@@ -247,7 +258,7 @@
         },
         {
             "before": [
-                "g",
+                "<leader>",
                 "i"
             ],
             "commands": [
@@ -257,10 +268,37 @@
         {
             "before": [
                 "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
                 "t"
             ],
             "commands": [
                 "editor.action.peekTypeDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "t"
+            ],
+            "commands": [
+                "editor.action.goToTypeDefinition"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "r"
+            ],
+            "commands": [
+                "editor.action.rename"
             ]
         },
         {
@@ -274,7 +312,7 @@
         },
         {
             "before": [
-                "g",
+                "<leader>",
                 "}"
             ],
             "commands": [
@@ -283,7 +321,7 @@
         },
         {
             "before": [
-                "g",
+                "<leader>",
                 "{"
             ],
             "commands": [
@@ -292,7 +330,7 @@
         },
         {
             "before": [
-                "g",
+                "<leader>",
                 "]"
             ],
             "commands": [
@@ -301,7 +339,7 @@
         },
         {
             "before": [
-                "g",
+                "<leader>",
                 "["
             ],
             "commands": [

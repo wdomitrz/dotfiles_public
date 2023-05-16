@@ -9,6 +9,7 @@
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
+    "clangd.checkUpdates": false,
     "diffEditor.codeLens": true,
     "editor.accessibilitySupport": "off",
     "editor.codeActionsOnSave": {
@@ -33,6 +34,7 @@
     "editor.tabCompletion": "on",
     "editor.wordWrap": "on",
     "explorer.confirmDelete": false,
+    "extensions.ignoreRecommendations": true,
     "files.associations": {
         "**/.ssh/config": "ssh_config",
         "**/.ssh/configs/*.conf": "ssh_config",
@@ -76,6 +78,10 @@
         "--ignore=D1,E203,E501,W503"
     ],
     "git.mergeEditor": true,
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
     "jupyter.askForKernelRestart": false,
     "jupyter.interactiveWindow.textEditor.executeSelection": true,
     "keyboard.dispatch": "keyCode",
@@ -110,6 +116,7 @@
         "Gruntfuggly.todo-tree",
         "ionutvmi.path-autocomplete",
         "KevinRose.vsc-python-indent",
+        "llvm-vs-code-extensions.vscode-clangd",
         "mechatroner.rainbow-csv",
         "ms-pyright.pyright",
         "ms-python.black-formatter",
@@ -150,6 +157,7 @@
     "security.workspace.trust.banner": "always",
     "security.workspace.trust.startupPrompt": "always",
     "settingsSync.keybindingsPerPlatform": false,
+    "shellcheck.disableVersionCheck": true,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
@@ -439,5 +447,6 @@
     "workbench.enableExperiments": false,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
-    "workbench.tips.enabled": false
+    "workbench.tips.enabled": false,
+    "workbench.welcomePage.walkthroughs.openOnInstall": false
 }

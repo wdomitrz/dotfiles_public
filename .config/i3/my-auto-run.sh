@@ -17,7 +17,10 @@ i3-xrl &&
         gtk-launch org.kde.kdeconnect.nonplasma &
         ibus-daemon --daemonize --replace &
         /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-        /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
-        /usr/lib64/xfce4/notifyd/xfce4-notifyd &
+        (
+            systemctl --user stop dunst
+            /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
+            /usr/lib64/xfce4/notifyd/xfce4-notifyd &
+        ) &
         watch --interval 60 set-background &
     )

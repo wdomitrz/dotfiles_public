@@ -48,6 +48,17 @@
         "key": "ctrl+k",
         "when": "editorFocus"
     },
+    // ctrl tab order
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "!activeEditorGroupEmpty"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "!activeEditorGroupEmpty"
+    },
     // Scroll suggestions
     {
         "command": "selectPrevSuggestion",

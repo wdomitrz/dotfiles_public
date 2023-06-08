@@ -1,12 +1,11 @@
 {
     "C_Cpp.loggingLevel": "Debug",
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "ms-python.python"
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
-    "cSpell.diagnosticLevel": "Hint",
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "clangd.checkUpdates": false,
@@ -112,8 +111,6 @@
         "dcasella.i3",
         "edonet.vscode-command-runner",
         "foxundermoon.shell-format",
-        "GitHub.remotehub",
-        "Gruntfuggly.todo-tree",
         "ionutvmi.path-autocomplete",
         "KevinRose.vsc-python-indent",
         "llvm-vs-code-extensions.vscode-clangd",
@@ -142,8 +139,6 @@
         "nico-castell.linux-desktop-file",
         "njpwerner.autodocstring",
         "PKief.material-icon-theme",
-        "rust-lang.rust-analyzer",
-        "shawtung.vscode-commentlinedown",
         "sleistner.vscode-fileutils",
         "stkb.rewrap",
         "streetsidesoftware.code-spell-checker",

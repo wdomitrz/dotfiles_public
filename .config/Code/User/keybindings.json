@@ -50,13 +50,13 @@
     },
     // ctrl tab order
     {
-        "key": "ctrl+shift+tab",
         "command": "workbench.action.previousEditorInGroup",
+        "key": "ctrl+shift+tab",
         "when": "!activeEditorGroupEmpty"
     },
     {
-        "key": "ctrl+tab",
         "command": "workbench.action.nextEditorInGroup",
+        "key": "ctrl+tab",
         "when": "!activeEditorGroupEmpty"
     },
     // Scroll suggestions

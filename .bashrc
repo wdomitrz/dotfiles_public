@@ -1,5 +1,12 @@
+# Header guard
+[ -z "${BASHRC_LOADED}" ] || return
+BASHRC_LOADED=1
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+# Profile
+[ -f "$HOME/.profile" ] && source "$HOME/.profile"
 
 [ -f "/etc/bashrc" ] && source /etc/bashrc
 
@@ -103,8 +110,6 @@ fi
 
 # Aliases
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
-# Profile
-[ -f "$HOME/.profile" ] && [ -z "${PROFILE_LOADED}" ] && source "$HOME/.profile"
 
 # Loading completed successfully
 true

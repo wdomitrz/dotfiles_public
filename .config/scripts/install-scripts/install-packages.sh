@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-function update_and_upgrade {
+function update_and_upgrade() {
     sudo apt-get update --yes &&
         sudo apt-get dist-upgrade --yes
 }
 
-function install_packages {
+function install_packages() {
     packages_file="$HOME/.config/packages/packages.txt"
     xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends <"$packages_file"
 }
 
-function install_with_recommended {
+function install_with_recommended() {
     packages_file="$HOME/.config/packages/with-recommends.txt"
     xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"$packages_file"
 }
 
-function main {
+function main() {
     set -xue
     source "$HOME"/.config/scripts/install-scripts/config-global.sh --source-only
 

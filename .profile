@@ -1,6 +1,6 @@
-export PROFILE_LOADED=1
-
-[ -f "$HOME/.bash_profile" ] && . "$HOME/.bash_profile"
+# Header guard
+[ -z "${PROFILE_LOADED}" ] || return
+PROFILE_LOADED=1
 
 # set PATH so it includes user's private bin if it exists
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
@@ -26,6 +26,7 @@ export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
 
+[ -n "$BASH_VERSION" ] && [ -f "$HOME/.bash_profile" ] && . "$HOME/.bash_profile"
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 # Loading completed successfully

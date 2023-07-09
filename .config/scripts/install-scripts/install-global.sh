@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function install_deb_from_url {
+function install_deb_from_url() {
     link="$1"
     package_file="$(mktemp /tmp/XXXXXX.deb)"
     wget "${link}" -O "${package_file}"
@@ -8,7 +8,7 @@ function install_deb_from_url {
     rm "${package_file}"
 }
 
-function install_gcloud {
+function install_gcloud() {
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" |
         sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg |
@@ -17,7 +17,7 @@ function install_gcloud {
         sudo apt-get install --yes google-cloud-sdk
 }
 
-function install_signal {
+function install_signal() {
     # 1. Install our official public software signing key
     wget -O- https://updates.signal.org/desktop/apt/keys.asc |
         gpg --dearmor |
@@ -32,40 +32,40 @@ function install_signal {
         sudo apt-get install --yes signal-desktop
 }
 
-function add_google_public_key {
+function add_google_public_key() {
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |
         sudo apt-key add -
 }
 
-function install_google_chrome {
+function install_google_chrome() {
     install_deb_from_url "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 }
 
-function install_vscode {
+function install_vscode() {
     install_deb_from_url "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
 }
 
-function install_chrome_remote_desktop {
+function install_chrome_remote_desktop() {
     install_deb_from_url "https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb"
     # Configure Chrome Remote Desktop
     echo "Configure Chrome Remote Desktop at" "https://remotedesktop.google.com/headless"
 }
 
-function install_slack {
+function install_slack() {
     install_deb_from_url "https://downloads.slack-edge.com/releases/linux/4.26.1/prod/x64/slack-desktop-4.26.1-amd64.deb"
 }
 
-function install_nordvpn {
+function install_nordvpn() {
     install_deb_from_url "https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb"
     sudo apt-get update --yes
     sudo apt-get install --yes nordvpn
 }
 
-function install_tailscale {
+function install_tailscale() {
     curl -fsSL https://tailscale.com/install.sh | sh
 }
 
-function main {
+function main() {
     set -xue
     source "$HOME"/.config/scripts/install-scripts/install-packages.sh --source-only
 

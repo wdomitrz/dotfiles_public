@@ -3,7 +3,7 @@
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r "$HOME/.dircolors" && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
+    (test -r "$HOME/.dircolors" && eval "$(dircolors -b "$HOME/.dircolors")") || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -40,15 +40,15 @@ alias pint='ping 8.8.8.8'
 
 alias today='date -I'
 
-alias emacs='emacs --no-window-system'
+alias emacs='emacsclient --create-frame --tty'
 
 # Ignore errors
-I() {
+function I() {
     ("$@") 2>/dev/null
 }
 alias I='I '
 # Run command independently
-DT() {
+function DT() {
     ("$@") &
     disown
 }

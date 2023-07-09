@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function add_user_to_groups {
+function add_user_to_groups() {
     for group in docker input kvm lpadmin audio netdev video libvirt; do
         getent group "$group" &&
             sudo usermod -aG "$group" "$USER" ||
@@ -8,7 +8,7 @@ function add_user_to_groups {
     done
 }
 
-function copy_configs_from_to {
+function copy_configs_from_to() {
     source_dir="$1"
     target_dir="$2"
     if [ ! -d "$source_dir" ]; then
@@ -19,17 +19,17 @@ function copy_configs_from_to {
     sudo cp "$source_dir"/* "$target_dir"
 }
 
-function enable_32_bit_architecture {
+function enable_32_bit_architecture() {
     sudo dpkg --add-architecture i386
 }
 
-function configure_debian_sources_list {
+function configure_debian_sources_list() {
     grep --quiet "/deb.debian.org" /etc/apt/sources.list &&
         sudo cp "$HOME"/.config/debian/sources.list /etc/apt/sources.list ||
         echo "Not using debian"
 }
 
-function update_locales {
+function update_locales() {
     echo "locales locales/default_environment_locale select en_US.UTF-8" |
         sudo debconf-set-selections
     echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, en_GB.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" |
@@ -38,12 +38,12 @@ function update_locales {
     sudo dpkg-reconfigure --frontend noninteractive locales
 }
 
-function configure_apt {
+function configure_apt() {
     copy_configs_from_to "$HOME"/.config/apt/apt.conf.d/ /etc/apt/apt.conf.d/
     copy_configs_from_to "$HOME"/.config/apt/preferences.d/ /etc/apt/preferences.d/
 }
 
-function install_and_config_ssh_server {
+function install_and_config_ssh_server() {
     if [ -f "$HOME/.local/bin/.config-sshd" ]; then
         sudo apt-get update --yes &&
             sudo apt-get install --yes openssh-server
@@ -51,39 +51,39 @@ function install_and_config_ssh_server {
     fi
 }
 
-function create_global_set_display_script {
+function create_global_set_display_script() {
     sudo cp ~/.local/bin/set-display /usr/bin/
 }
 
-function fix_screen_tearing {
+function fix_screen_tearing() {
     copy_configs_from_to "$HOME"/.config/xorg.conf.d/ /etc/X11/xorg.conf.d/
 }
 
-function set_global_keymap {
+function set_global_keymap() {
     # keybord options - map caps lock to ctrl
     sudo sed -i -E "s/^(XKBOPTIONS)\s*=\s*\"\"/\1=\"ctrl:nocaps\"/g" /etc/default/keyboard
 }
 
-function configure_lightdm {
+function configure_lightdm() {
     sudo sed -i -E "s/^(greeter-hide-users)\s*=\s*/#\1=/g" /usr/share/lightdm/*/*.conf
     copy_configs_from_to "$HOME"/.config/lightdm-gtk-greeter.conf.d/ /etc/lightdm/lightdm-gtk-greeter.conf.d/
     copy_configs_from_to "$HOME"/.config/lightdm.conf.d/ /etc/lightdm/lightdm.conf.d/
 }
 
-function fix_network_manager {
+function fix_network_manager() {
     sudo touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
 }
 
-function get_certificates {
+function get_certificates() {
     copy_configs_from_to "$HOME"/.config/ca-certificates/ /usr/share/ca-certificates/
 }
 
-function fix_redshift {
+function fix_redshift() {
     # Disable problematic redshift autostart
     sudo rm -f /etc/systemd/user/default.target.wants/redshift*.service
 }
 
-function configure_bluetooth {
+function configure_bluetooth() {
     ## Enable user space HID
     sudo sed -i -E "s/^#?\s?(UserspaceHID)\s*=\s*[a-z]*$/\1=true/g" /etc/bluetooth/input.conf
     ## Set idle timeout
@@ -97,21 +97,21 @@ function configure_bluetooth {
     sudo sed -i -E "s/^#?(ReconnectIntervals\s*=\s*[0-9, ]*)$/\1/g" /etc/bluetooth/main.conf
 }
 
-function fix_keychron {
+function fix_keychron() {
     # Keychron make Fn+f-keys work
     echo "options hid_apple fnmode=2" |
         sudo tee /etc/modprobe.d/hid_apple.conf
     sudo update-initramfs -u
 }
 
-function configure_newt_palette {
+function configure_newt_palette() {
     # Set the original palette as a default option
     update-alternatives --query newt-palette &&
         sudo update-alternatives --set newt-palette /etc/newt/palette.original ||
         echo "no newt-palette"
 }
 
-function configure_grub {
+function configure_grub() {
     # Custom colors
     copy_configs_from_to "$HOME"/.config/grub/ /boot/grub/
     # Load saved option
@@ -131,7 +131,7 @@ GRUB_DISABLE_OS_PROBER=false
     sudo update-grub
 }
 
-function fix_iwlwifi {
+function fix_iwlwifi() {
     # Fix iwlwifi iwl-debug-yoyo.bin error
     FIX="options iwlwifi enable_ini=N"
     CONF="/etc/modprobe.d/iwlwifi.conf"
@@ -140,7 +140,7 @@ function fix_iwlwifi {
     fi
 }
 
-function create_swap_file {
+function create_swap_file() {
     SWAPFILE_LOCATION="/home/swapfile"
     if ! [ -f "${SWAPFILE_LOCATION}" ]; then
         sudo fallocate -l 2G "${SWAPFILE_LOCATION}"
@@ -151,7 +151,7 @@ function create_swap_file {
             sudo tee -a /etc/fstab
     fi
 }
-function configure_touchpad {
+function configure_touchpad() {
     config_file="/usr/share/X11/xorg.conf.d/40-libinput.conf"
     # Tap to click
     grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
@@ -169,17 +169,17 @@ esac
 ' | sudo tee /lib/systemd/system-sleep/touchpad
 }
 
-function configure_tlp {
+function configure_tlp() {
     # Enable charge threshold for tlp
     sudo sed -i 's/#\([A-Z]*_CHARGE_THRESH_BAT0=[0-9]*\)$/\1/' /etc/tlp.conf
     sudo systemctl restart tlp
 }
 
-function remove_snap_directories {
+function remove_snap_directories() {
     sudo rm -rf /snap "$HOME"/snap
 }
 
-function main {
+function main() {
     set -xue
 
     add_user_to_groups

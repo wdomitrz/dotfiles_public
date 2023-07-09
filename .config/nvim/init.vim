@@ -22,7 +22,7 @@ set number
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024
 set shortmess=IAc
-set spell spelllang=en,pl
+set spelllang=en,pl
 set splitright splitbelow
 set tabstop=4 softtabstop=-1 shiftwidth=0 expandtab
 set termguicolors

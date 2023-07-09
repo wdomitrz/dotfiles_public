@@ -10,6 +10,8 @@ BASHRC_LOADED=1
 
 [ -f "/etc/bashrc" ] && source /etc/bashrc
 
+[ -f "$HOME/.config/local/bashrc.sh" ] && source "$HOME/.config/local/bashrc.sh"
+
 # Options
 shopt -s autocd       # Automatically change directory
 shopt -s checkwinsize # Detect resize
@@ -65,12 +67,16 @@ if [ -z "${NO_COLORS}" ]; then
     CLEAR="\[$(tput sgr0)\]"                # clear color
 fi
 
+[ -z "${PROMPT_FRONT_LOCAL}" ] && PROMPT_FRONT_LOCAL=""
+[ -z "${PROMPT_BACK_LOCAL}" ] && PROMPT_BACK_LOCAL=""
 export PROMPT_FRONT="\
 ${USER_COLOR}\u${CLEAR}\
 ${AT_COLOR}@${CLEAR}\
 ${HOST_COLOR}\h${CLEAR} \
-[${EXIT_STATUS_COLOR}\$?${CLEAR}]"
+[${EXIT_STATUS_COLOR}\$?${CLEAR}]\
+${PROMPT_FRONT_LOCAL}"
 export PROMPT_BACK=" \
+${PROMPT_BACK_LOCAL}\
 {${DATE_COLOR}\D{%F %A}${CLEAR} \
 ${TIME_COLOR}\t${CLEAR}} \
 ${PATH_COLOR}\w${CLEAR}\n\

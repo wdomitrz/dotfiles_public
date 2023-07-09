@@ -118,3 +118,10 @@ map <leader>t           :TagbarToggle<CR>
 map s                   <Plug>(easymotion-jumptoanywhere)
 endif
 " }}}
+
+let $LOCAL_CONFIG = $HOME . "/.config/nvim/local.vim"
+if filereadable($LOCAL_CONFIG)
+    source $LOCAL_CONFIG
+endif
+
+set spell

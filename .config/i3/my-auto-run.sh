@@ -14,6 +14,7 @@ i3-xrl &&
             nm-applet &
             redshift-gtk &
         )) &
+        ([ -f "$HOME/.config/i3/my-auto-run.local.sh" ] && "$HOME/.config/i3/my-auto-run.local.sh") &
         gtk-launch org.kde.kdeconnect.nonplasma &
         ibus-daemon --daemonize --replace &
         /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &

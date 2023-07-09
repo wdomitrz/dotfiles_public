@@ -26,6 +26,8 @@ export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
 
+[ -f "$HOME/.config/local/profile.sh" ] && source "$HOME/.config/local/profile.sh"
+
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bash_profile" ] && . "$HOME/.bash_profile"
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 

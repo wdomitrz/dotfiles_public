@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Header guard
 [ -z "${BASHRC_LOADED}" ] || return
 BASHRC_LOADED=1
@@ -20,7 +21,7 @@ shopt -s globstar     # Enable **
 shopt -s histappend   # Append to the history file
 shopt -u failglob     # Unmatched patterns don't cause errors
 
-export HISTFILE="$HOME/.cache/bash_history" # History file
+HISTFILE="$HOME/.cache/bash_history" # History file
 
 HISTCONTROL=ignorespace # don't save lines with leading space
 HISTSIZE=               # unlimited bash history
@@ -78,13 +79,13 @@ fi
 
 [ -z "${PROMPT_FRONT_LOCAL}" ] && PROMPT_FRONT_LOCAL=""
 [ -z "${PROMPT_BACK_LOCAL}" ] && PROMPT_BACK_LOCAL=""
-export PROMPT_FRONT="\
+PROMPT_FRONT="\
 ${USER_COLOR}\u${CLEAR}\
 ${AT_COLOR}@${CLEAR}\
 ${HOST_COLOR}\h${CLEAR} \
 [${EXIT_STATUS_COLOR}\$?${CLEAR}]\
 ${PROMPT_FRONT_LOCAL}"
-export PROMPT_BACK=" \
+PROMPT_BACK=" \
 ${PROMPT_BACK_LOCAL}\
 {${DATE_COLOR}\D{%F %A}${CLEAR} \
 ${TIME_COLOR}\t${CLEAR}} \
@@ -96,17 +97,16 @@ if source "$HOME/.local/share/git-core/contrib/completion/git-prompt.sh" 2>/dev/
     source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
     source /usr/share/git-core/contrib/completion/git-prompt.sh 2>/dev/null; then
 
-    export GIT_PS1_SHOWDIRTYSTATE=true     # staged '+', unstaged '*'
-    export GIT_PS1_SHOWSTASHSTATE=true     # '$' something is stashed
-    export GIT_PS1_SHOWUNTRACKEDFILES=true # '%' untracked files
-    export GIT_PS1_SHOWUPSTREAM="auto"     # '<' behind, '>' ahead, '<>' diverged, '=' no difference
-    export GIT_PS1_UNTRACKEDFILES=true
-    export GIT_PS1_SHOWCOLORHINTS=true
+    GIT_PS1_SHOWDIRTYSTATE=true     # staged '+', unstaged '*'
+    GIT_PS1_SHOWSTASHSTATE=true     # '$' something is stashed
+    GIT_PS1_SHOWUNTRACKEDFILES=true # '%' untracked files
+    GIT_PS1_SHOWUPSTREAM="auto"     # '<' behind, '>' ahead, '<>' diverged, '=' no difference
+    GIT_PS1_SHOWCOLORHINTS=true     # Show colors
 
-    export PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'
+    PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'
 fi
 
-export PS1="${PROMPT_FRONT}${PROMPT_BACK}"
+PS1="${PROMPT_FRONT}${PROMPT_BACK}"
 
 # Improved search backwards
 [ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash

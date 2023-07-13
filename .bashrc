@@ -47,6 +47,15 @@ kill_line_to_clipboard() {
 }
 bind -m vi-command -x '"dd": kill_line_to_clipboard'
 
+# enable programmable completion features
+if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        source /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        source /etc/bash_completion
+    fi
+fi
+
 # Prompt
 ## Detect no color support
 ([ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null) || NO_COLORS=1
@@ -82,10 +91,9 @@ ${TIME_COLOR}\t${CLEAR}} \
 ${PATH_COLOR}\w${CLEAR}\n\
 ${PROMPT_COLOR}\$${CLEAR} "
 
-export PS1="${PROMPT_FRONT}${PROMPT_BACK}"
-
 ## Git
-if source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
+if source "$HOME/.local/share/git-core/contrib/completion/git-prompt.sh" 2>/dev/null ||
+    source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
     source /usr/share/git-core/contrib/completion/git-prompt.sh 2>/dev/null; then
 
     export GIT_PS1_SHOWDIRTYSTATE=true     # staged '+', unstaged '*'
@@ -95,17 +103,10 @@ if source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
     export GIT_PS1_UNTRACKEDFILES=true
     export GIT_PS1_SHOWCOLORHINTS=true
 
-    export PROMPT_COMMAND='__git_ps1 "${PROMPT_FRONT}" "${PROMPT_BACK}"'
+    export PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'
 fi
 
-# enable programmable completion features
-if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        source /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        source /etc/bash_completion
-    fi
-fi
+export PS1="${PROMPT_FRONT}${PROMPT_BACK}"
 
 # Improved search backwards
 [ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash

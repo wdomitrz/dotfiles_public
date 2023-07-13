@@ -152,6 +152,9 @@
     "security.workspace.trust.banner": "always",
     "security.workspace.trust.startupPrompt": "always",
     "settingsSync.keybindingsPerPlatform": false,
+    "shellcheck.customArgs": [
+        "--external-sources"
+    ],
     "shellcheck.disableVersionCheck": true,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Header guard
 [ -z "${BASHRC_LOADED}" ] || return
 BASHRC_LOADED=1
 
@@ -103,6 +102,7 @@ if source "$HOME/.local/share/git-core/contrib/completion/git-prompt.sh" 2>/dev/
     GIT_PS1_SHOWUPSTREAM="auto"     # '<' behind, '>' ahead, '<>' diverged, '=' no difference
     GIT_PS1_SHOWCOLORHINTS=true     # Show colors
 
+    # shellcheck disable=SC2016
     PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'
 fi
 

@@ -1,4 +1,4 @@
-# Header guard
+#!/usr/bin/env sh
 [ -z "${PROFILE_LOADED}" ] || return
 PROFILE_LOADED=1
 
@@ -26,7 +26,7 @@ export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
 
-[ -f "$HOME/.config/local/profile.sh" ] && source "$HOME/.config/local/profile.sh"
+[ -f "$HOME/.config/local/profile.sh" ] && . "$HOME/.config/local/profile.sh"
 
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bash_profile" ] && . "$HOME/.bash_profile"
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"

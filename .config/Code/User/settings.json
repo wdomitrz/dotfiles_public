@@ -120,6 +120,7 @@
         "ms-python.flake8",
         "ms-python.gather",
         "ms-python.isort",
+        "ms-python.mypy-type-checker",
         "ms-python.pylint",
         "ms-python.python",
         "ms-python.vscode-pylance",

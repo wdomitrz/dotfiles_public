@@ -76,6 +76,7 @@
     "flake8.args": [
         "--ignore=D1,E203,E501,W503"
     ],
+    "git.enabled": true,
     "git.mergeEditor": true,
     "isort.args": [
         "--profile",

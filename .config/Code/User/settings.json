@@ -24,7 +24,7 @@
     "editor.mouseWheelZoom": true,
     "editor.rulers": [
         80,
-        88,
+        90,
         100,
         115,
         120
@@ -438,10 +438,13 @@
             ]
         }
     ],
+    "window.autoDetectColorScheme": true,
+    "window.commandCenter": false,
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
     "workbench.activityBar.visible": false,
     "workbench.editor.focusRecentEditorAfterClose": false,
+    "workbench.editor.tabSizing": "fixed",
     "workbench.enableExperiments": false,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",

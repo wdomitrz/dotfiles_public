@@ -10,11 +10,18 @@
         "key": "ctrl+o",
         "when": "canNavigateBack"
     },
+    // Interactive editor fixes
+,
     // Overwrite "interactive.input.clear"
     {
         "command": "extension.vim_escape",
         "key": "escape",
         "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'"
+    },
+    {
+        "command": "interactive.execute",
+        "key": "shift+enter",
+        "when": "activeEditor == 'workbench.editor.interactive'"
     },
     // 2x space triggers menu
     {
@@ -85,11 +92,5 @@
     {
         "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
         "key": "ctrl+l"
-    },
-    // Todo
-    {
-        "command": "workbench.view.extension.todo-tree-container",
-        "key": "ctrl+shift+t",
-        "when": "viewContainer.workbench.view.explorer.enabled"
     }
 ]

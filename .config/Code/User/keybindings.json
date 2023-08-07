@@ -10,9 +10,7 @@
         "key": "ctrl+o",
         "when": "canNavigateBack"
     },
-    // Interactive editor fixes
-,
-    // Overwrite "interactive.input.clear"
+    // Interactive editor fixes; Overwrite "interactive.input.clear"
     {
         "command": "extension.vim_escape",
         "key": "escape",

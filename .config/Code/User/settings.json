@@ -1,7 +1,7 @@
 {
     "C_Cpp.loggingLevel": "Debug",
     "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
+        "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -101,11 +101,13 @@
         "info": "Warning",
         "refactor": "Warning"
     },
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.inlayHints.callArgumentNames": true,
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.analysis.inlayHints.pytestParameters": true,
     "python.analysis.inlayHints.variableTypes": true,
-    "python.formatting.provider": "black",
-    "python.linting.mypyEnabled": true,
+    "python.formatting.provider": "none",
     "remote.SSH.defaultExtensions": [
         "amodio.toggle-excluded-files",
         "DavidAnson.vscode-markdownlint",
@@ -124,6 +126,7 @@
         "ms-python.mypy-type-checker",
         "ms-python.pylint",
         "ms-python.python",
+        "ms-python.vscode-pylance",
         "ms-toolsai.jupyter",
         "ms-toolsai.jupyter-keymap",
         "ms-toolsai.jupyter-renderers",

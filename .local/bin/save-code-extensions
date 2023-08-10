@@ -15,11 +15,15 @@ settings_file = os.path.expandvars("$HOME/.config/Code/User/settings.json")
 if len(sys.argv) > 1:
     settings_file = sys.argv[1]
 
-extensions = (
-    subprocess.run(["code", "--list-extensions"], stdout=subprocess.PIPE, check=True)
+extensions = [
+    extension
+    for extension in subprocess.run(
+        ["code", "--list-extensions"], stdout=subprocess.PIPE, check=True
+    )
     .stdout.decode()
     .splitlines()
-)
+    if " " not in extension
+]
 
 with open(settings_file, encoding="utf-8") as f:
     settings = f.read()

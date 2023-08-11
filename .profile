@@ -17,6 +17,7 @@ PROFILE_LOADED=1
 
 export EDITOR=vim
 export VISUAL=vim
+export ALTERNATE_EDITOR=""
 export TERMINAL=kitty
 export QT_STYLE_OVERRIDE=adwaita-dark
 export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc

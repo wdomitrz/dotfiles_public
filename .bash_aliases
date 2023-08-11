@@ -38,7 +38,7 @@ alias pint='ping 8.8.8.8'
 
 alias today='date -I'
 
-alias emacs='emacsclient --create-frame --tty --alternate-editor=""'
+alias emacs='emacsclient --create-frame --tty'
 
 # Ignore errors
 function I() {
@@ -54,6 +54,7 @@ alias DT='DT '
 alias nt='DT $TERMINAL'
 alias nv='nt -e nvim'
 
+[ "$TERM" == "xterm-kitty" ] && alias clear='printf "'"\E[H\E[3J"'"'
 [ "$TERM" != "xterm-kitty" ] && alias tmux='TERM=screen-256color tmux'
 
 # Package manager aliases

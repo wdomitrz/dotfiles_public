@@ -1,94 +1,102 @@
 [
-    // Vim
     {
         "command": "extension.vim_escape",
+        "comment": "Vim",
         "key": "capslock",
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     {
         "command": "workbench.action.navigateBack",
+        "comment": "Vim",
         "key": "ctrl+o",
         "when": "canNavigateBack"
     },
-    // Interactive editor fixes; Overwrite "interactive.input.clear"
     {
         "command": "extension.vim_escape",
+        "comment": "Interactive editor fixes; Overwrite interactive.input.clear",
         "key": "escape",
         "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'"
     },
     {
         "command": "interactive.execute",
+        "comment": "Interactive editor fixes",
         "key": "shift+enter",
         "when": "activeEditor == 'workbench.editor.interactive'"
     },
-    // 2x space triggers menu
     {
         "command": "workbench.action.showCommands",
+        "comment": "2x space triggers menu",
         "key": "space space",
         "when": "activeEditorGroupEmpty && focusedView == '' && !whichkeyActive && !inputFocus"
     },
     {
         "command": "workbench.action.showCommands",
+        "comment": "2x space triggers menu",
         "key": "space space",
         "when": "sideBarFocus && !inputFocus && !whichkeyActive"
     },
-    // Multi cursors
     {
         "command": "removeSecondaryCursors",
+        "comment": "Multi cursors",
         "key": "shift+escape",
         "when": "editorHasMultipleSelections && textInputFocus"
     },
     {
         "command": "editor.action.insertCursorAbove",
+        "comment": "Multi cursors",
         "key": "ctrl+shift+k",
         "when": "editorTextFocus"
     },
     {
         "command": "editor.action.insertCursorBelow",
+        "comment": "Multi cursors",
         "key": "ctrl+shift+j",
         "when": "editorTextFocus"
     },
     {
         "command": "editor.action.addSelectionToNextFindMatch",
+        "comment": "Multi cursors",
         "key": "ctrl+k",
         "when": "editorFocus"
     },
-    // ctrl tab order
     {
         "command": "workbench.action.previousEditorInGroup",
+        "comment": "ctrl tab order",
         "key": "ctrl+shift+tab",
         "when": "!activeEditorGroupEmpty"
     },
     {
         "command": "workbench.action.nextEditorInGroup",
+        "comment": "ctrl tab order",
         "key": "ctrl+tab",
         "when": "!activeEditorGroupEmpty"
     },
-    // Scroll suggestions
     {
         "command": "selectPrevSuggestion",
+        "comment": "Scroll suggestions",
         "key": "shift+tab",
         "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
     {
         "command": "selectNextSuggestion",
+        "comment": "Scroll suggestions",
         "key": "tab",
         "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
-    // Trigger suggestions
     {
         "command": "editor.action.triggerSuggest",
+        "comment": "Trigger suggestions",
         "key": "alt+space",
         "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
     },
-    // Open drop-down terminal
     {
         "command": "workbench.action.togglePanel",
+        "comment": "Open drop-down terminal",
         "key": "ctrl+space"
     },
-    // Fix spelling
     {
         "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
+        "comment": "Fix spelling",
         "key": "ctrl+l"
     }
 ]

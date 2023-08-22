@@ -86,6 +86,7 @@ ibus
 intel-microcode
 iputils-ping
 ipython3
+jq
 kazam
 kitty
 libavcodec-extra

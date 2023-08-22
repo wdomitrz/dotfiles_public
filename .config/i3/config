@@ -138,7 +138,7 @@ mode "mouse" {
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status-wrapper
+    status_command i3status_wrapper
     position top
     modifier none
 }
@@ -158,15 +158,15 @@ bindsym $mod+b              bar mode toggle
 # kill focused window
 bindsym $mod+Shift+q        kill
 # Adjust display
-bindsym $mod+x              exec --no-startup-id    i3-xrl
+bindsym $mod+x              exec --no-startup-id    i3_xrl
 # Pogram launcher
-bindsym $mod+d              exec --no-startup-id    gtk-launch run-menu
+bindsym $mod+d              exec --no-startup-id    gtk-launch run_menu
 # Global search
-bindsym $mod+slash          exec --no-startup-id    gtk-launch search-menu
+bindsym $mod+slash          exec --no-startup-id    gtk-launch search_menu
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
 # Change background
-bindsym $mod+y              exec --no-startup-id    set-background
+bindsym $mod+y              exec --no-startup-id    set_background
 # Screenshot
 bindsym Print               exec --no-startup-id    flameshot gui
 bindsym $mod+p              exec --no-startup-id    flameshot gui
@@ -178,7 +178,7 @@ bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
 bindsym $mod+Shift+Return   exec --no-startup-id    i3-sensible-terminal
 
 # Apps
-bindsym XF86Display         exec --no-startup-id    i3-xrl
+bindsym XF86Display         exec --no-startup-id    i3_xrl
 bindsym XF86Explorer        exec --no-startup-id    xdg-open ~/
 bindsym $mod+e              exec --no-startup-id    xdg-open ~/
 bindsym XF86HomePage        exec --no-startup-id    xdg-open https://
@@ -186,7 +186,7 @@ bindsym $mod+w              exec --no-startup-id    xdg-open https://
 bindsym XF86Mail            exec --no-startup-id    xdg-open "https://gmail.com"
 bindsym XF86Calculator      exec --no-startup-id    gnome-calculator
 bindsym $mod+c              exec --no-startup-id    code
-bindsym $mod+Shift+c        exec --no-startup-id    connect-displays
+bindsym $mod+Shift+c        exec --no-startup-id    connect_displays
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume        exec --no-startup-id    pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -210,5 +210,5 @@ bindsym XF86AudioPrev       exec --no-startup-id    playerctl prev
 bindsym XF86AudioStop       exec --no-startup-id    playerctl stop
 
 # Autostart
-exec --no-startup-id            ~/.config/i3/my-auto-run.sh
+exec --no-startup-id            ~/.config/i3/my_auto_run.sh
 exec_always --no-startup-id     autotiling

@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
-(check-if-remote || dex --autostart --environment i3) &
+(check_if_remote || dex --autostart --environment i3) &
 compton --backend glx --paint-on-overlay --mark-ovredir-focused &
 fusuma &
 geoclue-2-agent &
-i3-screen-locker &
-set-keymap &
+i3_screen_locker &
+set_keymap &
 xfce4-power-manager &
-i3-xrl &&
+i3_xrl &&
     (
-        (check-if-remote || (
+        (check_if_remote || (
             blueman-applet &
             env LANGUAGE=pl_PL.utf-8 signal-desktop --use-tray-icon --start-in-tray &
             nm-applet &
@@ -23,5 +23,5 @@ i3-xrl &&
             /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
             /usr/lib64/xfce4/notifyd/xfce4-notifyd &
         ) &
-        watch --interval 60 set-background &
+        watch --interval 60 set_background &
     )

@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set_display
+connect_displays
+i3_res
+set_background

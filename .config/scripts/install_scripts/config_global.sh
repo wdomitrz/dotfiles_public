@@ -44,15 +44,15 @@ function configure_apt() {
 }
 
 function install_and_config_ssh_server() {
-    if [ -f "$HOME/.local/bin/.config-sshd" ]; then
+    if [ -f "$HOME/.local/bin/.config_sshd" ]; then
         sudo apt-get update --yes &&
             sudo apt-get install --yes openssh-server
-        "$HOME"/.local/bin/.config-sshd
+        "$HOME"/.local/bin/.config_sshd
     fi
 }
 
 function create_global_set_display_script() {
-    sudo cp ~/.local/bin/set-display /usr/bin/
+    sudo cp ~/.local/bin/set_display /usr/bin/
 }
 
 function fix_screen_tearing() {

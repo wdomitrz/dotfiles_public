@@ -4,5 +4,5 @@ Version=1.0
 Terminal=true
 Type=Application
 Name=i3 Blank Screen
-Exec=i3-blank-screen
+Exec=i3_blank_screen
 OnlyShowIn=i3

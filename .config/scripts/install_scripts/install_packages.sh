@@ -11,13 +11,13 @@ function install_packages() {
 }
 
 function install_with_recommended() {
-    packages_file="$HOME/.config/packages/with-recommends.txt"
+    packages_file="$HOME/.config/packages/with_recommends.txt"
     xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"$packages_file"
 }
 
 function main() {
     set -xue
-    source "$HOME"/.config/scripts/install-scripts/config-global.sh --source-only
+    source "$HOME"/.config/scripts/install_scripts/config_global.sh --source-only
 
     update_locales
     configure_debian_sources_list

@@ -67,7 +67,7 @@ function install_tailscale() {
 
 function main() {
     set -xue
-    source "$HOME"/.config/scripts/install-scripts/install-packages.sh --source-only
+    source "$HOME"/.config/scripts/install_scripts/install_packages.sh --source-only
 
     install_google_chrome
     install_nordvpn

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-"$HOME"/.local/bin/list-backgrounds |
+"$HOME"/.local/bin/list_backgrounds |
     awk '{print "\"" $0 "\""}' |
     xargs feh --no-fehbg --bg-fill --randomize ||
     xsetroot -solid "#000000"

@@ -8,7 +8,7 @@ export XSESSIONRC_LOADED=1
 [ -n "$DESKTOP_SESSION" ] && eval "$(gnome-keyring-daemon --start)" && export SSH_AUTH_SOCK
 
 # Set keymap
-[ -x "$HOME/.local/bin/set-keymap" ] && "$HOME/.local/bin/set-keymap"
+[ -x "$HOME/.local/bin/set_keymap" ] && "$HOME/.local/bin/set_keymap"
 
 # Set display
-[ -x "$HOME/.local/bin/set-display" ] && "$HOME/.local/bin/set-display"
+[ -x "$HOME/.local/bin/set_display" ] && "$HOME/.local/bin/set_display"

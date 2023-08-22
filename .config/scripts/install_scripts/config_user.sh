@@ -50,7 +50,7 @@ function set_dark_gtk4_theme() {
 }
 
 function install_code_extensions() {
-    "$HOME"/.local/bin/install-code-extensions
+    "$HOME"/.local/bin/install_code_extensions
 }
 
 function main() {

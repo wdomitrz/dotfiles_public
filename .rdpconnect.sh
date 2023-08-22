@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-set-keymap
+set_keymap

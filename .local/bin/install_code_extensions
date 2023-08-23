@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
 
 if [ $# -eq 0 ]; then
-    settings_file="$HOME/.config/Code/User/settings.json"
+    settings_file="${HOME}/.config/Code/User/settings.json"
 else
     settings_file="$1"
 fi
 
-sed -n '/"remote.SSH.defaultExtensions"/,${p;/]/q}' "$settings_file" |
+# shellcheck disable=SC2016
+sed -n '/"remote.SSH.defaultExtensions"/,${p;/]/q}' "${settings_file}" |
     sed '1d;$d' | sed "s/,//" |
     xargs --max-lines=1 code --force --install-extension

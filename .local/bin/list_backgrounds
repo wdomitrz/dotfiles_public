@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec find -L "$HOME/.config/backgrounds/" -type f -iname "*.png" -or -iname "*.jpg"
+exec find -L "${HOME}/.config/backgrounds/" -type f -iname "*.png" -or -iname "*.jpg"

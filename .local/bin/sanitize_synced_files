@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -ue
+
+git_root="$(git rev-parse --show-toplevel)"
+
+for json_file in "${git_root}"/.config/Code/User/*.json; do
+    sort_json "${json_file}"
+done
+echo "Sorted jsons"
+
+for file_to_sort in "${git_root}"/.config/packages/*.txt; do
+    sort --output "${file_to_sort}"{,}
+done
+echo "Sorter other files"
+
+all_shell_scripts="$(comm -12 <(
+    git ls-tree -r --full-tree --full-name --name-only HEAD |
+        sed "s|^|${git_root}/|" |
+        sort
+) <(
+    shfmt -f "${git_root}" |
+        sort
+))"
+echo "Got all shell scripts"
+
+echo "${all_shell_scripts}" |
+    xargs shfmt -i 4 -w
+echo "Formatted shell scripts"
+
+echo "${all_shell_scripts}" |
+    xargs shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
+    sed "s|--- ${git_root}|--- a|g" |
+    sed "s|+++ ${git_root}|+++ b|g" |
+    git apply --allow-empty
+echo "Applied suggestions to shell scripts"
+
+echo "${all_shell_scripts}" |
+    xargs shellcheck --exclude=SC1091,SC2312 --enable=all
+echo "Checked shell scripts"

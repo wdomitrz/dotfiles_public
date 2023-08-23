@@ -4,7 +4,7 @@
 # and stop if an error occurs
 set -xue
 
-cd "$HOME/.config/scripts/install_scripts"
+cd "${HOME}/.config/scripts/install_scripts"
 
 ./install_packages.sh
 ./clear_packages.sh

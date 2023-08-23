@@ -6,18 +6,18 @@ function update_and_upgrade() {
 }
 
 function install_packages() {
-    packages_file="$HOME/.config/packages/packages.txt"
-    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends <"$packages_file"
+    packages_file="${HOME}/.config/packages/packages.txt"
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends <"${packages_file}"
 }
 
 function install_with_recommended() {
-    packages_file="$HOME/.config/packages/with_recommends.txt"
-    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"$packages_file"
+    packages_file="${HOME}/.config/packages/with_recommends.txt"
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"${packages_file}"
 }
 
 function main() {
     set -xue
-    source "$HOME"/.config/scripts/install_scripts/config_global.sh --source-only
+    source "${HOME}"/.config/scripts/install_scripts/config_global.sh --source-only
 
     update_locales
     configure_debian_sources_list
@@ -28,6 +28,6 @@ function main() {
     install_with_recommended
 }
 
-if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then
+if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
     main "${@}"
 fi

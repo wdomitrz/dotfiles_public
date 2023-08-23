@@ -2,21 +2,21 @@
 
 function add_user_to_groups() {
     for group in docker input kvm lpadmin audio netdev video libvirt; do
-        getent group "$group" &&
-            sudo usermod -aG "$group" "$USER" ||
-            echo "Adding to $group failed"
+        getent group "${group}" &&
+            sudo usermod -aG "${group}" "${USER}" ||
+            echo "Adding to ${group} failed"
     done
 }
 
 function copy_configs_from_to() {
     source_dir="$1"
     target_dir="$2"
-    if [ ! -d "$source_dir" ]; then
-        echo "No directory $source_dir"
+    if [[ ! -d "${source_dir}" ]]; then
+        echo "No directory ${source_dir}"
         return 1
     fi
-    sudo mkdir -p "$target_dir"
-    sudo cp "$source_dir"/* "$target_dir"
+    sudo mkdir -p "${target_dir}"
+    sudo cp "${source_dir}"/* "${target_dir}"
 }
 
 function enable_32_bit_architecture() {
@@ -25,7 +25,7 @@ function enable_32_bit_architecture() {
 
 function configure_debian_sources_list() {
     grep --quiet "/deb.debian.org" /etc/apt/sources.list &&
-        sudo cp "$HOME"/.config/debian/sources.list /etc/apt/sources.list ||
+        sudo cp "${HOME}"/.config/debian/sources.list /etc/apt/sources.list ||
         echo "Not using debian"
 }
 
@@ -39,15 +39,15 @@ function update_locales() {
 }
 
 function configure_apt() {
-    copy_configs_from_to "$HOME"/.config/apt/apt.conf.d/ /etc/apt/apt.conf.d/
-    copy_configs_from_to "$HOME"/.config/apt/preferences.d/ /etc/apt/preferences.d/
+    copy_configs_from_to "${HOME}"/.config/apt/apt.conf.d/ /etc/apt/apt.conf.d/
+    copy_configs_from_to "${HOME}"/.config/apt/preferences.d/ /etc/apt/preferences.d/
 }
 
 function install_and_config_ssh_server() {
-    if [ -f "$HOME/.local/bin/.config_sshd" ]; then
+    if [[ -f "${HOME}/.local/bin/.config_sshd" ]]; then
         sudo apt-get update --yes &&
             sudo apt-get install --yes openssh-server
-        "$HOME"/.local/bin/.config_sshd
+        "${HOME}"/.local/bin/.config_sshd
     fi
 }
 
@@ -56,7 +56,7 @@ function create_global_set_display_script() {
 }
 
 function fix_screen_tearing() {
-    copy_configs_from_to "$HOME"/.config/xorg.conf.d/ /etc/X11/xorg.conf.d/
+    copy_configs_from_to "${HOME}"/.config/xorg.conf.d/ /etc/X11/xorg.conf.d/
 }
 
 function set_global_keymap() {
@@ -66,8 +66,8 @@ function set_global_keymap() {
 
 function configure_lightdm() {
     sudo sed -i -E "s/^(greeter-hide-users)\s*=\s*/#\1=/g" /usr/share/lightdm/*/*.conf
-    copy_configs_from_to "$HOME"/.config/lightdm-gtk-greeter.conf.d/ /etc/lightdm/lightdm-gtk-greeter.conf.d/
-    copy_configs_from_to "$HOME"/.config/lightdm.conf.d/ /etc/lightdm/lightdm.conf.d/
+    copy_configs_from_to "${HOME}"/.config/lightdm-gtk-greeter.conf.d/ /etc/lightdm/lightdm-gtk-greeter.conf.d/
+    copy_configs_from_to "${HOME}"/.config/lightdm.conf.d/ /etc/lightdm/lightdm.conf.d/
 }
 
 function fix_network_manager() {
@@ -75,7 +75,7 @@ function fix_network_manager() {
 }
 
 function get_certificates() {
-    copy_configs_from_to "$HOME"/.config/ca-certificates/ /usr/share/ca-certificates/
+    copy_configs_from_to "${HOME}"/.config/ca-certificates/ /usr/share/ca-certificates/
 }
 
 function fix_redshift() {
@@ -113,12 +113,13 @@ function configure_newt_palette() {
 
 function configure_grub() {
     # Custom colors
-    copy_configs_from_to "$HOME"/.config/grub/ /boot/grub/
+    copy_configs_from_to "${HOME}"/.config/grub/ /boot/grub/
     # Load saved option
     sudo sed -i -E "s/^(GRUB_DEFAULT)\s*=\s*[a-z0-9]+$/\1=saved/" /etc/default/grub
     # 1 second timeout
     sudo sed -i -E "s/^(GRUB_TIMEOUT)\s*=\s*[0-9]+$/\1=1/" /etc/default/grub
     # Enable OS prober
+    # shellcheck disable=SC2015
     grep --quiet "GRUB_DISABLE_OS_PROBER" /etc/default/grub &&
         sudo sed -i -E "s/^#?(GRUB_DISABLE_OS_PROBER)\s*=\s*[0-9a-z]+$/\1=false/" /etc/default/grub ||
         (echo -n "
@@ -135,14 +136,14 @@ function fix_iwlwifi() {
     # Fix iwlwifi iwl-debug-yoyo.bin error
     FIX="options iwlwifi enable_ini=N"
     CONF="/etc/modprobe.d/iwlwifi.conf"
-    if ! grep -s "$FIX" "$CONF" >/dev/null; then
-        echo "$FIX" | sudo tee -a "$CONF"
+    if ! grep -s "${FIX}" "${CONF}" >/dev/null; then
+        echo "${FIX}" | sudo tee -a "${CONF}"
     fi
 }
 
 function create_swap_file() {
     SWAPFILE_LOCATION="/home/swapfile"
-    if ! [ -f "${SWAPFILE_LOCATION}" ]; then
+    if ! [[ -f "${SWAPFILE_LOCATION}" ]]; then
         sudo fallocate -l 2G "${SWAPFILE_LOCATION}"
         sudo chmod 600 "${SWAPFILE_LOCATION}"
         sudo mkswap "${SWAPFILE_LOCATION}"
@@ -158,6 +159,7 @@ function configure_touchpad() {
         sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"
 
     # Fix touchpad after sleep
+    # shellcheck disable=SC2016
     echo '
 #!/bin/sh
 
@@ -176,7 +178,7 @@ function configure_tlp() {
 }
 
 function remove_snap_directories() {
-    sudo rm -rf /snap "$HOME"/snap
+    sudo rm -rf /snap "${HOME}"/snap
 }
 
 function main() {
@@ -203,6 +205,6 @@ function main() {
     update_locales
 }
 
-if [ "$#" -ne 1 ] || [ "${1}" != "--source-only" ]; then
+if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
     main "${@}"
 fi

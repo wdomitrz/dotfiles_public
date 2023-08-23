@@ -140,6 +140,7 @@ rofi
 rsync
 ruby
 shellcheck
+shfmt
 simple-scan
 software-properties-gtk
 speedtest-cli

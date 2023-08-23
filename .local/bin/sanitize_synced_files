@@ -11,7 +11,7 @@ echo "Sorted jsons"
 for file_to_sort in "${git_root}"/.config/packages/*.txt; do
     sort --output "${file_to_sort}"{,}
 done
-echo "Sorter other files"
+echo "Sorted other files"
 
 all_shell_scripts="$(comm -12 <(
     git ls-tree -r --full-tree --full-name --name-only HEAD |

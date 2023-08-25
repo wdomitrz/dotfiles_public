@@ -31,7 +31,7 @@ echo "${all_shell_scripts}" |
     xargs shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
     sed "s|--- ${git_root}|--- a|g" |
     sed "s|+++ ${git_root}|+++ b|g" |
-    git apply --allow-empty
+    patch --strip=1 --directory="${git_root}"
 echo "Applied suggestions to shell scripts"
 
 echo "${all_shell_scripts}" |

@@ -27,7 +27,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-ask-for-lazy-installation t
 
    ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
+   ;; Paths must have a trailing slash (i.e. "~/.mycontribs/")
    dotspacemacs-configuration-layer-path '()
 
    ;; List of configuration layers to load.
@@ -38,10 +38,6 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (xclipboard :variables
-                 xclipboard-enable-cliphist t)
-     (multiple-cursors :variables
-                       multiple-cursors-backend 'evil-mc)
      (auto-completion :variables
                       auto-completion-idle-delay 0)
      better-defaults
@@ -333,7 +329,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil, the paste transient-state is enabled. While enabled, after you
    ;; paste something, pressing `C-j' and `C-k' several times cycles through the
    ;; elements in the `kill-ring'. (default nil)
-   dotspacemacs-enable-paste-transient-state t
+   dotspacemacs-enable-paste-transient-state nil
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
@@ -368,7 +364,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default t) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
@@ -550,7 +546,7 @@ This function defines the environment variables for your Emacs session. By
 default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
-  ;; (spacemacs/load-spacemacs-env)
+  (spacemacs/load-spacemacs-env)
 )
 
 (defun dotspacemacs/user-init ()
@@ -580,9 +576,6 @@ before packages are loaded."
   (define-key evil-motion-state-map (kbd "C-z") 'suspend-frame)
   (define-key evil-emacs-state-map (kbd "C-z") 'suspend-frame)
   (define-key evil-motion-state-map (kbd "s") 'evil-avy-goto-word-0)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-mc-make-cursor-move-next-line)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-mc-make-cursor-move-prev-line)
-  (define-key evil-normal-state-map (kbd "SPC <escape>") 'evil-mc-undo-all-cursors)
 )
 
 

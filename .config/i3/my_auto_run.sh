@@ -10,7 +10,7 @@ i3_xrl &&
     (
         (check_if_remote || (
             blueman-applet &
-            # env LANGUAGE=pl_PL.utf-8 signal-desktop --use-tray-icon --start-in-tray &
+            env LANGUAGE=pl_PL.utf-8 signal-desktop --use-tray-icon --start-in-tray &
             nm-applet &
             redshift-gtk &
         )) &

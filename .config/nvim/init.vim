@@ -1,6 +1,4 @@
-" vim:foldmethod=marker
-
-" {{{ Vim options
+" Vim options
 " Automatically removing all trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
 " Disable spellcheck in terminal
@@ -22,7 +20,7 @@ set number
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024
 set shortmess=IAc
-set spelllang=en,pl
+set spell spelllang=en,pl
 set splitright splitbelow
 set tabstop=4 softtabstop=-1 shiftwidth=0 expandtab
 set termguicolors
@@ -32,9 +30,8 @@ set whichwrap+=<,>,h,l,[,]
 " Set nicer spelling highlighting
 highlight SpellCap guisp=yellow  gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
-" }}}
 
-" {{{ Keymap
+" Keymap
 " Use space as leader
 let mapleader=" "
 " Move line up/down when wrapped
@@ -67,9 +64,8 @@ endfunction
 
 inoremap <expr> <TAB>   TabComplete()
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" }}}
 
-" {{{ Enable plugins
+" Plugins
 if $VIM_DISABLE_PLUGINS != 1
 " Install vim-plug automatically
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -117,11 +113,3 @@ map <leader><leader>    :Commands<CR>
 map <leader>t           :TagbarToggle<CR>
 map s                   <Plug>(easymotion-jumptoanywhere)
 endif
-" }}}
-
-let $LOCAL_CONFIG = $HOME . "/.config/nvim/local.vim"
-if filereadable($LOCAL_CONFIG)
-    source $LOCAL_CONFIG
-endif
-
-set spell

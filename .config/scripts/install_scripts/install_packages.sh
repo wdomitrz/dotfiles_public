@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 function update_and_upgrade() {
     sudo apt-get update --yes &&
@@ -16,7 +17,7 @@ function install_with_recommended() {
 }
 
 function main() {
-    set -xue
+    set -x
     source "${HOME}"/.config/scripts/install_scripts/config_global.sh --source-only
 
     update_locales

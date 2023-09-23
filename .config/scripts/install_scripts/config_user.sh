@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 function set_shell() {
     shell="$1"
@@ -37,7 +38,7 @@ function add_bookmarks() {
 function configure_nautilus_open_terminal() {
     # Open kitty from nautilus
     glib-compile-schemas "${HOME}"/.local/share/glib-2.0/schemas/
-    # shellcheck disable=SC2154
+    [[ -z ${TERMINAL+variable_unset} ]] && echo "Variable TERMINAL is not set" && return 1
     DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "${TERMINAL}"
 }
 
@@ -55,7 +56,7 @@ function install_code_extensions() {
 }
 
 function main() {
-    set -xue
+    set -x
 
     set_shell_bash
     update_tldr

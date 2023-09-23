@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Make less more friendly for non-text input files (see lesspipe(1)).
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    (test -r "$HOME/.dircolors" && eval "$(dircolors -b "$HOME/.dircolors")") || eval "$(dircolors -b)"
+if [[ -x /usr/bin/dircolors ]]; then
+    (test -r "${HOME}/.dircolors" && eval "$(dircolors -b "${HOME}/.dircolors")") || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -51,11 +51,11 @@ function DT() {
     disown
 }
 alias DT='DT '
-alias nt='DT $TERMINAL'
+[[ -z ${TERMINAL+variable_unset} ]] || alias nt='DT "${TERMINAL}"'
 alias nv='nt -e nvim'
 
-[ "$TERM" == "xterm-kitty" ] && alias clear='printf "'"\E[H\E[3J"'"'
-[ "$TERM" != "xterm-kitty" ] && alias tmux='TERM=screen-256color tmux'
+[[ "${TERM}" == "xterm-kitty" ]] && alias clear='printf "'"\E[H\E[3J"'"'
+[[ "${TERM}" != "xterm-kitty" ]] && alias tmux='TERM=screen-256color tmux'
 
 # Package manager aliases
 alias pcin='sudo apt-get install'

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -euo pipefail
 
 git_root="$(git rev-parse --show-toplevel)"
 
@@ -18,8 +18,10 @@ all_shell_scripts="$(comm -12 <(
         sed "s|^|${git_root}/|" |
         sort
 ) <(
-    shfmt -f "${git_root}" |
-        sort
+    (
+        shfmt -f "${git_root}"
+        ls "${git_root}"/{.bashrc,.bash_aliases,.profile,.Xclients,.xsession,.xsessionrc,.local/bin/.config_sshd}
+    ) | sort
 ))"
 echo "Got all shell scripts"
 

@@ -1,14 +1,5 @@
 #!/usr/bin/env sh
 set -eu
 
-DEFAULT_OPTIONS_FILE="${HOME}"/.config/dpi/default_dpi_options.txt
-DPI="$(
-    (
-        set_display --show-dpi
-        [ -f "${DEFAULT_OPTIONS_FILE}" ] && cat "${DEFAULT_OPTIONS_FILE}"
-    ) |
-        awk '!x[$0]++' | # Deduplicate lines
-        rofi -dmenu -p dpi
-)"
-export DPI
-i3_xrl
+set_dpi
+i3_res

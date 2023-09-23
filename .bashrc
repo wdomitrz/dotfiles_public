@@ -2,11 +2,11 @@
 [ -z "${BASHRC_LOADED}" ] || return
 BASHRC_LOADED=1
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
 # Profile
 [ -f "$HOME/.profile" ] && source "$HOME/.profile"
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 [ -f "/etc/bashrc" ] && source /etc/bashrc
 

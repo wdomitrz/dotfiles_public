@@ -114,6 +114,8 @@ def handle_volume(button, **_):
         cmd = ["pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%"]
     elif button in [5, 6]:
         cmd = ["pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1%"]
+    else:
+        raise RuntimeError(f"Unknown button: {button}")
     run_command(cmd, block=True)
     run_command(REFRESH_STATUS_CMD)
 
@@ -146,6 +148,8 @@ HEADER = {"version": 1, "click_events": True}
 
 def show_status_text():
     with subprocess.Popen("i3status", stdout=subprocess.PIPE) as i3status:
+        if i3status.stdout is None:
+            raise RuntimeError(f"i3status command failed ({i3status})")
         print(json.dumps(HEADER, separators=(",", ":")), flush=True)
         print("[", flush=True)
 

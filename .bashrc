@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-[ -z "${BASHRC_LOADED}" ] || return
+[[ -z "${BASHRC_LOADED}" ]] || return
 BASHRC_LOADED=1
 
 # Profile
-[ -f "$HOME/.profile" ] && source "$HOME/.profile"
+[[ -f "${HOME}/.profile" ]] && source "${HOME}/.profile"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-[ -f "/etc/bashrc" ] && source /etc/bashrc
+[[ -f "/etc/bashrc" ]] && source /etc/bashrc
 
-[ -f "$HOME/.config/local/bashrc.sh" ] && source "$HOME/.config/local/bashrc.sh"
+[[ -f "${HOME}/.config/local/bashrc.sh" ]] && source "${HOME}/.config/local/bashrc.sh"
 
 # Options
 shopt -s autocd       # Automatically change directory
@@ -20,7 +20,7 @@ shopt -s globstar     # Enable **
 shopt -s histappend   # Append to the history file
 shopt -u failglob     # Unmatched patterns don't cause errors
 
-HISTFILE="$HOME/.cache/bash_history" # History file
+HISTFILE="${HOME}/.cache/bash_history" # History file
 
 HISTCONTROL=ignorespace # don't save lines with leading space
 HISTSIZE=               # unlimited bash history
@@ -49,20 +49,20 @@ bind -m vi-command -x '"dd": kill_line_to_clipboard'
 
 # enable programmable completion features
 if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
+    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
         source /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
+    elif [[ -f /etc/bash_completion ]]; then
         source /etc/bash_completion
     fi
 fi
 
 # Prompt
 ## Detect no color support
-([ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null) || NO_COLORS=1
+([[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null) || NO_COLORS=1
 
-if [ -z "${NO_COLORS}" ]; then
+if [[ -z "${NO_COLORS}" ]]; then
     # Trick to make colors work well in tmux and in other scenarios
-    [ "$TERM" != "xterm-kitty" ] && TERM=xterm-256color
+    [[ "${TERM}" != "xterm-kitty" ]] && TERM=xterm-256color
 
     # Colors
     USER_COLOR="\[$(tput setaf 10)\]"       # green
@@ -76,8 +76,8 @@ if [ -z "${NO_COLORS}" ]; then
     CLEAR="\[$(tput sgr0)\]"                # clear color
 fi
 
-[ -z "${PROMPT_FRONT_LOCAL}" ] && PROMPT_FRONT_LOCAL=""
-[ -z "${PROMPT_BACK_LOCAL}" ] && PROMPT_BACK_LOCAL=""
+[[ -z "${PROMPT_FRONT_LOCAL}" ]] && PROMPT_FRONT_LOCAL=""
+[[ -z "${PROMPT_BACK_LOCAL}" ]] && PROMPT_BACK_LOCAL=""
 PROMPT_FRONT="\
 ${USER_COLOR}\u${CLEAR}\
 ${AT_COLOR}@${CLEAR}\
@@ -92,7 +92,7 @@ ${PATH_COLOR}\w${CLEAR}\n\
 ${PROMPT_COLOR}\$${CLEAR} "
 
 ## Git
-if source "$HOME/.local/share/git-core/contrib/completion/git-prompt.sh" 2>/dev/null ||
+if source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2>/dev/null ||
     source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
     source /usr/share/git-core/contrib/completion/git-prompt.sh 2>/dev/null; then
 
@@ -109,14 +109,14 @@ fi
 PS1="${PROMPT_FRONT}${PROMPT_BACK}"
 
 # Improved search backwards
-[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source /usr/share/doc/fzf/examples/key-bindings.bash
-[ -f "/usr/share/fzf/key-bindings.bash" ] && source /usr/share/fzf/key-bindings.bash
+[[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ]] && source /usr/share/doc/fzf/examples/key-bindings.bash
+[[ -f "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
 # Searching files and other completions (for example with `cat **<Tab>`, and processes with `kill -9 <Tab>`)
-[ -f "/usr/share/bash-completion/completions/fzf" ] && source /usr/share/bash-completion/completions/fzf
-[ -f "/usr/share/fzf/completion.bash" ] && source /usr/share/fzf/completion.bash
+[[ -f "/usr/share/bash-completion/completions/fzf" ]] && source /usr/share/bash-completion/completions/fzf
+[[ -f "/usr/share/fzf/completion.bash" ]] && source /usr/share/fzf/completion.bash
 
 # Aliases
-[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+[[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
 
 # Loading completed successfully
 true

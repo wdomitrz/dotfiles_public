@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 function install_deb_from_url() {
     link="$1"
@@ -66,7 +67,7 @@ function install_tailscale() {
 }
 
 function main() {
-    set -xue
+    set -x
     source "${HOME}"/.config/scripts/install_scripts/install_packages.sh --source-only
 
     install_google_chrome

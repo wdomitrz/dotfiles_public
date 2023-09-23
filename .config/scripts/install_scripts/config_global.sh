@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 function add_user_to_groups() {
     for group in docker input kvm lpadmin audio netdev video libvirt; do
@@ -182,7 +183,7 @@ function remove_snap_directories() {
 }
 
 function main() {
-    set -xue
+    set -x
 
     add_user_to_groups
     configure_apt

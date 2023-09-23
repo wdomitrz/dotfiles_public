@@ -1,14 +1,16 @@
+#!/usr/bin/env sh
+
 [ -z "${XSESSIONRC_LOADED}" ] || return
 export XSESSIONRC_LOADED=1
 
 # Load profile
-[ -r "$HOME/.profile" ] && . "$HOME/.profile"
+[ -r "${HOME}/.profile" ] && . "${HOME}/.profile"
 
 # Unlock gnome-keyring
-[ -n "$DESKTOP_SESSION" ] && eval "$(gnome-keyring-daemon --start)" && export SSH_AUTH_SOCK
+[ -n "${DESKTOP_SESSION}" ] && eval "$(gnome-keyring-daemon --start)" && export SSH_AUTH_SOCK
 
 # Set keymap
-[ -x "$HOME/.local/bin/set_keymap" ] && "$HOME/.local/bin/set_keymap"
+[ -x "${HOME}/.local/bin/set_keymap" ] && "${HOME}/.local/bin/set_keymap"
 
 # Set display
-[ -x "$HOME/.local/bin/set_display" ] && "$HOME/.local/bin/set_display"
+[ -x "${HOME}/.local/bin/set_display" ] && "${HOME}/.local/bin/set_display"

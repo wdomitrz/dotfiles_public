@@ -47,7 +47,13 @@ function configure_transmission() {
         cp "${HOME}"/.config/transmission/settings.bck.json "${HOME}"/.config/transmission/settings.json
 }
 
+function set_light_gtk4_theme() {
+    gsettings set org.gnome.desktop.interface gtk-theme Adwaita
+    gsettings set org.gnome.desktop.interface color-scheme prefer-light
+}
+
 function set_dark_gtk4_theme() {
+    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 }
 

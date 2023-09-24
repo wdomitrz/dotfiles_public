@@ -146,7 +146,9 @@ BUTTONS = {
 
 # Execution
 HEADER = {"version": 1, "click_events": True}
-I3STATUS_COMMANDS = ("i3status",)
+I3STATUS_COMMANDS = [
+    "i3status",
+]
 
 
 def combine_read_sources(*read_sources):

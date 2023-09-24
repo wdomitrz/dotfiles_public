@@ -3,4 +3,3 @@ set -eu
 
 set_dpi
 i3_res
-set_background

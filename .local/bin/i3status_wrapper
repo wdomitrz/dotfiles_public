@@ -5,9 +5,11 @@
 ################################################################
 
 
+import contextlib
 import itertools
 import json
 import multiprocessing
+import select
 import subprocess
 import sys
 
@@ -69,7 +71,7 @@ def media_blocks():
 
 def add_no_internet_info(old_blocks):
     def is_internet_block(block):
-        return block["name"] in ["ipv6", "wireless", "ethernet"]
+        return "name" in block and block["name"] in ["ipv6", "wireless", "ethernet"]
 
     internet_blocks = list(filter(is_internet_block, old_blocks))
 
@@ -144,29 +146,70 @@ BUTTONS = {
 
 # Execution
 HEADER = {"version": 1, "click_events": True}
+I3STATUS_COMMANDS = ("i3status",)
+
+
+def combine_read_sources(*read_sources):
+    while True:
+        ready_reads, _, _ = select.select(read_sources, [], [])
+        for ready_read in ready_reads:
+            yield ready_read.fileno(), ready_read.readline()
+
+
+def process_i3status_output(i3status_output):
+    i3status_output_str = bytes.decode(i3status_output).strip().strip(",")
+
+    try:
+        result = json.loads(i3status_output_str)
+    except json.decoder.JSONDecodeError:
+        return None
+
+    if not isinstance(result, list):
+        return None
+    return result
+
+
+def combine_i3status_outputs(*i3status_outputs):
+    fileno_order = [output.fileno() for output in i3status_outputs]
+
+    last_remembered_lists = {fileno: [] for fileno in fileno_order}
+    for fileno, output in combine_read_sources(*i3status_outputs):
+        result = process_i3status_output(output)
+        if result is None:
+            continue
+        last_remembered_lists[fileno] = result
+
+        yield sum([last_remembered_lists[fileno] for fileno in fileno_order], [])
 
 
 def show_status_text():
-    with subprocess.Popen("i3status", stdout=subprocess.PIPE) as i3status:
-        if i3status.stdout is None:
-            raise RuntimeError(f"i3status command failed ({i3status})")
-        print(json.dumps(HEADER, separators=(",", ":")), flush=True)
-        print("[", flush=True)
+    print(json.dumps(HEADER, separators=(",", ":")), flush=True)
+    print("[", flush=True)
 
-        # Discard the first two lines
-        for line in map(bytes.decode, itertools.islice(i3status.stdout, 2, None)):
-            data = process_blocks(json.loads(line.strip(",")))
-            print(
-                ("," if line[0] == "," else "")
-                + json.dumps(data, separators=(",", ":")),
-                flush=True,
+    with contextlib.ExitStack() as stack:
+        i3status_processes = [
+            stack.enter_context(
+                subprocess.Popen(i3status_command, stdout=subprocess.PIPE)
             )
+            for i3status_command in I3STATUS_COMMANDS
+        ]
+
+        for unprocessed_data in combine_i3status_outputs(
+            *(i3status_process.stdout for i3status_process in i3status_processes)
+        ):
+            data = process_blocks(unprocessed_data)
+            print(json.dumps(data, separators=(",", ":")) + ",", flush=True)
+
     print("]", flush=True)
 
 
 def handle_click(line):
     data = json.loads(line.strip(","))
+
+    if "name" not in data:
+        return
     name = data["name"]
+
     if name in BUTTONS:
         BUTTONS[name](**data)
 

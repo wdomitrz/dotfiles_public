@@ -2,7 +2,7 @@
 
 ################################################################
 # Copyright (c) 2022 Witalis Domitrz <witekdomitrz@gmail.com>
-# MIT License
+# AGPL License
 ################################################################
 
 import argparse
@@ -13,7 +13,7 @@ import os
 import re
 import subprocess
 import tempfile
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 class LookingFor(enum.Enum):
@@ -348,32 +348,34 @@ def set_display():
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(
-        prog="ProgramName",
-        description="What the program does",
-        epilog="Text at the bottom of help",
+    parser = argparse.ArgumentParser()
+    parser.set_defaults(func=set_display)
+    subparsers = parser.add_subparsers(title="subcommands")
+
+    show_dpi_parser = subparsers.add_parser(
+        "show_dpi", description="Display inferred dpi."
     )
-    parser.add_argument(
-        "-d",
-        "--show-dpi",
-        action="store_true",
-        help="Show inferred dpi and exit",
+    show_dpi_parser.set_defaults(func=lambda **kwargs: print(get_default_dpi(**kwargs)))
+
+    set_dpi_parser = subparsers.add_parser("set_dpi")
+    set_dpi_parser.set_defaults(
+        func=lambda dpi, **kwargs: set_dpi_func(
+            dpi=get_default_dpi(**kwargs) if dpi is None else dpi
+        )
     )
-    parser.add_argument(
-        "--set-dpi", action="store_true", help="Set inferred or overwritten dpi"
+    set_dpi_parser.add_argument(
+        "--dpi",
+        type=int,
+        required=False,
+        help="Set dpi to use, if not set use the inferred dpi.",
     )
 
     args = parser.parse_args()
     return args
 
 
-def main(show_dpi: bool, set_dpi: bool, **kwargs):
-    if show_dpi:
-        print(get_default_dpi(**kwargs))
-    elif set_dpi:
-        set_dpi_func(dpi=get_default_dpi(**kwargs))
-    else:
-        set_display(**kwargs)
+def main(*, func, **kwargs):
+    func(**kwargs)
 
 
 if __name__ == "__main__":

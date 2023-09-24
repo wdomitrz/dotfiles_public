@@ -51,7 +51,6 @@ file-roller
 firmware-iwlwifi
 firmware-linux
 firmware-realtek
-fish
 flameshot
 fonts-arphic-ukai
 fonts-arphic-uming

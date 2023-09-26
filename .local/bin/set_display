@@ -12,7 +12,7 @@ import os
 import re
 import subprocess
 import tempfile
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 
 class LookingFor(enum.Enum):

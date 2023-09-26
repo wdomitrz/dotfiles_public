@@ -100,6 +100,7 @@ lightdm-gtk-greeter
 linux-headers-amd64
 mobile-broadband-provider-info
 modemmanager
+moreutils
 nautilus
 nautilus-admin
 nautilus-image-converter
@@ -114,6 +115,7 @@ openconnect
 openssh-client
 os-prober
 pandoc
+parallel
 pavucontrol
 pdftk
 pipewire

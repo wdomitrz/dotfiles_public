@@ -22,9 +22,9 @@ shopt -u failglob     # Unmatched patterns don't cause errors
 
 HISTFILE="${HOME}/.cache/bash_history" # History file
 
-HISTCONTROL=ignorespace # don't save lines with leading space
-HISTSIZE=               # unlimited bash history
-HISTFILESIZE=           # unlimited bash history
+HISTCONTROL=ignoredups # don't save lines with leading space
+HISTSIZE=              # unlimited bash history
+HISTFILESIZE=          # unlimited bash history
 
 # Key bindings
 ## vi keybindings

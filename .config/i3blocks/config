@@ -12,7 +12,7 @@ full_text=TODO
 interval=10
 
 [internet]
-command=hostname --app-ip-addresses | ifne echo "🌐"; ([ "${button}" == "1" ] && nm-connection-editor &) >/dev/null
+command=hostname --all-ip-addresses | ifne echo "🌐"; ([ "${button}" == "1" ] && nm-connection-editor &) >/dev/null
 interval=10
 
 [battery]

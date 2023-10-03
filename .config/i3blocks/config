@@ -3,6 +3,22 @@
 # AGPL License
 ################################################################
 
+[media_player]
+full_text=TODO
+interval=10
+
+[volume]
+full_text=TODO
+interval=10
+
+[internet]
+command=hostname --app-ip-addresses | ifne echo "🌐"; ([ "${button}" == "1" ] && nm-connection-editor &) >/dev/null
+interval=10
+
+[battery]
+command=command -v acpi >/dev/null && acpi || echo "No battery"; ([ "${button}" == "1" ] && xfce4-power-manager-settings &) >/dev/null
+interval=10
+
 [time]
 command=date '+📆 %F %A 🕗 %T'
 interval=1

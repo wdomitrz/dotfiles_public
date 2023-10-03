@@ -10,12 +10,15 @@ interval=1
 [editor]
 command=gtk-launch code >/dev/null
 full_text=✍️
+
 [terminal]
 command=i3-sensible-terminal >/dev/null
 full_text=📄
+
 [menu]
 command=gtk-launch run_menu >/dev/null
 full_text=🔍
+
 [close]
 command=i3-msg kill >/dev/null
 full_text=❌

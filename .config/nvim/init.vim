@@ -75,21 +75,21 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'tomasiser/vim-code-dark'
-Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-sleuth'
-Plug 'Yggdroot/indentLine'
+Plug 'justinmk/vim-sneak'
 Plug 'lambdalisue/suda.vim'
-Plug 'skywind3000/vim-terminal-help'
-Plug 'easymotion/vim-easymotion'
-Plug 'preservim/tagbar'
 Plug 'preservim/nerdtree'
+Plug 'preservim/tagbar'
+Plug 'skywind3000/vim-terminal-help'
+Plug 'tomasiser/vim-code-dark'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " Extensions configs
@@ -111,5 +111,4 @@ map <C-/>               :Commentary<CR>
 map <C-p>               :Files<CR>
 map <leader><leader>    :Commands<CR>
 map <leader>t           :TagbarToggle<CR>
-map s                   <Plug>(easymotion-jumptoanywhere)
 endif

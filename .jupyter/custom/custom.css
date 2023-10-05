@@ -49,11 +49,6 @@ body[data-notebook-path] {
     background-color: #222;
 }
 
-body[data-notebook-path] #header,
-.terminal-app #header {
-    display: none !important;
-}
-
 .tabbable {
     color: rgb(241, 239, 239);
 }
@@ -104,14 +99,6 @@ body[data-notebook-path] #header,
 
 .list_header {
     background-color: #444;
-}
-
-#notebook_list input[type="checkbox"] {
-    opacity: 0.3;
-}
-
-#notebook_list input[type="checkbox"]:checked {
-    opacity: 1;
 }
 
 .item_icon {
@@ -177,52 +164,18 @@ body[data-notebook-path] #header,
 }
 
 
-/* NOTEBOOK AND EDITOR INTERFACE */
-
-
-/* comment out the following line to unhide the toolbar */
-
-div#maintoolbar {
-    display: none !important;
-}
-
-
 /*
   Header UI styles
 */
-
-body.notebook_app>#header {
-    display: block !important;
-}
 
 .notebook_app>#header,
 .edit_app>#header {
     background-color: #333;
     color: #b7b7b7;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.edit_app #menubar .navbar {
-    margin-bottom: 0;
 }
 
 body>#header .header-bar {
     background: #444;
-}
-
-#header .navbar-brand {
-    display: none;
-}
-
-#header .filename {
-    margin-left: 0;
-    margin-right: 2em;
-}
-
-#header .current_kernel_logo {
-    width: 24px;
-    height: 24px;
 }
 
 span.save_widget span.filename:hover {
@@ -275,10 +228,6 @@ span.save_widget span.filename:hover {
     border-color: #444;
 }
 
-.celltoolbar select {
-    opacity: 0.5;
-}
-
 .modal-dialog .modal-content,
 .popover,
 .popover .popover-title {
@@ -309,16 +258,9 @@ span.save_widget span.filename:hover {
     border-bottom-color: #444;
 }
 
-.btn:focus,
-.btn:active:focus {
-    outline: 5px auto rgba(102, 175, 233, 0.3);
-    outline-offset: -1px;
-}
-
 .btn-default {
     background-color: #555;
     border-color: #222;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
     color: #d2d2d2;
 }
 
@@ -326,7 +268,6 @@ span.save_widget span.filename:hover {
 .btn-default:hover {
     background-color: #555;
     border-color: #222;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
     color: #bbb;
 }
 
@@ -335,7 +276,6 @@ span.save_widget span.filename:hover {
 .open>.dropdown-toggle.btn-default {
     background-color: #474747;
     color: #999;
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .btn-default.disabled:focus,
@@ -344,7 +284,6 @@ span.save_widget span.filename:hover {
 .btn-default[disabled]:hover {
     background-color: #555;
     border-color: #222;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
     color: #aaa;
 }
 
@@ -355,14 +294,12 @@ span.save_widget span.filename:hover {
     background-color: #474747;
     color: #999;
     border-color: #222;
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary {
     color: #eee;
     background-color: #4481b7;
     border-color: #222;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
 .btn-primary:focus,
@@ -390,7 +327,6 @@ span.save_widget span.filename:hover {
 
 .form-control:focus {
     border-color: #458ac1;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.3);
 }
 
 .form-control::selection {
@@ -401,8 +337,6 @@ span.save_widget span.filename:hover {
     border-color: #444;
     background: rgba(50, 50, 50, 0.95);
     color: #b7b7b7;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .completions select {
@@ -414,10 +348,6 @@ span.save_widget span.filename:hover {
 /*
   Styles for outputted content
 */
-
-.rendered_html li p {
-    margin-top: 1em;
-}
 
 .rendered_html h1 {
     color: #CF4A4C;
@@ -431,12 +361,6 @@ span.save_widget span.filename:hover {
 @media not print {
     .notebook_app div.cell.running .input .input_area {
         border-color: #eea236;
-        border-width: 4px;
-        -webkit-animation-name: pulseBorder;
-        -webkit-animation-duration: 1s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-direction: alternate;
-        -webkit-animation-timing-function: ease-in-out;
     }
 
     @-webkit-keyframes pulseBorder {
@@ -457,22 +381,11 @@ span.save_widget span.filename:hover {
         color: #c1acc3;
     }
 
-    .notebook_app div.input_area {
-        border-radius: 0px;
-        border: 1px solid #464b50;
-    }
-
-    .notebook_app div.output_subarea {
-        max-width: 100%;
-    }
-
     .notebook_app div.output_area pre {
-        font-weight: normal;
         color: #dedede;
     }
 
     .notebook_app div.output_subarea {
-        font-weight: normal;
         color: #979797;
     }
 
@@ -488,7 +401,6 @@ span.save_widget span.filename:hover {
     .notebook_app .rendered_html th,
     .notebook_app .rendered_html tr,
     .notebook_app .rendered_html td {
-        border: 1px #979797 solid;
         color: #d6d6d6;
     }
 
@@ -503,15 +415,13 @@ span.save_widget span.filename:hover {
     }
 
     .notebook_app table.dataframe tr {
-        border: 1px #979797;
+        border-color: #979797;
     }
 
     .notebook_app .rendered_html pre,
     .notebook_app .rendered_html code {
-        border: 0;
         background-color: #444;
         color: #f3f3f3;
-        padding: 0;
     }
 }
 
@@ -565,7 +475,6 @@ div.CodeMirror-selected {
 #texteditor-backdrop #texteditor-container .CodeMirror-gutter,
 .CodeMirror-gutters {
     background: #444;
-    border-right: 0px;
     color: #777;
 }
 
@@ -573,15 +482,8 @@ div.CodeMirror-selected {
     color: #b4b7b4;
 }
 
-.CodeMirror-cursor {
-    border-left: 1px solid #A7A7A7 !important;
-    margin-top: -2px;
-    min-height: 18px;
-}
-
 .CodeMirror span.cm-comment {
     color: #50a703;
-    font-style: italic;
 }
 
 .CodeMirror span.cm-atom {
@@ -602,7 +504,6 @@ div.CodeMirror-selected {
 
 .CodeMirror span.cm-keyword {
     color: #d288ff;
-    font-weight: normal;
 }
 
 .CodeMirror span.cm-string {

@@ -23,5 +23,5 @@ i3_xrl &&
             /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
             /usr/lib64/xfce4/notifyd/xfce4-notifyd &
         ) &
-        TERM=linux watch --interval 60 set_background &
+        TERM=linux watch --exec --errexit --interval 60 set_background &
     )

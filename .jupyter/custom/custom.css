@@ -482,6 +482,10 @@ div.CodeMirror-selected {
     color: #b4b7b4;
 }
 
+.CodeMirror-cursor {
+    border-color: #A7A7A7 !important;
+}
+
 .CodeMirror span.cm-comment {
     color: #50a703;
 }

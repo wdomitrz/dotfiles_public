@@ -8,7 +8,6 @@
     },
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
-    "clangd.checkUpdates": false,
     "diffEditor.codeLens": true,
     "editor.accessibilitySupport": "off",
     "editor.codeActionsOnSave": {
@@ -74,7 +73,7 @@
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "flake8.args": [
-        "--ignore=D1,E203,E501,W503"
+        "--extend-ignore=D1,E203,E501"
     ],
     "git.enabled": true,
     "git.mergeEditor": true,
@@ -83,22 +82,13 @@
         "black"
     ],
     "jupyter.askForKernelRestart": false,
-    "jupyter.interactiveWindow.textEditor.executeSelection": true,
     "keyboard.dispatch": "keyCode",
-    "markdownlint.config": {
-        "no-duplicate-header": false
-    },
-    "mypy-type-checker.args": [
-        "--follow-imports=skip",
-        "--ignore-missing-imports"
-    ],
     "notebook.formatOnSave.enabled": true,
     "notebook.lineNumbers": "on",
     "notebook.output.textLineLimit": 8192,
     "path-autocomplete.triggerOutsideStrings": true,
     "pylint.args": [
-        "--disable=missing-class-docstring,missing-function-docstring,line-too-long,redefined-outer-name,wrong-import-order,no-else-return",
-        "--generated-members=numpy.*,torch.*"
+        "--disable=missing-class-docstring,missing-function-docstring"
     ],
     "pylint.severity": {
         "convention": "Warning",

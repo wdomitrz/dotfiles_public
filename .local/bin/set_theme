@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+function help_and_exit() {
+    echo "usage:$0 [dark/light/reset]"
+    exit 1
+}
+
+function set_light_gtk4_theme() {
+    gsettings set org.gnome.desktop.interface gtk-theme Adwaita
+    gsettings set org.gnome.desktop.interface color-scheme prefer-light
+}
+
+function set_dark_gtk4_theme() {
+    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+}
+
+function reset_gtk4_theme() {
+    gsettings reset org.gnome.desktop.interface gtk-theme
+    gsettings reset org.gnome.desktop.interface color-scheme
+}
+
+function set_light_kitty_theme() {
+    kitty_config_dir="${HOME}"/.config/kitty
+    ln --symbolic --relative --force "${kitty_config_dir}"/theme_light.conf "${kitty_config_dir}"/theme.conf
+}
+
+function set_dark_kitty_theme() {
+    kitty_config_dir="${HOME}"/.config/kitty
+    ln --symbolic --relative --force "${kitty_config_dir}"/theme_dark.conf "${kitty_config_dir}"/theme.conf
+}
+
+function reset_kitty_theme() {
+    kitty_config_dir="${HOME}"/.config/kitty
+    rm --force "${kitty_config_dir}"/theme.conf
+}
+
+function init_gtk3_settings() {
+    gtk3_settings_dir="${HOME}"/.config/gtk-3.0
+    mkdir --parents "${gtk3_settings_dir}"
+    gtk3_settings_path="${gtk3_settings_dir}"/settings.ini
+    if [[ ! -f "${gtk3_settings_path}" ]]; then
+        echo "[Settings]" >"${gtk3_settings_path}"
+    fi
+    echo "${gtk3_settings_path}"
+}
+
+function reset_gtk3_theme() {
+    gtk3_settings_path="$(init_gtk3_settings)"
+    settings_key="gtk-application-prefer-dark-theme"
+    settings_pattern="^#?\s?(${settings_key}\s*=\s*[a-z]*)$"
+    sed --in-place --regexp-extended "s/${settings_pattern}/# \1/g" "${gtk3_settings_path}"
+}
+
+function set_gtk3_theme_to_dark_true_false() {
+    target_value="$1"
+    gtk3_settings_path="$(init_gtk3_settings)"
+
+    settings_key="gtk-application-prefer-dark-theme"
+    settings_pattern="^#?\s?(${settings_key})\s*=\s*[a-z]*$"
+    if grep --quiet --extended-regexp "${settings_pattern}" "${gtk3_settings_path}"; then
+        sed --in-place --regexp-extended "s/${settings_pattern}/\1 = ${target_value}/g" "${gtk3_settings_path}"
+    else
+        echo "gtk-application-prefer-dark-theme = ${target_value}" >>"${gtk3_settings_path}"
+    fi
+}
+
+function set_dark_gtk3_theme() {
+    set_gtk3_theme_to_dark_true_false "true"
+}
+
+function set_light_gtk3_theme() {
+    set_gtk3_theme_to_dark_true_false "false"
+
+}
+function set_dark_theme() {
+    set_dark_gtk4_theme
+    set_dark_gtk3_theme
+    set_dark_kitty_theme
+}
+
+function set_light_theme() {
+    set_light_gtk4_theme
+    set_light_gtk3_theme
+    set_light_kitty_theme
+}
+
+function reset_theme() {
+    reset_gtk4_theme
+    reset_gtk3_theme
+    reset_kitty_theme
+}
+
+function main() {
+    if [[ "$#" -ne 1 ]]; then
+        help_and_exit
+    fi
+    theme="$1"
+    case "${theme}" in
+    light)
+        set_light_theme
+        ;;
+    dark)
+        set_dark_theme
+        ;;
+    reset)
+        reset_theme
+        ;;
+    *)
+        help_and_exit
+        ;;
+    esac
+
+}
+
+if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+    main "${@}"
+fi

@@ -47,16 +47,6 @@ function configure_transmission() {
         cp "${HOME}"/.config/transmission/settings.bck.json "${HOME}"/.config/transmission/settings.json
 }
 
-function set_light_gtk4_theme() {
-    gsettings set org.gnome.desktop.interface gtk-theme Adwaita
-    gsettings set org.gnome.desktop.interface color-scheme prefer-light
-}
-
-function set_dark_gtk4_theme() {
-    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
-    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-}
-
 function install_code_extensions() {
     "${HOME}"/.local/bin/install_code_extensions
 }
@@ -68,8 +58,8 @@ function main() {
     update_tldr
     configure_nautilus_open_terminal
     configure_transmission
-    set_dark_gtk4_theme
     install_code_extensions
+    "${HOME}"/.local/bin/set_theme dark
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then

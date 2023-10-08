@@ -151,7 +151,8 @@
     "security.workspace.trust.startupPrompt": "always",
     "settingsSync.keybindingsPerPlatform": false,
     "shellcheck.customArgs": [
-        "--external-sources"
+        "--exclude=SC1091,SC2312",
+        "--enable=all"
     ],
     "shellcheck.disableVersionCheck": true,
     "telemetry.enableCrashReporter": false,

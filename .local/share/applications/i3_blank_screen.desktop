@@ -1,8 +1,7 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Version=1.0
+Exec=i3_blank_screen
+Name=i3 Blank Screen
+OnlyShowIn=i3
 Terminal=true
 Type=Application
-Name=i3 Blank Screen
-Exec=i3_blank_screen
-OnlyShowIn=i3

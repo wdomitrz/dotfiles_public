@@ -4,7 +4,5 @@ Comment=Global search
 Exec=rofi -combi-modi window,drun,ssh -show combi
 Icon=edit-find
 Name=Rofi search
-NoDisplay=false
-StartupNotify=false
 Terminal=false
 Type=Application

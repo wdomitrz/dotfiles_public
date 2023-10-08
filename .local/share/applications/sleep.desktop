@@ -4,7 +4,5 @@ Comment=To suspend the computer
 Exec=systemctl suspend
 Icon=system-suspend
 Name=Sleep
-NoDisplay=false
-StartupNotify=false
 Terminal=false
 Type=Application

@@ -75,21 +75,21 @@ function set_light_gtk3_theme() {
 
 }
 function set_dark_theme() {
-    set_dark_gtk4_theme
-    set_dark_gtk3_theme
     set_dark_kitty_theme
+    set_dark_gtk3_theme
+    set_dark_gtk4_theme
 }
 
 function set_light_theme() {
-    set_light_gtk4_theme
-    set_light_gtk3_theme
     set_light_kitty_theme
+    set_light_gtk3_theme
+    set_light_gtk4_theme
 }
 
 function reset_theme() {
-    reset_gtk4_theme
-    reset_gtk3_theme
     reset_kitty_theme
+    reset_gtk3_theme
+    reset_gtk4_theme
 }
 
 function main() {

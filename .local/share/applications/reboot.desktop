@@ -4,7 +4,5 @@ Comment=Reboot system
 Exec=systemctl reboot
 Icon=view-refresh
 Name=Reboot
-NoDisplay=false
-StartupNotify=false
 Terminal=false
 Type=Application

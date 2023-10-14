@@ -6,14 +6,15 @@ function help_and_exit() {
     exit 1
 }
 
-function set_light_gtk4_theme() {
-    gsettings set org.gnome.desktop.interface gtk-theme Adwaita
-    gsettings set org.gnome.desktop.interface color-scheme prefer-light
-}
-
-function set_dark_gtk4_theme() {
-    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
-    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+function set_gtk4_theme() {
+    dark_or_light="$1"
+    if [[ "${dark_or_light}" == "dark" ]]; then
+        theme_name="Adwaita-dark"
+    else
+        theme_name="Adwaita"
+    fi
+    gsettings set org.gnome.desktop.interface gtk-theme "${theme_name}"
+    gsettings set org.gnome.desktop.interface color-scheme prefer-"${dark_or_light}"
 }
 
 function reset_gtk4_theme() {
@@ -21,14 +22,10 @@ function reset_gtk4_theme() {
     gsettings reset org.gnome.desktop.interface color-scheme
 }
 
-function set_light_kitty_theme() {
+function set_kitty_theme() {
+    dark_or_light="$1"
     kitty_config_dir="${HOME}"/.config/kitty
-    ln --symbolic --relative --force "${kitty_config_dir}"/theme_light.conf "${kitty_config_dir}"/theme.conf
-}
-
-function set_dark_kitty_theme() {
-    kitty_config_dir="${HOME}"/.config/kitty
-    ln --symbolic --relative --force "${kitty_config_dir}"/theme_dark.conf "${kitty_config_dir}"/theme.conf
+    ln --symbolic --relative --force "${kitty_config_dir}"/theme_"${dark_or_light}".conf "${kitty_config_dir}"/theme.conf
 }
 
 function reset_kitty_theme() {
@@ -46,6 +43,24 @@ function init_gtk3_settings() {
     echo "${gtk3_settings_path}"
 }
 
+function set_gtk3_theme() {
+    dark_or_light="$1"
+    if [[ "${dark_or_light}" == "dark" ]]; then
+        is_dark="true"
+    else
+        is_dark="false"
+    fi
+    gtk3_settings_path="$(init_gtk3_settings)"
+
+    settings_key="gtk-application-prefer-dark-theme"
+    settings_pattern="^#?\s?(${settings_key})\s*=\s*[a-z]*$"
+    if grep --quiet --extended-regexp "${settings_pattern}" "${gtk3_settings_path}"; then
+        sed --in-place --regexp-extended "s/${settings_pattern}/\1 = ${is_dark}/g" "${gtk3_settings_path}"
+    else
+        echo "gtk-application-prefer-dark-theme = ${is_dark}" >>"${gtk3_settings_path}"
+    fi
+}
+
 function reset_gtk3_theme() {
     gtk3_settings_path="$(init_gtk3_settings)"
     settings_key="gtk-application-prefer-dark-theme"
@@ -53,41 +68,28 @@ function reset_gtk3_theme() {
     sed --in-place --regexp-extended "s/${settings_pattern}/# \1/g" "${gtk3_settings_path}"
 }
 
-function set_gtk3_theme_to_dark_true_false() {
-    target_value="$1"
-    gtk3_settings_path="$(init_gtk3_settings)"
-
-    settings_key="gtk-application-prefer-dark-theme"
-    settings_pattern="^#?\s?(${settings_key})\s*=\s*[a-z]*$"
-    if grep --quiet --extended-regexp "${settings_pattern}" "${gtk3_settings_path}"; then
-        sed --in-place --regexp-extended "s/${settings_pattern}/\1 = ${target_value}/g" "${gtk3_settings_path}"
-    else
-        echo "gtk-application-prefer-dark-theme = ${target_value}" >>"${gtk3_settings_path}"
-    fi
+function set_nvim_theme() {
+    dark_or_light="$1"
+    nvim_config_dir="${HOME}"/.config/nvim
+    mkdir --parents "${nvim_config_dir}"
+    echo "${dark_or_light}" >"${nvim_config_dir}"/theme.txt
 }
 
-function set_dark_gtk3_theme() {
-    set_gtk3_theme_to_dark_true_false "true"
+function reset_nvim_theme() {
+    rm --force "${HOME}"/.config/nvim/theme.txt
 }
 
-function set_light_gtk3_theme() {
-    set_gtk3_theme_to_dark_true_false "false"
-
-}
-function set_dark_theme() {
-    set_dark_kitty_theme
-    set_dark_gtk3_theme
-    set_dark_gtk4_theme
-}
-
-function set_light_theme() {
-    set_light_kitty_theme
-    set_light_gtk3_theme
-    set_light_gtk4_theme
+function set_theme() {
+    dark_or_light="$1"
+    set_kitty_theme "${dark_or_light}"
+    set_nvim_theme "${dark_or_light}"
+    set_gtk3_theme "${dark_or_light}"
+    set_gtk4_theme "${dark_or_light}"
 }
 
 function reset_theme() {
     reset_kitty_theme
+    reset_nvim_theme
     reset_gtk3_theme
     reset_gtk4_theme
 }
@@ -99,10 +101,10 @@ function main() {
     theme="$1"
     case "${theme}" in
     light)
-        set_light_theme
+        set_theme "light"
         ;;
     dark)
-        set_dark_theme
+        set_theme "dark"
         ;;
     reset)
         reset_theme

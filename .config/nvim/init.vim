@@ -47,7 +47,7 @@ vnoremap < <gv
 inoremap <C-l> <C-g>u<Esc>[s1z=`]a<c-g>u
 noremap <C-l> [s1z=
 " Tab completion
-function! TabComplete()
+function! Tab_complete()
     " Cycle through completions
     if pumvisible() | return "\<C-n>" | endif
 
@@ -61,12 +61,34 @@ function! TabComplete()
     " Default completion
     return "\<C-X>\<C-P>"
 endfunction
-
-inoremap <expr> <TAB>   TabComplete()
+inoremap <expr> <TAB>   Tab_complete()
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Terminal shortcut
+function! Terminal_toggle()
+    if exists("s:terminal_buffer") && nvim_buf_is_valid(s:terminal_buffer)
+        let l:windows_with_buffer = win_findbuf(s:terminal_buffer)
+        if empty(l:windows_with_buffer)
+            execute "sbuffer " . s:terminal_buffer
+            startinsert
+        else
+            for window_with_buffer in windows_with_buffer
+                call nvim_win_close(window_with_buffer, 0)
+            endfor
+        endif
+    else
+        new
+        let s:terminal_buffer = bufnr()
+        terminal
+        setlocal nobuflisted
+        startinsert
+    endif
+endfunction
+noremap  <C-space>  <Cmd>call Terminal_toggle()<CR>
+tnoremap <C-space>  <Cmd>call Terminal_toggle()<CR>
+
 
 " Plugins
-if $VIM_DISABLE_PLUGINS != 1
+if $VIM_DISABLE_PLUG != 1
 " Install vim-plug automatically
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -80,10 +102,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'lambdalisue/suda.vim'
+Plug 'Mofiqul/vscode.nvim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
-Plug 'skywind3000/vim-terminal-help'
-Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
@@ -91,19 +112,26 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'Yggdroot/indentLine'
 call plug#end()
+endif
 
-" Extensions configs
-colorscheme codedark
+
+" Plugin options
+" Theme
+try
+    let &background = readfile($HOME . "/.config/nvim/theme.txt")[0]
+catch
+    let &background = "dark"
+endtry
+colorscheme vscode
 " With nicer spelling underline
 highlight SpellCap guisp=yellow  gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 
 let g:airline#extensions#tabline#enabled = 1
 let g:EasyMotion_do_mapping = 0
-let g:markdown_syntax_conceal=0
+let g:markdown_syntax_conceal = 0
 let g:suda_smart_edit = 1
-let g:terminal_key = "<C-space>"
-let g:vim_json_conceal=0
+let g:vim_json_conceal = 0
 
 " Plugins key mappings
 map <C-b>               :NERDTreeToggle<CR>
@@ -111,4 +139,3 @@ map <C-/>               :Commentary<CR>
 map <C-p>               :Files<CR>
 map <leader><leader>    :Commands<CR>
 map <leader>t           :TagbarToggle<CR>
-endif

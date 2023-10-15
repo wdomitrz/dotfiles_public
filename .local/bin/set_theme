@@ -2,7 +2,7 @@
 set -euo pipefail
 
 function help_and_exit() {
-    echo "usage:$0 [dark/light/reset]"
+    echo "usage:$0 [dark/light/toggle]"
     exit 1
 }
 
@@ -13,85 +13,93 @@ function set_gtk4_theme() {
     else
         theme_name="Adwaita"
     fi
+
+    if ! command -v gsettings >/dev/null; then
+        return
+    fi
+
     gsettings set org.gnome.desktop.interface gtk-theme "${theme_name}"
     gsettings set org.gnome.desktop.interface color-scheme prefer-"${dark_or_light}"
 }
 
-function reset_gtk4_theme() {
-    gsettings reset org.gnome.desktop.interface gtk-theme
-    gsettings reset org.gnome.desktop.interface color-scheme
+function set_theme_though_links() {
+    local -r theme_path="$1"
+    local -r dark_or_light="$2"
+
+    local -r theme_dir="$(dirname "${theme_path}")"
+    local -r theme_filename="$(basename "${theme_path}")"
+    local -r extension="${theme_filename##*.}"
+    local -r base_filename="${theme_filename%.*}"
+
+    local -r styled_theme_path="${theme_dir}"/"${base_filename}"_"${dark_or_light}"."${extension}"
+
+    mkdir --parents "${theme_dir}"
+    ln --symbolic --relative --force "${styled_theme_path}" "${theme_path}"
 }
 
 function set_kitty_theme() {
-    dark_or_light="$1"
-    kitty_config_dir="${HOME}"/.config/kitty
-    ln --symbolic --relative --force "${kitty_config_dir}"/theme_"${dark_or_light}".conf "${kitty_config_dir}"/theme.conf
-}
-
-function reset_kitty_theme() {
-    kitty_config_dir="${HOME}"/.config/kitty
-    rm --force "${kitty_config_dir}"/theme.conf
-}
-
-function init_gtk3_settings() {
-    gtk3_settings_dir="${HOME}"/.config/gtk-3.0
-    mkdir --parents "${gtk3_settings_dir}"
-    gtk3_settings_path="${gtk3_settings_dir}"/settings.ini
-    if [[ ! -f "${gtk3_settings_path}" ]]; then
-        echo "[Settings]" >"${gtk3_settings_path}"
-    fi
-    echo "${gtk3_settings_path}"
-}
-
-function set_gtk3_theme() {
-    dark_or_light="$1"
-    if [[ "${dark_or_light}" == "dark" ]]; then
-        is_dark="true"
-    else
-        is_dark="false"
-    fi
-    gtk3_settings_path="$(init_gtk3_settings)"
-
-    settings_key="gtk-application-prefer-dark-theme"
-    settings_pattern="^#?\s?(${settings_key})\s*=\s*[a-z]*$"
-    if grep --quiet --extended-regexp "${settings_pattern}" "${gtk3_settings_path}"; then
-        sed --in-place --regexp-extended "s/${settings_pattern}/\1 = ${is_dark}/g" "${gtk3_settings_path}"
-    else
-        echo "gtk-application-prefer-dark-theme = ${is_dark}" >>"${gtk3_settings_path}"
-    fi
-}
-
-function reset_gtk3_theme() {
-    gtk3_settings_path="$(init_gtk3_settings)"
-    settings_key="gtk-application-prefer-dark-theme"
-    settings_pattern="^#?\s?(${settings_key}\s*=\s*[a-z]*)$"
-    sed --in-place --regexp-extended "s/${settings_pattern}/# \1/g" "${gtk3_settings_path}"
+    local -r theme_path="${HOME}"/.config/kitty/theme.conf
+    set_theme_though_links "${theme_path}" "$@"
 }
 
 function set_nvim_theme() {
-    dark_or_light="$1"
-    nvim_config_dir="${HOME}"/.config/nvim
-    mkdir --parents "${nvim_config_dir}"
-    echo "${dark_or_light}" >"${nvim_config_dir}"/theme.txt
+    local -r theme_path="${HOME}"/.config/nvim/theme.txt
+    set_theme_though_links "${theme_path}" "$@"
 }
 
-function reset_nvim_theme() {
-    rm --force "${HOME}"/.config/nvim/theme.txt
+function set_gtk3_theme() {
+    local -r theme_path="${HOME}"/.config/gtk-3.0/settings.ini
+    set_theme_though_links "${theme_path}" "$@"
+}
+
+function set_jupyter_theme() {
+    local -r theme_path="${HOME}"/.jupyter/custom/custom.css
+    set_theme_though_links "${theme_path}" "$@"
+}
+
+function set_local_theme() {
+    local -r theme_path="${HOME}"/.config/theme/theme.txt
+    set_theme_though_links "${theme_path}" "$@"
+}
+
+function set_spacemacs_theme() {
+    local -r theme_path="${HOME}"/.config/spacemacs/theme.el
+    set_theme_though_links "${theme_path}" "$@"
+
+    dark_or_light="$1"
+    if ! command -v emacsclient >/dev/null; then
+        return
+    fi
+
+    emacsclient --alternate-editor=true --eval \
+        "(load-theme 'spacemacs-${dark_or_light} t)" &>/dev/null
 }
 
 function set_theme() {
     dark_or_light="$1"
+
+    set_local_theme "${dark_or_light}"
     set_kitty_theme "${dark_or_light}"
-    set_nvim_theme "${dark_or_light}"
     set_gtk3_theme "${dark_or_light}"
     set_gtk4_theme "${dark_or_light}"
+
+    set_jupyter_theme "${dark_or_light}"
+    set_nvim_theme "${dark_or_light}"
+    set_spacemacs_theme "${dark_or_light}"
 }
 
-function reset_theme() {
-    reset_kitty_theme
-    reset_nvim_theme
-    reset_gtk3_theme
-    reset_gtk4_theme
+function get_theme() {
+    local -r theme_file="${HOME}"/.config/theme/theme.txt
+    [[ -f "${theme_file}" ]] && cat "${theme_file}"
+}
+
+function toggle_theme() {
+    theme="$(get_theme)"
+    if [[ "${theme}" == "dark" ]]; then
+        set_theme "light"
+    else
+        set_theme "dark"
+    fi
 }
 
 function main() {
@@ -106,8 +114,8 @@ function main() {
     dark)
         set_theme "dark"
         ;;
-    reset)
-        reset_theme
+    toggle)
+        toggle_theme
         ;;
     *)
         help_and_exit

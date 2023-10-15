@@ -36,7 +36,7 @@ class DefaultScreenLaptop:  # pylint: disable=too-few-public-methods
     DIAMETER_INCH = 14
     WIDTH_MM = 310
     RESOLUTION_X = 1920
-    DPI = 114
+    DPI = 108
 
 
 def get_displays_info():

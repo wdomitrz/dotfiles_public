@@ -32,6 +32,7 @@
     "editor.tabCompletion": "on",
     "editor.wordWrap": "on",
     "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
     "extensions.ignoreRecommendations": true,
     "files.associations": {
         "**/.ssh/config": "ssh_config",

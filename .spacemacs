@@ -572,6 +572,8 @@ before packages are loaded."
   (define-key evil-motion-state-map (kbd "C-z") 'suspend-frame)
   (define-key evil-emacs-state-map (kbd "C-z") 'suspend-frame)
   (define-key evil-motion-state-map (kbd "s") 'evil-avy-goto-word-0)
+
+  (load-file "~/.config/spacemacs/theme.el")
 )
 
 

@@ -2,7 +2,7 @@ These are my dotfiles.
 
 ### Compatibility
 
-They work with Debian 12. With a little bit of work (removing some packages from `~/.config/scripts/install_scripts/install_packages.sh`) they should also work under Ubuntu 22.04. Making them work under other distribution might require manual installation of packages (and if the system does not use `systemd`, then some more work).
+They work with Debian 12. With a little bit of work (removing some packages from `~/.local/bin/install_scripts/install_packages.sh`) they should also work under Ubuntu 22.04. Making them work under other distribution might require manual installation of packages (and if the system does not use `systemd`, then some more work).
 
 ### Cloning the repo
 
@@ -33,10 +33,10 @@ git checkout -- <path_to_the_first_file> <path_to_the_second_file>
 
 ### Installing
 
-The main installation is done using `~/.config/scripts/install.sh` script. Just run the script.
+The main installation is done using `~/.local/bin/install_scripts/main.sh` script. Just run the script.
 
-Before you do it note that it will also remove some packages in script `~/.config/scripts/install_scripts/clear_packages.sh`. To avoid it, you can overwrite this script `echo "" > ~/.config/scripts/install_scripts/clear_packages.sh`.
+Before you do it note that it will also remove some packages in script `~/.local/bin/install_scripts/clear_packages.sh`. To avoid it, you can overwrite this script `echo "" > ~/.local/bin/install_scripts/clear_packages.sh`.
 
 ```bash
-~/.config/scripts/install.sh
+~/.local/bin/install_scripts/main.sh
 ```

@@ -40,6 +40,8 @@ function set_theme_though_links() {
 function set_kitty_theme() {
     local -r theme_path="${HOME}"/.config/kitty/theme.conf
     set_theme_though_links "${theme_path}" "$@"
+
+    (pidof kitty || true) | xargs --no-run-if-empty kill -SIGUSR1
 }
 
 function set_nvim_theme() {

@@ -1,0 +1,6 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Exec=set_theme toggle
+Icon=night-light-symbolic
+Name=Toggle theme
+Type=Application

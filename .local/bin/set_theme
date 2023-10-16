@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set +e
+set -uo pipefail
 
 function help_and_exit() {
     echo "usage:$0 [dark/light/toggle]"
@@ -77,17 +78,21 @@ function set_spacemacs_theme() {
         "(load-theme 'spacemacs-${dark_or_light} t)" &>/dev/null
 }
 
-function set_theme() {
+function set_theme_local() {
     dark_or_light="$1"
 
-    set_local_theme "${dark_or_light}"
-    set_kitty_theme "${dark_or_light}"
     set_gtk3_theme "${dark_or_light}"
     set_gtk4_theme "${dark_or_light}"
-
     set_jupyter_theme "${dark_or_light}"
+    set_kitty_theme "${dark_or_light}"
+    set_local_theme "${dark_or_light}"
     set_nvim_theme "${dark_or_light}"
     set_spacemacs_theme "${dark_or_light}"
+}
+
+function set_theme() {
+    set_theme_local "$@"
+    # ssh -Y localhost -- "$(typeset -f); set_theme_local" "$@"
 }
 
 function get_theme() {

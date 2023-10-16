@@ -1,7 +1,9 @@
 # i3 config file (v4)
 # Author: Witalis Domitrz <witekdomitrz@gmail.com>
 
+# Win
 set $mod Mod4
+# Alt
 set $mod2 Mod1
 
 # Movement keys
@@ -135,14 +137,6 @@ mode "mouse" {
     bindsym Escape          mode "default"
 }
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    status_command i3status_wrapper
-    position top
-    modifier none
-}
-
 # Borders - no title bars
 default_border pixel
 default_floating_border none
@@ -212,3 +206,9 @@ bindsym XF86AudioStop       exec --no-startup-id    playerctl stop
 # Autostart
 exec --no-startup-id            ~/.config/i3/my_auto_run.sh
 exec_always --no-startup-id     autotiling
+
+bar {
+    status_command i3status_wrapper
+    position top
+    modifier none
+}

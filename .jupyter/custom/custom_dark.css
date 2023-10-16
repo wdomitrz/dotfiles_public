@@ -3,6 +3,10 @@ pre {
     font-family: "Fira Code" !important;
 }
 
+.container {
+    width: 100% !important;
+}
+
 /*
   Dark theme for Jupyter Notebook/iPython 5
   Author: Theodore Pak

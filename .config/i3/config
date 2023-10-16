@@ -1,9 +1,7 @@
 # i3 config file (v4)
 # Author: Witalis Domitrz <witekdomitrz@gmail.com>
 
-# Win
 set $mod Mod4
-# Alt
 set $mod2 Mod1
 
 # Movement keys

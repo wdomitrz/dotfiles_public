@@ -4,4 +4,4 @@ configuration {
     show-icons: true;
     font: "Fira Code 13";
 }
-@theme "royal_sky"
+@import "theme"

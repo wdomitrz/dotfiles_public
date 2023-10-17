@@ -50,6 +50,11 @@ function set_nvim_theme() {
     set_theme_though_links "${theme_path}" "$@"
 }
 
+function set_rofi_theme() {
+    local -r theme_path="${HOME}"/.config/rofi/theme.rasi
+    set_theme_though_links "${theme_path}" "$@"
+}
+
 function set_gtk3_theme() {
     local -r theme_path="${HOME}"/.config/gtk-3.0/settings.ini
     set_theme_though_links "${theme_path}" "$@"
@@ -87,6 +92,7 @@ function set_theme_local() {
     set_kitty_theme "${dark_or_light}"
     set_local_theme "${dark_or_light}"
     set_nvim_theme "${dark_or_light}"
+    set_rofi_theme "${dark_or_light}"
     set_spacemacs_theme "${dark_or_light}"
 }
 

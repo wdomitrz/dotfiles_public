@@ -10,14 +10,20 @@ function add_user_to_groups() {
 }
 
 function copy_configs_from_to() {
-    source_dir="$1"
-    target_dir="$2"
+    local -r source_dir="$1"
+    local -r target_dir="$2"
     if [[ ! -d "${source_dir}" ]]; then
         echo "No directory ${source_dir}"
         return 1
     fi
-    sudo mkdir -p "${target_dir}"
+    sudo mkdir --parents "${target_dir}"
     sudo cp "${source_dir}"/* "${target_dir}"
+}
+
+function get_global_config() {
+    local -r target_dir="$1"
+    local -r source_dir="${HOME}"/.config"${target_dir}"
+    copy_configs_from_to "${source_dir}" "${target_dir}"
 }
 
 function enable_32_bit_architecture() {
@@ -26,7 +32,7 @@ function enable_32_bit_architecture() {
 
 function configure_debian_sources_list() {
     grep --quiet "/deb.debian.org" /etc/apt/sources.list &&
-        sudo cp "${HOME}"/.config/debian/sources.list /etc/apt/sources.list ||
+        sudo cp "${HOME}"/.config/etc/apt/sources.list /etc/apt/sources.list ||
         echo "Not using debian"
 }
 
@@ -40,8 +46,8 @@ function update_locales() {
 }
 
 function configure_apt() {
-    copy_configs_from_to "${HOME}"/.config/apt/apt.conf.d/ /etc/apt/apt.conf.d/
-    copy_configs_from_to "${HOME}"/.config/apt/preferences.d/ /etc/apt/preferences.d/
+    get_global_config /etc/apt/apt.conf.d/
+    get_global_config /etc/apt/preferences.d/
 }
 
 function install_and_config_ssh_server() {
@@ -57,7 +63,7 @@ function create_global_set_display_script() {
 }
 
 function fix_screen_tearing() {
-    copy_configs_from_to "${HOME}"/.config/xorg.conf.d/ /etc/X11/xorg.conf.d/
+    get_global_config /etc/X11/xorg.conf.d/
 }
 
 function set_global_keymap() {
@@ -67,12 +73,13 @@ function set_global_keymap() {
 
 function configure_lightdm() {
     sudo sed -i -E "s/^(greeter-hide-users)\s*=\s*/#\1=/g" /usr/share/lightdm/*/*.conf
-    copy_configs_from_to "${HOME}"/.config/lightdm-gtk-greeter.conf.d/ /etc/lightdm/lightdm-gtk-greeter.conf.d/
-    copy_configs_from_to "${HOME}"/.config/lightdm.conf.d/ /etc/lightdm/lightdm.conf.d/
+    get_global_config /etc/lightdm/lightdm-gtk-greeter.conf.d/
+    get_global_config /etc/lightdm/lightdm.conf.d/
 }
 
 function fix_network_manager() {
     sudo touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
+    get_global_config /etc/network/
 }
 
 function get_certificates() {

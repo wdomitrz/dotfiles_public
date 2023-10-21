@@ -62,6 +62,12 @@ function install_nordvpn() {
     sudo apt-get install --yes nordvpn
 }
 
+function install_nvim_appimage_as_system_nvim() {
+    sudo rm /usr/bin/nvim
+    sudo wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O /usr/bin/nvim
+    sudo chmod +x /usr/bin/nvim
+}
+
 function install_tailscale() {
     curl -fsSL https://tailscale.com/install.sh | sh
 }
@@ -76,6 +82,7 @@ function main() {
     install_signal
     install_tailscale
     install_vscode
+    install_nvim_appimage_as_system_nvim
     update_and_upgrade
 }
 

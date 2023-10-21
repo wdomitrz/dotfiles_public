@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 function update_and_upgrade() {
     sudo apt-get update --yes &&
@@ -17,8 +17,9 @@ function install_with_recommended() {
 }
 
 function main() {
+    set -e
     set -x
-    source "${HOME}"/.config/scripts/install_scripts/config_global.sh --source-only
+    source "${HOME}"/.local/bin/install_scripts/config_global.sh --source-only
 
     update_locales
     configure_debian_sources_list

@@ -2,7 +2,7 @@
 set -euo pipefail
 set -x
 
-cd "${HOME}/.config/install_scripts"
+cd "${HOME}/.local/bin/install_scripts"
 
 ./install_packages.sh
 ./clear_packages.sh

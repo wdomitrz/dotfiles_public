@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 function set_shell() {
     shell="$1"
@@ -52,6 +52,7 @@ function install_code_extensions() {
 }
 
 function main() {
+    set -e
     set -x
 
     set_shell_bash

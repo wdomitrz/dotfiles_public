@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 function add_user_to_groups() {
     for group in docker input kvm lpadmin audio netdev video libvirt; do
@@ -183,6 +183,7 @@ function remove_snap_directories() {
 }
 
 function main() {
+    set -e
     set -x
 
     add_user_to_groups

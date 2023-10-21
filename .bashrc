@@ -96,11 +96,12 @@ if source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2>/de
     source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
     source /usr/share/git-core/contrib/completion/git-prompt.sh 2>/dev/null; then
 
-    GIT_PS1_SHOWDIRTYSTATE=true     # staged '+', unstaged '*'
-    GIT_PS1_SHOWSTASHSTATE=true     # '$' something is stashed
-    GIT_PS1_SHOWUNTRACKEDFILES=true # '%' untracked files
-    GIT_PS1_SHOWUPSTREAM="auto"     # '<' behind, '>' ahead, '<>' diverged, '=' no difference
-    GIT_PS1_SHOWCOLORHINTS=true     # Show colors
+    GIT_PS1_SHOWDIRTYSTATE=true
+    GIT_PS1_SHOWSTASHSTATE=true
+    GIT_PS1_SHOWUNTRACKEDFILES=true
+    GIT_PS1_SHOWUPSTREAM="auto"
+    GIT_PS1_SHOWCOLORHINTS=true
+    GIT_PS1_SHOWCONFLICTSTATE=no
 
     # shellcheck disable=SC2016
     PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'

@@ -116,6 +116,7 @@ openssh-client
 os-prober
 pandoc
 parallel
+patch
 pavucontrol
 pdftk
 pipewire

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 function install_deb_from_url() {
     link="$1"
@@ -67,8 +67,9 @@ function install_tailscale() {
 }
 
 function main() {
+    set -e
     set -x
-    source "${HOME}"/.config/scripts/install_scripts/install_packages.sh --source-only
+    source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
 
     install_google_chrome
     install_nordvpn

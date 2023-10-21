@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 function install_multi_touch_gestures_fusuma() {
     gem install --user-install fusuma
@@ -106,8 +106,10 @@ function download_ubuntu_wallpapers() {
 }
 
 function main() {
+    set -e
     set -x
 
+    install_nvim_appimage
     install_python_packages
     install_multi_touch_gestures_fusuma
     download_ubuntu_wallpapers

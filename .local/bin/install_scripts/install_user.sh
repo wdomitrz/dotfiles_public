@@ -86,7 +86,7 @@ function update_node_and_npm() {
 
 function download_ubuntu_wallpapers() {
     wallpapers_directory="${HOME}/.local/share/backgrounds/ubuntu"
-    wallpapers_url="http://archive.ubuntu.com/ubuntu/pool/main/u/ubuntu-wallpapers/ubuntu-wallpapers_22.04.4.orig.tar.gz"
+    wallpapers_url="http://archive.ubuntu.com/ubuntu/pool/main/u/ubuntu-wallpapers/ubuntu-wallpapers_23.10.4.orig.tar.gz"
     mkdir -p "${wallpapers_directory}"
     wget -O- "${wallpapers_url}" |
         tar xz --directory="${wallpapers_directory}"
@@ -109,7 +109,6 @@ function main() {
     set -e
     set -x
 
-    install_nvim_appimage
     install_python_packages
     install_multi_touch_gestures_fusuma
     download_ubuntu_wallpapers

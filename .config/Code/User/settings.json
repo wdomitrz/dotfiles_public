@@ -6,6 +6,9 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
+    "black-formatter.args": [
+        "--skip-magic-trailing-comma"
+    ],
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
@@ -85,6 +88,9 @@
     ],
     "jupyter.askForKernelRestart": false,
     "keyboard.dispatch": "keyCode",
+    "mypy-type-checker.args": [
+        "--ignore-missing-imports"
+    ],
     "notebook.formatOnSave.enabled": true,
     "notebook.lineNumbers": "on",
     "notebook.output.textLineLimit": 8192,

@@ -184,6 +184,7 @@ wpasupplicant
 x11-xkb-utils
 xcape
 xclip
+xdg-desktop-portal-gtk
 xdotool
 xfce4-notifyd
 xfce4-power-manager

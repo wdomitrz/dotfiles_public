@@ -4,6 +4,7 @@ compton --backend glx --paint-on-overlay --mark-ovredir-focused &
 fusuma &
 geoclue-2-agent &
 i3_screen_locker &
+i3_theme_detection &
 set_keymap &
 xfce4-power-manager &
 i3_xrl &&

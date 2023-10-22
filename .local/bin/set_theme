@@ -42,7 +42,10 @@ function set_kitty_theme() {
     local -r theme_path="${HOME}"/.config/kitty/theme.conf
     set_theme_though_links "${theme_path}" "$@"
 
-    (pidof kitty || true) | xargs --no-run-if-empty kill -SIGUSR1
+    (pidof kitty || true) |
+        xargs ps --format pid:1,tty:1 --no-headers --pid |
+        grep "?" | cut --fields=1 --delimiter=" " |
+        xargs --no-run-if-empty kill -SIGUSR1
 }
 
 function set_nvim_theme() {

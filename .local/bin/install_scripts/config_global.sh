@@ -125,7 +125,8 @@ function configure_grub() {
     # Load saved option
     sudo sed -i -E "s/^(GRUB_DEFAULT)\s*=\s*[a-z0-9]+$/\1=saved/" /etc/default/grub
     # 1 second timeout
-    sudo sed -i -E "s/^(GRUB_TIMEOUT)\s*=\s*[0-9]+$/\1=1/" /etc/default/grub
+    grub_timeout_in_seconds=0
+    sudo sed -i -E "s/^(GRUB_TIMEOUT)\s*=\s*[0-9]+$/\1=${grub_timeout_in_seconds}/" /etc/default/grub
     # Enable OS prober
     # shellcheck disable=SC2015
     grep --quiet "GRUB_DISABLE_OS_PROBER" /etc/default/grub &&

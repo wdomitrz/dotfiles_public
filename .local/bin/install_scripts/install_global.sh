@@ -34,8 +34,9 @@ function install_signal() {
 }
 
 function add_google_public_key() {
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub |
         sudo apt-key add -
+
 }
 
 function install_google_chrome() {

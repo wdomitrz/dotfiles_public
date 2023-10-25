@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
+function check_files() {
+    diff <(
+        find "${HOME}"/.config/{boot,etc,lib} -type f |
+            sed -E "s|^${HOME}/||" | sort
+    ) <(
+        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/{boot,etc,lib} |
+            sort
+    ) || (
+        echo "Untracked configs"
+        exit 1
+    )
+}
+
 function add_user_to_groups() {
     for group in docker input kvm lpadmin audio netdev video libvirt; do
         getent group "${group}" &&
@@ -22,7 +35,7 @@ function copy_configs_from_to() {
 
 function get_global_config() {
     local -r target_dir="$1"
-    local -r source_dir="${HOME}"/.config"${target_dir}"
+    local -r source_dir="${HOME}"/.config/"${target_dir}"
     copy_configs_from_to "${source_dir}" "${target_dir}"
 }
 
@@ -67,23 +80,17 @@ function fix_screen_tearing() {
 }
 
 function set_global_keymap() {
-    # keybord options - map caps lock to ctrl
-    sudo sed -i -E "s/^(XKBOPTIONS)\s*=\s*\"\"/\1=\"ctrl:nocaps\"/g" /etc/default/keyboard
+    get_global_config /etc/default/
 }
 
 function configure_lightdm() {
-    sudo sed -i -E "s/^(greeter-hide-users)\s*=\s*/#\1=/g" /usr/share/lightdm/*/*.conf
-    get_global_config /etc/lightdm/lightdm-gtk-greeter.conf.d/
     get_global_config /etc/lightdm/lightdm.conf.d/
+    get_global_config /etc/lightdm/lightdm-gtk-greeter.conf.d/
 }
 
 function fix_network_manager() {
-    sudo touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
     get_global_config /etc/network/
-}
-
-function get_certificates() {
-    copy_configs_from_to "${HOME}"/.config/ca-certificates/ /usr/share/ca-certificates/
+    get_global_config /etc/NetworkManager/conf.d/
 }
 
 function fix_redshift() {
@@ -107,8 +114,7 @@ function configure_bluetooth() {
 
 function fix_keychron() {
     # Keychron make Fn+f-keys work
-    echo "options hid_apple fnmode=2" |
-        sudo tee /etc/modprobe.d/hid_apple.conf
+    get_global_config /etc/modprobe.d/
     sudo update-initramfs -u
 }
 
@@ -120,34 +126,14 @@ function configure_newt_palette() {
 }
 
 function configure_grub() {
-    # Custom colors
-    copy_configs_from_to "${HOME}"/.config/grub/ /boot/grub/
-    # Load saved option
-    sudo sed -i -E "s/^(GRUB_DEFAULT)\s*=\s*[a-z0-9]+$/\1=saved/" /etc/default/grub
-    # 1 second timeout
-    grub_timeout_in_seconds=0
-    sudo sed -i -E "s/^(GRUB_TIMEOUT)\s*=\s*[0-9]+$/\1=${grub_timeout_in_seconds}/" /etc/default/grub
-    # Enable OS prober
-    # shellcheck disable=SC2015
-    grep --quiet "GRUB_DISABLE_OS_PROBER" /etc/default/grub &&
-        sudo sed -i -E "s/^#?(GRUB_DISABLE_OS_PROBER)\s*=\s*[0-9a-z]+$/\1=false/" /etc/default/grub ||
-        (echo -n "
-# Enable OS prober
-GRUB_DISABLE_OS_PROBER=false
-" | sudo tee -a /etc/default/grub)
-    # No splash screen
-    sudo sed -i -E "s/ *splash//" /etc/default/grub
+    get_global_config /boot/grub/
+    get_global_config /etc/default/
     # Regenerate config
     sudo update-grub
 }
 
 function fix_iwlwifi() {
-    # Fix iwlwifi iwl-debug-yoyo.bin error
-    FIX="options iwlwifi enable_ini=N"
-    CONF="/etc/modprobe.d/iwlwifi.conf"
-    if ! grep -s "${FIX}" "${CONF}" >/dev/null; then
-        echo "${FIX}" | sudo tee -a "${CONF}"
-    fi
+    get_global_config /etc/modprobe.d/iwlwifi.conf
 }
 
 function create_swap_file() {
@@ -168,16 +154,7 @@ function configure_touchpad() {
         sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"
 
     # Fix touchpad after sleep
-    # shellcheck disable=SC2016
-    echo '
-#!/bin/sh
-
-case $1 in
-  post)
-    /sbin/modprobe -r psmouse && /sbin/modprobe psmouse
-  ;;
-esac
-' | sudo tee /lib/systemd/system-sleep/touchpad
+    get_global_config /lib/systemd/system-sleep/
 }
 
 function configure_tlp() {
@@ -186,12 +163,9 @@ function configure_tlp() {
     sudo systemctl restart tlp
 }
 
-function remove_snap_directories() {
-    sudo rm -rf /snap "${HOME}"/snap
-}
-
 function main() {
     set -e
+    check_files
     set -x
 
     add_user_to_groups
@@ -210,7 +184,6 @@ function main() {
     fix_redshift
     fix_screen_tearing
     install_and_config_ssh_server
-    remove_snap_directories
     set_global_keymap
     update_locales
 }

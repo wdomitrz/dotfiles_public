@@ -80,20 +80,6 @@ function fix_redshift() {
     sudo rm -f /etc/systemd/user/default.target.wants/redshift*.service
 }
 
-function configure_bluetooth() {
-    ## Enable user space HID
-    sudo sed -i -E "s/^#?\s?(UserspaceHID)\s*=\s*[a-z]*$/\1=true/g" /etc/bluetooth/input.conf
-    ## Set idle timeout
-    sudo sed -i -E "s/^#?\s?(IdleTimeout\s*=\s*[0-9]*)$/\1/g" /etc/bluetooth/input.conf
-    # fast bluetooth config
-    ## Enable FastConnect
-    sudo sed -i -E "s/^#?(FastConnectable)\s*=\s*[a-z]*/\1=true/g" /etc/bluetooth/main.conf
-    ## Set number of reconnect attempts
-    sudo sed -i -E "s/^#?(ReconnectAttempts\s*=\s*[0-9]*)$/\1/g" /etc/bluetooth/main.conf
-    ## Set reconnect intervals
-    sudo sed -i -E "s/^#?(ReconnectIntervals\s*=\s*[0-9, ]*)$/\1/g" /etc/bluetooth/main.conf
-}
-
 function configure_newt_palette() {
     # Set the original palette as a default option
     update-alternatives --query newt-palette &&
@@ -127,7 +113,6 @@ function main() {
     todo_post_global_configs_copy
 
     add_user_to_groups
-    configure_bluetooth
     configure_newt_palette
     configure_touchpad
     create_global_set_display_script

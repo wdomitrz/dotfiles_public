@@ -3,12 +3,12 @@ set -uo pipefail
 
 function check_files() {
     set -euo pipefail
-    where="$1"
+    local -r directory="$1"
     diff <(
-        find "${HOME}"/.config/"${where}" -type f |
+        find "${HOME}"/.config/"${directory}" -type f |
             sed -E "s|^${HOME}/||" | sort
     ) <(
-        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/"${where}" |
+        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/"${directory}" |
             sort
     ) || (
         echo "Untracked configs in ~/.config/${directory}" &&
@@ -18,6 +18,7 @@ function check_files() {
 
 function copy_global_configs() {
     set -euo pipefail
+    local directory
     for directory in boot etc lib; do
         check_files "${directory}"
         sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/"${directory}"/* /"${directory}"/
@@ -88,18 +89,18 @@ function configure_newt_palette() {
 }
 
 function create_swap_file() {
-    SWAPFILE_LOCATION="/home/swapfile"
-    if ! [[ -f "${SWAPFILE_LOCATION}" ]]; then
-        sudo fallocate -l 2G "${SWAPFILE_LOCATION}"
-        sudo chmod 600 "${SWAPFILE_LOCATION}"
-        sudo mkswap "${SWAPFILE_LOCATION}"
-        sudo swapon "${SWAPFILE_LOCATION}"
-        echo "${SWAPFILE_LOCATION} none    swap    sw    0   0" |
+    local -r swapfile_location="/home/swapfile"
+    if ! [[ -f "${swapfile_location}" ]]; then
+        sudo fallocate -l 2G "${swapfile_location}"
+        sudo chmod 600 "${swapfile_location}"
+        sudo mkswap "${swapfile_location}"
+        sudo swapon "${swapfile_location}"
+        echo "${swapfile_location} none    swap    sw    0   0" |
             sudo tee -a /etc/fstab
     fi
 }
 function configure_touchpad() {
-    config_file="/usr/share/X11/xorg.conf.d/40-libinput.conf"
+    local -r config_file="/usr/share/X11/xorg.conf.d/40-libinput.conf"
     # Tap to click
     grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
         sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"

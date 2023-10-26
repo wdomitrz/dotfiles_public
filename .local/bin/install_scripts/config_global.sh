@@ -1,28 +1,24 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-function check_files() {
+function check_global_configs_files() {
     set -euo pipefail
-    local -r directory="$1"
     diff <(
-        find "${HOME}"/.config/"${directory}" -type f |
+        find "${HOME}"/.config/global_configs -type f |
             sed -E "s|^${HOME}/||" | sort
     ) <(
-        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/"${directory}" |
+        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/global_configs |
             sort
     ) || (
-        echo "Untracked configs in ~/.config/${directory}" &&
+        echo "Untracked configs in ~/.config/global_configs" &&
             exit 1
     )
 }
 
 function copy_global_configs() {
     set -euo pipefail
-    local directory
-    for directory in boot etc lib; do
-        check_files "${directory}"
-        sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/"${directory}"/* /"${directory}"/
-    done
+    check_global_configs_files
+    sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/global_configs/* /
 }
 
 function reconfigure_tlp_post_config_copy() {

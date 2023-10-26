@@ -2,16 +2,44 @@
 set -uo pipefail
 
 function check_files() {
+    set -euo pipefail
+    where="$1"
     diff <(
-        find "${HOME}"/.config/{boot,etc,lib} -type f |
+        find "${HOME}"/.config/"${where}" -type f |
             sed -E "s|^${HOME}/||" | sort
     ) <(
-        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/{boot,etc,lib} |
+        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/"${where}" |
             sort
     ) || (
-        echo "Untracked configs"
-        exit 1
+        echo "Untracked configs in ~/.config/${directory}" &&
+            exit 1
     )
+}
+
+function copy_global_configs() {
+    set -euo pipefail
+    for directory in boot etc lib; do
+        check_files "${directory}"
+        sudo cp --verbose --recursive "${HOME}"/.config/"${directory}"/* /"${directory}"/
+    done
+}
+
+function reconfigure_tlp_post_config_copy() {
+    sudo systemctl restart tlp
+}
+
+function fix_keychron_post_config_copy() {
+    sudo update-initramfs -u
+}
+
+function regenerate_grub_post_config_copy() {
+    sudo update-grub
+}
+
+function todo_post_global_configs_copy() {
+    fix_keychron_post_config_copy
+    regenerate_grub_post_config_copy
+    reconfigure_tlp_post_config_copy
 }
 
 function add_user_to_groups() {
@@ -22,31 +50,8 @@ function add_user_to_groups() {
     done
 }
 
-function copy_configs_from_to() {
-    local -r source_dir="$1"
-    local -r target_dir="$2"
-    if [[ ! -d "${source_dir}" ]]; then
-        echo "No directory ${source_dir}"
-        return 1
-    fi
-    sudo mkdir --parents "${target_dir}"
-    sudo cp "${source_dir}"/* "${target_dir}"
-}
-
-function get_global_config() {
-    local -r target_dir="$1"
-    local -r source_dir="${HOME}"/.config/"${target_dir}"
-    copy_configs_from_to "${source_dir}" "${target_dir}"
-}
-
 function enable_32_bit_architecture() {
     sudo dpkg --add-architecture i386
-}
-
-function configure_debian_sources_list() {
-    grep --quiet "/deb.debian.org" /etc/apt/sources.list &&
-        sudo cp "${HOME}"/.config/etc/apt/sources.list /etc/apt/sources.list ||
-        echo "Not using debian"
 }
 
 function update_locales() {
@@ -56,11 +61,6 @@ function update_locales() {
         sudo debconf-set-selections
     sudo rm "/etc/locale.gen"
     sudo dpkg-reconfigure --frontend noninteractive locales
-}
-
-function configure_apt() {
-    get_global_config /etc/apt/apt.conf.d/
-    get_global_config /etc/apt/preferences.d/
 }
 
 function install_and_config_ssh_server() {
@@ -73,24 +73,6 @@ function install_and_config_ssh_server() {
 
 function create_global_set_display_script() {
     sudo cp ~/.local/bin/set_display /usr/bin/
-}
-
-function fix_screen_tearing() {
-    get_global_config /etc/X11/xorg.conf.d/
-}
-
-function set_global_keymap() {
-    get_global_config /etc/default/
-}
-
-function configure_lightdm() {
-    get_global_config /etc/lightdm/lightdm.conf.d/
-    get_global_config /etc/lightdm/lightdm-gtk-greeter.conf.d/
-}
-
-function fix_network_manager() {
-    get_global_config /etc/network/
-    get_global_config /etc/NetworkManager/conf.d/
 }
 
 function fix_redshift() {
@@ -112,28 +94,11 @@ function configure_bluetooth() {
     sudo sed -i -E "s/^#?(ReconnectIntervals\s*=\s*[0-9, ]*)$/\1/g" /etc/bluetooth/main.conf
 }
 
-function fix_keychron() {
-    # Keychron make Fn+f-keys work
-    get_global_config /etc/modprobe.d/
-    sudo update-initramfs -u
-}
-
 function configure_newt_palette() {
     # Set the original palette as a default option
     update-alternatives --query newt-palette &&
         sudo update-alternatives --set newt-palette /etc/newt/palette.original ||
         echo "no newt-palette"
-}
-
-function configure_grub() {
-    get_global_config /boot/grub/
-    get_global_config /etc/default/
-    # Regenerate config
-    sudo update-grub
-}
-
-function fix_iwlwifi() {
-    get_global_config /etc/modprobe.d/iwlwifi.conf
 }
 
 function create_swap_file() {
@@ -152,39 +117,23 @@ function configure_touchpad() {
     # Tap to click
     grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
         sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"
-
-    # Fix touchpad after sleep
-    get_global_config /lib/systemd/system-sleep/
-}
-
-function configure_tlp() {
-    # Enable charge threshold for tlp
-    sudo sed -i 's/#\([A-Z]*_CHARGE_THRESH_BAT0=[0-9]*\)$/\1/' /etc/tlp.conf
-    sudo systemctl restart tlp
 }
 
 function main() {
     set -e
-    check_files
     set -x
 
+    copy_global_configs
+    todo_post_global_configs_copy
+
     add_user_to_groups
-    configure_apt
     configure_bluetooth
-    configure_grub
-    configure_lightdm
     configure_newt_palette
-    configure_tlp
     configure_touchpad
     create_global_set_display_script
     create_swap_file
-    fix_iwlwifi
-    fix_keychron
-    fix_network_manager
     fix_redshift
-    fix_screen_tearing
     install_and_config_ssh_server
-    set_global_keymap
     update_locales
 }
 

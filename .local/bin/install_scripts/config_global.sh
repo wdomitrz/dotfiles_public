@@ -20,7 +20,7 @@ function copy_global_configs() {
     set -euo pipefail
     for directory in boot etc lib; do
         check_files "${directory}"
-        sudo cp --verbose --recursive "${HOME}"/.config/"${directory}"/* /"${directory}"/
+        sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/"${directory}"/* /"${directory}"/
     done
 }
 

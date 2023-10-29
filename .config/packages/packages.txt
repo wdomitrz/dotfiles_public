@@ -152,7 +152,6 @@ sudo
 syslinux
 system-config-printer
 tar
-telegram-desktop
 tesseract-ocr
 tesseract-ocr-chi-sim
 thinkfan

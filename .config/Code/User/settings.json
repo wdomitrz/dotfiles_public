@@ -24,6 +24,7 @@
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
+    "editor.multiDocumentOccurrencesHighlight": true,
     "editor.rulers": [
         80,
         90,
@@ -427,7 +428,7 @@
     "window.commandCenter": false,
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.location": "hidden",
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.editor.tabSizing": "fixed",
     "workbench.enableExperiments": false,

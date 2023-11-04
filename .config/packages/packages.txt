@@ -155,7 +155,6 @@ tar
 tesseract-ocr
 tesseract-ocr-chi-sim
 thinkfan
-thunar
 tldr
 tlp
 tmux

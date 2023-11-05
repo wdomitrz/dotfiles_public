@@ -1,6 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Exec=set_theme dark
-Icon=weather-clear-night-symbolic
-Name=Set dark theme
-Type=Application

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -uo pipefail
 
 function update_and_upgrade() {
     sudo apt-get update --yes &&
@@ -17,7 +16,7 @@ function install_with_recommended() {
 }
 
 function main() {
-    set -e
+    set -euo pipefail
     set -x
     source "${HOME}"/.local/bin/install_scripts/config_global.sh --source-only
 

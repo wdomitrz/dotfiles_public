@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -uo pipefail
 
 function set_shell() {
     shell="$1"
@@ -26,7 +25,7 @@ function update_tldr() {
 
 function add_bookmarks() {
     [[ -f "${HOME}/.config/gtk-3.0/bookmarks" ]] ||
-        (mkdir -p "${HOME}"/.config/gtk-3.0 &&
+        (mkdir --parents "${HOME}"/.config/gtk-3.0 &&
             touch "${HOME}"/.config/gtk-3.0/bookmarks)
 
     for d in Documents Downloads Music Pictures Videos; do
@@ -52,7 +51,7 @@ function install_code_extensions() {
 }
 
 function main() {
-    set -e
+    set -euo pipefail
     set -x
 
     set_shell_bash

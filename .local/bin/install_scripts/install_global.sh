@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -uo pipefail
 
 function install_deb_from_url() {
     link="$1"
@@ -74,7 +73,7 @@ function install_tailscale() {
 }
 
 function main() {
-    set -e
+    set -euo pipefail
     set -x
     source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
 

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -uo pipefail
 
 function uninstall_packages_and_cleanup() {
     xargs sudo apt-get autoremove --purge --yes <"${HOME}/.config/packages/to_remove.txt" ||
@@ -7,7 +6,7 @@ function uninstall_packages_and_cleanup() {
 }
 
 function main() {
-    set -e
+    set -euo pipefail
     set -x
 
     uninstall_packages_and_cleanup

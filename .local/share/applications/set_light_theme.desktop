@@ -1,6 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Exec=set_theme light
-Icon=weather-clear-symbolic
-Name=Set light theme
-Type=Application

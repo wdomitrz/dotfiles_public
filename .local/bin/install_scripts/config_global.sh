@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-set -uo pipefail
 
 function check_global_configs_files() {
     set -euo pipefail
     diff <(
         find "${HOME}"/.config/global_configs -type f |
-            sed -E "s|^${HOME}/||" | sort
+            sed --regexp-extended "s|^${HOME}/||" | sort
     ) <(
         git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/global_configs |
             sort
@@ -74,7 +73,7 @@ function create_global_set_display_script() {
 
 function fix_redshift() {
     # Disable problematic redshift autostart
-    sudo rm -f /etc/systemd/user/default.target.wants/redshift*.service
+    sudo rm --force /etc/systemd/user/default.target.wants/redshift*.service
 }
 
 function configure_newt_palette() {
@@ -103,7 +102,7 @@ function configure_touchpad() {
 }
 
 function main() {
-    set -e
+    set -euo pipefail
     set -x
 
     copy_global_configs

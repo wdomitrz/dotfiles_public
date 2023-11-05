@@ -7,6 +7,6 @@ else
 fi
 
 # shellcheck disable=SC2016
-sed -n '/"remote.SSH.defaultExtensions"/,${p;/]/q}' "${settings_file}" |
+sed --quiet '/"remote.SSH.defaultExtensions"/,${p;/]/q}' "${settings_file}" |
     sed '1d;$d' | sed "s/,//" |
     xargs --max-lines=1 code --force --install-extension

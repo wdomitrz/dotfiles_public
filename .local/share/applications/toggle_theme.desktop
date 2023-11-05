@@ -2,5 +2,5 @@
 [Desktop Entry]
 Exec=set_theme toggle
 Icon=night-light-symbolic
-Name=Toggle theme
+Name=Toggle dark/light theme
 Type=Application

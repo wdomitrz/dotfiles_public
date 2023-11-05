@@ -4,7 +4,7 @@
 
 # enable color support of ls and also add handy aliases
 if [[ -x /usr/bin/dircolors ]]; then
-    (test -r "${HOME}/.dircolors" && eval "$(dircolors -b "${HOME}/.dircolors")") || eval "$(dircolors -b)"
+    (test -r "${HOME}/.dircolors" && eval "$(dircolors --bourne-shell "${HOME}/.dircolors")") || eval "$(dircolors --bourne-shell)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -21,22 +21,20 @@ alias sudo='sudo '
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" ; paplay /usr/share/sounds/freedesktop/stereo/message-new-instant.oga'
-
-alias ix='curl -F '"'"'f:1=<-'"'"' ix.io'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed --expression='\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" ; paplay /usr/share/sounds/freedesktop/stereo/message-new-instant.oga'
 
 alias copy='xclip -selection clipboard'
 
-alias fzfcommandsearch="compgen -c | sort -u | fzf --preview 'shopt -s expand_aliases; source ~/.bashrc; type {}'"
+alias fzfcommandsearch="compgen -c | sort --unique | fzf --preview 'shopt -s expand_aliases; source ~/.bashrc; type {}'"
 
 # some more ls aliases
-alias ll='ls -Al'
-alias la='ls -A'
+alias ll='ls --almost-all -l'
+alias la='ls --almost-all'
 alias l='ls -C'
 
 alias pint='ping 8.8.8.8'
 
-alias today='date -I'
+alias today='date --iso-8601'
 
 alias emacs='emacsclient --create-frame --tty'
 

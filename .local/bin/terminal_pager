@@ -16,4 +16,4 @@ nvim \
     -c "silent terminal cat '${scrollback_buffer_file}' -" \
     "+${cursor_position}"
 
-rm -f "${scrollback_buffer_file}"
+rm --force "${scrollback_buffer_file}"

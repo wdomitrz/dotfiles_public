@@ -80,12 +80,7 @@ function install_python_packages() {
     ## pip modules
     pip3 install --user --upgrade \
         autotiling \
-        ipython \
-        matplotlib \
-        nautilus-open-any-terminal \
-        numpy \
-        pandas \
-        Pillow
+        nautilus-open-any-terminal
 
 }
 

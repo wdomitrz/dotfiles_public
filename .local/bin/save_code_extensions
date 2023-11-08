@@ -1,46 +1,12 @@
-#!/usr/bin/env python3
-import os
-import subprocess
-import sys
+#!/usr/bin/env sh
 
-extensions_field_bg = '''\
-    "remote.SSH.defaultExtensions": [
-        "'''
-extensions_field_ed = """"
-    ],"""
-extensions_separator = '''",
-        "'''
+settings_file="${HOME}/.config/Code/User/settings.json"
+if [ $# -ge 1 ]; then
+    settings_file="$1"
+fi
 
-settings_file = os.path.expandvars("$HOME/.config/Code/User/settings.json")
-if len(sys.argv) > 1:
-    settings_file = sys.argv[1]
-
-extensions = [
-    extension
-    for extension in subprocess.run(
-        ["code", "--list-extensions"], stdout=subprocess.PIPE, check=True
-    )
-    .stdout.decode()
-    .splitlines()
-    if " " not in extension
-]
-
-with open(settings_file, encoding="utf-8") as f:
-    settings = f.read()
-assert extensions_field_bg in settings and extensions_field_ed in settings
-
-settings_bg, settings_ed = settings.split(extensions_field_bg, maxsplit=1)
-settings_ed = settings_ed.split(extensions_field_ed, maxsplit=1)[1]
-
-settings = "".join(
-    [
-        settings_bg,
-        extensions_field_bg,
-        extensions_separator.join(extensions),
-        extensions_field_ed,
-        settings_ed,
-    ]
-)
-
-with open(settings_file, "w+", encoding="utf-8") as f:
-    f.write(settings)
+code --list-extensions |
+    jq --null-input --raw-input '{"remote.SSH.defaultExtensions": [inputs]}' |
+    jq 'add' --slurp "${settings_file}" - |
+    jq --sort-keys --indent 4 |
+    sponge "${settings_file}"

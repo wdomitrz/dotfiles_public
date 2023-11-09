@@ -20,16 +20,16 @@ function copy_global_configs() {
     sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/global_configs/* /
 }
 
-function reconfigure_tlp_post_config_copy() {
-    sudo systemctl restart tlp
-}
-
 function fix_keychron_post_config_copy() {
     sudo update-initramfs -u
 }
 
 function regenerate_grub_post_config_copy() {
     sudo update-grub
+}
+
+function reconfigure_tlp_post_config_copy() {
+    sudo systemctl restart tlp
 }
 
 function todo_post_global_configs_copy() {
@@ -53,7 +53,7 @@ function enable_32_bit_architecture() {
 function update_locales() {
     echo "locales locales/default_environment_locale select en_US.UTF-8" |
         sudo debconf-set-selections
-    echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, en_GB.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" |
+    echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" |
         sudo debconf-set-selections
     sudo rm "/etc/locale.gen"
     sudo dpkg-reconfigure --frontend noninteractive locales
@@ -100,14 +100,14 @@ function configure_touchpad() {
     grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
         sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"
 }
-
-function main() {
-    set -euo pipefail
-    set -x
-
+function config_global_start() {
     copy_global_configs
-    todo_post_global_configs_copy
+    update_locales
+    enable_32_bit_architecture
+}
 
+function config_global_rest() {
+    todo_post_global_configs_copy
     add_user_to_groups
     configure_newt_palette
     configure_touchpad
@@ -115,9 +115,16 @@ function main() {
     create_swap_file
     fix_redshift
     install_and_config_ssh_server
-    update_locales
+}
+
+function config_global_main() {
+    set -euo pipefail
+    set -x
+
+    config_global_start
+    config_global_rest
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
-    main "${@}"
+    config_global_main "${@}"
 fi

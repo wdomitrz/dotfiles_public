@@ -50,7 +50,7 @@ function install_code_extensions() {
     "${HOME}"/.local/bin/install_code_extensions
 }
 
-function main() {
+function config_user_main() {
     set -euo pipefail
     set -x
 
@@ -63,5 +63,5 @@ function main() {
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
-    main "${@}"
+    config_user_main "${@}"
 fi

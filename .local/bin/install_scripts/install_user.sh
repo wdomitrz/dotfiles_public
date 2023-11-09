@@ -109,7 +109,7 @@ function download_ubuntu_wallpapers() {
         xargs --null rmdir
 }
 
-function main() {
+function install_user_main() {
     set -euo pipefail
     set -x
 
@@ -119,5 +119,5 @@ function main() {
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
-    main "${@}"
+    install_user_main "${@}"
 fi

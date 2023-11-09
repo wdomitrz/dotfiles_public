@@ -15,20 +15,17 @@ function install_with_recommended() {
     xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"${packages_file}"
 }
 
-function main() {
+function install_packages_main() {
     set -euo pipefail
     set -x
     source "${HOME}"/.local/bin/install_scripts/config_global.sh --source-only
 
-    update_locales
-    configure_debian_sources_list
-    configure_apt
-    enable_32_bit_architecture
+    config_global_start
     update_and_upgrade
     install_packages
     install_with_recommended
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
-    main "${@}"
+    install_packages_main "${@}"
 fi

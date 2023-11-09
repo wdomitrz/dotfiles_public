@@ -72,7 +72,7 @@ function install_tailscale() {
     curl -fsSL https://tailscale.com/install.sh | sh
 }
 
-function main() {
+function install_global_main() {
     set -euo pipefail
     set -x
     source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
@@ -87,5 +87,5 @@ function main() {
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
-    main "${@}"
+    install_global_main "${@}"
 fi

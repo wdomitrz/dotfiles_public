@@ -5,7 +5,7 @@ function uninstall_packages_and_cleanup() {
         true
 }
 
-function main() {
+function clear_packages_main() {
     set -euo pipefail
     set -x
 
@@ -13,5 +13,5 @@ function main() {
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
-    main "${@}"
+    clear_packages_main "${@}"
 fi

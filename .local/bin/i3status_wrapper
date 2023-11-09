@@ -163,35 +163,30 @@ ALL_BLOCKS = {
 
 
 # Custom block groups
-def media_blocks():
+def media_block():
     try:
         playerctl_title_process = run_command_blocking(
             "playerctl metadata title".split()
         )
         playerctl_status_process = run_command_blocking("playerctl status".split())
     except FileNotFoundError:
-        return []
+        return Block(**ALL_BLOCKS["media_info"], full_text="")
 
     if (
         playerctl_title_process.returncode != 0
         or playerctl_status_process.returncode != 0
     ):
-        return []
+        return Block(**ALL_BLOCKS["media_info"], full_text="")
 
     title = playerctl_title_process.stdout.decode().strip()
     status = playerctl_status_process.stdout.decode().strip()
     control_icon = "⏸️" if status == "Playing" else "▶️"
 
-    return [
-        ALL_BLOCKS["previous_track"],
-        Block(
-            **ALL_BLOCKS["media_info"],
-            full_text=f"{title} {control_icon}",
-            color="#BBFFBB" if status == "Playing" else "#BBBBFF",
-        ),
-        ALL_BLOCKS["next_track"],
-        ALL_BLOCKS["stop"],
-    ]
+    return Block(
+        **ALL_BLOCKS["media_info"],
+        full_text=f"{title} {control_icon}",
+        color="#BBFFBB" if status == "Playing" else "#BBBBFF",
+    )
 
 
 def add_no_internet_info(old_blocks):
@@ -215,17 +210,12 @@ def add_no_internet_info(old_blocks):
 
 
 # Config
-BLOCKS_TO_ADD = [
-    "editor",
-    "terminal",
-    "menu",
-    "close",
-]
+BLOCKS_TO_ADD = ["editor", "terminal", "menu", "close"]
 
 
 def process_blocks(old_blocks):
     return (
-        media_blocks()
+        [media_block()]
         + add_no_internet_info(old_blocks)
         + [ALL_BLOCKS[name] for name in BLOCKS_TO_ADD]
     )
@@ -233,9 +223,7 @@ def process_blocks(old_blocks):
 
 # Execution
 HEADER = {"version": 1, "click_events": True}
-I3STATUS_COMMANDS = [
-    "i3status",
-]
+I3STATUS_COMMANDS = ["i3status"]
 
 
 def combine_read_sources(*read_sources):

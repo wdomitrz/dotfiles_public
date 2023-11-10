@@ -288,11 +288,14 @@ def show_status_text():
 def handle_click(line):
     data = json.loads(line.strip().strip(","))
 
-    if "name" not in data:
+    if (
+        (name := data.get("name")) is None
+        or (block := ALL_BLOCKS[name]) is None
+        or (on_click := block.get("on_click")) is None
+    ):
         return
 
-    if (name := data["name"]) in ALL_BLOCKS and "on_click" in ALL_BLOCKS[name]:
-        ALL_BLOCKS[name]["on_click"](**data)
+    on_click(**data)
 
 
 def clicks_handler():

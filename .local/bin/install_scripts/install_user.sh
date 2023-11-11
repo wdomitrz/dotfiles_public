@@ -9,6 +9,7 @@ function install_haskell_ghcup() {
 }
 
 function install_nvim_appimage() {
+    mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin
     save_dir="${HOME}"/.local/opt/nvim
     mkdir --parents "${save_dir}"
     save_file_path="${save_dir}"/nvim.appimage
@@ -21,6 +22,7 @@ function install_nvim_appimage() {
 }
 
 function install_moonlight() {
+    mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications
     save_dir="${HOME}"/.local/opt/moonlight
     mkdir --parents "${save_dir}"
     save_file_path="${save_dir}"/moonlight.appimage
@@ -40,6 +42,7 @@ function use_system_nvim() {
 }
 
 function install_kitty() {
+    mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
     curl --location https://sw.kovidgoyal.net/kitty/installer.sh |
         sh /dev/stdin launch=n dest="${HOME}"/.local/opt/
     ln --symbolic --relative --force "${HOME}"/.local/opt/kitty.app/bin/kitty "${HOME}"/.local/bin/
@@ -48,6 +51,7 @@ function install_kitty() {
 }
 
 function install_blender() {
+    mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
     curl --location "https://mirror.clarkson.edu/blender/release/Blender3.6/blender-3.6.5-linux-x64.tar.xz" |
         tar --extract --xz --directory="${HOME}"/.local/opt/
 

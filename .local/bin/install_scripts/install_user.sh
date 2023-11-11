@@ -74,14 +74,13 @@ function install_moonlight() {
     flatpak install --user --assumeyes flathub com.moonlight_stream.Moonlight
 }
 
-function install_python_packages() {
-    ## Update pip
+function upgrade_pip() {
     pip3 install --user --upgrade pip
-    ## pip modules
-    pip3 install --user --upgrade \
-        autotiling \
-        nautilus-open-any-terminal
+}
 
+function install_python_packages() {
+    # pip3 install --user --upgrade
+    true # No packages to install
 }
 
 function update_node_and_npm() {
@@ -113,7 +112,6 @@ function install_user_main() {
     set -euo pipefail
     set -x
 
-    install_python_packages
     install_multi_touch_gestures_fusuma
     download_ubuntu_wallpapers
 }

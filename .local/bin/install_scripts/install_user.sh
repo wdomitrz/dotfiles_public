@@ -9,18 +9,29 @@ function install_haskell_ghcup() {
 }
 
 function install_nvim_appimage() {
-    mkdir --parents "${HOME}"/.local/bin
-    wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O "${HOME}"/.local/bin/nvim
-    chmod +x "${HOME}"/.local/bin/nvim
+    save_dir="${HOME}"/.local/opt/nvim
+    mkdir --parents "${save_dir}"
+    save_file_path="${save_dir}"/nvim.appimage
+
+    wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage --output-document="${save_file_path}"
+
+    chmod +x "${save_file_path}"
+
+    ln --symbolic --relative --force "${save_file_path}" "${HOME}"/.local/bin/nvim
 }
 
-function install_nvim_tar_gz() {
-    mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons/hicolor/128x128/apps
-    curl --location https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz |
-        tar --extract --ungzip --directory="${HOME}"/.local/opt/
-    ln --symbolic --relative --force "${HOME}"/.local/opt/nvim-linux64/bin/nvim "${HOME}"/.local/bin/
-    ln --symbolic --relative --force "${HOME}"/.local/opt/nvim-linux64/share/applications/nvim.desktop "${HOME}"/.local/share/applications/
-    ln --symbolic --relative --force "${HOME}"/.local/opt/nvim-linux64/share/icons/hicolor/128x128/apps/nvim.png "${HOME}"/.local/share/icons/hicolor/128x128/apps/
+function install_moonlight() {
+    save_dir="${HOME}"/.local/opt/moonlight
+    mkdir --parents "${save_dir}"
+    save_file_path="${save_dir}"/moonlight.appimage
+
+    wget https://github.com/moonlight-stream/moonlight-qt/releases/download/v5.0.1/Moonlight-5.0.1-x86_64.AppImage --output-document="${save_file_path}"
+    wget https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/deploy/linux/com.moonlight_stream.Moonlight.desktop --output-document="${save_dir}"/moonlight.desktop
+
+    chmod +x "${save_file_path}"
+
+    ln --symbolic --relative --force "${save_file_path}" "${HOME}"/.local/bin/moonlight
+    ln --symbolic --relative --force "${save_dir}"/moonlight.desktop "${HOME}"/.local/share/applications
 }
 
 function use_system_nvim() {
@@ -29,7 +40,6 @@ function use_system_nvim() {
 }
 
 function install_kitty() {
-    mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
     curl --location https://sw.kovidgoyal.net/kitty/installer.sh |
         sh /dev/stdin launch=n dest="${HOME}"/.local/opt/
     ln --symbolic --relative --force "${HOME}"/.local/opt/kitty.app/bin/kitty "${HOME}"/.local/bin/
@@ -38,7 +48,6 @@ function install_kitty() {
 }
 
 function install_blender() {
-    mkdir -p "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
     curl --location "https://mirror.clarkson.edu/blender/release/Blender3.6/blender-3.6.5-linux-x64.tar.xz" |
         tar --extract --xz --directory="${HOME}"/.local/opt/
 
@@ -66,29 +75,8 @@ function install_fira_code() {
     fc-cache -f
 }
 
-function enable_flathub() {
-    flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-}
-
-function install_moonlight() {
-    flatpak install --user --assumeyes flathub com.moonlight_stream.Moonlight
-}
-
-function upgrade_pip() {
-    pip3 install --user --upgrade pip
-}
-
-function install_python_packages() {
-    # pip3 install --user --upgrade
-    true # No packages to install
-}
-
-function update_node_and_npm() {
-    npm install --global node@lts npm
-}
-
 function download_ubuntu_wallpapers() {
-    wallpapers_directory="${HOME}/.local/share/backgrounds/ubuntu"
+    wallpapers_directory="${HOME}"/.local/share/backgrounds/ubuntu
     wallpapers_url="http://archive.ubuntu.com/ubuntu/pool/main/u/ubuntu-wallpapers/ubuntu-wallpapers_23.10.4.orig.tar.gz"
     mkdir --parents "${wallpapers_directory}"
     wget -O- "${wallpapers_url}" |
@@ -112,6 +100,7 @@ function install_user_main() {
     set -euo pipefail
     set -x
 
+    install_nvim_appimage
     install_multi_touch_gestures_fusuma
     download_ubuntu_wallpapers
 }

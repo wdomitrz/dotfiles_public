@@ -10,7 +10,6 @@ else
 fi
 
 nvim \
-    --noplugin \
     -c "set clipboard=unnamedplus nonumber laststatus=0" \
     -c "map q :qa!<CR> | map a <Nop> | map A <Nop> | map i <Nop> | map I <Nop>" \
     -c "silent terminal cat '${scrollback_buffer_file}' -" \

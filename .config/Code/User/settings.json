@@ -97,7 +97,9 @@
     "notebook.output.textLineLimit": 8192,
     "path-autocomplete.triggerOutsideStrings": true,
     "pylint.args": [
-        "--disable=missing-class-docstring,missing-function-docstring",
+        "--disable=missing-class-docstring",
+        "--disable=missing-function-docstring",
+        "--disable=missing-module-docstring",
         "--generated-members=numpy.*,torch.*"
     ],
     "pylint.severity": {

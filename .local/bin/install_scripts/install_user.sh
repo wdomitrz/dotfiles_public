@@ -52,12 +52,12 @@ function install_kitty() {
 
 function install_blender() {
     mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
-    curl --location "https://mirror.clarkson.edu/blender/release/Blender3.6/blender-3.6.5-linux-x64.tar.xz" |
+    curl --location "https://mirrors.dotsrc.org/blender/release/Blender4.0/blender-4.0.0-linux-x64.tar.xz" |
         tar --extract --xz --directory="${HOME}"/.local/opt/
 
-    ln --symbolic --relative --force "${HOME}"/.local/opt/blender-3.6.5-linux-x64/blender "${HOME}"/.local/bin/
-    ln --symbolic --relative --force "${HOME}"/.local/opt/blender-3.6.5-linux-x64/blender.desktop "${HOME}"/.local/share/applications/
-    ln --symbolic --relative --force "${HOME}"/.local/opt/blender-3.6.5-linux-x64/blender*.svg "${HOME}"/.local/share/icons/
+    ln --symbolic --relative --force "${HOME}"/.local/opt/blender-4.0.0-linux-x64/blender "${HOME}"/.local/bin/
+    ln --symbolic --relative --force "${HOME}"/.local/opt/blender-4.0.0-linux-x64/blender.desktop "${HOME}"/.local/share/applications/
+    ln --symbolic --relative --force "${HOME}"/.local/opt/blender-4.0.0-linux-x64/blender*.svg "${HOME}"/.local/share/icons/
 }
 
 function install_fira_code() {

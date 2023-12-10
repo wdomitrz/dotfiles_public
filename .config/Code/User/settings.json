@@ -14,7 +14,7 @@
     "diffEditor.codeLens": true,
     "editor.accessibilitySupport": "off",
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": "always"
     },
     "editor.cursorBlinking": "solid",
     "editor.cursorSurroundingLines": 1024,

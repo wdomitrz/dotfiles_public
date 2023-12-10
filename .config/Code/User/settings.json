@@ -97,6 +97,7 @@
     "notebook.output.textLineLimit": 8192,
     "path-autocomplete.triggerOutsideStrings": true,
     "pylint.args": [
+        "--disable=line-too-long",
         "--disable=missing-class-docstring",
         "--disable=missing-function-docstring",
         "--disable=missing-module-docstring",

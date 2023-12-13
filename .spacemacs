@@ -3,7 +3,6 @@
 (defun dotspacemacs/layers ()
   (setq-default
    dotspacemacs-ask-for-lazy-installation t
-
    dotspacemacs-configuration-layers
    '(
      (auto-completion

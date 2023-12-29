@@ -101,6 +101,7 @@
         "--disable=missing-class-docstring",
         "--disable=missing-function-docstring",
         "--disable=missing-module-docstring",
+        "--disable=no-else-return",
         "--generated-members=numpy.*,torch.*"
     ],
     "pylint.severity": {

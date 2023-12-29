@@ -139,6 +139,7 @@ python3-numpy
 python3-pandas
 python3-pil
 python3-pip
+python3-tqdm
 python3-venv
 python3-xlib
 python-is-python3

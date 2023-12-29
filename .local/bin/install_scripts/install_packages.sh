@@ -10,6 +10,14 @@ function install_packages() {
     xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends <"${packages_file}"
 }
 
+function install_nvidia() {
+    if ! (lspci | grep --quiet --ignore-case nvidia); then
+        echo "Not installing nvidia driver, becuase it's not needed"
+        return 0
+    fi
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends nvidia-driver
+}
+
 function install_with_recommended() {
     packages_file="${HOME}/.config/packages/with_recommends.txt"
     xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"${packages_file}"
@@ -23,6 +31,7 @@ function install_packages_main() {
     config_global_start
     update_and_upgrade
     install_packages
+    install_nvidia
     install_with_recommended
 }
 

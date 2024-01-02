@@ -95,6 +95,7 @@ libimage-exiftool-perl
 libinput-tools
 libpam-gnome-keyring
 libspa-0.2-bluetooth
+libtss2-rc0
 lightdm
 lightdm-gtk-greeter
 linux-headers-amd64

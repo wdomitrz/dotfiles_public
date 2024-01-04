@@ -40,7 +40,7 @@
    dotspacemacs-startup-buffer-multi-digit-delay 0.0
    dotspacemacs-startup-buffer-show-version nil
    dotspacemacs-startup-lists '((recents . 16))
-   dotspacemacs-which-key-delay 0.0
+   dotspacemacs-which-key-delay 0.01
 
    dotspacemacs-default-font '("Fira Code"
                                :size 10.0

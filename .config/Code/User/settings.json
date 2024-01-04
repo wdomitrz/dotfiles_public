@@ -81,6 +81,7 @@
     "flake8.args": [
         "--extend-ignore=D1,E203,E501"
     ],
+    "git.enableSmartCommit": true,
     "git.enabled": true,
     "git.mergeEditor": true,
     "isort.args": [

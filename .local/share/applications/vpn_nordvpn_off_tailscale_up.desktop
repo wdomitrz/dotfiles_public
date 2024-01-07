@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Exec=sh -c "nordvpn disconnect && nordvpn set killswitch off && tailscale up"
+Icon=tailscale
+Name=VPN NordVPN off, tailscale up
+Terminal=true
+Type=Application

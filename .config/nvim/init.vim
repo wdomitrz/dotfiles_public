@@ -98,11 +98,11 @@ endif
 
 call plug#begin()
 Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-sneak'
+Plug 'easymotion/vim-easymotion'
 Plug 'lambdalisue/suda.vim'
 Plug 'Mofiqul/vscode.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
 Plug 'tpope/vim-commentary'
@@ -136,6 +136,7 @@ let g:vim_json_conceal = 0
 " Plugins key mappings
 map <C-b>               :NERDTreeToggle<CR>
 map <C-/>               :Commentary<CR>
-map <C-p>               :Files<CR>
-map <leader><leader>    :Commands<CR>
+map <C-p>               :Telescope find_files<CR>
+map <leader><leader>    :Telescope commands<CR>
 map <leader>t           :TagbarToggle<CR>
+map s                   <Plug>(easymotion-jumptoanywhere)

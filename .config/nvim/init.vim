@@ -4,7 +4,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " Disable spellcheck in terminal
 autocmd TermOpen * setlocal nospell nonumber norelativenumber
 " set options
-if has('nvim-0.7') | set laststatus=3 | endif
+set laststatus=3
 set autochdir
 set clipboard=unnamedplus
 set colorcolumn=80,88,100,115,120
@@ -90,7 +90,7 @@ tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
 " Plugins
 if $VIM_DISABLE_PLUG != 1
 " Install vim-plug automatically
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = stdpath('data') . '/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC

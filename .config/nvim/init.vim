@@ -38,13 +38,13 @@ let mapleader=" "
 noremap <expr> j v:count == 0 ? 'j' : 'gj'
 noremap <expr> k v:count == 0 ? 'k' : 'gk'
 " Ctrl + Backspace to remote previous word
-noremap! <C-BS> <C-w>
+noremap! <C-bs> <C-w>
 noremap! <C-h> <C-w>
 " Don't lose selection after changing indentation
 vnoremap > >gv
 vnoremap < <gv
 " Correct spelling
-inoremap <C-l> <C-g>u<Esc>[s1z=`]a<c-g>u
+inoremap <C-l> <C-g>u<esc>[s1z=`]a<c-g>u
 noremap <C-l> [s1z=
 " Tab completion
 function! Tab_complete()
@@ -61,8 +61,8 @@ function! Tab_complete()
     " Default completion
     return "\<C-X>\<C-P>"
 endfunction
-inoremap <expr> <TAB>   Tab_complete()
-inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <tab>   Tab_complete()
+inoremap <expr> <S-tab> pumvisible() ? "\<C-p>" : "\<S-tab>"
 " Terminal shortcut
 function! Terminal_toggle()
     if exists("s:terminal_buffer") && nvim_buf_is_valid(s:terminal_buffer)
@@ -83,8 +83,8 @@ function! Terminal_toggle()
         startinsert
     endif
 endfunction
-noremap  <C-space>  <Cmd>call Terminal_toggle()<CR>
-tnoremap <C-space>  <Cmd>call Terminal_toggle()<CR>
+noremap  <C-space>  <cmd>call Terminal_toggle()<cr>
+tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
 
 
 " Plugins
@@ -134,9 +134,9 @@ let g:suda_smart_edit = 1
 let g:vim_json_conceal = 0
 
 " Plugins key mappings
-map <C-b>               :NERDTreeToggle<CR>
-map <C-/>               :Commentary<CR>
-map <C-p>               :Telescope find_files<CR>
-map <leader><leader>    :Telescope commands<CR>
-map <leader>t           :TagbarToggle<CR>
-map s                   <Plug>(easymotion-jumptoanywhere)
+map <C-b>               <cmd>NERDTreeToggle<cr>
+map <C-/>               <cmd>Commentary<cr>
+map <C-p>               <cmd>lua require('telescope.builtin').find_files({no_ignore=true, hidden=true})<cr>
+map <leader><leader>    <cmd>Telescope commands<cr>
+map <leader>t           <cmd>TagbarToggle<cr>
+map s                   <plug>(easymotion-jumptoanywhere)

@@ -1,6 +1,4 @@
 160218-deux-two_by_Pierre_Cante.jpg
-Camera_Film_by_Markus_Spiske.jpg
-Cosmic_Cuttlefish_by_Jim_Coleman.jpg
 80s_Disco_Dingo_Simulation_by_Abubakar_NK.jpg
 Aardvark_Wallpaper_Grey_4096x2304.png
 Abstract_Ubuntu_by_Marek_Koteluk.jpg
@@ -11,7 +9,9 @@ Beaver_Wallpaper_Grey_4096x2304.png
 Bodacious_bovine_by_oklopfer_dark.png
 Bodacious_bovine_by_oklopfer_light.png
 Cacomixtle_Ubunteño_by_Carlos_and_Paula_Morales.jpg
+Camera_Film_by_Markus_Spiske.jpg
 canvas_by_roytanck.jpg
+Cosmic_Cuttlefish_by_Jim_Coleman.jpg
 Cuttlefish_Wallpaper_Grey_4096x2304.png
 Definitive_Light_Zen_Orange_by_Pierre_Cante.jpg
 Dingo_Wallpaper_Grey_4096x2304.png
@@ -40,6 +40,7 @@ Lunar-lobster-side_by_Gixo-light.png
 Mantic_maze_by_motaymour.png
 Minotaur_by_gixo_dark.png
 Minotaur_by_gixo_light.png
+Mirada_Perduda_by_Marxicoli.jpg
 Mountain_king_by_seashxlls.png
 Outoffocus.jpg
 Passion_by_Vilia_Majere.jpg

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-DEFAULT_OPTIONS_FILE="${HOME}"/.config/dpi/default_dpi_options.txt
+DEFAULT_OPTIONS_FILE="${HOME}"/.config/dpi/default_dpi_options.sorted_numeric.txt
 DPI="$(
     (
         set_display show_dpi

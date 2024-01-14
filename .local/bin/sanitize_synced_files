@@ -1,41 +1,72 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
-git_root="$(git rev-parse --show-toplevel)"
+function sort_json_files() {
+    git_root="$(git rev-parse --show-toplevel)"
+    for json_file in "${git_root}"/.config/Code/User/*.json; do
+        sort_json "${json_file}"
+    done
+    echo "Sorted jsons"
+}
 
-for json_file in "${git_root}"/.config/Code/User/*.json; do
-    sort_json "${json_file}"
-done
-echo "Sorted jsons"
+function sort_txt_files() {
+    git_root="$(git rev-parse --show-toplevel)"
+    for file_to_sort in "${git_root}"/.config/*/*.sorted.txt; do
+        sort --output "${file_to_sort}"{,}
+    done
+    echo "Sorted txt files"
+}
 
-for file_to_sort in "${git_root}"/.config/packages/*.txt; do
-    sort --output "${file_to_sort}"{,}
-done
-echo "Sorted other files"
+function sort_numeric_txt_files() {
+    git_root="$(git rev-parse --show-toplevel)"
+    for file_to_sort in "${git_root}"/.config/*/*.sorted_numeric.txt; do
+        sort --numeric-sort --output "${file_to_sort}"{,}
+    done
+    echo "Sorted numeric txt files"
+}
 
-all_shell_scripts="$(comm -12 <(
-    git ls-tree -r --full-tree --full-name --name-only HEAD |
-        sed "s|^|${git_root}/|" |
-        sort
-) <(
-    (
-        shfmt -f "${git_root}"
-        ls "${git_root}"/{.bashrc,.bash_aliases,.profile,.Xclients,.xsession,.xsessionrc,.local/bin/.config_sshd}
-    ) | sort
-))"
-echo "Got all shell scripts"
+function sort_all_files() {
+    sort_json_files
+    sort_txt_files
+    sort_numeric_txt_files
+}
 
-echo "${all_shell_scripts}" |
-    xargs shfmt -i 4 -w
-echo "Formatted shell scripts"
+function format_and_sanitize_shell_files() {
+    git_root="$(git rev-parse --show-toplevel)"
+    all_shell_scripts="$(comm -12 <(
+        git ls-tree -r --full-tree --full-name --name-only HEAD |
+            sed "s|^|${git_root}/|" |
+            sort
+    ) <(
+        (
+            shfmt -f "${git_root}"
+            ls "${git_root}"/{.bashrc,.bash_aliases,.profile,.Xclients,.xsession,.xsessionrc,.local/bin/.config_sshd}
+        ) | sort
+    ))"
+    echo "Got all shell scripts"
 
-echo "${all_shell_scripts}" |
-    xargs shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
-    sed "s|--- ${git_root}|--- a|g" |
-    sed "s|+++ ${git_root}|+++ b|g" |
-    patch --strip=1 --directory="${git_root}"
-echo "Applied suggestions to shell scripts"
+    echo "${all_shell_scripts}" |
+        xargs shfmt -i 4 -w
+    echo "Formatted shell scripts"
 
-echo "${all_shell_scripts}" |
-    xargs shellcheck --exclude=SC1091,SC2312 --enable=all
-echo "Checked shell scripts"
+    echo "${all_shell_scripts}" |
+        xargs shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
+        sed "s|--- ${git_root}|--- a|g" |
+        sed "s|+++ ${git_root}|+++ b|g" |
+        patch --strip=1 --directory="${git_root}"
+    echo "Applied suggestions to shell scripts"
+
+    echo "${all_shell_scripts}" |
+        xargs shellcheck --exclude=SC1091,SC2312 --enable=all
+    echo "Checked shell scripts"
+}
+
+function sanitize_synced_main() {
+    sort_all_files
+    format_and_sanitize_shell_files
+}
+
+if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+    set -euo pipefail
+
+    sanitize_synced_main "${@}"
+fi

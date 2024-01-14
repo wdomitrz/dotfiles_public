@@ -91,7 +91,7 @@ function download_ubuntu_wallpapers() {
     find "${wallpapers_directory}" -type f -not -iname "*.png" -and -not -iname "*.jpg" -print0 |
         xargs --null rm
     # Remove backgrounds to remove
-    backgrounds_to_remove_file="${HOME}/.config/backgrounds/backgrounds_to_remove.txt"
+    backgrounds_to_remove_file="${HOME}/.config/backgrounds/backgrounds_to_remove.sorted.txt"
     [[ -f "${backgrounds_to_remove_file}" ]] &&
         xargs -L 1 find "${wallpapers_directory}" -name <"${backgrounds_to_remove_file}" |
         xargs rm

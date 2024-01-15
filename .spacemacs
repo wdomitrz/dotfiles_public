@@ -6,7 +6,6 @@
    dotspacemacs-configuration-layers
    '(
      auto-completion
-     better-defaults
      emacs-lisp
      git
      (ivy

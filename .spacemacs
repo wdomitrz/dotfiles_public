@@ -22,11 +22,11 @@
       :variables
       shell-default-height 30
       shell-default-position 'bottom)
+     shell-scripts
      spell-checking
      syntax-checking
-     shell-scripts
-     version-control
-     treemacs)
+     treemacs
+     version-control)
    dotspacemacs-install-packages 'used-only
 ))
 

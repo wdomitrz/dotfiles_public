@@ -5,9 +5,7 @@
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layers
    '(
-     (auto-completion
-      :variables
-      auto-completion-idle-delay 0)
+     auto-completion
      better-defaults
      emacs-lisp
      git
@@ -15,6 +13,7 @@
       :variables
       ivy-initial-inputs-alist nil)
      markdown
+     multiple-cursors
      (python
       :variables
       python-formatter 'black

@@ -26,7 +26,10 @@
      spell-checking
      syntax-checking
      treemacs
-     version-control)
+     version-control
+     (xclipboard
+      :variables
+      xclipboard-enable-cliphist t))
    dotspacemacs-install-packages 'used-only
 ))
 
@@ -34,7 +37,6 @@
   (setq-default
    dotspacemacs-default-font '("Fira Code")
    dotspacemacs-enable-server t
-   dotspacemacs-line-numbers t
    dotspacemacs-startup-banner nil
    dotspacemacs-startup-buffer-show-version nil
    dotspacemacs-startup-lists '((recents . 16))

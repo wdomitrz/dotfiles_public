@@ -6,9 +6,6 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
-    "black-formatter.args": [
-        "--skip-magic-trailing-comma"
-    ],
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
@@ -118,7 +115,7 @@
     "python.analysis.inlayHints.variableTypes": true,
     "remote.SSH.defaultExtensions": [
         "amodio.toggle-excluded-files",
-        "DavidAnson.vscode-markdownlint",
+        "davidanson.vscode-markdownlint",
         "dcasella.i3",
         "edonet.vscode-command-runner",
         "foxundermoon.shell-format",
@@ -126,6 +123,7 @@
         "llvm-vs-code-extensions.vscode-clangd",
         "mechatroner.rainbow-csv",
         "ms-python.black-formatter",
+        "ms-python.debugpy",
         "ms-python.flake8",
         "ms-python.gather",
         "ms-python.isort",
@@ -145,11 +143,9 @@
         "ms-vscode.hexeditor",
         "ms-vscode.makefile-tools",
         "ms-vscode.remote-explorer",
-        "ms-vscode.remote-repositories",
         "mtxr.sqltools",
         "nico-castell.linux-desktop-file",
         "njpwerner.autodocstring",
-        "PKief.material-icon-theme",
         "sleistner.vscode-fileutils",
         "stkb.rewrap",
         "streetsidesoftware.code-spell-checker",
@@ -157,7 +153,7 @@
         "timonwong.shellcheck",
         "tomoki1207.pdf",
         "vscodevim.vim",
-        "XadillaX.viml"
+        "xadillax.viml"
     ],
     "remote.SSH.lockfilesInTmp": true,
     "security.workspace.trust.banner": "always",
@@ -458,7 +454,6 @@
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.editor.tabSizing": "fixed",
     "workbench.enableExperiments": false,
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.tips.enabled": false,
     "workbench.welcomePage.walkthroughs.openOnInstall": false

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+# file with groups of comma separated displays
 config_file="${HOME}/.config/displays_to_connect/${HOSTNAME}.txt"
 
-DISPLAYS_TO_CONNECT="" # Comma separated list
-[[ -f "${config_file}" ]] && DISPLAYS_TO_CONNECT="$(cat "${config_file}")"
-[[ "$#" -eq 1 ]] && DISPLAYS_TO_CONNECT="$1"
+[[ -f "${config_file}" ]] || exit 0
 
-xrandr --setmonitor "connected_${DISPLAYS_TO_CONNECT}" auto "${DISPLAYS_TO_CONNECT}"
+while read -r displays_to_connect; do
+    xrandr --setmonitor "connected_${displays_to_connect}" auto "${displays_to_connect}"
+done <"${config_file}"

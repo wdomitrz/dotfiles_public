@@ -6,6 +6,16 @@
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     {
+        "args": {
+            "commands": [
+                "workbench.action.toggleAuxiliaryBar",
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        "command": "runCommands",
+        "key": "ctrl+m"
+    },
+    {
         "command": "workbench.action.navigateBack",
         "comment": "Vim",
         "key": "ctrl+o",

@@ -2,4 +2,6 @@
 set_display
 connect_displays
 i3_res
-set_background
+if [ "$#" -ne 1 ] || [ "${1}" != "--no-set-background" ]; then
+    set_background
+fi

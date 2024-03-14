@@ -6,7 +6,7 @@ i3_screen_locker &
 i3_theme_detection &
 set_keymap &
 xfce4-power-manager &
-i3_xrl &&
+i3_xrl --no-set-background &&
     (
         (check_if_remote || (
             blueman-applet &
@@ -20,8 +20,10 @@ i3_xrl &&
         /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
         (
             systemctl --user stop dunst
-            /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
-            /usr/lib64/xfce4/notifyd/xfce4-notifyd &
+            (
+                /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
+                /usr/lib64/xfce4/notifyd/xfce4-notifyd &
+            )
         ) &
         TERM=linux watch --exec --errexit --interval 60 set_background &
     )

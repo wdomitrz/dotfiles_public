@@ -100,13 +100,28 @@ function download_ubuntu_wallpapers() {
         xargs --null rmdir
 }
 
+function download_wallpapers_from_file_with_urls() {
+    if [[ "$#" -ne 2 ]]; then
+        echo "Expected 2 arguments: <output directory name> <urls path file>"
+        return 1
+    fi
+    wallpapers_directory="${HOME}"/.local/share/backgrounds/"$1"
+    wallpapers_urls_file="$2"
+    mkdir --parents "${wallpapers_directory}"
+    wget --directory-prefix="${wallpapers_directory}" --input-file="${wallpapers_urls_file}"
+}
+
+function download_macos_wallpapers() {
+    download_wallpapers_from_file_with_urls macos "${HOME}"/.config/backgrounds/backgrounds_macos.sorted.txt
+}
+
 function install_user_main() {
     set -euo pipefail
     set -x
 
     install_nvim_appimage
     install_multi_touch_gestures_fusuma
-    download_ubuntu_wallpapers
+    download_macos_wallpapers
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then

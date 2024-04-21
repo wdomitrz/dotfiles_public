@@ -6,6 +6,10 @@
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     {
+        "command": "workbench.action.toggleAuxiliaryBar",
+        "key": "ctrl+shift+b"
+    },
+    {
         "args": {
             "commands": [
                 "workbench.action.toggleAuxiliaryBar",

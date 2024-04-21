@@ -450,7 +450,7 @@
     "window.commandCenter": false,
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
-    "workbench.activityBar.location": "hidden",
+    "workbench.activityBar.location": "top",
     "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.editor.tabSizing": "fixed",
     "workbench.enableExperiments": false,

@@ -76,7 +76,7 @@
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "flake8.args": [
-        "--extend-ignore=D1,E203,E501"
+        "--extend-ignore=D1,D2,D4,E203,E501"
     ],
     "git.enableSmartCommit": true,
     "git.enabled": true,

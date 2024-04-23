@@ -145,6 +145,7 @@ python3-tqdm
 python3-venv
 python3-xlib
 python-is-python3
+pythonpy
 redshift-gtk
 rename
 ripgrep

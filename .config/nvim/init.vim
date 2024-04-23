@@ -127,7 +127,6 @@ if has('nvim-0.9') | colorscheme vscode | endif
 highlight SpellCap guisp=yellow  gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 
-let g:airline#extensions#tabline#enabled = 1
 let g:EasyMotion_do_mapping = 0
 let g:markdown_syntax_conceal = 0
 let g:suda_smart_edit = 1

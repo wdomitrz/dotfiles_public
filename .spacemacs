@@ -37,14 +37,10 @@
   (setq-default
    dotspacemacs-default-font '("Fira Code")
    dotspacemacs-enable-server t
-   dotspacemacs-startup-banner nil
-   dotspacemacs-startup-buffer-show-version nil
-   dotspacemacs-startup-lists '((recents . 16))
 ))
 
 (defun dotspacemacs/user-config ()
-  (add-hook 'tuareg-mode-hook #'eglot-ensure) ; for OCaml
-  (add-hook 'python-mode-hook #'eglot-ensure) ; for Python
+  (setq initial-buffer-choice t)
 
   (define-key evil-motion-state-map (kbd "C-z") 'suspend-frame)
   (define-key evil-emacs-state-map (kbd "C-z") 'suspend-frame)

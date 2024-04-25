@@ -1,18 +1,18 @@
 [Default Applications]
-application/pdf=org.gnome.Evince.desktop
-application/x-shellscript=code.desktop
+application/pdf=evince.desktop;org.gnome.Evince.desktop;google-chrome.desktop
+application/x-shellscript=code.desktop;nvim.desktop
 application/zip=org.gnome.FileRoller.desktop
 image/gif=org.gnome.eog.desktop
 image/jpeg=org.gnome.eog.desktop
 image/png=org.gnome.eog.desktop
 inode/directory=org.gnome.Nautilus.desktop
-text/c++src=code.desktop
-text/csv=code.desktop
+text/c++src=code.desktop;nvim.desktop
+text/csv=code.desktop;nvim.desktop
 text/html=google-chrome.desktop
-text/plain=code.desktop
-text/x-csrc=code.desktop
-text/x-makefile=code.desktop
-text/x-python=code.desktop
+text/plain=code.desktop;nvim.desktop
+text/x-csrc=code.desktop;nvim.desktop
+text/x-makefile=code.desktop;nvim.desktop
+text/x-python=code.desktop;nvim.desktop
 video/mp4=vlc.desktop
 x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop

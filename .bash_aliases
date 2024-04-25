@@ -30,7 +30,7 @@ alias fzfcommandsearch="compgen -c | sort --unique | fzf --preview 'shopt -s exp
 # some more ls aliases
 alias ll='ls --almost-all -l'
 alias la='ls --almost-all'
-alias l='ls -C'
+alias l='ls -l'
 
 alias pint='ping 8.8.8.8'
 

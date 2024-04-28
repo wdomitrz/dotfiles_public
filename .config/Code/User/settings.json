@@ -91,6 +91,7 @@
     "mypy-type-checker.args": [
         "--ignore-missing-imports"
     ],
+    "notebook.formatOnCellExecution": true,
     "notebook.formatOnSave.enabled": true,
     "notebook.lineNumbers": "on",
     "notebook.output.textLineLimit": 8192,

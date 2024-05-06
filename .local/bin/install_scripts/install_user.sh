@@ -79,27 +79,6 @@ function install_fira_code() {
     fc-cache -f
 }
 
-function download_ubuntu_wallpapers() {
-    wallpapers_directory="${HOME}"/.local/share/backgrounds/ubuntu
-    wallpapers_url="http://archive.ubuntu.com/ubuntu/pool/main/u/ubuntu-wallpapers/ubuntu-wallpapers_23.10.4.orig.tar.gz"
-    mkdir --parents "${wallpapers_directory}"
-    wget -O- "${wallpapers_url}" |
-        tar --extract --ungzip --directory="${wallpapers_directory}"
-
-    # Cleanup
-    # Remove files that are not pictures
-    find "${wallpapers_directory}" -type f -not -iname "*.png" -and -not -iname "*.jpg" -print0 |
-        xargs --null rm
-    # Remove backgrounds to remove
-    backgrounds_to_remove_file="${HOME}/.config/backgrounds/backgrounds_to_remove.sorted.txt"
-    [[ -f "${backgrounds_to_remove_file}" ]] &&
-        xargs -L 1 find "${wallpapers_directory}" -name <"${backgrounds_to_remove_file}" |
-        xargs rm
-    # Remove empty directories
-    find "${wallpapers_directory}" -type d -empty -print0 |
-        xargs --null rmdir
-}
-
 function download_wallpapers_from_file_with_urls() {
     if [[ "$#" -ne 2 ]]; then
         echo "Expected 2 arguments: <output directory name> <urls path file>"

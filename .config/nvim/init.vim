@@ -16,7 +16,7 @@ set linebreak breakindent
 set list
 set mouse=a
 set noswapfile nowritebackup
-set number
+set nonumber
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024
 set shortmess=IAc

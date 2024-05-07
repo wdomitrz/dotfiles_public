@@ -157,7 +157,7 @@ bindsym $mod+slash          exec --no-startup-id    gtk-launch search_menu
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
 # Change background
-bindsym $mod+y              exec --no-startup-id    set_background
+bindsym $mod+y              exec --no-startup-id    set_theme toggle
 # Screenshot
 bindsym Print               exec --no-startup-id    flameshot gui
 bindsym $mod+p              exec --no-startup-id    flameshot gui

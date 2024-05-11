@@ -25,5 +25,8 @@ i3_xrl --no-set-background &&
                 /usr/lib64/xfce4/notifyd/xfce4-notifyd &
             )
         ) &
-        TERM=linux watch --exec --errexit --interval 60 set_background &
+        while :; do
+            set_background
+            sleep 60
+        done &
     )

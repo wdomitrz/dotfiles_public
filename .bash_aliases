@@ -28,8 +28,8 @@ alias copy='xclip -selection clipboard'
 alias fzfcommandsearch="compgen -c | sort --unique | fzf --preview 'shopt -s expand_aliases; source ~/.bashrc; type {}'"
 
 # some more ls aliases
-alias ll='ls --almost-all -l'
-alias la='ls --almost-all'
+alias ll='ls -l'
+alias la='ls --almost-all -l'
 alias l='ls -l'
 
 alias pint='ping 8.8.8.8'

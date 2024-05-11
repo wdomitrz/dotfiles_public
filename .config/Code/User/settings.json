@@ -23,6 +23,7 @@
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
     "editor.multiDocumentOccurrencesHighlight": true,
+    "editor.occurrencesHighlight": "multiFile",
     "editor.rulers": [
         80,
         90,
@@ -116,10 +117,8 @@
     "python.analysis.inlayHints.pytestParameters": true,
     "python.analysis.inlayHints.variableTypes": true,
     "remote.SSH.defaultExtensions": [
-        "amodio.toggle-excluded-files",
         "davidanson.vscode-markdownlint",
         "dcasella.i3",
-        "edonet.vscode-command-runner",
         "foxundermoon.shell-format",
         "ionutvmi.path-autocomplete",
         "llvm-vs-code-extensions.vscode-clangd",
@@ -153,7 +152,6 @@
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-polish",
         "timonwong.shellcheck",
-        "tomoki1207.pdf",
         "vscodevim.vim",
         "xadillax.viml"
     ],
@@ -169,7 +167,7 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
-    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.localEchoEnabled": "off",
     "update.showReleaseNotes": false,
     "vim.easymotion": true,

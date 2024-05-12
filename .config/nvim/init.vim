@@ -104,13 +104,11 @@ Plug 'Mofiqul/vscode.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/nerdtree'
-Plug 'preservim/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
-Plug 'Yggdroot/indentLine'
 call plug#end()
 endif
 
@@ -134,8 +132,7 @@ let g:vim_json_conceal = 0
 
 " Plugins key mappings
 map <C-b>               <cmd>NERDTreeToggle<cr>
-map <C-/>               <cmd>Commentary<cr>
+map <C-/>               :Commentary<cr>
 map <C-p>               <cmd>lua require('telescope.builtin').find_files({no_ignore=true, hidden=true})<cr>
 map <leader><leader>    <cmd>Telescope commands<cr>
-map <leader>t           <cmd>TagbarToggle<cr>
 map s                   <plug>(easymotion-jumptoanywhere)

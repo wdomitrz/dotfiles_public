@@ -35,8 +35,10 @@ highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NON
 " Use space as leader
 let mapleader=" "
 " Move line up/down when wrapped
-noremap <expr> j v:count == 0 ? 'j' : 'gj'
-noremap <expr> k v:count == 0 ? 'k' : 'gk'
+noremap j gj
+noremap k gk
+" Paste in visual mode without overwriting
+vnoremap p pgvy
 " Ctrl + Backspace to remote previous word
 noremap! <C-bs> <C-w>
 noremap! <C-h> <C-w>
@@ -134,5 +136,4 @@ let g:vim_json_conceal = 0
 map <C-b>               <cmd>NERDTreeToggle<cr>
 map <C-/>               :Commentary<cr>
 map <C-p>               <cmd>lua require('telescope.builtin').find_files({no_ignore=true, hidden=true})<cr>
-map <leader><leader>    <cmd>Telescope commands<cr>
 map s                   <plug>(easymotion-jumptoanywhere)

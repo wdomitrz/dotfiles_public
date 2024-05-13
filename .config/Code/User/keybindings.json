@@ -10,16 +10,6 @@
         "key": "ctrl+shift+b"
     },
     {
-        "args": {
-            "commands": [
-                "workbench.action.toggleAuxiliaryBar",
-                "workbench.action.toggleSidebarVisibility"
-            ]
-        },
-        "command": "runCommands",
-        "key": "ctrl+m"
-    },
-    {
         "command": "workbench.action.navigateBack",
         "comment": "Vim",
         "key": "ctrl+o",
@@ -36,18 +26,6 @@
         "comment": "Interactive editor fixes",
         "key": "shift+enter",
         "when": "activeEditor == 'workbench.editor.interactive'"
-    },
-    {
-        "command": "workbench.action.showCommands",
-        "comment": "2x space triggers menu",
-        "key": "space space",
-        "when": "activeEditorGroupEmpty && focusedView == '' && !whichkeyActive && !inputFocus"
-    },
-    {
-        "command": "workbench.action.showCommands",
-        "comment": "2x space triggers menu",
-        "key": "space space",
-        "when": "sideBarFocus && !inputFocus && !whichkeyActive"
     },
     {
         "command": "removeSecondaryCursors",

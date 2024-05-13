@@ -13,6 +13,7 @@ apt-transport-https
 arandr
 bash
 bash-completion
+bat
 blueman
 bluetooth
 bolt

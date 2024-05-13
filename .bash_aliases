@@ -14,7 +14,7 @@ if [[ -x /usr/bin/dircolors ]]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias gla='git log --all --graph --oneline --decorate'
+alias gla='git log --all --graph --oneline --decorate --date-order'
 
 # let aliases work after sudo (see http://askubuntu.com/a/22043)
 alias sudo='sudo '

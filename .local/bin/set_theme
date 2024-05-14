@@ -55,6 +55,11 @@ function set_background_theme() {
     set_background
 }
 
+function set_bat_theme() {
+    local -r theme_path="${HOME}"/.config/bat/config
+    set_theme_though_links "${theme_path}" "$@"
+}
+
 function set_nvim_theme() {
     local -r theme_path="${HOME}"/.config/nvim/theme.txt
     set_theme_though_links "${theme_path}" "$@"
@@ -102,6 +107,7 @@ function set_theme_local() {
     set_kitty_theme "${dark_or_light}"
     set_background_theme "${dark_or_light}"
     set_local_theme "${dark_or_light}"
+    set_bat_theme "${dark_or_light}"
     set_nvim_theme "${dark_or_light}"
     set_rofi_theme "${dark_or_light}"
     set_spacemacs_theme "${dark_or_light}"

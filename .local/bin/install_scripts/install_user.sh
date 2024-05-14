@@ -79,19 +79,25 @@ function install_fira_code() {
     fc-cache -f
 }
 
+wallpapers_directory_base="${HOME}"/.local/share/backgrounds
 function download_wallpapers_from_file_with_urls() {
     if [[ "$#" -ne 2 ]]; then
         echo "Expected 2 arguments: <output directory name> <urls path file>"
         return 1
     fi
-    wallpapers_directory="${HOME}"/.local/share/backgrounds/"$1"
+    wallpapers_directory="${wallpapers_directory_base}"/"$1"
     wallpapers_urls_file="$2"
     mkdir --parents "${wallpapers_directory}"
     wget --directory-prefix="${wallpapers_directory}" --input-file="${wallpapers_urls_file}"
 }
 
 function download_macos_wallpapers() {
+    wallpapers_directory="${wallpapers_directory_base}"/macos
+    wallpapers_directory_dark="${wallpapers_directory_base}"/backgrounds_dark.dir
+    wallpapers_directory_light="${wallpapers_directory_base}"/backgrounds_light.dir
     download_wallpapers_from_file_with_urls macos "${HOME}"/.config/backgrounds/backgrounds_macos.sorted.txt
+    ln -rsf "${wallpapers_directory}"/10-15-Night.jpg "${wallpapers_directory_dark}"/
+    ln -rsf "${wallpapers_directory}"/10-15-Day.jpg "${wallpapers_directory_light}"/
 }
 
 function install_user_main() {

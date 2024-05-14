@@ -136,4 +136,4 @@ let g:vim_json_conceal = 0
 map <C-b>               <cmd>NERDTreeToggle<cr>
 map <C-/>               :Commentary<cr>
 map <C-p>               <cmd>lua require('telescope.builtin').find_files({no_ignore=true, hidden=true})<cr>
-map s                   <plug>(easymotion-jumptoanywhere)
+map f                   <plug>(easymotion-jumptoanywhere)

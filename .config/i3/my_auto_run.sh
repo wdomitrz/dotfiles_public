@@ -3,6 +3,7 @@
 fusuma &
 geoclue-2-agent &
 i3_screen_locker &
+i3status_run_file_updaters.sh &
 i3_theme_detection &
 set_keymap &
 xfce4-power-manager &

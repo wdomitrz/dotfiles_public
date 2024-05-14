@@ -48,3 +48,8 @@ battery all {
 tztime local {
     format = "📆 %F %A 🕗 %T"
 }
+
+read_file file_updater_example {
+    path = "~/.cache/i3status_files-file_updater_example.txt"
+    color_good = "#f0f0f0"
+}

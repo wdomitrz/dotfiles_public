@@ -1,0 +1,13 @@
+{
+    "browser": {
+        "enable_spellchecking": true
+    },
+    "spellcheck": {
+        "dictionaries": [
+            "pl",
+            "en-US",
+            "en"
+        ],
+        "dictionary": ""
+    }
+}

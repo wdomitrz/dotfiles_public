@@ -11,7 +11,7 @@ i3_xrl --no-set-background &&
     (
         (check_if_remote || (
             blueman-applet &
-            env LANGUAGE=pl_PL.utf-8 signal-desktop --use-tray-icon --start-in-tray &
+            signal-desktop &
             nm-applet &
             redshift-gtk &
         )) &

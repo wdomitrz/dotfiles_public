@@ -1,23 +1,8 @@
 #!/usr/bin/env bash
 
-function check_global_configs_files() {
-    set -euo pipefail
-    diff <(
-        find "${HOME}"/.config/global_configs -type f |
-            sed --regexp-extended "s|^${HOME}/||" | sort
-    ) <(
-        git ls-tree --full-tree --name-only -r HEAD "${HOME}"/.config/global_configs |
-            sort
-    ) || (
-        echo "Untracked configs in ~/.config/global_configs" &&
-            exit 1
-    )
-}
-
 function copy_global_configs() {
-    set -euo pipefail
-    check_global_configs_files
-    sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/global_configs/* /
+    check_integrity_of_tracked_dir "${HOME}"/.config/global_configs &&
+        sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/global_configs/ /
 }
 
 function fix_keychron_post_config_copy() {

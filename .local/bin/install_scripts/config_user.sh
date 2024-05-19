@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+function copy_user_configs() {
+    check_integrity_of_tracked_dir "${HOME}"/.config/user_configs &&
+        cp --backup=numbered --verbose --recursive "${HOME}"/.config/user_configs/ "${HOME}"/
+}
+
 function set_shell() {
     shell="$1"
 
@@ -41,11 +46,6 @@ function configure_nautilus_open_terminal() {
     DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "${TERMINAL}"
 }
 
-function configure_transmission() {
-    [[ -f "${HOME}/.config/transmission/settings.bck.json" ]] &&
-        cp "${HOME}"/.config/transmission/settings.bck.json "${HOME}"/.config/transmission/settings.json
-}
-
 function install_code_extensions() {
     "${HOME}"/.local/bin/install_code_extensions
 }
@@ -54,10 +54,10 @@ function config_user_main() {
     set -euo pipefail
     set -x
 
+    copy_user_configs
     set_shell_bash
     update_tldr
     configure_nautilus_open_terminal
-    configure_transmission
     install_code_extensions
     "${HOME}"/.local/bin/set_theme dark
 }

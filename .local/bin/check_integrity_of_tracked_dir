@@ -4,7 +4,7 @@ function check_if_all_files_are_tracked() {
     set -uo pipefail
     local files_location="$1"
     diff <(
-        find "${files_location}" -type f |
+        find "${files_location}" -type f -follow |
             sed --regexp-extended "s|^${HOME}/||" | sort
     ) <(
         git --git-dir="${HOME}"/.git ls-tree --full-tree --name-only -r HEAD "${files_location}" |

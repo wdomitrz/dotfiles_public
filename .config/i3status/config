@@ -4,7 +4,6 @@ general {
     interval = 1
 }
 
-order += "read_file file_updater_example"
 order += "volume default"
 order += "ipv6"
 order += "wireless _first_"

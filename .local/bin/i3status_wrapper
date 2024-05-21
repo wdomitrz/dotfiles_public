@@ -162,14 +162,6 @@ ALL_BLOCKS = {
         ),
         Block(name="volume", on_click=handle_volume),
     ]
-    #
-    + [
-        Block(
-            name="read_file",
-            instance="~/.cache/i3status_files-file_updater_example.txt",
-            on_click=run_command_on_click("xdg-open https://gmail.com/".split()),
-        )
-    ]
 }
 
 

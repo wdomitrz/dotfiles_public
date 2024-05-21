@@ -63,13 +63,16 @@ def handle_volume(*, button, modifiers, **_):
 # Blocks
 class Block(TypedDict, total=False):
     name: Required[str]
+    instance: str
     full_text: str
     color: str
     on_click: Callable[..., None]
 
 
 ALL_BLOCKS = {
-    block["name"]: block
+    (
+        (block["name"], block["instance"]) if "instance" in block else block["name"]
+    ): block
     for block in []
     # Button blocks
     + [
@@ -158,6 +161,14 @@ ALL_BLOCKS = {
             on_click=run_command_on_click("playerctl play-pause".split(), refresh=True),
         ),
         Block(name="volume", on_click=handle_volume),
+    ]
+    #
+    + [
+        Block(
+            name="read_file",
+            instance="~/.cache/i3status_files-file_updater_example.txt",
+            on_click=run_command_on_click("xdg-open https://gmail.com/".split()),
+        )
     ]
 }
 
@@ -288,11 +299,11 @@ def show_status_text():
 def handle_click(line):
     data = json.loads(line.strip().strip(","))
 
-    if (
-        (name := data.get("name")) is None
-        or (block := ALL_BLOCKS[name]) is None
-        or (on_click := block.get("on_click")) is None
-    ):
+    block: Block | None = ALL_BLOCKS.get((data.get("name"), data.get("instance")))
+    if block is None:
+        block: Block | None = ALL_BLOCKS.get(data.get("name"))
+
+    if (block is None) or ((on_click := block.get("on_click")) is None):
         return
 
     on_click(**data)

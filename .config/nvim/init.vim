@@ -27,9 +27,6 @@ set termguicolors
 set undofile
 set updatetime=100
 set whichwrap+=<,>,h,l,[,]
-" Set nicer spelling highlighting
-highlight SpellCap guisp=yellow  gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
-highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 
 " Keymap
 " Use space as leader

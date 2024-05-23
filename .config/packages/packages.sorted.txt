@@ -139,6 +139,7 @@ python3-ipykernel
 python3-ipython
 python3-matplotlib
 python3-nautilus
+python3-neovim
 python3-numpy
 python3-pandas
 python3-pil

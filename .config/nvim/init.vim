@@ -1,5 +1,5 @@
 " Vim options
-" Automatically removing all trailing whitespace
+" Automatically removing all trailing whitespaces
 autocmd BufWritePre * %s/\s\+$//e
 " Disable spellcheck in terminal
 autocmd TermOpen * setlocal nospell nonumber norelativenumber

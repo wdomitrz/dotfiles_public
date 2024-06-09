@@ -5,7 +5,7 @@ if [ $# -ge 1 ]; then
     settings_file="$1"
 fi
 
-code --list-extensions |
+code --list-extensions | grep --invert-match "^Extensions installed on " |
     jq --null-input --raw-input '{"remote.SSH.defaultExtensions": [inputs]}' |
     jq 'add' --slurp "${settings_file}" - |
     jq --sort-keys --indent 4 |

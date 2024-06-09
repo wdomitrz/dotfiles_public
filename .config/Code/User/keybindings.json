@@ -98,7 +98,7 @@
         "command": "vspacecode.space",
         "comment": "Trigger vspacecode in empty editor group",
         "key": "space",
-        "when": "activeEditorGroupEmpty && focusedView == '' && !whichkeyActive && !inputFocus"
+        "when": "activeEditorGroupEmpty && !whichkeyActive && !inputFocus"
     },
     {
         "command": "vspacecode.space",
@@ -138,7 +138,7 @@
         "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
     {
-        "comment": "navigation in parameter hint (i.e. traverse the hints when there's multiple overload for one method)"
+        "comment": "Easy navigation in parameter hint (i.e. traverse the hints when there's multiple overload for one method)"
     },
     {
         "command": "showNextParameterHint",

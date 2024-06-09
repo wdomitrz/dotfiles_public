@@ -117,16 +117,17 @@
     "python.analysis.inlayHints.pytestParameters": true,
     "python.analysis.inlayHints.variableTypes": true,
     "remote.SSH.defaultExtensions": [
+        "bodil.file-browser",
         "davidanson.vscode-markdownlint",
         "dcasella.i3",
         "foxundermoon.shell-format",
         "ionutvmi.path-autocomplete",
+        "jacobdufault.fuzzy-search",
+        "kahole.magit",
         "llvm-vs-code-extensions.vscode-clangd",
         "mechatroner.rainbow-csv",
         "ms-python.black-formatter",
-        "ms-python.debugpy",
         "ms-python.flake8",
-        "ms-python.gather",
         "ms-python.isort",
         "ms-python.mypy-type-checker",
         "ms-python.pylint",
@@ -136,7 +137,6 @@
         "ms-toolsai.jupyter-keymap",
         "ms-toolsai.jupyter-renderers",
         "ms-toolsai.vscode-jupyter-cell-tags",
-        "ms-toolsai.vscode-jupyter-powertoys",
         "ms-vscode-remote.remote-ssh",
         "ms-vscode-remote.remote-ssh-edit",
         "ms-vscode.cpptools",
@@ -146,12 +146,13 @@
         "mtxr.sqltools",
         "nico-castell.linux-desktop-file",
         "njpwerner.autodocstring",
-        "sleistner.vscode-fileutils",
         "stkb.rewrap",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-polish",
         "timonwong.shellcheck",
         "vscodevim.vim",
+        "vspacecode.vspacecode",
+        "vspacecode.whichkey",
         "xadillax.viml"
     ],
     "remote.SSH.lockfilesInTmp": true,
@@ -193,6 +194,35 @@
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
+            "before": [
+                "<leader>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "args": "m",
+                    "command": "whichkey.triggerKey"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "d"
+            ],
+            "commands": [
+                "workbench.action.compareEditor.focusOtherSide"
+            ]
+        },
+        {
             "after": [
                 "g",
                 "j"
@@ -232,22 +262,13 @@
                 "d"
             ],
             "commands": [
-                "editor.action.goToDeclaration"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "d"
-            ],
-            "commands": [
                 "editor.action.peekDeclaration"
             ]
         },
         {
             "before": [
-                "<leader>",
-                "k"
+                "g",
+                "h"
             ],
             "commands": [
                 "editor.action.showHover"
@@ -263,7 +284,7 @@
         },
         {
             "before": [
-                "<leader>",
+                "g",
                 "i"
             ],
             "commands": [
@@ -273,37 +294,10 @@
         {
             "before": [
                 "g",
-                "i"
-            ],
-            "commands": [
-                "editor.action.goToImplementation"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
                 "t"
             ],
             "commands": [
                 "editor.action.peekTypeDefinition"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "t"
-            ],
-            "commands": [
-                "editor.action.goToTypeDefinition"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "r"
-            ],
-            "commands": [
-                "editor.action.rename"
             ]
         },
         {
@@ -316,42 +310,6 @@
             ]
         },
         {
-            "before": [
-                "<leader>",
-                "}"
-            ],
-            "commands": [
-                "editor.action.marker.nextInFiles"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "{"
-            ],
-            "commands": [
-                "editor.action.marker.prevInFiles"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "]"
-            ],
-            "commands": [
-                "editor.action.marker.next"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "["
-            ],
-            "commands": [
-                "editor.action.marker.prev"
-            ]
-        },
-        {
             "after": [
                 "<leader>",
                 "<leader>",
@@ -361,11 +319,40 @@
             "before": [
                 "f"
             ]
+        },
+        {
+            "after": [
+                "f"
+            ],
+            "before": [
+                "g",
+                "f"
+            ]
         }
     ],
     "vim.useCtrlKeys": false,
     "vim.useSystemClipboard": true,
     "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "args": "m",
+                    "command": "whichkey.triggerKey"
+                }
+            ]
+        },
         {
             "after": [
                 "p",
@@ -396,23 +383,19 @@
             ]
         },
         {
-            "after": [
-                "<",
-                "g",
-                "v"
-            ],
             "before": [
-                "<"
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
             ]
         },
         {
-            "after": [
-                ">",
-                "g",
-                "v"
-            ],
             "before": [
-                ">"
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
             ]
         },
         {
@@ -425,6 +408,29 @@
             "before": [
                 "f"
             ]
+        },
+        {
+            "after": [
+                "f"
+            ],
+            "before": [
+                "g",
+                "f"
+            ]
+        }
+    ],
+    "vspacecode.bindingOverrides": [
+        {
+            "command": "editor.action.marker.next",
+            "keys": "]",
+            "name": "Next error/marker",
+            "type": "command"
+        },
+        {
+            "command": "editor.action.marker.prev",
+            "keys": "[",
+            "name": "Previous error/marker",
+            "type": "command"
         }
     ],
     "window.autoDetectColorScheme": true,

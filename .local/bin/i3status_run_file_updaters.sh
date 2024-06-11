@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set +e
+set -uo pipefail
 
 file_updaters_dir="${HOME}"/.local/bin/i3status_file_updaters/
 check_integrity_of_tracked_dir "${file_updaters_dir}" || exit 1

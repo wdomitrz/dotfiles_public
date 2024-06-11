@@ -20,6 +20,8 @@ shopt -s globstar     # Enable **
 shopt -s histappend   # Append to the history file
 shopt -u failglob     # Unmatched patterns don't cause errors
 
+set -o physical # symbolic links to directories expend directly to the target
+
 HISTFILE="${HOME}/.cache/bash_history" # History file
 
 HISTCONTROL=ignoredups # don't save lines with leading space

@@ -256,9 +256,29 @@
             ]
         },
         {
+            "after": [
+                "<leader>",
+                "<leader>",
+                "<leader>",
+                "j"
+            ],
+            "before": [
+                "f"
+            ]
+        },
+        {
+            "after": [
+                "f"
+            ],
             "before": [
                 "g",
-                "d"
+                "f"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "D"
             ],
             "commands": [
                 "editor.action.peekDeclaration"
@@ -267,18 +287,18 @@
         {
             "before": [
                 "g",
-                "h"
+                "d"
             ],
             "commands": [
-                "editor.action.showHover"
+                "editor.action.peekDefinition"
             ]
         },
         {
             "before": [
-                "shift+k"
+                "K"
             ],
             "commands": [
-                "editor.action.peekDefinition"
+                "editor.action.showHover"
             ]
         },
         {
@@ -302,6 +322,24 @@
         {
             "before": [
                 "g",
+                "R"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "c"
+            ],
+            "commands": [
+                "editor.action.codeActions"
+            ]
+        },
+        {
+            "before": [
+                "g",
                 "r"
             ],
             "commands": [
@@ -309,23 +347,21 @@
             ]
         },
         {
-            "after": [
-                "<leader>",
-                "<leader>",
-                "<leader>",
-                "j"
-            ],
             "before": [
-                "f"
+                "]",
+                "d"
+            ],
+            "commands": [
+                "editor.action.marker.next"
             ]
         },
         {
-            "after": [
-                "f"
-            ],
             "before": [
-                "g",
-                "f"
+                "[",
+                "d"
+            ],
+            "commands": [
+                "editor.action.marker.prev"
             ]
         }
     ],
@@ -416,20 +452,6 @@
                 "g",
                 "f"
             ]
-        }
-    ],
-    "vspacecode.bindingOverrides": [
-        {
-            "command": "editor.action.marker.next",
-            "keys": "]",
-            "name": "Next error/marker",
-            "type": "command"
-        },
-        {
-            "command": "editor.action.marker.prev",
-            "keys": "[",
-            "name": "Previous error/marker",
-            "type": "command"
         }
     ],
     "window.autoDetectColorScheme": true,

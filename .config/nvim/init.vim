@@ -28,6 +28,13 @@ set undofile
 set updatetime=100
 set whichwrap+=<,>,h,l,[,]
 
+" Theme
+try
+    let &background = readfile($HOME . "/.config/nvim/theme.txt")[0]
+catch
+    let &background = "dark"
+endtry
+
 " Keymap
 " Use space as leader
 let mapleader=" "
@@ -112,16 +119,6 @@ endif
 
 
 " Plugin options
-" Theme
-try
-    let &background = readfile($HOME . "/.config/nvim/theme.txt")[0]
-catch
-    let &background = "dark"
-endtry
-" With nicer spelling underline
-highlight SpellCap guisp=yellow  gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
-highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
-
 let g:EasyMotion_do_mapping = 0
 let g:markdown_syntax_conceal = 0
 let g:suda_smart_edit = 1

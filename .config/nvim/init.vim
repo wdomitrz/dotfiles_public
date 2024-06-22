@@ -99,7 +99,6 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'lambdalisue/suda.vim'
-Plug 'Mofiqul/vscode.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/nerdtree'
@@ -119,7 +118,6 @@ try
 catch
     let &background = "dark"
 endtry
-if has('nvim-0.9') | colorscheme vscode | endif
 " With nicer spelling underline
 highlight SpellCap guisp=yellow  gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
 highlight SpellBad guisp=red     gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl

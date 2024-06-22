@@ -4,4 +4,11 @@
     shuf --head-count=1 |
     awk '{print "\"" $0 "\""}' |
     xargs feh --no-fehbg --bg-fill ||
-    xsetroot -solid "#000000"
+    (
+        THEME_FILE="${HOME}"/.config/theme/theme.txt
+        if [ -f "${THEME_FILE}" ] && [ "$(cat "${THEME_FILE}")" = "light" ]; then
+            xsetroot -grey
+        else
+            xsetroot -solid "#000000"
+        fi
+    )

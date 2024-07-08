@@ -281,7 +281,7 @@
                 "D"
             ],
             "commands": [
-                "editor.action.peekDeclaration"
+                "editor.action.goToDeclaration"
             ]
         },
         {
@@ -316,7 +316,7 @@
                 "t"
             ],
             "commands": [
-                "editor.action.peekTypeDefinition"
+                "editor.action.goToTypeDefinition"
             ]
         },
         {

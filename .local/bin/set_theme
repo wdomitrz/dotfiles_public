@@ -97,12 +97,12 @@ function set_local_theme() {
 function set_theme_local() {
     dark_or_light="$1"
 
+    set_local_theme "${dark_or_light}"
     set_gtk3_theme "${dark_or_light}"
     set_gtk4_theme "${dark_or_light}"
     set_jupyter_theme "${dark_or_light}"
     set_kitty_theme "${dark_or_light}"
     set_background_theme "${dark_or_light}"
-    set_local_theme "${dark_or_light}"
     set_bat_theme "${dark_or_light}"
     set_nvim_theme "${dark_or_light}"
     set_rofi_theme "${dark_or_light}"
@@ -110,7 +110,7 @@ function set_theme_local() {
 
 function set_theme() {
     set_theme_local "$@"
-    # ssh -Y localhost -- "$(typeset -f); set_theme_local" "$@"
+    # ssh -Y localhost -- "$(typeset -f); set_theme_local" "$@" &
 }
 
 function get_theme() {

@@ -28,6 +28,12 @@
         "when": "activeEditor == 'workbench.editor.interactive'"
     },
     {
+        "command": "acceptSelectedSuggestion",
+        "comment": "accept suggestion even in interactive window",
+        "key": "enter",
+        "when": "acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus"
+    },
+    {
         "command": "removeSecondaryCursors",
         "comment": "Multi cursors",
         "key": "shift+escape",

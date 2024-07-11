@@ -39,9 +39,13 @@ function add_bookmarks() {
     done
 }
 
-function configure_nautilus_open_terminal() {
-    # Open kitty from nautilus
+function compile_glib_schemas() {
     glib-compile-schemas "${HOME}"/.local/share/glib-2.0/schemas/
+}
+
+function configure_nautilus_open_terminal() {
+    compile_glib_schemas
+    # Open kitty from nautilus
     [[ -z ${TERMINAL+variable_unset} ]] && echo "Variable TERMINAL is not set" && return 1
     DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "${TERMINAL}"
 }
@@ -56,6 +60,7 @@ function config_user_main() {
 
     copy_user_configs
     set_shell_bash
+    compile_glib_schemas
     update_tldr
     configure_nautilus_open_terminal
     install_code_extensions

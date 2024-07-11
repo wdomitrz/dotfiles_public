@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gsettings-desktop-schemas">
   <!-- https://github.com/GNOME/gsettings-desktop-schemas/blob/master/headers/gdesktop-enums.h -->
-  <enum>
+  <enum id="org.gnome.desktop.GDesktopColorScheme">
     <value nick="default" value="0"/>
     <value nick="prefer-dark" value="1"/>
     <value nick="prefer-light" value="2"/>

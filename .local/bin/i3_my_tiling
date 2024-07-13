@@ -6,74 +6,51 @@
 import i3ipc
 
 
-def container_to_ignore(container: i3ipc.Con) -> bool:
-    if "_on" in container.floating:  # Floating
-        return True
-    if container.fullscreen_mode == 1:  # Full screen
-        return True
-    if container.parent.layout == "stacked":
-        return True
-    if container.parent.layout == "tabbed":
-        return True
-    return False
+def container_to_ignore(container: i3ipc.Con | None) -> bool:
+    return (
+        container is None
+        or "_on" in container.floating  # Floating
+        or container.fullscreen_mode == 1  # Full screen
+        or container.parent.layout == "stacked"
+        or container.parent.layout == "tabbed"
+    )
 
 
-def get_widows_on_workspace(workspace):
-    return list(
-        filter(
-            lambda container: container.window and not container_to_ignore(container),
-            workspace.descendants(),
+def n_column_layout(i3: i3ipc.Connection, *, n: int) -> None:
+    def resize_to_nth(i3: i3ipc.Connection, event: i3ipc.WindowEvent) -> None:
+        if event.container.ipc_data.get("last_split_layout") != "splith":
+            return
+        if container_to_ignore(container := i3.get_tree().find_focused()):
+            return
+
+        workspace_width: int = container.workspace().rect.width
+        container_width: int = container.rect.width
+        size_delta: int = container_width % (workspace_width // n)
+        if size_delta < n or (workspace_width // n - size_delta) < n:
+            return
+        i3.command(f"resize set {container_width - size_delta}")
+
+    def up_to_n_colums(i3: i3ipc.Connection, _event: i3ipc.WindowEvent) -> None:
+
+        if container_to_ignore(container := i3.get_tree().find_focused()):
+            return
+
+        how_to_split: str = (
+            "splith"
+            if container.rect.width > container.workspace().rect.width // n + 1
+            else "splitv"
         )
-    )
+        i3.command(how_to_split)
 
-
-def resize_2nd_and_3rd(i3: i3ipc.Connection, event: i3ipc.WindowEvent):
-    if event.container.ipc_data.get("last_split_layout") != "splith":
-        print(event.container.__dict__)
-        return
-    container = i3.get_tree().find_focused()
-    if container_to_ignore(container):
-        return
-
-    if (
-        numer_of_windows := len(get_widows_on_workspace(container.workspace()))
-    ) not in [2, 3]:
-        return
-
-    workspace_width = container.workspace().rect.width
-
-    if numer_of_windows == 2:
-        i3.command(f"resize set {workspace_width // 3}")
-        return
-    elif numer_of_windows == 3:
-        for _ in range(2):
-            i3.command("focus left")
-        for i in range(3):
-            if i != 0:
-                i3.command("focus right")
-            i3.command(f"resize set {workspace_width // 3}")
-
-
-def up_to_3_colums(i3: i3ipc.Connection, _event: i3ipc.WindowEvent):
-    container = i3.get_tree().find_focused()
-    if container_to_ignore(container):
-        return
-
-    i3.command(
-        "splith"
-        if len(get_widows_on_workspace(container.workspace())) < 3
-        else "splitv"
-    )
-
-
-def layout_3_columns(i3):
-    i3.on(i3ipc.Event.WINDOW_FOCUS, up_to_3_colums)
-    i3.on(i3ipc.Event.WINDOW_NEW, resize_2nd_and_3rd)
+    i3.on(event=i3ipc.Event.WINDOW_NEW, handler=resize_to_nth)
+    i3.on(event=i3ipc.Event.WINDOW_CLOSE, handler=resize_to_nth)
+    i3.on(event=i3ipc.Event.WINDOW_MOVE, handler=resize_to_nth)
+    i3.on(event=i3ipc.Event.WINDOW_FOCUS, handler=up_to_n_colums)
 
 
 def main():
     i3 = i3ipc.Connection()
-    layout_3_columns(i3)
+    n_column_layout(i3, n=3)
     i3.main()
 
 

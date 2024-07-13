@@ -3,6 +3,9 @@
 # Copyright (c) 2024 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
+import argparse
+from typing import Literal
+
 import i3ipc
 
 
@@ -16,41 +19,53 @@ def container_to_ignore(container: i3ipc.Con | None) -> bool:
     )
 
 
-def n_column_layout(i3: i3ipc.Connection, *, n: int) -> None:
-    def resize_to_nth(i3: i3ipc.Connection, event: i3ipc.WindowEvent) -> None:
-        if event.container.ipc_data.get("last_split_layout") != "splith":
-            return
-        if container_to_ignore(container := i3.get_tree().find_focused()):
+def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
+    def resize_to_nth(i3: i3ipc.Connection, _event: i3ipc.WindowEvent) -> None:
+        if container_to_ignore(container := i3.get_tree().find_focused()) or (
+            container.parent is not None
+            and container.ipc_data["rect"]["y"]
+            != container.parent.ipc_data["rect"]["y"]
+        ):
             return
 
-        workspace_width: int = container.workspace().rect.width
-        container_width: int = container.rect.width
-        size_delta: int = container_width % (workspace_width // n)
-        if size_delta < n or (workspace_width // n - size_delta) < n:
-            return
-        i3.command(f"resize set {container_width - size_delta}")
+        workspace_width = container.workspace().rect.width
+        container_width = container.rect.width
+        size_delta = container_width % (workspace_width // n)
+        if -n <= (size_delta - workspace_width // n):
+            size_delta -= workspace_width // n
+
+        i3.command(f"resize set width {container_width - int(size_delta)}")
 
     def up_to_n_colums(i3: i3ipc.Connection, _event: i3ipc.WindowEvent) -> None:
-
         if container_to_ignore(container := i3.get_tree().find_focused()):
             return
 
-        how_to_split: str = (
-            "splith"
-            if container.rect.width > container.workspace().rect.width // n + 1
-            else "splitv"
+        how_to_split: Literal["horizontal", "vertical"] = (
+            "horizontal"
+            if container.rect.width > 2 * container.workspace().rect.width // n - n
+            else "vertical"
         )
-        i3.command(how_to_split)
 
-    i3.on(event=i3ipc.Event.WINDOW_NEW, handler=resize_to_nth)
-    i3.on(event=i3ipc.Event.WINDOW_CLOSE, handler=resize_to_nth)
-    i3.on(event=i3ipc.Event.WINDOW_MOVE, handler=resize_to_nth)
+        i3.command(f"split {how_to_split}")
+
     i3.on(event=i3ipc.Event.WINDOW_FOCUS, handler=up_to_n_colums)
+    i3.on(event=i3ipc.Event.WINDOW_NEW, handler=resize_to_nth)
+    i3.on(event=i3ipc.Event.WINDOW_MOVE, handler=resize_to_nth)
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-n",
+        "--number-of-columns",
+        help="number of columns",
+        type=float,
+        default=3,
+    )
+    args = parser.parse_args()
+
     i3 = i3ipc.Connection()
-    n_column_layout(i3, n=3)
+    n_column_layout(i3, n=args.number_of_columns)
     i3.main()
 
 

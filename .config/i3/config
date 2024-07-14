@@ -202,7 +202,7 @@ bindsym XF86AudioStop       exec --no-startup-id    playerctl stop
 
 # Autostart
 exec --no-startup-id            ~/.config/i3/my_auto_run.sh
-exec_always --no-startup-id     i3_my_tiling --number-of-columns 2.5
+exec_always --no-startup-id     i3_n_column_layout --number-of-columns 2.5
 
 bar {
     status_command i3status_wrapper

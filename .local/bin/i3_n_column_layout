@@ -51,6 +51,7 @@ def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
     i3.on(event=i3ipc.Event.WINDOW_FOCUS, handler=up_to_n_colums)
     i3.on(event=i3ipc.Event.WINDOW_NEW, handler=resize_to_nth)
     i3.on(event=i3ipc.Event.WINDOW_MOVE, handler=resize_to_nth)
+    i3.on(event=i3ipc.Event.WINDOW_CLOSE, handler=resize_to_nth)
 
 
 def main():

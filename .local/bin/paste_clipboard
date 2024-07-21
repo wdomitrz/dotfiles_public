@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec xclip -out -selection clipboard

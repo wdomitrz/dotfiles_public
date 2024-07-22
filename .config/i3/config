@@ -163,6 +163,8 @@ bindsym Print               exec --no-startup-id    flameshot gui
 bindsym $mod+p              exec --no-startup-id    flameshot gui
 bindsym Ctrl+Print          exec --no-startup-id    flameshot full --clipboard
 bindsym $mod+Ctrl+p         exec --no-startup-id    flameshot full --clipboard
+# Scan text using image to text software
+bindsym $mod+t              exec --no-startup-id    gtk-launch scan_text
 # Terminal
 bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
 # Terminal on local machine

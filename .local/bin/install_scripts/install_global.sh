@@ -72,6 +72,10 @@ function install_tailscale() {
     curl -fsSL https://tailscale.com/install.sh | sh
 }
 
+function install_dust() {
+    install_deb_from_url "https://github.com/bootandy/dust/releases/download/v1.1.1/du-dust_1.1.1-1_amd64.deb"
+}
+
 function install_global_main() {
     set -euo pipefail
     set -x
@@ -83,6 +87,7 @@ function install_global_main() {
     install_tailscale
     install_vscode
     install_nvim_appimage_as_system_nvim
+    install_dust
     update_and_upgrade
 }
 

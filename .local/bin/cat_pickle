@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
-import sys
 import pickle
+import sys
 
 for f in sys.argv[1:]:
-    print(pickle.load(open(f, "rb")))
+    with open(f, "rb") as file:
+        data = pickle.load(file)
+    try:
+        print(data)
+    except BrokenPipeError:
+        pass

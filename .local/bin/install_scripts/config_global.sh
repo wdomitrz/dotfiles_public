@@ -2,7 +2,7 @@
 
 function copy_global_configs() {
     check_integrity_of_tracked_dir "${HOME}"/.config/global_configs &&
-        sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/global_configs/ /
+        sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/global_configs/. /
 }
 
 function fix_keychron_post_config_copy() {
@@ -85,6 +85,7 @@ function configure_touchpad() {
     grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
         sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"
 }
+
 function config_global_start() {
     copy_global_configs
     update_locales

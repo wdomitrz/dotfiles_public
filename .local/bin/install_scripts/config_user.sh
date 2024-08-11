@@ -2,7 +2,7 @@
 
 function copy_user_configs() {
     check_integrity_of_tracked_dir "${HOME}"/.config/user_configs &&
-        cp --backup=numbered --verbose --recursive "${HOME}"/.config/user_configs/ "${HOME}"/
+        cp --backup=numbered --verbose --recursive "${HOME}"/.config/user_configs/. "${HOME}"/
 }
 
 function set_shell() {

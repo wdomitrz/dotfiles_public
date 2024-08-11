@@ -105,8 +105,6 @@ function install_user_main() {
     set -x
 
     install_nvim_appimage
-    install_multi_touch_gestures_fusuma
-    download_macos_wallpapers
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then

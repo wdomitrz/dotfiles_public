@@ -1,0 +1,1 @@
+i3_blank_screen

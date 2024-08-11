@@ -14,6 +14,7 @@ arandr
 bash
 bash-completion
 bat
+black
 blueman
 bluetooth
 bolt

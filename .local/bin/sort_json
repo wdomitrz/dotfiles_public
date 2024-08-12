@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-target_file="$1"
-tmp_file="$(mktemp)"
-python3 -m json.tool --sort-keys "${target_file}" "${tmp_file}"
-mv "${tmp_file}" "${target_file}"

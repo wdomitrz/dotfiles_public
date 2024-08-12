@@ -110,6 +110,7 @@ nautilus-admin
 nautilus-image-converter
 ncdu
 neovim
+net-tools
 network-manager
 network-manager-gnome
 nmap
@@ -132,6 +133,7 @@ powertop
 preload
 printer-driver-all
 progress
+pulseaudio-utils
 pv
 python3
 python3-dev

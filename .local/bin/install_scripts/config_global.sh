@@ -103,6 +103,43 @@ function config_global_rest() {
     install_and_config_ssh_server
 }
 
+function configure_tpm2_non_root_disk_unlock() {
+    echo "Don't use this function" && exit 1
+
+    # Add tpm2 as a method to open the drive on boot
+    # For lines with encrypted disks (with `_crypt UUID`) add `,tpm2-device=auto`
+    # to the last parameter
+    sudo sed --in-place --expression='/_crypt UUID/s/[ \t]*$/,tpm2-device=auto/' /etc/crypttab
+    sudo update-initramfs -u
+
+    # Actually allow tmp2 to unlock the drive
+    # replace UNSET_DEVICE with something like nvme0n1p3 (if above you had nvme0n1p3_crypt)
+    sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/UNSET_DEVICE
+}
+
+function configure_tpm2_oot_disk_unlock_with_dracut() {
+    echo "Don't use this function" && exit 1
+
+    # https://blog.fernvenue.com/archives/debian-with-luks-and-tpm-auto-decryption/
+
+    # Comment out /etc/crypttab
+    sudo sed --in-place --expression='/_crypt UUID/s/^/# /' /etc/crypttab
+
+    sudo apt-get install --no-install-recommends dracut tpm4-tools && sudo apt-get autoremove --purge
+    echo 'add_dracutmodules+=" tpm2-tss crypt "' | sudo tee /etc/dracut.conf.d/tpm2.conf
+    sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="rd.auto rd.luks=1"/' /etc/default/grub
+    sudo dracut -f
+    sudo update-grub
+
+    # Actually allow tmp2 to unlock the drive
+    # replace UNSET_DEVICE with something like nvme0n1p3
+    sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/UNSET_DEVICE
+
+    # I didn't test if it's necesary to run it again
+    sudo dracut -f
+    sudo update-grub
+}
+
 function config_global_main() {
     set -euo pipefail
     set -x

@@ -20,6 +20,8 @@ if [[ "${MAIN_BRANCH}" != "$(git rev-parse --abbrev-ref HEAD)" ]]; then
     git -c core.editor=true merge --continue
 fi
 
+git fetch
+
 for branch in "${ALL_BRANCHES[@]}"; do
     merge_with_main_branch "${branch}"
 done

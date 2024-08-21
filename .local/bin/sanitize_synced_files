@@ -1,71 +1,73 @@
 #!/usr/bin/env bash
 
+function print_and_run() {
+    function_to_run="$1"
+    echo -en "${function_to_run}:\t\tstarting ..."
+    "${function_to_run}"
+    echo -e " done"
+}
+
 function get_all_tracked_files() {
-    git ls-tree -r --full-tree --full-name --name-only HEAD |
-        sort
+    git rev-parse --show-toplevel | xargs git ls-files --full-name
 }
 
 function sort_json_files() {
     for json_file in $(get_all_tracked_files | grep "\.sorted\.json$"); do
         jq --sort-keys . "${json_file}" | sponge "${json_file}"
     done
-    echo "Sorted jsons"
 }
 
 function format_json_files() {
     for json_file in $(get_all_tracked_files | grep "\.json$"); do
         jq --indent 4 . "${json_file}" | sponge "${json_file}"
     done
-    echo "Formatted jsons"
 }
 
 function sort_txt_files() {
     for file_to_sort in $(get_all_tracked_files | grep "\.sorted\.txt$"); do
         sort --output "${file_to_sort}"{,}
     done
-    echo "Sorted txt files"
 }
 
 function sort_numeric_txt_files() {
     for file_to_sort in $(get_all_tracked_files | grep "\.sorted_numeric\.txt$"); do
         sort --numeric-sort --output "${file_to_sort}"{,}
     done
-    echo "Sorted numeric txt files"
 }
 
 function format_shell_files() {
     get_all_tracked_files | grep "\.sh$" | xargs readlink --canonicalize |
         xargs shfmt --indent 4 --space-redirects --write
-    echo "Formatted shell scripts"
 }
 
-function lint_shell_files() {
+function apply_suggestions_to_shell_files() {
     git_root="$(git rev-parse --show-toplevel)"
     get_all_tracked_files | grep "\.sh$" | xargs readlink --canonicalize |
         xargs shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
         sed "s|--- ${git_root}|--- a|g" |
         sed "s|+++ ${git_root}|+++ b|g" |
         patch --strip=1 --directory="${git_root}"
-    echo "Applied suggestions to shell scripts"
+}
 
+function lint_shell_files() {
     get_all_tracked_files | grep "\.sh$" |
         xargs shellcheck --exclude=SC1091,SC2312 --enable=all
-    echo "Checked shell scripts"
 }
 
 function format_python_files() {
     get_all_tracked_files | grep "\.py$" | xargs readlink --canonicalize |
-        xargs black
+        xargs black --quiet
 }
 
 function sanitize_synced_main() {
-    sort_json_files
-    format_json_files
-    sort_txt_files
-    sort_numeric_txt_files
-    format_shell_files
-    lint_shell_files
-    format_python_files
+    print_and_run sort_json_files
+    print_and_run format_json_files
+    print_and_run sort_txt_files
+    print_and_run sort_numeric_txt_files
+    print_and_run format_python_files
+    print_and_run format_shell_files
+    print_and_run apply_suggestions_to_shell_files
+    print_and_run lint_shell_files
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then

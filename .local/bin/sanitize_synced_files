@@ -12,26 +12,26 @@ function get_all_tracked_files() {
 }
 
 function sort_json_files() {
-    for json_file in $(get_all_tracked_files | grep "\.sorted\.json$"); do
-        jq --sort-keys . "${json_file}" | sponge "${json_file}"
+    for file in $(get_all_tracked_files | grep "\.sorted\.json$"); do
+        jq --sort-keys . "${file}" | sponge "${file}"
     done
 }
 
 function format_json_files() {
-    for json_file in $(get_all_tracked_files | grep "\.json$"); do
-        jq --indent 4 . "${json_file}" | sponge "${json_file}"
+    for file in $(get_all_tracked_files | grep "\.json$"); do
+        jq --indent 4 . "${file}" | sponge "${file}"
     done
 }
 
 function sort_txt_files() {
-    for file_to_sort in $(get_all_tracked_files | grep "\.sorted\.txt$"); do
-        sort --output "${file_to_sort}"{,}
+    for file in $(get_all_tracked_files | grep "\.sorted\.txt$"); do
+        sort --output "${file}"{,}
     done
 }
 
 function sort_numeric_txt_files() {
-    for file_to_sort in $(get_all_tracked_files | grep "\.sorted_numeric\.txt$"); do
-        sort --numeric-sort --output "${file_to_sort}"{,}
+    for file in $(get_all_tracked_files | grep "\.sorted_numeric\.txt$"); do
+        sort --numeric-sort --output "${file}"{,}
     done
 }
 

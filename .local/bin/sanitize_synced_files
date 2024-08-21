@@ -35,7 +35,7 @@ function sort_numeric_txt_files() {
 
 function format_shell_files() {
     get_all_tracked_files | grep "\.sh$" | xargs readlink --canonicalize |
-        xargs shfmt -i 4 -w
+        xargs shfmt --indent 4 --space-redirects --write
     echo "Formatted shell scripts"
 }
 

@@ -35,7 +35,7 @@ function add_bookmarks() {
 
     for d in Documents Downloads Music Pictures Videos; do
         grep --quiet "${d}" "${HOME}"/.config/gtk-3.0/bookmarks ||
-            echo "file://$(pwd)/${d}" >>"${HOME}"/.config/gtk-3.0/bookmarks
+            echo "file://$(pwd)/${d}" >> "${HOME}"/.config/gtk-3.0/bookmarks
     done
 }
 

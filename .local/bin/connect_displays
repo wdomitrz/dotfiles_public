@@ -7,4 +7,4 @@ config_file="${HOME}/.config/displays_to_connect/${HOSTNAME}.txt"
 
 while read -r displays_to_connect; do
     xrandr --setmonitor "connected_${displays_to_connect}" auto "${displays_to_connect}"
-done <"${config_file}"
+done < "${config_file}"

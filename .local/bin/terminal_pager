@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 scrollback_buffer_file="$(mktemp)"
-cat >"${scrollback_buffer_file}"
+cat > "${scrollback_buffer_file}"
 
 if [ $# -eq 0 ]; then
     cursor_position="" # Empty position means last line

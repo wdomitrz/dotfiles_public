@@ -21,7 +21,7 @@ function install_signal() {
     # 1. Install our official public software signing key
     wget -O- https://updates.signal.org/desktop/apt/keys.asc |
         gpg --dearmor |
-        sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg >/dev/null
+        sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
 
     # 2. Add our repository to your list of repositories
     echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |

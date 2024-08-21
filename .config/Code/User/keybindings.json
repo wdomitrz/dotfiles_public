@@ -19,7 +19,7 @@
         "command": "extension.vim_escape",
         "comment": "Interactive editor fixes; Overwrite interactive.input.clear",
         "key": "escape",
-        "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && (resourceScheme == 'vscode-interactive' || activeEditor == 'workbench.editor.interactive)"
+        "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && (resourceScheme == 'vscode-interactive' || activeEditor == 'workbench.editor.interactive')"
     },
     {
         "command": "interactive.execute",

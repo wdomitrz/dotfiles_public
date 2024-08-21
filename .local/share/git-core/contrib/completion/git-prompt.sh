@@ -110,7 +110,7 @@
 
 # check whether printf supports -v
 __git_printf_supports_v=
-printf -v __git_printf_supports_v -- '%s' yes >/dev/null 2>&1
+printf -v __git_printf_supports_v -- '%s' yes > /dev/null 2>&1
 
 # stores the divergence from upstream in $p
 # used by GIT_PS1_SHOWUPSTREAM
@@ -121,7 +121,7 @@ __git_ps1_show_upstream() {
 
     svn_remote=()
     # get some config options from git-config
-    local output="$(git config -z --get-regexp '^(svn-remote\..*\.url|bash\.showupstream)$' 2>/dev/null | tr '\0\n' '\n ')"
+    local output="$(git config -z --get-regexp '^(svn-remote\..*\.url|bash\.showupstream)$' 2> /dev/null | tr '\0\n' '\n ')"
     while read -r key value; do
         case "$key" in
         bash.showupstream)
@@ -137,7 +137,7 @@ __git_ps1_show_upstream() {
             upstream_type=svn+git # default upstream type is SVN if available, else git
             ;;
         esac
-    done <<<"$output"
+    done <<< "$output"
 
     # parse configuration values
     local option
@@ -158,7 +158,7 @@ __git_ps1_show_upstream() {
         # (git-svn uses essentially the same procedure internally)
         local -a svn_upstream
         svn_upstream=($(git log --first-parent -1 \
-            --grep="^git-svn-id: \(${svn_url_pattern#??}\)" 2>/dev/null))
+            --grep="^git-svn-id: \(${svn_url_pattern#??}\)" 2> /dev/null))
         if [[ 0 -ne ${#svn_upstream[@]} ]]; then
             svn_upstream=${svn_upstream[${#svn_upstream[@]} - 2]}
             svn_upstream=${svn_upstream%@*}
@@ -182,11 +182,11 @@ __git_ps1_show_upstream() {
     # Find how many commits we are ahead/behind our upstream
     if [[ -z "$legacy" ]]; then
         count="$(git rev-list --count --left-right \
-            "$upstream_type"...HEAD 2>/dev/null)"
+            "$upstream_type"...HEAD 2> /dev/null)"
     else
         # produce equivalent output to --count for older versions of git
         local commits
-        if commits="$(git rev-list --left-right "$upstream_type"...HEAD 2>/dev/null)"; then
+        if commits="$(git rev-list --left-right "$upstream_type"...HEAD 2> /dev/null)"; then
             local commit behind=0 ahead=0
             for commit in $commits; do
                 case "$commit" in
@@ -229,7 +229,7 @@ __git_ps1_show_upstream() {
         esac
         if [[ -n "$count" && -n "$name" ]]; then
             __git_ps1_upstream_name=$(git rev-parse \
-                --abbrev-ref "$upstream_type" 2>/dev/null)
+                --abbrev-ref "$upstream_type" 2> /dev/null)
             if [ $pcmode = yes ] && [ $ps1_expanded = yes ]; then
                 upstream="$upstream \${__git_ps1_upstream_name}"
             else
@@ -294,7 +294,7 @@ __git_ps1_colorize_gitstring() {
 # __git_eread requires 2 arguments, the file path and the name of the
 # variable, in that order.
 __git_eread() {
-    test -r "$1" && IFS=$'\r\n' read -r "$2" <"$1"
+    test -r "$1" && IFS=$'\r\n' read -r "$2" < "$1"
 }
 
 # see if a cherry-pick or revert is in progress, if the user has committed a
@@ -403,7 +403,7 @@ __git_ps1() {
     local repo_info rev_parse_exit_code
     repo_info="$(git rev-parse --git-dir --is-inside-git-dir \
         --is-bare-repository --is-inside-work-tree \
-        --short HEAD 2>/dev/null)"
+        --short HEAD 2> /dev/null)"
     rev_parse_exit_code="$?"
 
     if [ -z "$repo_info" ]; then
@@ -469,7 +469,7 @@ __git_ps1() {
             :
         elif [ -h "$g/HEAD" ]; then
             # symlink symbolic ref
-            b="$(git symbolic-ref HEAD 2>/dev/null)"
+            b="$(git symbolic-ref HEAD 2> /dev/null)"
         else
             local head=""
             if ! __git_eread "$g/HEAD" head; then
@@ -496,7 +496,7 @@ __git_ps1() {
                     * | default)
                         git describe --tags --exact-match HEAD
                         ;;
-                    esac 2>/dev/null
+                    esac 2> /dev/null
                 )" ||
                     b="$short_sha..."
                 b="($b)"
@@ -510,7 +510,7 @@ __git_ps1() {
 
     local conflict="" # state indicator for unresolved conflicts
     if [[ "${GIT_PS1_SHOWCONFLICTSTATE}" == "yes" ]] &&
-        [[ $(git ls-files --unmerged 2>/dev/null) ]]; then
+        [[ $(git ls-files --unmerged 2> /dev/null) ]]; then
         conflict="|CONFLICT"
     fi
 
@@ -539,13 +539,13 @@ __git_ps1() {
             fi
         fi
         if [ -n "${GIT_PS1_SHOWSTASHSTATE-}" ] &&
-            git rev-parse --verify --quiet refs/stash >/dev/null; then
+            git rev-parse --verify --quiet refs/stash > /dev/null; then
             s="$"
         fi
 
         if [ -n "${GIT_PS1_SHOWUNTRACKEDFILES-}" ] &&
             [ "$(git config --bool bash.showUntrackedFiles)" != "false" ] &&
-            git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- ':/*' >/dev/null 2>/dev/null; then
+            git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- ':/*' > /dev/null 2> /dev/null; then
             u="%${ZSH_VERSION+%}"
         fi
 

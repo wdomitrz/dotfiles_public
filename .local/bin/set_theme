@@ -15,7 +15,7 @@ function set_gtk4_theme() {
         theme_name="Adwaita"
     fi
 
-    if ! command -v gsettings >/dev/null; then
+    if ! command -v gsettings > /dev/null; then
         return
     fi
 

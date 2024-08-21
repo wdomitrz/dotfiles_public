@@ -38,7 +38,7 @@ alias emacs='emacsclient --create-frame --tty'
 
 # Ignore errors
 function I() {
-    ("$@") 2>/dev/null
+    ("$@") 2> /dev/null
 }
 alias I='I '
 # Run command independently

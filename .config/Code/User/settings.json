@@ -91,6 +91,7 @@
     "mypy-type-checker.args": [
         "--ignore-missing-imports"
     ],
+    "notebook.experimental.remoteSave": true,
     "notebook.formatOnCellExecution": true,
     "notebook.formatOnSave.enabled": true,
     "notebook.lineNumbers": "on",
@@ -163,6 +164,7 @@
         "--enable=all"
     ],
     "shellcheck.disableVersionCheck": true,
+    "shellformat.flag": "--space-redirects",
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
@@ -290,7 +292,7 @@
                 "d"
             ],
             "commands": [
-                "editor.action.peekDefinition"
+                "editor.action.revealDefinition"
             ]
         },
         {

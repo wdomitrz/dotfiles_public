@@ -19,7 +19,7 @@
         "command": "extension.vim_escape",
         "comment": "Interactive editor fixes; Overwrite interactive.input.clear",
         "key": "escape",
-        "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'"
+        "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive' || activeEditor == 'workbench.editor.interactive"
     },
     {
         "command": "interactive.execute",
@@ -88,14 +88,26 @@
         "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
     },
     {
-        "command": "workbench.action.togglePanel",
+        "command": "workbench.action.terminal.toggleTerminal",
         "comment": "Open drop-down terminal",
-        "key": "ctrl+space"
+        "key": "ctrl+space",
+        "when": "terminal.active"
+    },
+    {
+        "command": "workbench.action.togglePanel",
+        "comment": "Toggle bottom panel",
+        "key": "ctrl+j"
     },
     {
         "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
         "comment": "Fix spelling",
         "key": "ctrl+l"
+    },
+    {
+        "command": "actions.find",
+        "comment": "Fix ctrl+f malfunctioning sometimes",
+        "key": "ctrl+f",
+        "when": "editorFocus || editorIsOpen"
     },
     {
         "comment": "VSpaceCode bindings"

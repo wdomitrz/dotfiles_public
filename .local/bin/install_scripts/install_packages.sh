@@ -7,7 +7,7 @@ function update_and_upgrade() {
 
 function install_packages() {
     packages_file="${HOME}"/.config/packages/packages.sorted.txt
-    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends <"${packages_file}"
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends < "${packages_file}"
 }
 
 function install_nvidia() {
@@ -20,7 +20,7 @@ function install_nvidia() {
 
 function install_with_recommended() {
     packages_file="${HOME}"/.config/packages/with_recommends.sorted.txt
-    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends <"${packages_file}"
+    xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends < "${packages_file}"
 }
 
 function install_packages_main() {

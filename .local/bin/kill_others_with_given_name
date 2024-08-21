@@ -10,4 +10,4 @@ function find_my_ancestors() {
 
 (pgrep --full "${pgrep_pattern}" || true) |
     sort | comm -23 - <(find_my_ancestors | sort) |
-    xargs --max-args=1 kill --signal KILL &>/dev/null
+    xargs --max-args=1 kill --signal KILL &> /dev/null

@@ -94,9 +94,9 @@ ${PATH_COLOR}\w${CLEAR}\n\
 ${PROMPT_COLOR}\$${CLEAR} "
 
 ## Git
-if source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2>/dev/null ||
-    source /usr/lib/git-core/git-sh-prompt 2>/dev/null ||
-    source /usr/share/git-core/contrib/completion/git-prompt.sh 2>/dev/null; then
+if source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2> /dev/null ||
+    source /usr/lib/git-core/git-sh-prompt 2> /dev/null ||
+    source /usr/share/git-core/contrib/completion/git-prompt.sh 2> /dev/null; then
 
     GIT_PS1_SHOWDIRTYSTATE=true
     GIT_PS1_SHOWSTASHSTATE=true

@@ -172,6 +172,7 @@
     "terminal.integrated.localEchoEnabled": "off",
     "update.showReleaseNotes": false,
     "vim.easymotion": true,
+    "vim.easymotionDimBackground": false,
     "vim.enableNeovim": true,
     "vim.handleKeys": {
         "<C-[>": true,

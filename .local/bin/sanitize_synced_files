@@ -1,19 +1,12 @@
 #!/usr/bin/env bash
 
-function print_and_run() {
-    function_to_run="$1"
-    echo -en "${function_to_run}:\t\tstarting ..."
-    "${function_to_run}"
-    echo -e " done"
-}
-
 function get_all_tracked_files() {
     git rev-parse --show-toplevel | xargs git ls-files --full-name
 }
 
 function sort_json_files() {
     for file in $(get_all_tracked_files | grep "\.sorted\.json$"); do
-        jq --sort-keys . "${file}" | sponge "${file}"
+        jq --indent 4 --sort-keys . "${file}" | sponge "${file}"
     done
 }
 
@@ -21,6 +14,11 @@ function format_json_files() {
     for file in $(get_all_tracked_files | grep "\.json$"); do
         jq --indent 4 . "${file}" | sponge "${file}"
     done
+}
+
+function do_all_jsons() {
+    sort_json_files
+    format_json_files
 }
 
 function sort_txt_files() {
@@ -54,21 +52,62 @@ function lint_shell_files() {
         xargs shellcheck --exclude=SC1091,SC2312 --enable=all
 }
 
+function do_all_shell_files() {
+    format_shell_files
+    apply_suggestions_to_shell_files
+    lint_shell_files
+}
+
 function format_python_files() {
     get_all_tracked_files | grep "\.py$" | xargs readlink --canonicalize |
-        xargs black --quiet
+        xargs ruff format --quiet
+}
+
+function isort_python_files() {
+    get_all_tracked_files | grep "\.py$" | xargs readlink --canonicalize |
+        xargs ruff check --select I --fix
+}
+
+function lint_python_files() {
+    get_all_tracked_files | grep "\.py$" | xargs readlink --canonicalize |
+        xargs ruff check --fix
+}
+
+function do_all_python_files() {
+    format_python_files
+}
+
+# Parallel exectuion with tracking proceesses ##################################
+declare -A running_processes
+declare -a running_processes_names
+
+function run_and_save() {
+    set -euo pipefail
+    name="$1"
+    running_processes_names+=("${name}")
+    "$@" &
+    running_processes["${name}"]="$!"
+}
+
+function wait_for_all() {
+    for name in "${running_processes_names[@]}"; do
+        pid="${running_processes[${name}]}"
+        echo -n "${name}"
+        wait "${pid}"
+        echo -e "\tdone"
+    done
 }
 
 function sanitize_synced_main() {
-    print_and_run sort_json_files
-    print_and_run format_json_files
-    print_and_run sort_txt_files
-    print_and_run sort_numeric_txt_files
-    print_and_run format_python_files
-    print_and_run format_shell_files
-    print_and_run apply_suggestions_to_shell_files
-    print_and_run lint_shell_files
+    run_and_save do_all_jsons
+    run_and_save sort_txt_files
+    run_and_save sort_numeric_txt_files
+    run_and_save do_all_python_files
+    run_and_save do_all_shell_files
+    wait_for_all
 }
+
+################################################################################
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
     set -euo pipefail

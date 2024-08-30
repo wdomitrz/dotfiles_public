@@ -79,11 +79,12 @@ function create_swap_file() {
             sudo tee -a /etc/fstab
     fi
 }
+
 function configure_touchpad() {
     local -r config_file="/usr/share/X11/xorg.conf.d/40-libinput.conf"
     # Tap to click
     grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
-        sudo sed 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' -i "${config_file}"
+        sudo sed --in-place 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' "${config_file}"
 }
 
 function config_global_start() {

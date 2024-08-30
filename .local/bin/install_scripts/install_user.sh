@@ -100,11 +100,16 @@ function download_macos_wallpapers() {
     ln -rsf "${wallpapers_directory}"/10-15-Day.jpg "${wallpapers_directory_light}"/
 }
 
+function install_python_ruff() {
+    pip3 install --user --upgrade ruff
+}
+
 function install_user_main() {
     set -euo pipefail
     set -x
 
     install_nvim_appimage
+    install_python_ruff
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then

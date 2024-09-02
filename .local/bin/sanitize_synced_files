@@ -75,6 +75,8 @@ function lint_python_files() {
 
 function do_all_python_files() {
     format_python_files
+    isort_python_files
+    lint_python_files
 }
 
 # Parallel exectuion with tracking proceesses ##################################

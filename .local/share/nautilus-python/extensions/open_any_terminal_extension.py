@@ -22,7 +22,7 @@ except ValueError:
     require_version("Gtk", "3.0")
     require_version("Nautilus", "3.0")
 
-from gi.repository import Gio, GObject, Gtk, Nautilus  # noqa: E402
+from gi.repository import Gio, GObject, Gtk, Nautilus
 
 TERM_WORKDIR_PARAMS = {
     "alacritty": "--working-directory ",

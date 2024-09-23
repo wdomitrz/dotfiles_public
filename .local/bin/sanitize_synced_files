@@ -63,19 +63,13 @@ function format_python_files() {
         xargs ruff format --quiet
 }
 
-function isort_python_files() {
-    get_all_tracked_files | grep "\.py$" | xargs readlink --canonicalize |
-        xargs ruff check --select I --fix
-}
-
 function lint_python_files() {
     get_all_tracked_files | grep "\.py$" | xargs readlink --canonicalize |
-        xargs ruff check --fix
+        xargs ruff check --quiet --extend-select I --fix
 }
 
 function do_all_python_files() {
     format_python_files
-    isort_python_files
     lint_python_files
 }
 

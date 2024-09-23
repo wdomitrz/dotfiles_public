@@ -201,7 +201,7 @@ def add_no_internet_info(old_blocks):
     if len(internet_blocks) == 0:
         return old_blocks
 
-    if any(map(lambda x: len(x["full_text"]) > 0, internet_blocks)):
+    if any((len(x["full_text"]) > 0 for x in internet_blocks)):
         return old_blocks
 
     for i, old_block in enumerate(old_blocks):
@@ -259,7 +259,7 @@ def combine_i3status_outputs(*i3status_outputs):
             continue
         last_remembered_lists[fileno] = result
 
-        yield sum([last_remembered_lists[fileno] for fileno in fileno_order], [])
+        yield sum([last_remembered_lists[fileno] for fileno in fileno_order], [])  # noqa: RUF017
 
 
 def show_status_text():

@@ -1,7 +1,7 @@
 {
     "C_Cpp.loggingLevel": "Debug",
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -76,16 +76,9 @@
     "files.simpleDialog.enable": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-    "flake8.args": [
-        "--extend-ignore=D1,D2,D4,E203,E501"
-    ],
     "git.enableSmartCommit": true,
     "git.enabled": true,
     "git.mergeEditor": true,
-    "isort.args": [
-        "--profile",
-        "black"
-    ],
     "jupyter.askForKernelRestart": false,
     "keyboard.dispatch": "keyCode",
     "mypy-type-checker.args": [
@@ -102,6 +95,7 @@
         "--disable=missing-class-docstring",
         "--disable=missing-function-docstring",
         "--disable=missing-module-docstring",
+        "--disable=no-else-raise",
         "--disable=no-else-return",
         "--generated-members=numpy.*,torch.*"
     ],
@@ -118,6 +112,7 @@
     "python.analysis.inlayHints.variableTypes": true,
     "remote.SSH.defaultExtensions": [
         "bodil.file-browser",
+        "charliermarsh.ruff",
         "davidanson.vscode-markdownlint",
         "dcasella.i3",
         "foxundermoon.shell-format",
@@ -126,9 +121,6 @@
         "kahole.magit",
         "llvm-vs-code-extensions.vscode-clangd",
         "mechatroner.rainbow-csv",
-        "ms-python.black-formatter",
-        "ms-python.flake8",
-        "ms-python.isort",
         "ms-python.mypy-type-checker",
         "ms-python.pylint",
         "ms-python.python",

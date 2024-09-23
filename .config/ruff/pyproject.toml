@@ -1,0 +1,13 @@
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+extend-select = [
+    "B", "C", "E", "F", "I", "RUF", "W"
+]
+ignore = [
+    "E501", "RUF005"
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 18

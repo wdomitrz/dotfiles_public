@@ -451,7 +451,7 @@
     ],
     "window.autoDetectColorScheme": true,
     "window.commandCenter": false,
-    "window.customTitleBarVisibility": "never",
+    "window.customTitleBarVisibility": "auto",
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
     "workbench.activityBar.location": "top",

@@ -115,21 +115,6 @@
         "when": "editorFocus || editorIsOpen"
     },
     {
-        "comment": "VSpaceCode bindings"
-    },
-    {
-        "command": "vspacecode.space",
-        "comment": "Trigger vspacecode in empty editor group",
-        "key": "space",
-        "when": "activeEditorGroupEmpty && !whichkeyActive && !inputFocus"
-    },
-    {
-        "command": "vspacecode.space",
-        "comment": "Trigger vspacecode when sidebar is in focus",
-        "key": "space",
-        "when": "sideBarFocus && !inputFocus && !whichkeyActive"
-    },
-    {
         "comment": "Easy navigation in quick open/QuickPick"
     },
     {

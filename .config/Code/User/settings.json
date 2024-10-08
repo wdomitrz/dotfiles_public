@@ -118,6 +118,7 @@
         "foxundermoon.shell-format",
         "ionutvmi.path-autocomplete",
         "jacobdufault.fuzzy-search",
+        "jimmyzjx.leaderkey",
         "kahole.magit",
         "llvm-vs-code-extensions.vscode-clangd",
         "mechatroner.rainbow-csv",
@@ -143,8 +144,6 @@
         "streetsidesoftware.code-spell-checker-polish",
         "timonwong.shellcheck",
         "vscodevim.vim",
-        "vspacecode.vspacecode",
-        "vspacecode.whichkey",
         "xadillax.viml"
     ],
     "remote.SSH.lockfilesInTmp": true,
@@ -192,7 +191,17 @@
                 "<leader>"
             ],
             "commands": [
-                "vspacecode.space"
+                {
+                    "args": [
+                        "leaderkeyState",
+                        "SPC"
+                    ],
+                    "command": "_setContext"
+                },
+                {
+                    "args": "SPC",
+                    "command": "leaderkey.render"
+                }
             ]
         },
         {
@@ -200,10 +209,16 @@
                 ","
             ],
             "commands": [
-                "vspacecode.space",
                 {
-                    "args": "m",
-                    "command": "whichkey.triggerKey"
+                    "args": [
+                        "leaderkeyState",
+                        ","
+                    ],
+                    "command": "_setContext"
+                },
+                {
+                    "args": ",",
+                    "command": "leaderkey.render"
                 }
             ]
         },
@@ -368,7 +383,17 @@
                 "<space>"
             ],
             "commands": [
-                "vspacecode.space"
+                {
+                    "args": [
+                        "leaderkeyState",
+                        "SPC"
+                    ],
+                    "command": "_setContext"
+                },
+                {
+                    "args": "SPC",
+                    "command": "leaderkey.render"
+                }
             ]
         },
         {
@@ -376,10 +401,16 @@
                 ","
             ],
             "commands": [
-                "vspacecode.space",
                 {
-                    "args": "m",
-                    "command": "whichkey.triggerKey"
+                    "args": [
+                        "leaderkeyState",
+                        ","
+                    ],
+                    "command": "_setContext"
+                },
+                {
+                    "args": ",",
+                    "command": "leaderkey.render"
                 }
             ]
         },

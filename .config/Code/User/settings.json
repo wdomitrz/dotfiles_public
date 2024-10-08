@@ -7,6 +7,7 @@
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
     "cSpell.language": "en,pl",
+    "cSpell.suggestionMenuType": "quickFix",
     "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
     "editor.accessibilitySupport": "off",
@@ -199,6 +200,9 @@
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
+            "comment": "normal/visual mode keybindings"
+        },
+        {
             "before": [
                 "<leader>"
             ],
@@ -304,6 +308,9 @@
             ]
         },
         {
+            "comment": "normal mode keybindings"
+        },
+        {
             "before": [
                 "g",
                 "D"
@@ -397,8 +404,11 @@
     "vim.useSystemClipboard": true,
     "vim.visualModeKeyBindingsNonRecursive": [
         {
+            "comment": "normal/visual mode keybindings"
+        },
+        {
             "before": [
-                "<space>"
+                "<leader>"
             ],
             "commands": [
                 {
@@ -433,6 +443,78 @@
             ]
         },
         {
+            "before": [
+                "<C-w>",
+                "d"
+            ],
+            "commands": [
+                "workbench.action.compareEditor.focusOtherSide",
+                {
+                    "args": {
+                        "to": "viewPortCenter"
+                    },
+                    "command": "cursorMove"
+                }
+            ]
+        },
+        {
+            "after": [
+                "g",
+                "j"
+            ],
+            "before": [
+                "j"
+            ]
+        },
+        {
+            "after": [
+                "g",
+                "k"
+            ],
+            "before": [
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "u"
+            ],
+            "commands": [
+                "undo"
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "commands": [
+                "redo"
+            ]
+        },
+        {
+            "after": [
+                "<leader>",
+                "<leader>",
+                "<leader>",
+                "j"
+            ],
+            "before": [
+                "f"
+            ]
+        },
+        {
+            "after": [
+                "f"
+            ],
+            "before": [
+                "g",
+                "f"
+            ]
+        },
+        {
+            "comment": "visual mode keybindings"
+        },
+        {
             "after": [
                 "p",
                 "g",
@@ -441,24 +523,6 @@
             ],
             "before": [
                 "p"
-            ]
-        },
-        {
-            "after": [
-                "g",
-                "j"
-            ],
-            "before": [
-                "j"
-            ]
-        },
-        {
-            "after": [
-                "g",
-                "k"
-            ],
-            "before": [
-                "k"
             ]
         },
         {
@@ -475,26 +539,6 @@
             ],
             "commands": [
                 "editor.action.outdentLines"
-            ]
-        },
-        {
-            "after": [
-                "<leader>",
-                "<leader>",
-                "<leader>",
-                "j"
-            ],
-            "before": [
-                "f"
-            ]
-        },
-        {
-            "after": [
-                "f"
-            ],
-            "before": [
-                "g",
-                "f"
             ]
         }
     ],

@@ -84,9 +84,25 @@
     "keyboard.dispatch": "keyCode",
     "leaderkey.overrides.user": {
         ", e": "Error...",
+        ", e N": {
+            "command": "editor.action.marker.next",
+            "name": "next error in file"
+        },
+        ", e P": {
+            "command": "editor.action.marker.prev",
+            "name": "previous error in file"
+        },
         ", e n": {
             "command": "editor.action.marker.nextInFiles",
             "name": "next error"
+        },
+        ", e p": {
+            "command": "editor.action.marker.prevInFiles",
+            "name": "previous error"
+        },
+        ", g D": {
+            "command": "editor.action.goToDeclaration",
+            "name": "Go to declaration"
         },
         ", h": "Hover...",
         ", h t": {
@@ -312,91 +328,10 @@
         },
         {
             "before": [
-                "g",
-                "D"
-            ],
-            "commands": [
-                "editor.action.goToDeclaration"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "d"
-            ],
-            "commands": [
-                "editor.action.revealDefinition"
-            ]
-        },
-        {
-            "before": [
                 "K"
             ],
             "commands": [
                 "editor.action.showHover"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "i"
-            ],
-            "commands": [
-                "editor.action.peekImplementation"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "t"
-            ],
-            "commands": [
-                "editor.action.goToTypeDefinition"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "R"
-            ],
-            "commands": [
-                "editor.action.rename"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "c"
-            ],
-            "commands": [
-                "editor.action.codeActions"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "r"
-            ],
-            "commands": [
-                "editor.action.showReferences"
-            ]
-        },
-        {
-            "before": [
-                "]",
-                "d"
-            ],
-            "commands": [
-                "editor.action.marker.next"
-            ]
-        },
-        {
-            "before": [
-                "[",
-                "d"
-            ],
-            "commands": [
-                "editor.action.marker.prev"
             ]
         }
     ],

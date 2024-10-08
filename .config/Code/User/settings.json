@@ -81,6 +81,18 @@
     "git.mergeEditor": true,
     "jupyter.askForKernelRestart": false,
     "keyboard.dispatch": "keyCode",
+    "leaderkey.overrides.user": {
+        ", e": "Error...",
+        ", e n": {
+            "command": "editor.action.marker.nextInFiles",
+            "name": "next error"
+        },
+        ", h": "Hover...",
+        ", h t": {
+            "command": "editor.action.showDefinitionPreviewHover",
+            "name": "show type"
+        }
+    },
     "mypy-type-checker.args": [
         "--ignore-missing-imports"
     ],
@@ -228,7 +240,13 @@
                 "d"
             ],
             "commands": [
-                "workbench.action.compareEditor.focusOtherSide"
+                "workbench.action.compareEditor.focusOtherSide",
+                {
+                    "args": {
+                        "to": "viewPortCenter"
+                    },
+                    "command": "cursorMove"
+                }
             ]
         },
         {

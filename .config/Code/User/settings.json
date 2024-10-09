@@ -108,6 +108,18 @@
         ", h t": {
             "command": "editor.action.showDefinitionPreviewHover",
             "name": "show type"
+        },
+        "SPC w t": {
+            "commands": [
+                "workbench.action.compareEditor.focusOtherSide",
+                {
+                    "args": {
+                        "to": "viewPortCenter"
+                    },
+                    "command": "cursorMove"
+                }
+            ],
+            "name": "toggle diff view"
         }
     },
     "mypy-type-checker.args": [
@@ -255,21 +267,6 @@
             ]
         },
         {
-            "before": [
-                "<C-w>",
-                "d"
-            ],
-            "commands": [
-                "workbench.action.compareEditor.focusOtherSide",
-                {
-                    "args": {
-                        "to": "viewPortCenter"
-                    },
-                    "command": "cursorMove"
-                }
-            ]
-        },
-        {
             "after": [
                 "g",
                 "j"
@@ -374,21 +371,6 @@
                 {
                     "args": ",",
                     "command": "leaderkey.render"
-                }
-            ]
-        },
-        {
-            "before": [
-                "<C-w>",
-                "d"
-            ],
-            "commands": [
-                "workbench.action.compareEditor.focusOtherSide",
-                {
-                    "args": {
-                        "to": "viewPortCenter"
-                    },
-                    "command": "cursorMove"
                 }
             ]
         },

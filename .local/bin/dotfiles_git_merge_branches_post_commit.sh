@@ -7,7 +7,7 @@ readarray -t ALL_BRANCHES < "${HOME}"/.config/git/dotfiles/all_branches.sorted.t
 function merge_with_main_branch {
     current_branch="$1"
     git checkout "${current_branch}"
-    git merge "${MAIN_BRANCH}"
+    git merge --no-edit "${MAIN_BRANCH}"
 }
 
 function go_back_push_and_cleanup {

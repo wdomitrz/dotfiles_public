@@ -138,6 +138,8 @@
         "--disable=missing-module-docstring",
         "--disable=no-else-raise",
         "--disable=no-else-return",
+        "--disable=redefined-outer-name",
+        "--disable=use-dict-literal",
         "--generated-members=numpy.*,torch.*"
     ],
     "pylint.severity": {

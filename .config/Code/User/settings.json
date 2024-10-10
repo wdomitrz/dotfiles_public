@@ -141,9 +141,7 @@
         "--generated-members=numpy.*,torch.*"
     ],
     "pylint.severity": {
-        "convention": "Warning",
-        "info": "Warning",
-        "refactor": "Warning"
+        "refactor": "Information"
     },
     "python.analysis.autoFormatStrings": true,
     "python.analysis.completeFunctionParens": true,
@@ -321,6 +319,14 @@
             ]
         },
         {
+            "before": [
+                "%"
+            ],
+            "commands": [
+                "editor.action.jumpToBracket"
+            ]
+        },
+        {
             "comment": "normal mode keybindings"
         },
         {
@@ -426,6 +432,14 @@
             "before": [
                 "g",
                 "f"
+            ]
+        },
+        {
+            "before": [
+                "%"
+            ],
+            "commands": [
+                "editor.action.jumpToBracket"
             ]
         },
         {

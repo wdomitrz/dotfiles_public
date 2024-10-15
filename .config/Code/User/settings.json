@@ -10,6 +10,7 @@
     "cSpell.suggestionMenuType": "quickFix",
     "cSpell.useGitignore": false,
     "diffEditor.codeLens": true,
+    "editor.acceptSuggestionOnEnter": "on",
     "editor.accessibilitySupport": "off",
     "editor.codeActionsOnSave": {
         "source.organizeImports": "always"
@@ -32,6 +33,7 @@
         120
     ],
     "editor.stickyScroll.enabled": true,
+    "editor.suggest.matchOnWordStartOnly": false,
     "editor.tabCompletion": "on",
     "editor.wordWrap": "on",
     "explorer.confirmDelete": false,
@@ -99,10 +101,6 @@
         ", e p": {
             "command": "editor.action.marker.prevInFiles",
             "name": "previous error"
-        },
-        ", g D": {
-            "command": "editor.action.goToDeclaration",
-            "name": "Go to declaration"
         },
         ", h": "Hover...",
         ", h t": {
@@ -321,11 +319,11 @@
             ]
         },
         {
-            "before": [
+            "after": [
                 "%"
             ],
-            "commands": [
-                "editor.action.jumpToBracket"
+            "before": [
+                "%"
             ]
         },
         {
@@ -437,11 +435,11 @@
             ]
         },
         {
-            "before": [
+            "after": [
                 "%"
             ],
-            "commands": [
-                "editor.action.jumpToBracket"
+            "before": [
+                "%"
             ]
         },
         {

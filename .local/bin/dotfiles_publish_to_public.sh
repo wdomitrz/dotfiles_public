@@ -44,7 +44,7 @@ function dotfiles_publish_to_public_main() {
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
-    set -euo pipefail
+    set -xeuo pipefail
 
     dotfiles_publish_to_public_main "${@}"
 fi

@@ -24,6 +24,7 @@ export LANGUAGE="en_US"
 export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
+export GTK_A11Y=none
 
 [ -f "${HOME}/.config/local/profile.sh" ] && . "${HOME}/.config/local/profile.sh"
 

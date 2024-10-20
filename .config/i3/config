@@ -196,7 +196,9 @@ bindsym XF86AudioMicMute            exec --no-startup-id    pactl set-source-mut
 
 # Handle media keys
 bindsym XF86AudioPlay       exec --no-startup-id    playerctl play-pause
-bindsym XF86AudioPlayPause  exec --no-startup-id    playerctl play-pause
+# XF86AudioPlayPause: xmodmap -pke | grep XF86AudioPlay
+# https://github.com/swaywm/sway/issues/4783
+bindcode 172                exec --no-startup-id    playerctl play-pause
 bindsym XF86AudioPause      exec --no-startup-id    playerctl pause
 bindsym XF86AudioNext       exec --no-startup-id    playerctl next
 bindsym XF86AudioPrev       exec --no-startup-id    playerctl prev

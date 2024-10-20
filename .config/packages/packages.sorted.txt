@@ -95,6 +95,7 @@ libblockdev-crypto2
 libgtk-3-bin
 libimage-exiftool-perl
 libinput-tools
+libnotify-bin
 libpam-gnome-keyring
 libspa-0.2-bluetooth
 libtss2-rc0

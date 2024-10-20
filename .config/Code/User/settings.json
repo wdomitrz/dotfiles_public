@@ -284,22 +284,6 @@
             ]
         },
         {
-            "before": [
-                "u"
-            ],
-            "commands": [
-                "undo"
-            ]
-        },
-        {
-            "before": [
-                "<C-r>"
-            ],
-            "commands": [
-                "redo"
-            ]
-        },
-        {
             "after": [
                 "<leader>",
                 "<leader>",
@@ -329,6 +313,22 @@
         },
         {
             "comment": "normal mode keybindings"
+        },
+        {
+            "before": [
+                "u"
+            ],
+            "commands": [
+                "undo"
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "commands": [
+                "redo"
+            ]
         },
         {
             "before": [
@@ -397,22 +397,6 @@
             ],
             "before": [
                 "k"
-            ]
-        },
-        {
-            "before": [
-                "u"
-            ],
-            "commands": [
-                "undo"
-            ]
-        },
-        {
-            "before": [
-                "<C-r>"
-            ],
-            "commands": [
-                "redo"
             ]
         },
         {

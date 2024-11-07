@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ue
 
-readonly MAIN_BRANCH="$(cat "${HOME}"/.config/git/dotfiles/main_branch.sorted.txt)"
+MAIN_BRANCH="$(cat "${HOME}"/.config/git/dotfiles/main_branch.sorted.txt)"
 readarray -t ALL_BRANCHES < "${HOME}"/.config/git/dotfiles/all_branches.sorted.txt
 
 function merge_with_main_branch {

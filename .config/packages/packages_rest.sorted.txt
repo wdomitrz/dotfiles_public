@@ -1,0 +1,9 @@
+amd64-microcode
+firmware-iwlwifi
+firmware-linux
+firmware-realtek
+intel-microcode
+ttf-mscorefonts-installer
+unrar
+wine32
+winetricks

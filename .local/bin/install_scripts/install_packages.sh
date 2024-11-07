@@ -5,9 +5,17 @@ function update_and_upgrade() {
         sudo apt-get dist-upgrade --yes
 }
 
-function install_packages() {
-    packages_file="${HOME}"/.config/packages/packages.sorted.txt
+function install_packages_from() {
+    packages_file="$1"
     xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends < "${packages_file}"
+}
+
+function install_packages_base() {
+    install_packages_from "${HOME}"/.config/packages/packages_base.sorted.txt
+}
+
+function install_packages_rest() {
+    install_packages_from "${HOME}"/.config/packages/packages_rest.sorted.txt
 }
 
 function install_nvidia() {
@@ -28,9 +36,11 @@ function install_packages_main() {
     set -x
     source "${HOME}"/.local/bin/install_scripts/config_global.sh --source-only
 
+    update_and_upgrade
+    install_packages_base
     config_global_start
     update_and_upgrade
-    install_packages
+    install_packages_rest
     install_nvidia
     install_with_recommended
 }

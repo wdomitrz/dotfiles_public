@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 set -ue
 
-MAIN_BRANCH="$(cat "${HOME}"/.config/git/dotfiles/main_branch.sorted.txt)"
-readarray -t ALL_BRANCHES < "${HOME}"/.config/git/dotfiles/all_branches.sorted.txt
+function get_config_file() {
+    readonly original_file_path="$1"
+    # shellcheck disable=SC2155
+    readonly tmp_file_path=/tmp/"$(basename "${original_file_path}")"
+    [[ -f "${original_file_path}" ]] && (cp -a "${original_file_path}" "${tmp_file_path}" || true)
+    echo "${tmp_file_path}"
+}
+
+MAIN_BRANCH="$(set -e && get_config_file "${HOME}"/.config/git/dotfiles/main_branch.sorted.txt | xargs cat)"
+readarray -t ALL_BRANCHES < <(get_config_file "${HOME}"/.config/git/dotfiles/all_branches.sorted.txt | xargs cat)
 
 function merge_with_main_branch {
     current_branch="$1"

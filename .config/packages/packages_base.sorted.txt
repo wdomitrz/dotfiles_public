@@ -98,6 +98,7 @@ lightdm
 lightdm-gtk-greeter
 linux-headers-amd64
 locales
+lshw
 mobile-broadband-provider-info
 modemmanager
 moreutils

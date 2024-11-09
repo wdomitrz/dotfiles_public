@@ -25,12 +25,12 @@ USER user
 WORKDIR /home/user
 
 RUN touch ~/.Xauthority && mkdir ./.ssh
-ADD --chown=user https://github.com/wdomitrz.keys ./.ssh/authorized_keys
 ADD --chown=user \
     https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.bashrc \
     https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.bash_aliases \
     https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.profile \
     ./
-
 EXPOSE 22
+ADD --chown=user https://github.com/wdomitrz.keys ./.ssh/authorized_keys
+
 CMD sudo /usr/sbin/sshd -D

@@ -118,7 +118,7 @@ function configure_tpm2_non_root_disk_unlock() {
     sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/UNSET_DEVICE
 }
 
-function configure_tpm2_oot_disk_unlock_with_dracut() {
+function configure_tpm2_root_disk_unlock_with_dracut() {
     echo "Don't use this function" && exit 1
 
     # https://blog.fernvenue.com/archives/debian-with-luks-and-tpm-auto-decryption/
@@ -126,7 +126,7 @@ function configure_tpm2_oot_disk_unlock_with_dracut() {
     # Comment out /etc/crypttab
     sudo sed --in-place --expression='/_crypt UUID/s/^/# /' /etc/crypttab
 
-    sudo apt-get install --no-install-recommends dracut tpm4-tools && sudo apt-get autoremove --purge
+    sudo apt-get install --no-install-recommends dracut tpm-tools && sudo apt-get autoremove --purge
     echo 'add_dracutmodules+=" tpm2-tss crypt "' | sudo tee /etc/dracut.conf.d/tpm2.conf
     sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="rd.auto rd.luks=1"/' /etc/default/grub
     sudo dracut -f

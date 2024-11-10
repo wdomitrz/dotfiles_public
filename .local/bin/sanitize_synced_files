@@ -77,8 +77,8 @@ function get_all_files_without_extensions() {
     for file in $(get_all_tracked_files); do
         [[ -L "${file}" ]] && continue # Ignore links
         base_file_name="$(basename "${file}")"
-        [[ ${base_file_name} == ?*.* ]] && continue    # Check if the file has an extension
-        [[ ${base_file_name} == ".keep" ]] && continue # Check if the file is a keep file
+        [[ "${base_file_name}" == ?*.* ]] && continue    # Check if the file has an extension
+        [[ "${base_file_name}" == ".keep" ]] && continue # Check if the file is a keep file
         echo "${file}"
     done
 }

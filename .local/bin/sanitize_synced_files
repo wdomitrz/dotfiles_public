@@ -86,7 +86,7 @@ function get_all_files_without_extensions() {
 function get_all_files_covered_by_extension_links() {
     git_root="$(git rev-parse --show-toplevel)"
     get_all_tracked_files |
-        (grep "^.config/extension_links" || true) |
+        (grep "^.config/extension_links/" || true) |
         sed "s|^|${git_root}/|g" |
         xargs --no-run-if-empty readlink --canonicalize |
         sed "s|^${git_root}/||g"
@@ -95,7 +95,7 @@ function get_all_files_covered_by_extension_links() {
 function dangling_extension_links() {
     git_root="$(git rev-parse --show-toplevel)"
     for file in $(get_all_tracked_files |
-        grep "^.config/extension_links" |
+        grep "^.config/extension_links/" |
         sed "s|^|${git_root}/|g"); do
         [[ -L "${file}" ]] || continue # Process only links
         readlink --canonicalize-existing "${file}" > /dev/null ||
@@ -107,7 +107,7 @@ function files_without_extensions() {
     dangling_extension_links | not grep "?*"
 
     get_all_files_covered_by_extension_links |
-        (grep "^.config/extension_links" || true) |
+        (grep "^.config/extension_links/" || true) |
         not grep "?*"
 
     comm -23 <(

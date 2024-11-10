@@ -121,9 +121,6 @@
             "name": "toggle diff view"
         }
     },
-    "mypy-type-checker.args": [
-        "--ignore-missing-imports"
-    ],
     "notebook.experimental.remoteSave": true,
     "notebook.formatOnCellExecution": true,
     "notebook.formatOnSave.enabled": true,
@@ -145,6 +142,7 @@
         "refactor": "Information"
     },
     "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": true,
     "python.analysis.completeFunctionParens": true,
     "python.analysis.inlayHints.callArgumentNames": "partial",
     "python.analysis.inlayHints.functionReturnTypes": true,
@@ -162,7 +160,7 @@
         "kahole.magit",
         "llvm-vs-code-extensions.vscode-clangd",
         "mechatroner.rainbow-csv",
-        "ms-python.mypy-type-checker",
+        "ms-pyright.pyright",
         "ms-python.pylint",
         "ms-python.python",
         "ms-python.vscode-pylance",

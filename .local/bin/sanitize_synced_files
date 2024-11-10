@@ -73,6 +73,50 @@ function do_all_python_files() {
     lint_python_files
 }
 
+function get_all_files_without_extensions() {
+    for file in $(get_all_tracked_files); do
+        [[ -L "${file}" ]] && continue # Ignore links
+        base_file_name="$(basename "${file}")"
+        [[ ${base_file_name} == ?*.* ]] && continue    # Check if the file has an extension
+        [[ ${base_file_name} == ".keep" ]] && continue # Check if the file is a keep file
+        echo "${file}"
+    done
+}
+
+function get_all_files_covered_by_extension_links() {
+    git_root="$(git rev-parse --show-toplevel)"
+    get_all_tracked_files |
+        (grep "^.config/extension_links" || true) |
+        sed "s|^|${git_root}/|g" |
+        xargs --no-run-if-empty readlink --canonicalize |
+        sed "s|^${git_root}/||g"
+}
+
+function dangling_extension_links() {
+    git_root="$(git rev-parse --show-toplevel)"
+    for file in $(get_all_tracked_files |
+        grep "^.config/extension_links" |
+        sed "s|^|${git_root}/|g"); do
+        [[ -L "${file}" ]] || continue # Process only links
+        readlink --canonicalize-existing "${file}" > /dev/null ||
+            echo "${file}"
+    done
+}
+
+function files_without_extensions() {
+    dangling_extension_links | not grep "?*"
+
+    get_all_files_covered_by_extension_links |
+        (grep "^.config/extension_links" || true) |
+        not grep "?*"
+
+    comm -23 <(
+        get_all_files_without_extensions | sort
+    ) <(
+        get_all_files_covered_by_extension_links | sort
+    ) | not grep "?*"
+}
+
 # Parallel exectuion with tracking proceesses ##################################
 declare -A running_processes
 declare -a running_processes_names
@@ -96,6 +140,7 @@ function wait_for_all() {
 
 function sanitize_synced_main() {
     run_and_save do_all_jsons
+    run_and_save files_without_extensions
     run_and_save sort_txt_files
     run_and_save sort_numeric_txt_files
     run_and_save do_all_python_files

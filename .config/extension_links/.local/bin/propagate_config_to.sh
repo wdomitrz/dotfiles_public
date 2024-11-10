@@ -1,0 +1,1 @@
+../../../../.local/bin/propagate_config_to

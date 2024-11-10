@@ -1,0 +1,1 @@
+../../../../.local/bin/kill_others_with_given_name

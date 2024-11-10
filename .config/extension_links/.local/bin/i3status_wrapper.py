@@ -1,0 +1,1 @@
+../../../../.local/bin/i3status_wrapper

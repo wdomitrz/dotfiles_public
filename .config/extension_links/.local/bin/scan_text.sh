@@ -1,0 +1,1 @@
+../../../../.local/bin/scan_text

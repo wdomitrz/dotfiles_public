@@ -197,6 +197,7 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
+    "terminal.integrated.cwd": "${relativeFileDirname}",
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.localEchoEnabled": "off",
     "update.showReleaseNotes": false,

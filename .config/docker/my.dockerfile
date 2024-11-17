@@ -24,7 +24,7 @@ RUN useradd --create-home --shell /bin/bash --groups sudo user
 USER user
 WORKDIR /home/user
 
-RUN touch ~/.Xauthority && mkdir ./.ssh
+RUN touch ~/.Xauthority && mkdir --parents ./.ssh ./.local ./.cache ./.config
 ADD --chown=user \
     https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.bashrc \
     https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.bash_aliases \

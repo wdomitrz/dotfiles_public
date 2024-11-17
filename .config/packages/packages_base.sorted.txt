@@ -46,6 +46,8 @@ hwinfo
 iputils-ping
 ipython3
 jq
+kitty-shell-integration
+kitty-terminfo
 libblockdev-crypto2
 libimage-exiftool-perl
 libnotify-bin

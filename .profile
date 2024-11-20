@@ -17,7 +17,7 @@ PROFILE_LOADED=1
 
 export EDITOR=vim
 export VISUAL=vim
-export MANPAGER='nvim -c "Man!"'
+export MANPAGER='nvim -c Man!'
 export ALTERNATE_EDITOR=""
 export TERMINAL=kitty
 export LANG="en_US.UTF-8"

@@ -8,17 +8,9 @@ function install_haskell_ghcup() {
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 }
 
-function install_nvim_appimage() {
-    mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin
-    save_dir="${HOME}"/.local/opt/nvim
-    mkdir --parents "${save_dir}"
-    save_file_path="${save_dir}"/nvim.appimage
-
-    wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage --output-document="${save_file_path}"
-
-    chmod +x "${save_file_path}"
-
-    ln --symbolic --relative --force "${save_file_path}" "${HOME}"/.local/bin/nvim
+function install_nvim_tar() {
+    source "${HOME}"/.local/bin/install_scripts/install_global.sh --source-only
+    install_nvim_tar_given_locations "${HOME}"/.local/opt "${HOME}"/.local/bin not_sudo
 }
 
 function install_moonlight() {
@@ -108,7 +100,7 @@ function install_user_main() {
     set -euo pipefail
     set -x
 
-    install_nvim_appimage
+    install_nvim_tar
     install_python_ruff
 }
 

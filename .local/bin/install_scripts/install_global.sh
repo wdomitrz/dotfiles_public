@@ -62,10 +62,27 @@ function install_nordvpn() {
     sudo apt-get install --yes nordvpn
 }
 
-function install_nvim_appimage_as_system_nvim() {
-    sudo rm /usr/bin/nvim
-    sudo wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O /usr/bin/nvim
-    sudo chmod +x /usr/bin/nvim
+function not_sudo() {
+    "$@"
+}
+
+function install_nvim_tar_given_locations() {
+    # appimage url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+    if [[ "$#" -ne 3 ]]; then
+        echo "expected 2 parameters: <save_dir> <link_dir> <sudo_or_not_sudo>"
+        return 1
+    fi
+    local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
+
+    "${sudo_or_not_sudo}" mkdir --parents "${save_dir}" "${link_dir}"
+
+    wget -qO- https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz | "${sudo_or_not_sudo}" tar xvz -C "${save_dir}"
+
+    "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/nvim-linux64/bin/nvim "${link_dir}"/
+}
+
+function install_nvim_tar_as_system_nvim() {
+    install_nvim_tar_given_locations /opt /usr/bin sudo
 }
 
 function install_tailscale() {
@@ -93,7 +110,7 @@ function install_global_main() {
     install_signal
     install_tailscale
     install_vscode
-    install_nvim_appimage_as_system_nvim
+    install_nvim_tar_as_system_nvim
     install_dust
     install_usb_c_display_driver
     update_and_upgrade

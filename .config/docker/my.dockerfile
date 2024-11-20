@@ -2,8 +2,6 @@ FROM debian
 
 RUN apt-get update && apt-get upgrade --yes
 ADD https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.config/packages/packages_base.sorted.txt /
-RUN cat /packages_base.sorted.txt | DEBIAN_FRONTEND=noninteractive xargs apt-get install --yes --no-install-recommends && \
-    rm /packages_base.sorted.txt
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends openssh-server && \
     mkdir /var/run/sshd && \
     (echo "ChallengeResponseAuthentication no" && \
@@ -13,6 +11,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends
         echo "UsePAM yes" && \
         echo "X11Forwarding yes" && \
         echo "X11UseLocalhost no") | tee --append /etc/ssh/sshd_config
+RUN cat /packages_base.sorted.txt | DEBIAN_FRONTEND=noninteractive xargs apt-get install --yes --no-install-recommends && \
+    rm /packages_base.sorted.txt
 RUN echo "locales locales/default_environment_locale select en_US.UTF-8" | debconf-set-selections && \
     echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" | debconf-set-selections && \
     rm --force --verbose "/etc/locale.gen" && \

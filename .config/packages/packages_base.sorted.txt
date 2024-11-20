@@ -54,6 +54,7 @@ libnotify-bin
 libtss2-rc0
 locales
 lshw
+man-db
 moreutils
 ncdu
 neovim

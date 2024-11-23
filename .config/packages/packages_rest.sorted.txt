@@ -23,6 +23,7 @@ firmware-linux
 firmware-realtek
 flameshot
 fwupd
+gdm3
 geoclue-2.0
 gnome-calculator
 gnome-disk-utility
@@ -47,8 +48,6 @@ libgtk-3-bin
 libinput-tools
 libpam-gnome-keyring
 libspa-0.2-bluetooth
-lightdm
-lightdm-gtk-greeter
 linux-headers-amd64
 mobile-broadband-provider-info
 modemmanager

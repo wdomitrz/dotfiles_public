@@ -7,11 +7,8 @@
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
     "cSpell.language": "en,pl",
-    "cSpell.suggestionMenuType": "quickFix",
     "cSpell.useGitignore": false,
-    "diffEditor.codeLens": true,
     "editor.acceptSuggestionOnEnter": "on",
-    "editor.accessibilitySupport": "off",
     "editor.codeActionsOnSave": {
         "source.organizeImports": "always"
     },
@@ -24,8 +21,6 @@
     "editor.inlayHints.enabled": "on",
     "editor.lineNumbers": "off",
     "editor.minimap.enabled": false,
-    "editor.mouseWheelZoom": true,
-    "editor.multiDocumentOccurrencesHighlight": true,
     "editor.occurrencesHighlight": "multiFile",
     "editor.rulers": [
         80,
@@ -39,6 +34,10 @@
     "editor.wordWrap": "on",
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
+    "extensions.experimental.affinity": {
+        "jimmyzjx.leaderkey": 1,
+        "vscodevim.vim": 1
+    },
     "extensions.ignoreRecommendations": true,
     "files.associations": {
         "**/.ssh/config": "ssh_config",
@@ -80,7 +79,6 @@
     "files.simpleDialog.enable": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-    "git.enableSmartCommit": true,
     "git.enabled": true,
     "git.mergeEditor": true,
     "jupyter.askForKernelRestart": false,
@@ -124,8 +122,7 @@
     "notebook.experimental.remoteSave": true,
     "notebook.formatOnCellExecution": true,
     "notebook.formatOnSave.enabled": true,
-    "notebook.lineNumbers": "on",
-    "notebook.output.textLineLimit": 8192,
+    "notebook.output.textLineLimit": 1024,
     "path-autocomplete.triggerOutsideStrings": true,
     "pylint.args": [
         "--disable=line-too-long",
@@ -204,8 +201,6 @@
     "terminal.integrated.localEchoEnabled": "off",
     "update.showReleaseNotes": false,
     "vim.easymotion": true,
-    "vim.easymotionDimBackground": false,
-    "vim.enableNeovim": true,
     "vim.handleKeys": {
         "<C-[>": true,
         "<C-a>": true,
@@ -465,11 +460,9 @@
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
     "workbench.activityBar.location": "top",
-    "workbench.editor.focusRecentEditorAfterClose": false,
     "workbench.editor.showTabs": "none",
-    "workbench.editor.tabSizing": "fixed",
     "workbench.enableExperiments": false,
-    "workbench.startupEditor": "none",
+    "workbench.startupEditor": "terminal",
     "workbench.tips.enabled": false,
     "workbench.welcomePage.walkthroughs.openOnInstall": false
 }

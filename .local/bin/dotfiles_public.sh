@@ -47,21 +47,37 @@ function dotfiles_publish_to_public_main() {
     get_public
     checkout_public
     update_to_local_copy
-    compare_with_local_copy
     push
     cleanup "${starting_branch}"
 }
 
 function diff_public() {
     get_public
+    echo "DIFF BEGINS"
     git diff "${public_upstream}"/"${public_branch}" "${local_public_branch}"
+    echo "DIFF ENDS"
     remove_remote
 }
 
-if [[ "$#" -eq 1 ]] && [[ "${1}" == "--diff" ]]; then
+if [[ "$#" -ne 1 ]]; then
+    echo "Expected exactly 1 argument"
+    exit 1
+fi
+
+case "$1" in
+diff)
     set -euo pipefail
     diff_public
-elif [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+    ;;
+publish)
     set -xeuo pipefail
-    dotfiles_publish_to_public_main "${@}"
-fi
+    dotfiles_publish_to_public_main
+    ;;
+--source-only)
+    true
+    ;;
+*)
+    echo "Unrecognized argument '$1'"
+    exit 1
+    ;;
+esac

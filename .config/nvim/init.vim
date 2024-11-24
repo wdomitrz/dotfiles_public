@@ -39,14 +39,31 @@ endtry
 function! Format_file()
     if &readonly
         return
-    elseif &filetype == 'sh'
+    endif
+
+    if &filetype == 'sh'
         !format_sh.sh %
     elseif &filetype == 'python'
         !format_py.sh %
     elseif &filetype == 'json'
         !format_json.sh %
+    elseif &filetype == 'vim'
+        !format_vim.sh %
     endif
+
+    let file_name = expand('%:t')
+    if match(file_name, "\.sorted\.json$") != -1
+        !format_sorted_json.sh %
+    elseif match(file_name, "\.sorted\.txt$") != -1
+        !format_sorted_txt.sh %
+    elseif match(file_name, "\.sorted_numeric\.txt$") != -1
+        !format_sorted_numeric_txt.sh %
+    endif
+
+    " Reload the formatted file
+    edit!
 endfunction
+autocmd BufWritePost * silent call Format_file()
 
 " Keymap
 " Use space as leader
@@ -107,27 +124,27 @@ tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
 
 
 " Plugins
-if $VIM_DISABLE_PLUG != 1
-" Install vim-plug automatically
-let data_dir = stdpath('data') . '/site'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+if ! $VIM_DISABLE_PLUG
+    " Install vim-plug automatically
+    let data_dir = stdpath('data') . '/site'
+    if empty(glob(data_dir . '/autoload/plug.vim'))
+        execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
 
-call plug#begin()
-Plug 'airblade/vim-gitgutter'
-Plug 'easymotion/vim-easymotion'
-Plug 'lambdalisue/suda.vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'preservim/nerdtree'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-call plug#end()
+    call plug#begin()
+    Plug 'airblade/vim-gitgutter'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'lambdalisue/suda.vim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'preservim/nerdtree'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-sleuth'
+    Plug 'tpope/vim-surround'
+    Plug 'vim-airline/vim-airline'
+    call plug#end()
 endif
 
 

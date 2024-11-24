@@ -64,7 +64,7 @@ function config_user_main() {
     update_tldr
     configure_nautilus_open_terminal
     install_code_extensions
-    "${HOME}"/.local/bin/set_theme dark
+    "${HOME}"/.local/bin/set_theme light
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then

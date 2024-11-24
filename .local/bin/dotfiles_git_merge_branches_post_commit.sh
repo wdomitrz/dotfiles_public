@@ -15,7 +15,12 @@ readarray -t ALL_BRANCHES < <(get_config_file "${HOME}"/.config/git/dotfiles/all
 function merge_with_main_branch {
     current_branch="$1"
     git checkout "${current_branch}"
-    git merge --no-edit "${MAIN_BRANCH}"
+    if ! git merge --no-edit "${MAIN_BRANCH}"; then
+        git status -s | grep "^DU " |
+            cut --delimiter ' ' --fields 2- |
+            xargs git rm
+        git -c core.editor=true merge --continue
+    fi
 }
 
 function go_back_push_and_cleanup {

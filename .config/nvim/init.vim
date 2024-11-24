@@ -35,6 +35,19 @@ catch
     let &background = "dark"
 endtry
 
+" Formatter
+function! Format_file()
+    if &readonly
+        return
+    elseif &filetype == 'sh'
+        !format_sh.sh %
+    elseif &filetype == 'python'
+        !format_py.sh %
+    elseif &filetype == 'json'
+        !format_json.sh %
+    endif
+endfunction
+
 " Keymap
 " Use space as leader
 let mapleader=" "

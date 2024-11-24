@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
 function sort_json_files() {
-    for file in $(list_git_files | grep "\.sorted\.json$"); do
-        jq --indent 4 --sort-keys . "${file}" | sponge "${file}"
-    done
+    list_git_files | grep "\.sorted\.json$" |
+        xargs format_sorted_json.sh
 }
 
 function format_json_files() {
-    for file in $(list_git_files | grep "\.json$"); do
-        jq --indent 4 . "${file}" | sponge "${file}"
-    done
+    list_git_files | grep "\.json$" |
+        xargs format_json.sh
 }
 
 function do_all_jsons() {
@@ -18,20 +16,18 @@ function do_all_jsons() {
 }
 
 function sort_txt_files() {
-    for file in $(list_git_files | grep "\.sorted\.txt$"); do
-        sort --output "${file}"{,}
-    done
+    list_git_files | grep "\.sorted\.txt$" |
+        xargs format_sorted_txt.sh
 }
 
 function sort_numeric_txt_files() {
-    for file in $(list_git_files | grep "\.sorted_numeric\.txt$"); do
-        sort --numeric-sort --output "${file}"{,}
-    done
+    list_git_files | grep "\.sorted_numeric\.txt$" |
+        xargs format_sorted_numeric_txt.sh
 }
 
 function format_shell_files() {
     list_git_files | grep "\.sh$" | xargs readlink --canonicalize |
-        xargs shfmt --indent 4 --space-redirects --write
+        xargs format_sh.sh
 }
 
 function apply_suggestions_to_shell_files() {
@@ -56,7 +52,7 @@ function do_all_shell_files() {
 
 function format_python_files() {
     list_git_files | grep "\.py$" | xargs readlink --canonicalize |
-        xargs ruff format --quiet
+        xargs format_py.sh
 }
 
 function lint_python_files() {
@@ -113,7 +109,7 @@ function files_without_extensions() {
     ) | not grep "?*"
 }
 
-# Parallel exectuion with tracking proceesses ##################################
+# Parallel execution with tracking processes ###################################
 declare -A running_processes
 declare -a running_processes_names
 

@@ -224,10 +224,7 @@ class DpiSettings:
     def set_gnome_text_scaling_factor(scaling_factor):
         subprocess.run(
             [
-                "gsettings",
-                "set",
-                "org.gnome.desktop.interface",
-                "text-scaling-factor",
+                *"gsettings set org.gnome.desktop.interface text-scaling-factor".split(),
                 str(scaling_factor),
             ],
             check=False,

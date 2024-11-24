@@ -25,6 +25,11 @@ function sort_numeric_txt_files() {
         xargs format_sorted_numeric_txt.sh
 }
 
+function format_vim_files() {
+    list_git_files | grep "\.vim$" |
+        xargs format_vim.sh
+}
+
 function format_shell_files() {
     list_git_files | grep "\.sh$" | xargs readlink --canonicalize |
         xargs format_sh.sh
@@ -135,6 +140,7 @@ function sanitize_synced_main() {
     run_and_save files_without_extensions
     run_and_save sort_txt_files
     run_and_save sort_numeric_txt_files
+    run_and_save format_vim_files
     run_and_save do_all_python_files
     run_and_save do_all_shell_files
     wait_for_all

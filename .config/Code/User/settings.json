@@ -462,7 +462,7 @@
     "workbench.activityBar.location": "top",
     "workbench.editor.showTabs": "none",
     "workbench.enableExperiments": false,
-    "workbench.startupEditor": "terminal",
+    "workbench.startupEditor": "none",
     "workbench.tips.enabled": false,
     "workbench.welcomePage.walkthroughs.openOnInstall": false
 }

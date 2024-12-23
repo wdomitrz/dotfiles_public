@@ -198,6 +198,7 @@
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.cwd": "${relativeFileDirname}",
     "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.fontLigatures": true,
     "terminal.integrated.localEchoEnabled": "off",
     "update.showReleaseNotes": false,
     "vim.easymotion": true,

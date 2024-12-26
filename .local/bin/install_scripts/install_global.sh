@@ -57,9 +57,7 @@ function install_slack() {
 }
 
 function install_nordvpn() {
-    install_deb_from_url "https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb"
-    sudo apt-get update --yes
-    sudo apt-get install --yes nordvpn
+    sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 }
 
 function not_sudo() {

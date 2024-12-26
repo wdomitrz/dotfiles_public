@@ -106,7 +106,6 @@ function install_global_main() {
     source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
 
     install_google_chrome
-    install_nordvpn
     install_signal
     install_tailscale
     install_vscode

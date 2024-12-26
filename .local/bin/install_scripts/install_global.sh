@@ -96,7 +96,7 @@ function install_dust() {
 function install_usb_c_display_driver() {
     # Synaptics displaylink-driver
     install_deb_from_url "https://www.synaptics.com/sites/default/files/Ubuntu/pool/stable/main/all/synaptics-repository-keyring.deb"
-    sudo apt-get update --yes
+    sudo apt-get update --yes && sudo apt-get upgrade --yes
     sudo apt-get install --yes displaylink-driver evdi-dkms
 }
 
@@ -111,7 +111,6 @@ function install_global_main() {
     install_vscode
     install_nvim_tar_as_system_nvim
     install_dust
-    install_usb_c_display_driver
     update_and_upgrade
 }
 

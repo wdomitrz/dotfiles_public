@@ -87,6 +87,26 @@ function configure_touchpad() {
         sudo sed --in-place 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' "${config_file}"
 }
 
+function udisk_allow_operations() {
+    for operation in \
+        '"org.freedesktop.udisks2.encrypted-unlock"' \
+        '"org.freedesktop.udisks2.encrypted-unlock-system"' \
+        '"org.freedesktop.udisks2.filesystem-mount"'; do
+        for group in allow_any allow_inactive allow_active; do
+            sudo sed -i \
+                '/'"${operation}"'/,/'"${group}"'/{/'"${group}"'/{s/auth_admin[_keep]*/yes/;}}' \
+                /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
+        done
+    done
+}
+
+function nordvpn_with_tailscale() {
+    nordvpn whitelist add subnet 100.64.0.0/10
+    nordvpn whitelist add subnet fd7a:115c:a1e0::/48
+    nordvpn whitelist add port 41641
+    nordvpn set dns 103.86.96.100 103.86.99.100 100.100.100.100
+}
+
 function config_global_start() {
     copy_global_configs
     update_locales
@@ -97,6 +117,7 @@ function config_global_rest() {
     todo_post_global_configs_copy
     add_user_to_groups
     configure_newt_palette
+    udisk_allow_operations
     configure_touchpad
     create_global_set_display_script
     create_swap_file

@@ -89,6 +89,7 @@ python3-venv
 python3-xlib
 python-is-python3
 pythonpy
+qrterminal
 rename
 ripgrep
 rlwrap

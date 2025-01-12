@@ -28,11 +28,6 @@ function install_moonlight() {
     ln --symbolic --relative --force "${save_dir}"/moonlight.desktop "${HOME}"/.local/share/applications
 }
 
-function use_system_nvim() {
-    ln --symbolic /usr/bin/nvim "${HOME}"/.local/bin/ ||
-        echo "nvim file/link already exists"
-}
-
 function install_kitty() {
     mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
     curl --location https://sw.kovidgoyal.net/kitty/installer.sh |
@@ -100,7 +95,6 @@ function install_user_main() {
     set -euo pipefail
     set -x
 
-    install_nvim_tar
     install_python_ruff
 }
 

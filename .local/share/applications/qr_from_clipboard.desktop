@@ -1,0 +1,6 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Exec=sh -c 'qr_from_clipboard.sh && sleep_forever.sh'
+Name=QR Code from clipboard
+Terminal=true
+Type=Application

@@ -106,6 +106,10 @@
             "command": "editor.action.showDefinitionPreviewHover",
             "name": "show type"
         },
+        "SPC f f": {
+            "command": "workbench.action.files.openFile",
+            "name": "Open file/folder"
+        },
         "SPC w t": {
             "commands": [
                 "workbench.action.compareEditor.focusOtherSide",

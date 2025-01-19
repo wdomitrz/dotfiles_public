@@ -5,6 +5,7 @@ apt
 apt-file
 aptitude
 apt-transport-https
+at-spi2-core
 bash
 bash-completion
 bat

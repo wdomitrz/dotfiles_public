@@ -156,5 +156,6 @@ let g:vim_json_conceal = 0
 " Plugins key mappings
 noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges
 noremap <C-p>       <cmd>Buffers<cr>
-noremap <Leader>ff  <cmd>Files<cr>
+noremap <leader>bb  <cmd>Buffers<cr>
+noremap <leader>ff  <cmd>Files<cr>
 noremap f           <plug>(easymotion-jumptoanywhere)

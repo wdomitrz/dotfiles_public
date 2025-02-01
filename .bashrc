@@ -98,12 +98,12 @@ if source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2> /d
     source /usr/lib/git-core/git-sh-prompt 2> /dev/null ||
     source /usr/share/git-core/contrib/completion/git-prompt.sh 2> /dev/null; then
 
-    GIT_PS1_SHOWDIRTYSTATE=true
-    GIT_PS1_SHOWSTASHSTATE=true
-    GIT_PS1_SHOWUNTRACKEDFILES=true
-    GIT_PS1_SHOWUPSTREAM="auto"
-    GIT_PS1_SHOWCOLORHINTS=true
-    GIT_PS1_SHOWCONFLICTSTATE=no
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    export GIT_PS1_SHOWSTASHSTATE=true
+    export GIT_PS1_SHOWUNTRACKEDFILES=true
+    export GIT_PS1_SHOWUPSTREAM="auto"
+    export GIT_PS1_SHOWCOLORHINTS=true
+    export GIT_PS1_SHOWCONFLICTSTATE=no
 
     # shellcheck disable=SC2016
     PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'

@@ -133,17 +133,16 @@ if ! $VIM_DISABLE_PLUG
     endif
 
     call plug#begin()
-    Plug 'airblade/vim-gitgutter'
+    Plug 'airblade/vim-gitgutter'  " Git plugin, adding line markers
     Plug 'easymotion/vim-easymotion'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'lambdalisue/suda.vim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'preservim/nerdtree'
     Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-sleuth'
+    Plug 'tpope/vim-fugitive'  " Git plugin, adding :G(it)
+    Plug 'tpope/vim-sleuth'  " Automatic tab sizing
     Plug 'tpope/vim-surround'
-    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline'  " Nice bottom bar
     call plug#end()
 endif
 
@@ -155,7 +154,7 @@ let g:suda_smart_edit = 1
 let g:vim_json_conceal = 0
 
 " Plugins key mappings
-map <C-b>               <cmd>NERDTreeToggle<cr>
-map <C-/>               :Commentary<cr>
-map <C-p>               <cmd>lua require('telescope.builtin').find_files({no_ignore=true, hidden=true})<cr>
-map f                   <plug>(easymotion-jumptoanywhere)
+noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges
+noremap <C-p>       <cmd>Buffers<cr>
+noremap <Leader>ff  <cmd>Files<cr>
+noremap f           <plug>(easymotion-jumptoanywhere)

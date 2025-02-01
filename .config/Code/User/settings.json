@@ -86,19 +86,19 @@
     "leaderkey.overrides.user": {
         ", e": "Error...",
         ", e N": {
-            "command": "editor.action.marker.next",
+            "command": "go-to-next-problem.next",
             "name": "next error in file"
         },
         ", e P": {
-            "command": "editor.action.marker.prev",
+            "command": "go-to-next-problem.prev",
             "name": "previous error in file"
         },
         ", e n": {
-            "command": "editor.action.marker.nextInFiles",
+            "command": "go-to-next-problem.nextInFiles",
             "name": "next error"
         },
         ", e p": {
-            "command": "editor.action.marker.prevInFiles",
+            "command": "go-to-next-problem.prevInFiles",
             "name": "previous error"
         },
         ", h": "Hover...",

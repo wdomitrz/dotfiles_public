@@ -3,7 +3,7 @@
 function install_deb_from_url() {
     link="$1"
     package_file="$(mktemp /tmp/XXXXXX.deb)"
-    wget "${link}" -O "${package_file}"
+    wget_with_defaults.sh "${link}" > "${package_file}"
     sudo apt-get install --yes "${package_file}"
     rm "${package_file}"
 }
@@ -11,7 +11,7 @@ function install_deb_from_url() {
 function install_gcloud() {
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" |
         sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg |
+    wget_with_defaults.sh https://packages.cloud.google.com/apt/doc/apt-key.gpg |
         sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
     sudo apt-get update --yes &&
         sudo apt-get install --yes google-cloud-sdk
@@ -19,7 +19,7 @@ function install_gcloud() {
 
 function install_signal() {
     # 1. Install our official public software signing key
-    wget -O- https://updates.signal.org/desktop/apt/keys.asc |
+    wget_with_defaults.sh https://updates.signal.org/desktop/apt/keys.asc |
         gpg --dearmor |
         sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
 
@@ -33,7 +33,7 @@ function install_signal() {
 }
 
 function add_google_public_key() {
-    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub |
+    wget_with_defaults.sh https://dl.google.com/linux/linux_signing_key.pub |
         sudo apt-key add -
 
 }
@@ -57,7 +57,7 @@ function install_slack() {
 }
 
 function install_nordvpn() {
-    sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
+    wget_with_defaults.sh https://downloads.nordcdn.com/apps/linux/install.sh | sh
 }
 
 function not_sudo() {
@@ -74,7 +74,8 @@ function install_nvim_tar_given_locations() {
 
     "${sudo_or_not_sudo}" mkdir --parents "${save_dir}" "${link_dir}"
 
-    wget -qO- https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz | "${sudo_or_not_sudo}" tar xvz -C "${save_dir}"
+    wget_with_defaults.sh https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz |
+        "${sudo_or_not_sudo}" tar xvz -C "${save_dir}"
 
     "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/nvim-linux64/bin/nvim "${link_dir}"/
 }
@@ -84,7 +85,7 @@ function install_nvim_tar_as_system_nvim() {
 }
 
 function install_tailscale() {
-    curl -fsSL https://tailscale.com/install.sh | sh
+    wget_with_defaults.sh https://tailscale.com/install.sh | sh
 }
 
 function install_dust() {

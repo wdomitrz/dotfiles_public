@@ -35,6 +35,7 @@ fonts-arphic-ukai
 fonts-arphic-uming
 fonts-dejavu
 fonts-firacode
+fonts-jetbrains-mono
 fonts-noto-color-emoji
 fzf
 gdb

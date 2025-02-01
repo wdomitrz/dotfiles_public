@@ -5,7 +5,7 @@ function install_multi_touch_gestures_fusuma() {
 }
 
 function install_haskell_ghcup() {
-    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+    curl --fail --progress-bar --show-error --location --proto '=https' --tlsv1.2 https://get-ghcup.haskell.org | sh
 }
 
 function install_nvim_tar() {
@@ -19,8 +19,8 @@ function install_moonlight() {
     mkdir --parents "${save_dir}"
     save_file_path="${save_dir}"/moonlight.appimage
 
-    wget https://github.com/moonlight-stream/moonlight-qt/releases/download/v5.0.1/Moonlight-5.0.1-x86_64.AppImage --output-document="${save_file_path}"
-    wget https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/deploy/linux/com.moonlight_stream.Moonlight.desktop --output-document="${save_dir}"/moonlight.desktop
+    wget_with_defaults.sh https://github.com/moonlight-stream/moonlight-qt/releases/download/v5.0.1/Moonlight-5.0.1-x86_64.AppImage > "${save_file_path}"
+    wget_with_defaults.sh https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/deploy/linux/com.moonlight_stream.Moonlight.desktop > "${save_dir}"/moonlight.desktop
 
     chmod +x "${save_file_path}"
 
@@ -30,7 +30,7 @@ function install_moonlight() {
 
 function install_kitty() {
     mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
-    curl --location https://sw.kovidgoyal.net/kitty/installer.sh |
+    wget_with_defaults.sh https://sw.kovidgoyal.net/kitty/installer.sh |
         sh /dev/stdin launch=n dest="${HOME}"/.local/opt/
     ln --symbolic --relative --force "${HOME}"/.local/opt/kitty.app/bin/kitty "${HOME}"/.local/bin/
     ln --symbolic --relative --force "${HOME}"/.local/opt/kitty.app/share/applications/kitty.desktop "${HOME}"/.local/share/applications/
@@ -39,7 +39,7 @@ function install_kitty() {
 
 function install_blender() {
     mkdir --parents "${HOME}"/.local/opt "${HOME}"/.local/bin "${HOME}"/.local/share/applications "${HOME}"/.local/share/icons
-    curl --location "https://mirrors.dotsrc.org/blender/release/Blender4.0/blender-4.0.0-linux-x64.tar.xz" |
+    wget_with_defaults.sh "https://mirrors.dotsrc.org/blender/release/Blender4.0/blender-4.0.0-linux-x64.tar.xz" |
         tar --extract --xz --directory="${HOME}"/.local/opt/
 
     ln --symbolic --relative --force "${HOME}"/.local/opt/blender-4.0.0-linux-x64/blender "${HOME}"/.local/bin/
@@ -49,21 +49,18 @@ function install_blender() {
 
 function install_fira_code() {
     fonts_dir="${HOME}/.local/share/fonts"
-    if [[ ! -d "${fonts_dir}" ]]; then
-        echo "mkdir --parents ${fonts_dir}"
-        mkdir --parents "${fonts_dir}"
-    else
-        echo "Found fonts dir ${fonts_dir}"
-    fi
+    mkdir --parents "${fonts_dir}"
 
-    version=6.2
-    zip="Fira_Code_v${version}.zip"
-    curl --fail --location --show-error "https://github.com/tonsky/FiraCode/releases/download/${version}/${zip}" --output "${zip}"
-    unzip -o -q -d "${fonts_dir}" "${zip}"
-    rm "${zip}"
+    file_zip="$(mktemp /tmp/XXXXXX.zip)"
+    wget_with_defaults.sh "https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip" > "${file_zip}"
+    unzip -d "${fonts_dir}" "${file_zip}"
+    rm "${file_zip}"
 
-    echo "fc-cache -f"
     fc-cache -f
+}
+
+function install_jetbrains_mono() {
+    wget_with_defaults.sh https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh | bash
 }
 
 wallpapers_directory_base="${HOME}"/.local/share/backgrounds
@@ -75,7 +72,9 @@ function download_wallpapers_from_file_with_urls() {
     wallpapers_directory="${wallpapers_directory_base}"/"$1"
     wallpapers_urls_file="$2"
     mkdir --parents "${wallpapers_directory}"
-    wget --directory-prefix="${wallpapers_directory}" --input-file="${wallpapers_urls_file}"
+    wget --no-verbose --show-progress \
+        --directory-prefix="${wallpapers_directory}" \
+        --input-file="${wallpapers_urls_file}"
 }
 
 function download_macos_wallpapers() {

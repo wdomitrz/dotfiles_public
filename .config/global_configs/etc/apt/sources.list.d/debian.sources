@@ -1,0 +1,13 @@
+Enabled: yes
+Types: deb
+URIs: http://deb.debian.org/debian
+Suites: bookworm bookworm-updates
+Components: main contrib non-free-firmware non-free
+Signed-By: /usr/share/keyrings/apt/debian.gpg
+
+Enabled: yes
+Types: deb
+URIs: http://deb.debian.org/debian-security
+Suites: bookworm-security
+Components: main contrib non-free-firmware non-free
+Signed-By: /usr/share/keyrings/apt/debian.gpg

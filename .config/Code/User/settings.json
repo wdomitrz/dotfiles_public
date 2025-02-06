@@ -6,6 +6,7 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
+    "breadcrumbs.enabled": false,
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "editor.acceptSuggestionOnEnter": "on",
@@ -467,12 +468,13 @@
     ],
     "window.autoDetectColorScheme": true,
     "window.commandCenter": false,
-    "window.customTitleBarVisibility": "never",
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
-    "workbench.activityBar.location": "top",
+    "workbench.activityBar.location": "hidden",
+    "workbench.editor.editorActionsLocation": "hidden",
     "workbench.editor.showTabs": "none",
     "workbench.enableExperiments": false,
+    "workbench.layoutControl.enabled": false,
     "workbench.sideBar.location": "right",
     "workbench.startupEditor": "none",
     "workbench.tips.enabled": false,

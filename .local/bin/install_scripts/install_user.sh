@@ -53,7 +53,7 @@ function install_fira_code() {
 
     file_zip="$(mktemp /tmp/XXXXXX.zip)"
     wget_with_defaults.sh "https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip" > "${file_zip}"
-    unzip -d "${fonts_dir}" "${file_zip}"
+    unzip -q -d "${fonts_dir}" "${file_zip}"
     rm "${file_zip}"
 
     fc-cache -f
@@ -90,11 +90,31 @@ function install_python_ruff() {
     pip3 install --user --upgrade ruff
 }
 
+function install_doc() {
+    local url="$1"
+    local name="$2"
+    local target_dir="${HOME}/.local/share/doc/${name}"
+    local package_file
+    package_file="$(mktemp /tmp/XXXXXX.zip)"
+
+    mkdir --parents "${target_dir}"
+    wget_with_defaults.sh "${url}" > "${package_file}"
+    unzip -q -d "${target_dir}"/ "${package_file}"
+    rm "${package_file}"
+}
+
+function install_python_doc() {
+    ln --force --symbolic /usr/share/doc/python3 "${HOME}"/.local/share/doc/
+    install_doc https://numpy.org/doc/1.24/numpy-html.zip "python3-numpy/html"
+    install_doc https://pandas.pydata.org/pandas-docs/version/1.5/pandas.zip "python3-pandas/html"
+}
+
 function install_user_main() {
     set -euo pipefail
     set -x
 
     install_python_ruff
+    install_python_doc
 }
 
 if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then

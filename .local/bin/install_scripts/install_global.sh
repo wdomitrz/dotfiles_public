@@ -8,56 +8,17 @@ function install_deb_from_url() {
     rm "${package_file}"
 }
 
-function install_gcloud() {
-    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" |
-        sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
-    wget_with_defaults.sh https://packages.cloud.google.com/apt/doc/apt-key.gpg |
-        sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-    sudo apt-get update --yes &&
-        sudo apt-get install --yes google-cloud-sdk
-}
+function enable_sources_file() {
+    set -euo pipefail
+    sources_file=/etc/apt/sources.list.d/"$1"
 
-function install_signal() {
-    # 1. Install our official public software signing key
-    wget_with_defaults.sh https://updates.signal.org/desktop/apt/keys.asc |
-        gpg --dearmor |
-        sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+    key_source=$(grep 'Key-Source: ' "${sources_file}" | sed 's/Key-Source: //g')
+    key_file=$(grep 'Signed-By: ' "${sources_file}" | sed 's/Signed-By: //g')
 
-    # 2. Add our repository to your list of repositories
-    echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |
-        sudo tee /etc/apt/sources.list.d/signal-xenial.list
+    sudo mkdir --parents "$(dirname "${key_file}")"
+    wget_with_defaults.sh "${key_source}" | sudo sponge "${key_file}"
 
-    # 3. Update your package database and install signal
-    sudo apt-get update --yes &&
-        sudo apt-get install --yes signal-desktop
-}
-
-function add_google_public_key() {
-    wget_with_defaults.sh https://dl.google.com/linux/linux_signing_key.pub |
-        sudo apt-key add -
-
-}
-
-function install_google_chrome() {
-    install_deb_from_url "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-}
-
-function install_vscode() {
-    install_deb_from_url "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-}
-
-function install_chrome_remote_desktop() {
-    install_deb_from_url "https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb"
-    # Configure Chrome Remote Desktop
-    echo "Configure Chrome Remote Desktop at" "https://remotedesktop.google.com/headless"
-}
-
-function install_slack() {
-    install_deb_from_url "https://downloads.slack-edge.com/releases/linux/4.26.1/prod/x64/slack-desktop-4.26.1-amd64.deb"
-}
-
-function install_nordvpn() {
-    wget_with_defaults.sh https://downloads.nordcdn.com/apps/linux/install.sh | sh
+    sudo sed --in-place 's/^Enabled: no$/Enabled: yes/g' "${sources_file}"
 }
 
 function not_sudo() {
@@ -84,19 +45,33 @@ function install_nvim_tar_as_system_nvim() {
     install_nvim_tar_given_locations /opt /usr/bin sudo
 }
 
-function install_tailscale() {
-    wget_with_defaults.sh https://tailscale.com/install.sh | sh
-}
-
 function install_dust() {
     install_deb_from_url "https://github.com/bootandy/dust/releases/download/v1.1.1/du-dust_1.1.1-1_amd64.deb"
 }
 
+function install_chrome_remote_desktop() {
+    enable_sources_file chrome_remote_desktop.sources
+    sudo apt-get update --yes &&
+        sudo apt-get install --yes chrome-remote-desktop
+    # Configure Chrome Remote Desktop
+    echo "Configure Chrome Remote Desktop at" "https://remotedesktop.google.com/headless"
+}
+
 function install_usb_c_display_driver() {
-    # Synaptics displaylink-driver
-    install_deb_from_url "https://www.synaptics.com/sites/default/files/Ubuntu/pool/stable/main/all/synaptics-repository-keyring.deb"
-    sudo apt-get update --yes && sudo apt-get upgrade --yes
-    sudo apt-get install --yes displaylink-driver evdi-dkms
+    install_deb_from_url https://www.synaptics.com/sites/default/files/Ubuntu/pool/stable/main/all/synaptics-repository-keyring.deb
+    sudo apt-get update --yes &&
+        sudo apt-get install --yes displaylink-driver evdi-dkms
+}
+
+function install_packages_external() {
+    enable_sources_file google_chrome.sources
+    enable_sources_file signal.sources
+    enable_sources_file tailscale.sources
+    enable_sources_file vscode.sources
+
+    source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only &&
+        sudo apt-get update --yes &&
+        install_packages_from "${HOME}"/.config/packages/packages_external.sorted.txt
 }
 
 function install_global_main() {
@@ -104,10 +79,7 @@ function install_global_main() {
     set -x
     source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
 
-    install_google_chrome
-    install_signal
-    install_tailscale
-    install_vscode
+    install_packages_external
     install_nvim_tar_as_system_nvim
     install_dust
     update_and_upgrade

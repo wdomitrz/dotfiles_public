@@ -1,0 +1,9 @@
+Enabled: no
+Types: deb
+URIs: https://dl.google.com/linux/chrome/deb
+Suites: stable
+Components: main
+Signed-By: /usr/share/keyrings/apt/google_chrome.asc
+Architectures: amd64
+Key-Source: https://dl.google.com/linux/linux_signing_key.pub
+Package-Source: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

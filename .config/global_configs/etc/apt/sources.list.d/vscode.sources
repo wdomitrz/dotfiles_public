@@ -1,0 +1,10 @@
+X-Repolib-Name: VScode
+Enabled: no
+Types: deb
+URIs: https://packages.microsoft.com/repos/code
+Suites: stable
+Components: main
+Signed-By: /usr/share/keyrings/apt/vscode.asc
+Architectures: amd64 arm64 armhf
+Key-Source: https://packages.microsoft.com/keys/microsoft.asc
+Package-Source: https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64

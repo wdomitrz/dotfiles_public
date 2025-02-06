@@ -35,6 +35,19 @@ function format_shell_files() {
         xargs format_sh.sh
 }
 
+function validate_sources_files() {
+    for f in $(list_git_files | grep "\.sources$"); do
+        key_file=$(grep 'Signed-By: ' "${f}" | sed 's/Signed-By: //g')
+        key_file="$(basename "${key_file}")"
+
+        sources_file="$(basename "${f}")"
+
+        [[ "${key_file%.*}" = "${sources_file%.*}" ]] || (
+            echo "${f} is mis-formatted" && return 1
+        )
+    done
+}
+
 function apply_suggestions_to_shell_files() {
     git_root="$(git rev-parse --show-toplevel)"
     list_git_files | grep "\.sh$" | xargs readlink --canonicalize |
@@ -140,6 +153,7 @@ function sanitize_synced_main() {
     run_and_save files_without_extensions
     run_and_save sort_txt_files
     run_and_save sort_numeric_txt_files
+    run_and_save validate_sources_files
     run_and_save format_vim_files
     run_and_save do_all_python_files
     run_and_save do_all_shell_files

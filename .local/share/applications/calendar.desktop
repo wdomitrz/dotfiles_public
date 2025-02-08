@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Exec=google-chrome --app=https://calendar.google.com/ --disable-infobard --kiosk-printing --margins=0
+Icon=evolution
+Name=Calendar
+GenericName=Google Calendar

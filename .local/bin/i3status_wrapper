@@ -261,7 +261,7 @@ def combine_i3status_outputs(*i3status_outputs):
             continue
         last_remembered_lists[fileno] = result
 
-        yield functools.reducte(
+        yield functools.reduce(
             operator.iadd,
             [last_remembered_lists[fileno] for fileno in fileno_order],
             [],

@@ -8,7 +8,7 @@
     conflictstyle = diff3
 
 [alias]
-    la = log --all --graph --oneline --decorate
+    la = log --all --graph --oneline --decorate --date-order
 
 [include]
     path = ~/.config/git/gitconfig.local

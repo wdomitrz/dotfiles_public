@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-git rev-list -n1 --merges HEAD^
+git rev-list --max-count=1 --merges HEAD^

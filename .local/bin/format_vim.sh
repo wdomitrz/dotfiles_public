@@ -3,7 +3,7 @@
 function format_function() {
     set -ue
     [[ "$#" -eq 1 ]] || return 1
-    nvim --noplugin --headless \
+    nvim --headless \
         -c 'silent norm gg=G' \
         -c 'silent wqa' \
         -- "$@" \

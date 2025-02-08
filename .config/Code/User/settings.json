@@ -88,6 +88,7 @@
     "files.trimTrailingWhitespace": true,
     "git.enabled": true,
     "git.mergeEditor": true,
+    "git.openRepositoryInParentFolders": "always",
     "jupyter.askForKernelRestart": false,
     "keyboard.dispatch": "keyCode",
     "leaderkey.overrides.user": {

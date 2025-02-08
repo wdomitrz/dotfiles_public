@@ -6,9 +6,11 @@
 
 
 import contextlib
+import functools
 import itertools
 import json
 import multiprocessing
+import operator
 import select
 import subprocess
 import sys
@@ -259,7 +261,11 @@ def combine_i3status_outputs(*i3status_outputs):
             continue
         last_remembered_lists[fileno] = result
 
-        yield sum([last_remembered_lists[fileno] for fileno in fileno_order], [])  # noqa: RUF017
+        yield functools.reducte(
+            operator.iadd,
+            [last_remembered_lists[fileno] for fileno in fileno_order],
+            [],
+        )
 
 
 def show_status_text():

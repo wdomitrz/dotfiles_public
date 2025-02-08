@@ -3,5 +3,9 @@ configuration {
     modi: "drun,window,ssh,combi";
     show-icons: true;
     font: "JetBrains Mono 13";
+    kb-remove-to-eol: "";  /* Unmap Ctrl+k */
+    kb-row-up: "Up,Control+p,ISO_Left_Tab,Ctrl+k";  /* Add Ctrl+k */
+    kb-accept-entry: "Control+m,Return,KP_Enter";  /* Unmap Ctrl+j */
+    kb-row-down: "Down,Control+n,Ctrl+j";  /* Add Ctrl+j */
 }
 @import "theme"

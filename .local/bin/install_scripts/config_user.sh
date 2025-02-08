@@ -16,10 +16,6 @@ function set_shell_bash() {
     set_shell /usr/bin/bash
 }
 
-function set_shell_zsh() {
-    set_shell /usr/bin/zsh
-}
-
 function disable_core_file() {
     ulimit -c 0
 }

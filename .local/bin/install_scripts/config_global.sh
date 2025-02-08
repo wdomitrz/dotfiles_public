@@ -52,10 +52,6 @@ function install_and_config_ssh_server() {
     fi
 }
 
-function create_global_set_display_script() {
-    sudo cp ~/.local/bin/set_display /usr/bin/
-}
-
 function fix_redshift() {
     # Disable problematic redshift autostart
     sudo rm --force /etc/systemd/user/default.target.wants/redshift*.service
@@ -103,8 +99,6 @@ function udisk_allow_operations() {
 function nordvpn_with_tailscale() {
     nordvpn whitelist add subnet 100.64.0.0/10
     nordvpn whitelist add subnet fd7a:115c:a1e0::/48
-    nordvpn whitelist add port 41641
-    nordvpn set dns 103.86.96.100 103.86.99.100 100.100.100.100
 }
 
 function config_global_start() {
@@ -119,7 +113,6 @@ function config_global_rest() {
     configure_newt_palette
     udisk_allow_operations
     configure_touchpad
-    create_global_set_display_script
     create_swap_file
     fix_redshift
     install_and_config_ssh_server
@@ -137,29 +130,6 @@ function configure_tpm2_non_root_disk_unlock() {
     # Actually allow tmp2 to unlock the drive
     # replace UNSET_DEVICE with something like nvme0n1p3 (if above you had nvme0n1p3_crypt)
     sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/UNSET_DEVICE
-}
-
-function configure_tpm2_root_disk_unlock_with_dracut() {
-    echo "Don't use this function" && exit 1
-
-    # https://blog.fernvenue.com/archives/debian-with-luks-and-tpm-auto-decryption/
-
-    # Comment out /etc/crypttab
-    sudo sed --in-place --expression='/_crypt UUID/s/^/# /' /etc/crypttab
-
-    sudo apt-get install --no-install-recommends dracut tpm-tools && sudo apt-get autoremove --purge
-    echo 'add_dracutmodules+=" tpm2-tss crypt "' | sudo tee /etc/dracut.conf.d/tpm2.conf
-    sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="rd.auto rd.luks=1"/' /etc/default/grub
-    sudo dracut -f
-    sudo update-grub
-
-    # Actually allow tmp2 to unlock the drive
-    # replace UNSET_DEVICE with something like nvme0n1p3
-    sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/UNSET_DEVICE
-
-    # I didn't test if it's necesary to run it again
-    sudo dracut -f
-    sudo update-grub
 }
 
 function config_global_main() {

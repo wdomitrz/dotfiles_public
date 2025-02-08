@@ -1,1 +1,0 @@
-../../../../.local/bin/post_commit_hook

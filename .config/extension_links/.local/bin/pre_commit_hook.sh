@@ -1,1 +1,0 @@
-../../../../.local/bin/pre_commit_hook

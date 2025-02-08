@@ -3,7 +3,7 @@
 function install_deb_from_url() {
     link="$1"
     package_file="$(mktemp /tmp/XXXXXX.deb)"
-    wget_with_defaults.sh "${link}" > "${package_file}"
+    wget_with_defaults.sh --max-redirect=1 "${link}" > "${package_file}"
     sudo apt-get install --yes "${package_file}"
     rm "${package_file}"
 }
@@ -35,10 +35,10 @@ function install_nvim_tar_given_locations() {
 
     "${sudo_or_not_sudo}" mkdir --parents "${save_dir}" "${link_dir}"
 
-    wget_with_defaults.sh https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz |
+    wget_with_defaults.sh --max-redirect=1 https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz |
         "${sudo_or_not_sudo}" tar xvz -C "${save_dir}"
 
-    "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/nvim-linux64/bin/nvim "${link_dir}"/
+    "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/nvim-linux-x86_64/bin/nvim "${link_dir}"/
 }
 
 function install_nvim_tar_as_system_nvim() {

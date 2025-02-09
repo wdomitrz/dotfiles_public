@@ -3,6 +3,6 @@ Types: deb
 URIs: https://pkgs.tailscale.com/stable/debian
 Suites: bookworm
 Components: main
-Signed-By: /usr/share/keyrings/apt/tailscale.asc
-Key-Source: https://pkgs.tailscale.com/stable/debian/bookworm.asc
-Package-Source: https://tailscale.com/install.sh
+key_source: https://pkgs.tailscale.com/stable/debian/bookworm.asc
+package_source: https://tailscale.com/install.sh
+packages_to_install: tailscale

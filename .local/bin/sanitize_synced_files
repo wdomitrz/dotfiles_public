@@ -36,15 +36,19 @@ function format_shell_files() {
 }
 
 function validate_sources_files() {
-    for f in $(list_git_files | grep "\.sources$"); do
-        key_file=$(grep 'Signed-By: ' "${f}" | sed 's/Signed-By: //g')
-        key_file="$(basename "${key_file}")"
-
-        sources_file="$(basename "${f}")"
-
-        [[ "${key_file%.*}" = "${sources_file%.*}" ]] || (
-            echo "${f} is mis-formatted" && return 1
-        )
+    for f in $(list_git_files | grep "\.sourcesk$"); do
+        if grep --quiet '^Enabled: no$' "${f}" &&
+            grep --quiet '^Signed-By:' "${f}"; then
+            echo "${f} is not enabled, but already signed" && return 1
+        fi
+        if (! grep --quiet '^Signed-By:' "${f}") &&
+            (! grep --quiet '^key_source:' "${f}"); then
+            echo "${f} is not signed, and doesn't have a key_source" && return 1
+        fi
+        if grep --quiet '^Enabled: yes$' "${f}" &&
+            grep --quiet '^Signed-By:' "${f}"; then
+            echo "${f} is enabled, but not signed" && return 1
+        fi
     done
 }
 

@@ -3,7 +3,7 @@ Types: deb
 URIs: https://updates.signal.org/desktop/apt
 Suites: xenial
 Components: main
-Signed-By: /usr/share/keyrings/apt/signal.asc
 Architectures: amd64
-Key-Source: https://updates.signal.org/desktop/apt/keys.asc
-Package-Source: https://signal.org/download/#
+key_source: https://updates.signal.org/desktop/apt/keys.asc
+package_source: https://signal.org/download/#
+packages_to_install: signal-desktop

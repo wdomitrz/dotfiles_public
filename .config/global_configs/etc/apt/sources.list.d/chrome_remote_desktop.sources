@@ -3,7 +3,7 @@ Types: deb
 URIs: http://dl.google.com/linux/chrome-remote-desktop/deb
 Suites: stable
 Components: main
-Signed-By: /usr/share/keyrings/apt/chrome_remote_desktop.asc
 Architectures: amd64
-Key-Source: https://dl.google.com/linux/linux_signing_key.pub
-Package-Source: https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+key_source: https://dl.google.com/linux/linux_signing_key.pub
+package_source: https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+packages_to_install: chrome-remote-desktop

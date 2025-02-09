@@ -3,6 +3,6 @@ Types: deb
 URIs: https://repo.nordvpn.com/deb/nordvpn/debian
 Suites: stable
 Components: main
-Signed-By: /usr/share/keyrings/apt/nordvpn.asc
-Key-Source: https://repo.nordvpn.com/gpg/nordvpn_public.asc
-Package-Source: https://downloads.nordcdn.com/apps/linux/install.sh
+key_source: https://repo.nordvpn.com/gpg/nordvpn_public.asc
+package_source: https://downloads.nordcdn.com/apps/linux/install.sh
+packages_to_install: nordvpn

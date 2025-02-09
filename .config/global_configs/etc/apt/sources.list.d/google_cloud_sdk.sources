@@ -3,7 +3,7 @@ Types: deb
 URIs: https://packages.cloud.google.com/apt
 Suites: cloud-sdk
 Components: main
-Signed-By: /usr/share/keyrings/apt/google_cloud_sdk.asc
 Architectures: amd64
-Key-Source: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-Package-Source: https://cloud.google.com/sdk/docs/install#deb
+key_source: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+package_source: https://cloud.google.com/sdk/docs/install#deb
+packages_to_install: google-cloud-cli

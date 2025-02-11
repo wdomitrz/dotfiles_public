@@ -26,11 +26,6 @@ function set_gtk4_theme() {
 function set_theme_though_links() {
     local -r theme_path="$1"
     local -r dark_or_light="$2"
-    if [[ "$#" -ge 3 ]]; then
-        local -r use_hard_link="${3}"
-    else
-        local -r use_hard_link=""
-    fi
 
     local -r theme_dir="$(dirname "${theme_path}")"
     local -r theme_filename="$(basename "${theme_path}")"
@@ -41,11 +36,7 @@ function set_theme_though_links() {
 
     mkdir --parents "${theme_dir}"
     rm --force "${theme_path}"
-    if [[ "${use_hard_link}" == "hard_link" ]]; then
-        ln --force "${styled_theme_path}" "${theme_path}"
-    else
-        ln --symbolic --relative --force "${styled_theme_path}" "${theme_path}"
-    fi
+    ln --symbolic --relative --force "${styled_theme_path}" "${theme_path}"
 }
 
 function set_kitty_theme() {
@@ -84,11 +75,6 @@ function set_gtk3_theme() {
     set_theme_though_links "${theme_path}" "$@"
 }
 
-function set_jupyter_theme() {
-    local -r theme_path="${HOME}"/.jupyter/custom/custom.css
-    set_theme_though_links "${theme_path}" "$@" "hard_link"
-}
-
 function set_local_theme() {
     local -r theme_path="${HOME}"/.config/theme/theme.txt
     set_theme_though_links "${theme_path}" "$@"
@@ -100,7 +86,6 @@ function set_theme_local() {
     set_local_theme "${dark_or_light}"
     set_gtk3_theme "${dark_or_light}"
     set_gtk4_theme "${dark_or_light}"
-    set_jupyter_theme "${dark_or_light}"
     set_kitty_theme "${dark_or_light}"
     set_background_theme "${dark_or_light}"
     set_bat_theme "${dark_or_light}"

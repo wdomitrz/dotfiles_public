@@ -15,7 +15,7 @@
     },
     "editor.cursorBlinking": "solid",
     "editor.cursorSurroundingLines": 1024,
-    "editor.fontFamily": "'JetBrains Mono', Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
@@ -451,19 +451,23 @@
             ]
         },
         {
+            "after": [
+                ">",
+                "g",
+                "v"
+            ],
             "before": [
                 ">"
-            ],
-            "commands": [
-                "editor.action.indentLines"
             ]
         },
         {
+            "after": [
+                "<",
+                "g",
+                "v"
+            ],
             "before": [
                 "<"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
             ]
         }
     ],

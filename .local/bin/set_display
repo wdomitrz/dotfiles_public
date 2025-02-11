@@ -17,7 +17,7 @@ from dataclasses import dataclass
 
 PRIMARY_ORDER_DEFAULT = ("screen", "rdp", "DP", "HDMI", "eDP")
 DEFAULT_FAILSAFE_DPI = DEFAULT_GNOME_DPI = 96
-HISTORICAL_DIVISOR = 92 / 96
+ADDITIONAL_MULT = 1.2
 LAPTOP_SCREEN_DIVISOR = 1.4
 INCH_TO_MM = 25.4
 
@@ -271,7 +271,7 @@ class DpiSettings:
             ):
                 return DEFAULT_FAILSAFE_DPI  # If cannot get the dpi, return the default
 
-            return INCH_TO_MM * max(resolution) / max(size) / HISTORICAL_DIVISOR
+            return INCH_TO_MM * ADDITIONAL_MULT * max(resolution) / max(size)
 
         return round(get_my_base_dpi() / additional_divisor)
 

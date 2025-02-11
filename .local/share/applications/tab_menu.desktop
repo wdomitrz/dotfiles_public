@@ -1,8 +1,0 @@
-[Desktop Entry]
-Categories=System;
-Comment=Application switcher
-Exec=rofi -show window
-Icon=view-restore
-Name=List windows
-Terminal=false
-Type=Application

@@ -86,12 +86,12 @@ ALL_BLOCKS = {
         Block(
             name="editor",
             full_text="✍️",
-            on_click=run_command_on_click("gtk-launch code".split()),
+            on_click=run_command_on_click("code".split()),
         ),
         Block(
             name="menu",
             full_text="🔍",
-            on_click=run_command_on_click("gtk-launch run_menu".split()),
+            on_click=run_command_on_click("run_menu.sh".split()),
         ),
         Block(
             name="terminal",
@@ -215,7 +215,7 @@ def add_no_internet_info(old_blocks):
 
 
 # Config
-BLOCKS_TO_ADD = ["editor", "terminal", "menu", "close"]
+BLOCKS_TO_ADD = ["terminal", "menu", "close"]
 
 
 def process_blocks(old_blocks):

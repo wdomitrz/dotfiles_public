@@ -1,8 +1,6 @@
+#!/usr/bin/env dex
 [Desktop Entry]
-Categories=System;
-Comment=ssh connections menu
 Exec=rofi -show ssh
 Icon=network-receive
 Name=ssh menu
-Terminal=false
 Type=Application

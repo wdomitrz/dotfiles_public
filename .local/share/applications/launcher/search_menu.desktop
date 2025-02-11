@@ -1,8 +1,6 @@
+#!/usr/bin/env dex
 [Desktop Entry]
-Categories=System;
-Comment=Global search
 Exec=rofi -combi-modi window,drun,ssh -show combi
 Icon=edit-find
-Name=Rofi search
-Terminal=false
+Name=Search everywhere
 Type=Application

@@ -1,6 +1,0 @@
-[Desktop Entry]
-Categories=System;
-Comment=Set display in i3
-Exec=i3_xrl
-Name=Set display automatically
-Type=Application

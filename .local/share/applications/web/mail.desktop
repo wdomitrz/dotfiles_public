@@ -1,7 +1,7 @@
-#!/usr/bin/env xdg-open
+#!/usr/bin/env dex
 [Desktop Entry]
-Type=Application
 Exec=google-chrome --app=https://gmail.com/ --disable-infobars --kiosk-printing --margins=0
+GenericName=GMail
 Icon=org.xfce.mailreader
 Name=Mail
-GenericName=GMail - Google Mail
+Type=Application

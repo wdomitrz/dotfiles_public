@@ -1,0 +1,6 @@
+#!/usr/bin/env dex
+[Desktop Entry]
+Exec=rofi -show window
+Icon=view-restore
+Name=Application
+Type=Application

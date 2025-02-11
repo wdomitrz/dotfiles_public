@@ -1,8 +1,6 @@
+#!/usr/bin/env dex
 [Desktop Entry]
-Categories=System;
 Exec=scan_text
-Comment=Scan text using image to text software
 Icon=text-x-generic
 Name=Scan text
-Terminal=false
 Type=Application

@@ -1,8 +1,6 @@
+#!/usr/bin/env dex
 [Desktop Entry]
-Categories=System;
-Comment=Reboot system
 Exec=systemctl reboot
 Icon=view-refresh
 Name=Reboot
-Terminal=false
 Type=Application

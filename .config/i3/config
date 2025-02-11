@@ -151,9 +151,7 @@ bindsym $mod+Shift+q        kill
 # Adjust display
 bindsym $mod+x              exec --no-startup-id    i3_xrl
 # Pogram launcher
-bindsym $mod+d              exec --no-startup-id    gtk-launch run_menu
-# Global search
-bindsym $mod+slash          exec --no-startup-id    gtk-launch search_menu
+bindsym $mod+d              exec --no-startup-id    run_menu.sh || i3-dmenu-desktop
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
 # Change background
@@ -164,7 +162,7 @@ bindsym $mod+p              exec --no-startup-id    flameshot gui
 bindsym Ctrl+Print          exec --no-startup-id    flameshot full --clipboard
 bindsym $mod+Ctrl+p         exec --no-startup-id    flameshot full --clipboard
 # Scan text using image to text software
-bindsym $mod+t              exec --no-startup-id    gtk-launch scan_text
+bindsym $mod+t              exec --no-startup-id    scan_text
 # Terminal
 bindsym $mod+Return         exec --no-startup-id    i3-sensible-terminal
 # Terminal on local machine

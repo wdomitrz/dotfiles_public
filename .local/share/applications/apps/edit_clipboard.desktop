@@ -1,5 +1,5 @@
+#!/usr/bin/env dex
 [Desktop Entry]
-Categories=System;
 Exec=edit_clipboard
 Icon=edit-copy
 Name=Edit clipboard

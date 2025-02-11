@@ -1,4 +1,4 @@
-#!/usr/bin/env xdg-open
+#!/usr/bin/env dex
 [Desktop Entry]
 Exec=sh -c "nordvpn disconnect && nordvpn set killswitch off && tailscale up && nordvpn set killswitch on && nordvpn connect"
 Icon=tailscale

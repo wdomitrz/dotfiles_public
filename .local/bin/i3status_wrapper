@@ -15,30 +15,26 @@ import select
 import subprocess
 import sys
 from dataclasses import asdict, dataclass, replace
-from typing import Callable, LiteralString
+from typing import Callable, Sequence
 
 
 # Helper functions
-def run_command_background(
-    cmd: str | list[str] | list[LiteralString],
-) -> subprocess.Popen:
+def run_command_background(cmd: str | Sequence[str]) -> subprocess.Popen:
     return subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def run_command_blocking(
-    cmd: str | list[str] | list[LiteralString],
-) -> subprocess.CompletedProcess:
+def run_command_blocking(cmd: str | Sequence[str]) -> subprocess.CompletedProcess:
     return subprocess.run(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=False
     )
 
 
-REFRESH_STATUS_CMD = "killall -SIGUSR1 i3status".split()
+REFRESH_STATUS_CMD: Sequence[str] = "killall -SIGUSR1 i3status".split()
 
 
 # Click handling
 def run_command_on_click(
-    cmd: str | list[str] | list[LiteralString],
+    cmd: str | Sequence[str],
     accepted_button: int = 1,
     refresh: bool = False,
 ) -> Callable[..., None]:

@@ -14,8 +14,9 @@ import subprocess
 import tempfile
 import textwrap
 from dataclasses import dataclass
+from typing import Callable, Sequence
 
-PRIMARY_ORDER_DEFAULT = ("screen", "rdp", "DP", "HDMI", "eDP")
+PRIMARY_ORDER_DEFAULT: tuple[str, ...] = ("screen", "rdp", "DP", "HDMI", "eDP")
 DEFAULT_FAILSAFE_DPI = DEFAULT_GNOME_DPI = 96
 ADDITIONAL_MULT = 1.125
 LAPTOP_SCREEN_DIVISOR = 1.4
@@ -38,7 +39,7 @@ class Display:  # pylint: disable=too-many-instance-attributes
         return "eDP" == name[:3]
 
     @staticmethod
-    def is_laptop_display_open():
+    def is_laptop_display_open() -> bool:
         state_files = glob.glob("/proc/acpi/button/lid/LID*/state")
         if len(state_files) == 0:
             raise RuntimeError("No laptop screen")
@@ -89,7 +90,7 @@ class Display:  # pylint: disable=too-many-instance-attributes
         )
 
     @staticmethod
-    def get_all_displays():
+    def get_all_displays() -> list[Display]:
         res = subprocess.run(
             "xrandr",
             text=True,
@@ -103,17 +104,17 @@ class Display:  # pylint: disable=too-many-instance-attributes
             if not display_info_line.startswith(" ")
         ]
 
-    def set_primary(self, **kwargs):
+    def set_primary(self, **kwargs) -> None:
         self.is_primary = True
         return self.set_auto(**kwargs)
 
     def set_auto(  # pylint: disable=too-many-arguments
         self,
-        same_as=None,
-        left_of=None,
-        right_of=None,
-        above=None,
-        below=None,
+        same_as: str | None = None,
+        left_of: str | None = None,
+        right_of: str | None = None,
+        above: str | None = None,
+        below: str | None = None,
     ):
         cmd = ["xrandr", "--output", self.name, "--auto"]
 
@@ -139,7 +140,7 @@ class Display:  # pylint: disable=too-many-instance-attributes
     def set_off(self):
         subprocess.run(["xrandr", "--output", self.name, "--off"], check=False)
 
-    def set_auto_or_off(self):
+    def set_auto_or_off(self) -> None:
         if os.getenv("SINGLE_DISPLAY") == "1":
             return self.set_off()
         else:
@@ -148,7 +149,9 @@ class Display:  # pylint: disable=too-many-instance-attributes
 
 class GettingPrimaryDisplay:
     @staticmethod
-    def new(displays: list[Display], primary_order=PRIMARY_ORDER_DEFAULT) -> Display:
+    def new(
+        displays: list[Display], primary_order: Sequence[str] = PRIMARY_ORDER_DEFAULT
+    ) -> Display:
         for requirement in primary_order:
             for display in displays:
                 if display.is_connected and display.name.startswith(requirement):
@@ -164,8 +167,8 @@ class GettingPrimaryDisplay:
 
     @staticmethod
     def current_with_failsafe(
-        displays: list[Display], primary_order=PRIMARY_ORDER_DEFAULT
-    ):
+        displays: list[Display], primary_order: Sequence[str] = PRIMARY_ORDER_DEFAULT
+    ) -> Display:
         primary_display = GettingPrimaryDisplay.current(displays)
         if primary_display is not None:
             return primary_display
@@ -174,7 +177,7 @@ class GettingPrimaryDisplay:
 
 class DpiSettings:
     @staticmethod
-    def set_rofi_dpi(dpi):
+    def set_rofi_dpi(dpi: int) -> None:
         config_dir = os.path.expanduser("~/.config/rofi")
         if not os.path.isdir(config_dir):
             return
@@ -221,7 +224,7 @@ class DpiSettings:
             )
 
     @staticmethod
-    def set_gnome_text_scaling_factor(scaling_factor):
+    def set_gnome_text_scaling_factor(scaling_factor: float) -> None:
         subprocess.run(
             [
                 *"gsettings set org.gnome.desktop.interface text-scaling-factor".split(),
@@ -231,7 +234,7 @@ class DpiSettings:
         )
 
     @staticmethod
-    def set_global_base_dpi(dpi):
+    def set_global_base_dpi(dpi: int) -> None:
         with tempfile.NamedTemporaryFile("w+") as config_file:
             config_file.write(
                 textwrap.dedent(
@@ -244,7 +247,7 @@ class DpiSettings:
             subprocess.run(["xrdb", "-override", config_file.name], check=False)
 
     @classmethod
-    def set_dpi(cls, dpi):
+    def set_dpi(cls, dpi: int) -> None:
         cls.set_global_base_dpi(dpi)
         cls.set_rofi_dpi(dpi)
         cls.set_gnome_text_scaling_factor(dpi / DEFAULT_GNOME_DPI)
@@ -253,13 +256,13 @@ class DpiSettings:
     def get_my_dpi(
         resolution: tuple[int, int] | None,
         size: tuple[int, int] | None,
-        is_laptop=False,
+        is_laptop: bool = False,
     ) -> int:
         additional_divisor = 1
         if is_laptop:
             additional_divisor *= LAPTOP_SCREEN_DIVISOR
 
-        def get_my_base_dpi():
+        def get_my_base_dpi() -> float:
             if (
                 resolution is None
                 or size is None
@@ -276,7 +279,7 @@ class DpiSettings:
         return round(get_my_base_dpi() / additional_divisor)
 
     @staticmethod
-    def get_forced_dpi(forced_dpi: int | None = None):
+    def get_forced_dpi(forced_dpi: int | None = None) -> int | None:
         if forced_dpi is not None:
             return forced_dpi
         # Check the environmental variable
@@ -312,7 +315,7 @@ class Commands:
         print(DpiSettings.get_default_dpi(forced_dpi=dpi))
 
     @staticmethod
-    def set_display(**get_dpi_kwargs):
+    def set_display(**get_dpi_kwargs: int | None) -> None:
         displays = Display.get_all_displays()
         primary_display = GettingPrimaryDisplay.new(displays)
 
@@ -332,7 +335,7 @@ class Commands:
                 display.set_auto_or_off()
 
     @staticmethod
-    def parse_arguments():
+    def parse_arguments() -> argparse.Namespace:
         parser = argparse.ArgumentParser()
         parser.set_defaults(func=Commands.set_display)
         subparsers = parser.add_subparsers(title="subcommands")
@@ -353,7 +356,7 @@ class Commands:
         return args
 
 
-def main(*, func, **kwargs):
+def main(*, func: Callable, **kwargs):
     func(**kwargs)
 
 

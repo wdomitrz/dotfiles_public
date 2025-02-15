@@ -6,12 +6,6 @@
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     {
-        "command": "workbench.action.navigateBack",
-        "comment": "Vim",
-        "key": "ctrl+o",
-        "when": "canNavigateBack"
-    },
-    {
         "command": "extension.vim_escape",
         "comment": "Interactive editor fixes; Overwrite interactive.input.clear",
         "key": "escape",
@@ -52,18 +46,6 @@
         "comment": "Multi cursors",
         "key": "ctrl+k",
         "when": "editorFocus"
-    },
-    {
-        "command": "workbench.action.previousEditorInGroup",
-        "comment": "ctrl tab order",
-        "key": "ctrl+shift+tab",
-        "when": "!activeEditorGroupEmpty"
-    },
-    {
-        "command": "workbench.action.nextEditorInGroup",
-        "comment": "ctrl tab order",
-        "key": "ctrl+tab",
-        "when": "!activeEditorGroupEmpty"
     },
     {
         "command": "selectPrevSuggestion",
@@ -137,11 +119,6 @@
         "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
     {
-        "command": "acceptSelectedSuggestion",
-        "key": "ctrl+l",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
         "comment": "Easy navigation in parameter hint (i.e. traverse the hints when there's multiple overload for one method)"
     },
     {
@@ -165,11 +142,6 @@
     {
         "command": "selectPrevCodeAction",
         "key": "ctrl+k",
-        "when": "codeActionMenuVisible"
-    },
-    {
-        "command": "acceptSelectedCodeAction",
-        "key": "ctrl+l",
         "when": "codeActionMenuVisible"
     },
     {

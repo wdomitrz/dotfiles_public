@@ -2,7 +2,7 @@ These are my dotfiles.
 
 ### Compatibility
 
-They work with Debian 12. With a little bit of work (removing some packages from `~/.local/bin/install_scripts/install_packages.sh`) they should also work under Ubuntu 22.04. Making them work under other distribution might require manual installation of packages (and if the system does not use `systemd`, then some more work).
+They work with the current version of [Debian stable](https://www.debian.org/releases/stable/).
 
 ### Cloning the repo
 

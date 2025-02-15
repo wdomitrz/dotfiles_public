@@ -8,6 +8,18 @@ pre {
 }
 
 @media (prefers-color-scheme: dark) {
+    body>#header {
+        background-color: #000;
+        color: #eee;
+    }
+
+    span#login_widged>.button,
+    #logout,
+    #shutdown {
+        background-color: #000 !important;
+        color: #eee !important;
+    }
+
     /*
       Dark theme for Jupyter Notebook/iPython 5
       Author: Theodore Pak

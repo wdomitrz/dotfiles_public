@@ -13,7 +13,7 @@ pre {
         color: #eee;
     }
 
-    span#login_widged>.button,
+    span#login_widget>.button,
     #logout,
     #shutdown {
         background-color: #000 !important;

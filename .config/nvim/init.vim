@@ -139,7 +139,6 @@ if ! $VIM_DISABLE_PLUG
     Plug 'junegunn/fzf.vim'
     Plug 'lambdalisue/suda.vim'
     Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive'  " Git plugin, adding :G(it)
     Plug 'tpope/vim-sleuth'  " Automatic tab sizing
     Plug 'tpope/vim-surround'
     Plug 'vim-airline/vim-airline'  " Nice bottom bar

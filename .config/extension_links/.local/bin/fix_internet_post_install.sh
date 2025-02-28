@@ -1,1 +1,0 @@
-../../../../.local/bin/fix_internet_post_install

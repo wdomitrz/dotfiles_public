@@ -1,1 +1,0 @@
-../../../../.local/bin/sanitize_synced_files

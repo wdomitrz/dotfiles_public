@@ -1,1 +1,0 @@
-../../../../.local/bin/browser_proxy_mim

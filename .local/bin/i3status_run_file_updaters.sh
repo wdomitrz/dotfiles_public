@@ -5,7 +5,7 @@ set -uo pipefail
 kill_others_with_given_name "$(basename "$0")"
 
 file_updaters_dir="${HOME}"/.local/bin/i3status_file_updaters/
-check_integrity_of_tracked_dir "${file_updaters_dir}" || exit 1
+check_integrity_of_tracked_dir.sh "${file_updaters_dir}" || exit 1
 
 readarray -t file_updaters < <(
     find "${file_updaters_dir}" -maxdepth 1 -not -name '.*' -type f -follow

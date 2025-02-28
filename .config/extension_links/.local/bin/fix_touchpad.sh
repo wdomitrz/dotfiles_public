@@ -1,1 +1,0 @@
-../../../../.local/bin/fix_touchpad

@@ -1,1 +1,0 @@
-../../../../.local/bin/connect_displays

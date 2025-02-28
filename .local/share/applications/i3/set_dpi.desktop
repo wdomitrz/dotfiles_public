@@ -1,5 +1,5 @@
 #!/usr/bin/env dex
 [Desktop Entry]
-Exec=i3_set_dpi
+Exec=i3_set_dpi.sh
 Name=Set dpi
 Type=Application

@@ -1,1 +1,0 @@
-../../../../.local/bin/edit_clipboard

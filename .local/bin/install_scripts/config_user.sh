@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function copy_user_configs() {
-    check_integrity_of_tracked_dir "${HOME}"/.config/user_configs &&
+    check_integrity_of_tracked_dir.sh "${HOME}"/.config/user_configs &&
         cp --backup=numbered --verbose --recursive "${HOME}"/.config/user_configs/. "${HOME}"/
 }
 
@@ -46,10 +46,6 @@ function configure_nautilus_open_terminal() {
     DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "${TERMINAL}"
 }
 
-function install_code_extensions() {
-    "${HOME}"/.local/bin/install_code_extensions
-}
-
 function config_user_main() {
     set -euo pipefail
     set -x
@@ -59,7 +55,7 @@ function config_user_main() {
     compile_glib_schemas
     update_tldr
     configure_nautilus_open_terminal
-    install_code_extensions
+    install_code_extensions.sh
     "${HOME}"/.local/bin/set_theme light
 }
 

@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
-(check_if_remote || dex --autostart --environment i3) &
+(check_if_remote.sh || dex --autostart --environment i3) &
 fusuma &
 geoclue-2-agent &
-i3_screen_locker &
+i3_screen_locker.sh &
 i3status_run_file_updaters.sh &
 i3_theme_detection &
-set_keymap &
+set_keymap.sh &
 xfce4-power-manager &
 i3_xrl --no-set-background &&
     (
-        (check_if_remote || (
+        (check_if_remote.sh || (
             blueman-applet &
             signal-desktop &
             nm-applet &

@@ -1,6 +1,6 @@
 #!/usr/bin/env dex
 [Desktop Entry]
-Exec=i3_blank_screen
+Exec=i3_blank_screen.sh
 Name=i3 Blank Screen
 OnlyShowIn=i3
 Terminal=true

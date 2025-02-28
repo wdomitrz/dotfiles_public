@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 set_display
-connect_displays
+connect_displays.sh
 i3_res
 if [ "$#" -ne 1 ] || [ "${1}" != "--no-set-background" ]; then
     set_background

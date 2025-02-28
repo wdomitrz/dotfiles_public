@@ -1,1 +1,0 @@
-../../../../.local/bin/blank_screen

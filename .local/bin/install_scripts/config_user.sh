@@ -16,6 +16,11 @@ function set_shell_bash() {
     set_shell /usr/bin/bash
 }
 
+function add_git_dotfiles_hooks() {
+    ln --relative --symbolic --force "${HOME}"/.local/bin/pre_commit_hook.sh "${HOME}"/.git/hooks/pre-commit
+    ln --relative --symbolic --force "${HOME}"/.local/bin/post_commit_hook.sh "${HOME}"/.git/hooks/post-commit
+}
+
 function disable_core_file() {
     ulimit -c 0
 }
@@ -51,6 +56,7 @@ function config_user_main() {
     set -x
 
     copy_user_configs
+    add_git_dotfiles_hooks
     set_shell_bash
     compile_glib_schemas
     update_tldr

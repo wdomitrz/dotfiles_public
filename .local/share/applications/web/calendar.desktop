@@ -1,7 +1,0 @@
-#!/usr/bin/env dex
-[Desktop Entry]
-Exec=google-chrome --app=https://calendar.google.com/ --disable-infobars --kiosk-printing --margins=0
-GenericName=Google Calendar
-Icon=evolution
-Name=Calendar
-Type=Application

@@ -423,6 +423,7 @@
     "window.commandCenter": false,
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
+    "window.titleBarStyle": "native",
     "workbench.activityBar.location": "hidden",
     "workbench.editor.editorActionsLocation": "hidden",
     "workbench.editor.showTabs": "none",

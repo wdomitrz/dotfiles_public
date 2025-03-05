@@ -62,13 +62,16 @@ function apply_suggestions_to_shell_files() {
 }
 
 function lint_shell_files() {
-    list_git_files.sh | grep "\.sh$" |
-        xargs shellcheck --exclude=SC1091,SC2312 --enable=all
+    # shellcheck disable=SC2310
+    apply_suggestions_to_shell_files || (
+        # Show all errors
+        list_git_files.sh | grep "\.sh$" |
+            xargs shellcheck --exclude=SC1091,SC2312 --enable=all
+    )
 }
 
 function do_all_shell_files() {
     format_shell_files
-    apply_suggestions_to_shell_files
     lint_shell_files
 }
 
@@ -98,19 +101,15 @@ function get_all_files_without_extensions() {
 }
 
 function get_all_files_covered_by_extension_links() {
-    git_root="$(git rev-parse --show-toplevel)"
     list_git_files.sh |
-        (grep "^.config/extension_links/" || true) |
-        sed "s|^|${git_root}/|g" |
+        (grep ".config/extension_links/" || true) |
         xargs --no-run-if-empty readlink --canonicalize |
-        sed "s|^${git_root}/||g"
+        xargs --no-run-if-empty realpath --strip --relative-to="$(pwd)"
 }
 
 function dangling_extension_links() {
-    git_root="$(git rev-parse --show-toplevel)"
     for file in $(list_git_files.sh |
-        grep "^.config/extension_links/" |
-        sed "s|^|${git_root}/|g"); do
+        grep ".config/extension_links/"); do
         [[ -L "${file}" ]] || continue # Process only links
         readlink --canonicalize-existing "${file}" > /dev/null ||
             echo "${file}"

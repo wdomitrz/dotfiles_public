@@ -52,10 +52,13 @@ Hyper_L
 function set_keymap_base() {
     clear_all_options
 
-    tab_keycode=23 control_l_keycode=37 space_keycode=65 caps_lock_keycode=66
+    tab_keycode=23
     set_as_tap_hold "${tab_keycode}" Tab mod1 Hyper_L mod4
+    # space_keycode=65
     # set_as_tap_hold "${space_keycode}" space mod4 Super_R mod4
+    caps_lock_keycode=66
     set_as_tap_hold "${caps_lock_keycode}" Escape control Hyper_R mod4
+    control_l_keycode=37
     set_as_tap_hold "${control_l_keycode}" Escape control Hyper_R mod4
 }
 

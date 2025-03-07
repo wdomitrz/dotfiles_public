@@ -153,16 +153,16 @@ bindsym $mod+x              exec --no-startup-id    i3_xrl
 # Program launcher
 bindsym $mod+d              exec --no-startup-id    run_menu.sh || i3-dmenu-desktop
 # Application switcher
-bindsym $mod+p              exec --no-startup-id    rofi -show window
+bindsym $mod+g              exec --no-startup-id    rofi -show window
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
 # Change background
 bindsym $mod+y              exec --no-startup-id    set_theme toggle
 # Screenshot
 bindsym Print               exec --no-startup-id    flameshot gui
-bindsym $mod+o              exec --no-startup-id    flameshot gui
+bindsym $mod+p              exec --no-startup-id    flameshot gui
 bindsym Ctrl+Print          exec --no-startup-id    flameshot full --clipboard
-bindsym $mod+Ctrl+o         exec --no-startup-id    flameshot full --clipboard
+bindsym $mod+Ctrl+p         exec --no-startup-id    flameshot full --clipboard
 # Scan text using image to text software
 bindsym $mod+t              exec --no-startup-id    scan_text.sh
 # Terminal

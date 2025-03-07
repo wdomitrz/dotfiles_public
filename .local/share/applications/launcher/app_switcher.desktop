@@ -2,5 +2,5 @@
 [Desktop Entry]
 Exec=rofi -show window
 Icon=view-restore
-Name=App switcher
+Name=Application switcher
 Type=Application

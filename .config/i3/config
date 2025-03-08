@@ -153,7 +153,7 @@ bindsym $mod+x              exec --no-startup-id    i3_xrl
 # Program launcher
 bindsym $mod+d              exec --no-startup-id    run_menu.sh || i3-dmenu-desktop
 # Application switcher
-bindsym $mod+s              exec --no-startup-id    rofi -show windowcd -modi window,windowcd
+bindsym $mod+s              exec --no-startup-id    rofi -show windowcd
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
 # Change background

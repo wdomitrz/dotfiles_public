@@ -1,6 +1,6 @@
 #!/usr/bin/env dex
 [Desktop Entry]
-Exec=rofi -show window
+Exec=rofi -show windowcd -modi window,windowcd
 Icon=view-restore
 Name=Application switcher
 Type=Application

@@ -50,7 +50,7 @@ bindsym $mod+space          focus mode_toggle
 bindsym $mod+Shift+s        move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+s              scratchpad show
+bindsym $mod+Ctrl+s         scratchpad show
 
 # Move to next/prev workspace
 bindsym $mod+Ctrl+$left     workspace prev
@@ -153,7 +153,7 @@ bindsym $mod+x              exec --no-startup-id    i3_xrl
 # Program launcher
 bindsym $mod+d              exec --no-startup-id    run_menu.sh || i3-dmenu-desktop
 # Application switcher
-bindsym $mod+g              exec --no-startup-id    rofi -show window
+bindsym $mod+s              exec --no-startup-id    rofi -show windowcd -modi window,windowcd
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
 # Change background

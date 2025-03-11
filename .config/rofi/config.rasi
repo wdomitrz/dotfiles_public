@@ -1,6 +1,6 @@
 @import "dpi"
 configuration {
-    modi: "drun,windowcd,window,ssh";
+    modi: "drun,window,ssh";
     show-icons: true;
     font: "JetBrains Mono 13";
     kb-remove-to-eol: "";  /* Unmap Ctrl+k */

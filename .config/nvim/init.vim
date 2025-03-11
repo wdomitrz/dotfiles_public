@@ -4,7 +4,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " Disable spellcheck in terminal
 autocmd TermOpen * setlocal nospell nonumber norelativenumber
 " set options
-set laststatus=3
+set laststatus=0
 set autochdir
 set clipboard=unnamedplus
 set colorcolumn=80,90,100,120
@@ -141,7 +141,6 @@ if ! $VIM_DISABLE_PLUG
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sleuth'  " Automatic tab sizing
     Plug 'tpope/vim-surround'
-    Plug 'vim-airline/vim-airline'  " Nice bottom bar
     call plug#end()
 endif
 
@@ -154,7 +153,7 @@ let g:vim_json_conceal = 0
 
 " Plugins key mappings
 noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges
-noremap <C-p>       <cmd>Buffers<cr>
+noremap <C-p>       <cmd>History<cr>
 noremap <leader>bb  <cmd>Buffers<cr>
 noremap <leader>ff  <cmd>Files<cr>
 noremap f           <plug>(easymotion-jumptoanywhere)

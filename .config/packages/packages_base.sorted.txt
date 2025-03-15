@@ -5,6 +5,8 @@ apt
 apt-file
 aptitude
 apt-transport-https
+aspell
+aspell-en
 at-spi2-core
 bash
 bash-completion
@@ -13,6 +15,7 @@ bluetooth
 bolt
 brightnessctl
 build-essential
+calc
 clangd
 cmake
 command-not-found
@@ -21,6 +24,7 @@ curl
 dbus-x11
 desktop-file-utils
 dex
+dict
 dkms
 dosfstools
 ethtool
@@ -112,6 +116,7 @@ tldr
 tmux
 tree
 unattended-upgrades
+units
 universal-ctags
 unzip
 vim-tiny

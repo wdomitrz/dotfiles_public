@@ -129,7 +129,11 @@ function configure_tpm2_non_root_disk_unlock() {
 
     # Actually allow tmp2 to unlock the drive
     # replace UNSET_DEVICE with something like nvme0n1p3 (if above you had nvme0n1p3_crypt)
-    sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/UNSET_DEVICE
+    # For info on slots:
+    # sudo systemd-cryptenroll /dev/nvme0n1p3
+    # For wiping unused slot
+    # sudo systemd-cryptenroll --wipe-slot=1 /dev/nvme0n1p3
+    sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/nvme0n1p3
 }
 
 function config_global_main() {

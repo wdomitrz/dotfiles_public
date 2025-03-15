@@ -7,7 +7,7 @@ autocmd TermOpen * setlocal nospell nonumber norelativenumber
 set laststatus=0
 set autochdir
 set clipboard=unnamedplus
-set colorcolumn=80,90,100,120
+set colorcolumn=80,100
 set completeopt=menuone,noinsert,noselect
 set complete=.,w,b,u,U,k,kspell,s,i,t
 set foldmethod=syntax nofoldenable

@@ -4,19 +4,20 @@ autocmd BufWritePre * %s/\s\+$//e
 " Disable spellcheck in terminal
 autocmd TermOpen * setlocal nospell nonumber norelativenumber
 " set options
-set laststatus=0
 set autochdir
 set clipboard=unnamedplus
 set colorcolumn=80,100
 set completeopt=menuone,noinsert,noselect
 set complete=.,w,b,u,U,k,kspell,s,i,t
 set foldmethod=syntax nofoldenable
+set smartcase ignorecase
+set laststatus=0
 set lazyredraw
 set linebreak breakindent
 set list
 set mouse=a
-set noswapfile nowritebackup
 set nonumber
+set noswapfile nowritebackup
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024
 set shortmess=IAc
@@ -148,6 +149,7 @@ endif
 " Plugin options
 let g:EasyMotion_do_mapping = 0
 let g:markdown_syntax_conceal = 0
+let g:sneak#use_ic_scs = 1
 let g:suda_smart_edit = 1
 let g:vim_json_conceal = 0
 
@@ -158,5 +160,3 @@ noremap <leader>bb  <cmd>Buffers<cr>
 noremap <leader>ff  <cmd>Files<cr>
 noremap f           <Plug>Sneak_f
 noremap F           <Plug>Sneak_F
-noremap t           <Plug>Sneak_t
-noremap T           <Plug>Sneak_T

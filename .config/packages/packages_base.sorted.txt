@@ -27,6 +27,7 @@ dex
 dict
 dkms
 dosfstools
+entr
 ethtool
 e-wrapper
 exfat-fuse

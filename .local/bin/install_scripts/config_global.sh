@@ -45,10 +45,10 @@ function update_locales() {
 }
 
 function install_and_config_ssh_server() {
-    if [[ -f "${HOME}/.local/bin/.config_sshd" ]]; then
+    if [[ -f "${HOME}/.local/bin/.config_sshd.sh" ]]; then
         sudo apt-get update --yes &&
             sudo apt-get install --yes openssh-server
-        "${HOME}"/.local/bin/.config_sshd
+        "${HOME}"/.local/bin/.config_sshd.sh
     fi
 }
 

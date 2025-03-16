@@ -64,6 +64,11 @@ function configure_newt_palette() {
         echo "no newt-palette"
 }
 
+function configure_external_power_sleep() {
+    sudo sed --in-place=".bck" --regexp-extended "s/^#?(HandleLidSwitchExternalPower)\s*=\s*[a-z]*/\1=lock/g" /etc/systemd/logind.conf
+    sudo sed --in-place=".bck" --regexp-extended "s/^#?(HandleLidSwitchDocked)\s*=\s*[a-z]*/\1=lock/g" /etc/systemd/logind.conf
+}
+
 function create_swap_file() {
     local -r swapfile_location="/home/swapfile"
     if ! [[ -f "${swapfile_location}" ]]; then

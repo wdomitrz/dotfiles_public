@@ -168,6 +168,7 @@
         "<C-w>": true,
         "<C-x>": true
     },
+    "vim.hlsearch": true,
     "vim.insertModeKeyBindings": [
         {
             "before": [

@@ -134,9 +134,9 @@ if ! $VIM_DISABLE_PLUG
 
     call plug#begin()
     Plug 'airblade/vim-gitgutter'  " Git plugin, adding line markers
-    Plug 'easymotion/vim-easymotion'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'justinmk/vim-sneak'
     Plug 'lambdalisue/suda.vim'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sleuth'  " Automatic tab sizing
@@ -156,4 +156,7 @@ noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges
 noremap <C-p>       <cmd>History<cr>
 noremap <leader>bb  <cmd>Buffers<cr>
 noremap <leader>ff  <cmd>Files<cr>
-noremap f           <plug>(easymotion-jumptoanywhere)
+noremap f           <Plug>Sneak_f
+noremap F           <Plug>Sneak_F
+noremap t           <Plug>Sneak_t
+noremap T           <Plug>Sneak_T

@@ -10,7 +10,6 @@ set colorcolumn=80,100
 set completeopt=menuone,noinsert,noselect
 set complete=.,w,b,u,U,k,kspell,s,i,t
 set foldmethod=syntax nofoldenable
-set smartcase ignorecase
 set laststatus=0
 set lazyredraw
 set linebreak breakindent
@@ -137,7 +136,6 @@ if ! $VIM_DISABLE_PLUG
     Plug 'airblade/vim-gitgutter'  " Git plugin, adding line markers
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'justinmk/vim-sneak'
     Plug 'lambdalisue/suda.vim'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sleuth'  " Automatic tab sizing
@@ -158,5 +156,3 @@ noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges
 noremap <C-p>       <cmd>History<cr>
 noremap <leader>bb  <cmd>Buffers<cr>
 noremap <leader>ff  <cmd>Files<cr>
-noremap f           <Plug>Sneak_f
-noremap F           <Plug>Sneak_F

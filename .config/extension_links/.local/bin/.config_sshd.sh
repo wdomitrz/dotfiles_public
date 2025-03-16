@@ -1,1 +1,0 @@
-../../../../.local/bin/.config_sshd

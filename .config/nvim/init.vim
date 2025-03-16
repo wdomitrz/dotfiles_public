@@ -1,21 +1,19 @@
 " Vim options
-" Automatically removing all trailing whitespaces
+" Automatically removing all trailing spaces
 autocmd BufWritePre * %s/\s\+$//e
 " Disable spellcheck in terminal
-autocmd TermOpen * setlocal nospell nonumber norelativenumber
+autocmd TermOpen * setlocal nospell
 " set options
 set autochdir
+set breakindent
 set clipboard=unnamedplus
 set colorcolumn=80,100
 set completeopt=menuone,noinsert,noselect
 set complete=.,w,b,u,U,k,kspell,s,i,t
-set foldmethod=syntax nofoldenable
+set foldmethod=syntax foldlevelstart=99
 set laststatus=0
-set lazyredraw
-set linebreak breakindent
+set linebreak
 set list
-set mouse=a
-set nonumber
 set noswapfile nowritebackup
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024
@@ -23,9 +21,7 @@ set shortmess=IAc
 set spell spelllang=en,pl
 set splitright splitbelow
 set tabstop=4 softtabstop=-1 shiftwidth=0 expandtab
-set termguicolors
 set undofile
-set updatetime=100
 set whichwrap+=<,>,h,l,[,]
 
 " Theme
@@ -65,7 +61,7 @@ function! Format_file()
 endfunction
 autocmd BufWritePost * silent call Format_file()
 
-" Keymap
+" Key mappings
 " Use space as leader
 let mapleader=" "
 " Move line up/down when wrapped
@@ -145,11 +141,7 @@ endif
 
 
 " Plugin options
-let g:EasyMotion_do_mapping = 0
-let g:markdown_syntax_conceal = 0
-let g:sneak#use_ic_scs = 1
 let g:suda_smart_edit = 1
-let g:vim_json_conceal = 0
 
 " Plugins key mappings
 noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges

@@ -33,29 +33,11 @@ endtry
 
 " Formatter
 function! Format_file()
-    if &readonly
-        return
-    endif
+    if &readonly | return | endif
+    if match(expand('%:p'), "^suda://") != -1 | return | endif
 
-    if &filetype == 'sh'
-        !format_sh.sh %
-    elseif &filetype == 'python'
-        !format_py.sh %
-    elseif &filetype == 'json'
-        !format_json.sh %
-    elseif &filetype == 'vim'
-        !format_vim.sh %
-    endif
-
-    let file_name = expand('%:t')
-    if match(file_name, "\.sorted\.json$") != -1
-        !format_sorted_json.sh %
-    elseif match(file_name, "\.sorted\.txt$") != -1
-        !format_sorted_txt.sh %
-    elseif match(file_name, "\.sorted_numeric\.txt$") != -1
-        !format_sorted_numeric_txt.sh %
-    endif
-
+    " Actually run the formatting
+    !format.sh %
     " Reload the formatted file
     edit!
 endfunction

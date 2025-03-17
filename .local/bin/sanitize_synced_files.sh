@@ -1,41 +1,10 @@
 #!/usr/bin/env bash
 
-function sort_json_files() {
-    list_git_files.sh | grep "\.sorted\.json$" |
-        xargs format_sorted_json.sh
+function format_all_files() {
+    list_git_files.sh | xargs format.sh
 }
 
-function format_json_files() {
-    list_git_files.sh | grep "\.json$" |
-        xargs format_json.sh
-}
-
-function do_all_jsons() {
-    sort_json_files
-    format_json_files
-}
-
-function sort_txt_files() {
-    list_git_files.sh | grep "\.sorted\.txt$" |
-        xargs format_sorted_txt.sh
-}
-
-function sort_numeric_txt_files() {
-    list_git_files.sh | grep "\.sorted_numeric\.txt$" |
-        xargs format_sorted_numeric_txt.sh
-}
-
-function format_vim_files() {
-    list_git_files.sh | grep "\.vim$" |
-        xargs format_vim.sh
-}
-
-function format_shell_files() {
-    list_git_files.sh | grep "\.sh$" | xargs readlink --canonicalize |
-        xargs format_sh.sh
-}
-
-function validate_sources_files() {
+function lint_source_files() {
     for f in $(list_git_files.sh | grep "\.sourcesk$"); do
         if grep --quiet '^Enabled: no$' "${f}" &&
             grep --quiet '^Signed-By:' "${f}"; then
@@ -52,42 +21,25 @@ function validate_sources_files() {
     done
 }
 
-function apply_suggestions_to_shell_files() {
-    git_root="$(git rev-parse --show-toplevel)"
-    list_git_files.sh | grep "\.sh$" | xargs readlink --canonicalize |
-        xargs shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
-        sed "s|--- ${git_root}|--- a|g" |
-        sed "s|+++ ${git_root}|+++ b|g" |
-        patch --strip=1 --directory="${git_root}"
-}
-
 function lint_shell_files() {
-    # shellcheck disable=SC2310
-    apply_suggestions_to_shell_files || (
+    git_root="$(git rev-parse --show-toplevel)"
+    (
+        # Automatically apply fixes
+        list_git_files.sh | grep "\.sh$" | xargs readlink --canonicalize |
+            parallel shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
+            sed "s|--- ${git_root}|--- a|g" |
+            sed "s|+++ ${git_root}|+++ b|g" |
+            patch --strip=1 --directory="${git_root}"
+    ) || (
         # Show all errors
         list_git_files.sh | grep "\.sh$" |
-            xargs shellcheck --exclude=SC1091,SC2312 --enable=all
+            parallel shellcheck --exclude=SC1091,SC2312 --enable=all
     )
-}
-
-function do_all_shell_files() {
-    format_shell_files
-    lint_shell_files
-}
-
-function format_python_files() {
-    list_git_files.sh | grep "\.py$" | xargs readlink --canonicalize |
-        xargs format_py.sh
 }
 
 function lint_python_files() {
     list_git_files.sh | grep "\.py$" | xargs readlink --canonicalize |
         xargs ruff check --quiet --extend-select I --fix
-}
-
-function do_all_python_files() {
-    format_python_files
-    lint_python_files
 }
 
 function get_all_files_without_extensions() {
@@ -116,7 +68,7 @@ function dangling_extension_links() {
     done
 }
 
-function files_without_extensions() {
+function lint_extension_links() {
     dangling_extension_links | not grep "?*"
 
     get_all_files_covered_by_extension_links |
@@ -152,14 +104,11 @@ function wait_for_all() {
 }
 
 function sanitize_synced_main() {
-    run_and_save do_all_jsons
-    run_and_save files_without_extensions
-    run_and_save sort_txt_files
-    run_and_save sort_numeric_txt_files
-    run_and_save validate_sources_files
-    run_and_save format_vim_files
-    run_and_save do_all_python_files
-    run_and_save do_all_shell_files
+    run_and_save format_all_files
+    run_and_save lint_source_files
+    run_and_save lint_extension_links
+    run_and_save lint_python_files
+    run_and_save lint_shell_files
     wait_for_all
 }
 

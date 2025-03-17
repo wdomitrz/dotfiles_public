@@ -14,6 +14,7 @@ set foldmethod=syntax foldlevelstart=99
 set laststatus=0
 set linebreak
 set list
+set nonumber
 set noswapfile nowritebackup
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024

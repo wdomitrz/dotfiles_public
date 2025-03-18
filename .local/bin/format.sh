@@ -20,12 +20,12 @@ function format_sorted_json() {
 export -f format_sorted_json
 
 function format_sorted_numeric_txt() {
-    LC_ALL=C sort --numeric-sort --output "$1"{,}
+    sort --numeric-sort --output "$1"{,}
 }
 export -f format_sorted_numeric_txt
 
 function format_sorted_txt() {
-    LC_ALL=C sort --output "$1"{,}
+    sort --output "$1"{,}
 }
 export -f format_sorted_txt
 
@@ -79,7 +79,7 @@ function format_main() {
         echo "Usage: $0 <file_path> [<file_path>]*"
         return 1
     fi
-    find "$@" | exec parallel format_a_file
+    find "$@" | LC_ALL=C exec parallel format_a_file
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

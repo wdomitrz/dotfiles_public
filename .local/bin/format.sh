@@ -39,12 +39,14 @@ function format_vim() {
 export -f format_vim
 
 function format_a_file() {
+    set -euo pipefail
     if [[ $# -eq 0 ]]; then
         echo "${FUNCNAME[*]}: Expected exactly one argument"
         return 1
     fi
     given_file_path="$1"
-    file_path="$(realpath "${given_file_path}")"
+    file_path="$(realpath --quiet "${given_file_path}")" ||
+        return 0 # Ignore dangling links
 
     case ${given_file_path} in
     *.sh)

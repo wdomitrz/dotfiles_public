@@ -20,12 +20,12 @@ function format_sorted_json() {
 export -f format_sorted_json
 
 function format_sorted_numeric_txt() {
-    sort --numeric-sort --output "$1"{,}
+    LC_ALL=C sort --numeric-sort --output "$1"{,}
 }
 export -f format_sorted_numeric_txt
 
 function format_sorted_txt() {
-    sort --output "$1"{,}
+    LC_ALL=C sort --output "$1"{,}
 }
 export -f format_sorted_txt
 

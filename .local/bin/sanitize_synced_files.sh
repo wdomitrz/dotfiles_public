@@ -116,5 +116,5 @@ function sanitize_synced_main() {
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     set -euo pipefail
 
-    sanitize_synced_main "${@}"
+    LC_ALL=C sanitize_synced_main "${@}"
 fi

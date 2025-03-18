@@ -72,8 +72,8 @@ software-properties-gtk
 system-config-printer
 thinkfan
 tlp
-tpb
 tp-smapi-dkms
+tpb
 transmission
 ttf-mscorefonts-installer
 unrar

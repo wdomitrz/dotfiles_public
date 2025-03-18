@@ -59,7 +59,7 @@ function diff_public() {
     remove_remote
 }
 
-if [[ "$#" -ne 1 ]]; then
+if [[ $# -ne 1 ]]; then
     echo "Expected exactly 1 argument"
     exit 1
 fi

@@ -6,7 +6,7 @@ function usage_and_exit() {
     exit "$1"
 }
 
-if [[ "$#" -eq 0 ]]; then
+if [[ $# -eq 0 ]]; then
     usage_and_exit 1
 fi
 
@@ -16,7 +16,7 @@ case "$1" in
     usage_and_exit 0
     ;;
 --mtime_cache_too_old)
-    if [[ "$#" -lt 2 ]]; then
+    if [[ $# -lt 2 ]]; then
         usage_and_exit 1
     fi
     mtime_cache_too_old="$2"
@@ -28,7 +28,7 @@ esac
 args_hash="$(printf '%s\t\0' "$@" | md5sum | awk '{print $1}')"
 cache_file="${HOME}/.cache/cached_command/cached_command_file_${args_hash}.txt"
 
-if [[ ! -f "${cache_file}" ]] ||
+if [[ ! -f ${cache_file} ]] ||
     [[ -n "$(find "${cache_file}" -mtime "${mtime_cache_too_old}")" ]]; then
     # shellcheck disable=SC2174
     # --mode=700 applied only to the deepest directory - as intended

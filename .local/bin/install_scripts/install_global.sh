@@ -67,7 +67,7 @@ function not_sudo() {
 
 function install_nvim_tar_given_locations() {
     # appimage url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-    if [[ "$#" -ne 3 ]]; then
+    if [[ $# -ne 3 ]]; then
         echo "expected 2 parameters: <save_dir> <link_dir> <sudo_or_not_sudo>"
         return 1
     fi
@@ -106,6 +106,6 @@ function install_global_main() {
     update_and_upgrade
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     install_global_main "${@}"
 fi

@@ -45,6 +45,6 @@ function install_packages_main() {
     install_with_recommended
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     install_packages_main "${@}"
 fi

@@ -4,7 +4,7 @@ function get_list_of_modifiers() {
 }
 
 function validate_modifier() {
-    if [[ "$#" -ne 1 ]]; then
+    if [[ $# -ne 1 ]]; then
         return 1
     fi
     get_list_of_modifiers | grep --quiet '^'"$1"'$'
@@ -17,7 +17,7 @@ function clear_all_options() {
 }
 
 function set_as_tap_hold() {
-    if [[ "$#" -ne 5 ]]; then
+    if [[ $# -ne 5 ]]; then
         echo "\
 usage: ${FUNCNAME[0]} <keycode_to_use> <key_on_tap> <modifier_on_hold> <spare_key> <modifier_on_spare_modifier>
 
@@ -70,6 +70,6 @@ function set_keymap_main() {
     set_keymap_base
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     set_keymap_main "${@}"
 fi

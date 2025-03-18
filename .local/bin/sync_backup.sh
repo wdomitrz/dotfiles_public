@@ -51,7 +51,7 @@ function main() {
     from_location="$1"
     where_and_to_location="$2"
 
-    if [[ "${where_and_to_location}" != *:* ]]; then
+    if [[ ${where_and_to_location} != *:* ]]; then
         echo "Incorrect format of ${where_and_to_location}. Expected ':' inside."
         exit 1
     fi
@@ -69,6 +69,6 @@ function main() {
     ssh -A "${where}" -- "$(typeset -f); push_up" "${to_location}"
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     main "${@}"
 fi

@@ -25,6 +25,6 @@ function checko_integrity_of_tracked_dir() {
         check_integrity_of_tracked_files "${files_location}"
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     checko_integrity_of_tracked_dir "${@}"
 fi

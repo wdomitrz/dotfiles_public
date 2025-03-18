@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-
 function format_all_files() {
     list_git_files.sh | xargs format.sh
 }
 
-function lint_source_files() {
+function lint_sources_files() {
     for f in $(list_git_files.sh | grep "\.sourcesk$"); do
         if grep --quiet '^Enabled: no$' "${f}" &&
             grep --quiet '^Signed-By:' "${f}"; then
@@ -44,10 +43,10 @@ function lint_python_files() {
 
 function get_all_files_without_extensions() {
     for file in $(list_git_files.sh); do
-        [[ -L "${file}" ]] && continue # Ignore links
+        [[ -L ${file} ]] && continue # Ignore links
         base_file_name="$(basename "${file}")"
-        [[ "${base_file_name}" == ?*.* ]] && continue    # Check if the file has an extension
-        [[ "${base_file_name}" == ".keep" ]] && continue # Check if the file is a keep file
+        [[ ${base_file_name} == ?*.* ]] && continue    # Check if the file has an extension
+        [[ ${base_file_name} == ".keep" ]] && continue # Check if the file is a keep file
         echo "${file}"
     done
 }
@@ -62,7 +61,7 @@ function get_all_files_covered_by_extension_links() {
 function dangling_extension_links() {
     for file in $(list_git_files.sh |
         grep ".config/extension_links/"); do
-        [[ -L "${file}" ]] || continue # Process only links
+        [[ -L ${file} ]] || continue # Process only links
         readlink --canonicalize-existing "${file}" > /dev/null ||
             echo "${file}"
     done
@@ -104,17 +103,17 @@ function wait_for_all() {
 }
 
 function sanitize_synced_main() {
-    run_and_save format_all_files
-    run_and_save lint_source_files
-    run_and_save lint_extension_links
+    run_and_save lint_sources_files
     run_and_save lint_python_files
+    run_and_save lint_extension_links
     run_and_save lint_shell_files
+    run_and_save format_all_files
     wait_for_all
 }
 
 ################################################################################
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     set -euo pipefail
 
     sanitize_synced_main "${@}"

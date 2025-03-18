@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 function format_json() {
     jq --indent 4 . -- "$@" | sponge "$@"
 }
@@ -11,7 +10,7 @@ function format_py() {
 export -f format_py
 
 function format_sh() {
-    shfmt --indent 4 --space-redirects --write "$@"
+    shfmt --indent 4 --space-redirects --simplify --write "$@"
 }
 export -f format_sh
 
@@ -40,10 +39,14 @@ function format_vim() {
 export -f format_vim
 
 function format_a_file() {
-    [[ "$#" -eq 1 ]] || return 1
-    file_path="$1"
+    if [[ $# -eq 0 ]]; then
+        echo "${FUNCNAME[*]}: Expected exactly one argument"
+        return 1
+    fi
+    given_file_path="$1"
+    file_path="$(realpath "${given_file_path}")"
 
-    case ${file_path} in
+    case ${given_file_path} in
     *.sh)
         format_sh "${file_path}"
         ;;
@@ -51,7 +54,7 @@ function format_a_file() {
         format_py "${file_path}"
         ;;
     *.sorted.json)
-        format_sorted_json.sh "${file_path}"
+        format_sorted_json "${file_path}"
         ;;
     *.json)
         format_json "${file_path}"
@@ -60,10 +63,10 @@ function format_a_file() {
         format_vim "${file_path}"
         ;;
     *.sorted.txt)
-        format_sorted_txt.sh "${file_path}"
+        format_sorted_txt "${file_path}"
         ;;
     *.sorted_numeric.txt)
-        format_sorted_numeric_txt.sh "${file_path}"
+        format_sorted_numeric_txt "${file_path}"
         ;;
     *) ;;
     esac
@@ -72,9 +75,13 @@ export -f format_a_file
 
 function format_main() {
     set -euo pipefail
-    echo "$@" | parallel format_a_file
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: $0 <file_path> [<file_path>]*"
+        return 1
+    fi
+    find "$@" | exec parallel format_a_file
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     format_main "${@}"
 fi

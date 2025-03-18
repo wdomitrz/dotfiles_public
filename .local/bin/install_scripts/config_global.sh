@@ -71,7 +71,7 @@ function configure_external_power_sleep() {
 
 function create_swap_file() {
     local -r swapfile_location="/home/swapfile"
-    if ! [[ -f "${swapfile_location}" ]]; then
+    if ! [[ -f ${swapfile_location} ]]; then
         sudo fallocate -l 2G "${swapfile_location}"
         sudo chmod 600 "${swapfile_location}"
         sudo mkswap "${swapfile_location}"
@@ -149,6 +149,6 @@ function config_global_main() {
     config_global_rest
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     config_global_main "${@}"
 fi

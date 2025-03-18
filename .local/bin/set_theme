@@ -9,7 +9,7 @@ function help_and_exit() {
 
 function set_gtk4_theme() {
     dark_or_light="$1"
-    if [[ "${dark_or_light}" == "dark" ]]; then
+    if [[ ${dark_or_light} == "dark" ]]; then
         theme_name="Adwaita-dark"
     else
         theme_name="Adwaita"
@@ -100,12 +100,12 @@ function set_theme() {
 
 function get_theme() {
     local -r theme_file="${HOME}"/.config/theme/theme.txt
-    [[ -f "${theme_file}" ]] && cat "${theme_file}"
+    [[ -f ${theme_file} ]] && cat "${theme_file}"
 }
 
 function toggle_theme() {
     theme="$(get_theme)"
-    if [[ "${theme}" == "dark" ]]; then
+    if [[ ${theme} == "dark" ]]; then
         set_theme "light"
     else
         set_theme "dark"
@@ -113,7 +113,7 @@ function toggle_theme() {
 }
 
 function main() {
-    if [[ "$#" -ne 1 ]]; then
+    if [[ $# -ne 1 ]]; then
         help_and_exit
     fi
     theme="$1"
@@ -134,6 +134,6 @@ function main() {
 
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     main "${@}"
 fi

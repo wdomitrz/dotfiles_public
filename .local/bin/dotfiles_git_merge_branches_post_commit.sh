@@ -5,7 +5,7 @@ function get_config_file() {
     readonly original_file_path="$1"
     # shellcheck disable=SC2155
     readonly tmp_file_path=/tmp/"$(basename "${original_file_path}")"
-    [[ -f "${original_file_path}" ]] && (cp -a "${original_file_path}" "${tmp_file_path}" || true)
+    [[ -f ${original_file_path} ]] && (cp -a "${original_file_path}" "${tmp_file_path}" || true)
     echo "${tmp_file_path}"
 }
 
@@ -29,7 +29,7 @@ function go_back_push_and_cleanup {
     git branch --delete "${MAIN_BRANCH}" "${ALL_BRANCHES[@]}" || echo "Branches removed"
 }
 
-if [[ "${MAIN_BRANCH}" != "$(git rev-parse --abbrev-ref HEAD)" ]]; then
+if [[ ${MAIN_BRANCH} != "$(git rev-parse --abbrev-ref HEAD)" ]]; then
     git -c core.editor=true merge --continue
 fi
 

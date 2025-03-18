@@ -12,6 +12,6 @@ function clear_packages_main() {
     uninstall_packages_and_cleanup
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     clear_packages_main "${@}"
 fi

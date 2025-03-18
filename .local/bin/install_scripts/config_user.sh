@@ -65,6 +65,6 @@ function config_user_main() {
     "${HOME}"/.local/bin/set_theme light
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     config_user_main "${@}"
 fi

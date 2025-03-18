@@ -65,7 +65,7 @@ function install_jetbrains_mono() {
 
 wallpapers_directory_base="${HOME}"/.local/share/backgrounds
 function download_wallpapers_from_file_with_urls() {
-    if [[ "$#" -ne 2 ]]; then
+    if [[ $# -ne 2 ]]; then
         echo "Expected 2 arguments: <output directory name> <urls path file>"
         return 1
     fi
@@ -117,6 +117,6 @@ function install_user_main() {
     install_python_doc
 }
 
-if [[ "$#" -ne 1 ]] || [[ "${1}" != "--source-only" ]]; then
+if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
     install_user_main "${@}"
 fi

@@ -3,7 +3,7 @@ name: sanitize_synced_files
 on: [push]
 
 jobs:
-  build:
+  sanitize:
     runs-on: ubuntu-latest
     steps:
     - name: Dependencies
@@ -12,8 +12,8 @@ jobs:
         sudo apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt
         python3 -m pip install --upgrade --user ruff
     - uses: actions/checkout@v4
+    - run: |
+        cp --recursive ./. ~/ && cd ~
     - name: Sanitize
       run: |
-        cp --recursive ./. ~/
-        cd ~
-        source .profile && sanitize_synced_files.sh && git diff --exit-code
+        source ~/.profile && sanitize_synced_files.sh && git diff --exit-code

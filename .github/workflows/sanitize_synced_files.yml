@@ -4,13 +4,15 @@ on: [push]
 
 jobs:
   build:
-    runs-on: debian:stable
+    runs-on: ubuntu-latest
     steps:
-    - name: Dependencies
+    - name: Dependencies through apt
       run: |
-        apt-get update --yes
-        apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt
-        python3 -m pip install --upgrade --user --break-system-packages ruff
+        sudo apt-get update --yes
+        sudo apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt
+    - name: Dependencies through pip
+      run: |
+        python3 -m pip install --upgrade --user ruff
     - uses: actions/checkout@v4
     - run: |
         cp --recursive ./. ~/

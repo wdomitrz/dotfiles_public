@@ -16,5 +16,4 @@ jobs:
       run: |
         cp --recursive ./. ~/
         cd ~
-        bash -c "source .profile && sanitize_synced_files.sh"
-        git diff --exit-code
+        source .profile && sanitize_synced_files.sh && git diff --exit-code

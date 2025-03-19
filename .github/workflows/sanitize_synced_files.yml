@@ -6,16 +6,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Dependencies through apt
+    - name: Dependencies
       run: |
         sudo apt-get update --yes
         sudo apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt
-    - name: Dependencies through pip
-      run: |
         python3 -m pip install --upgrade --user ruff
     - uses: actions/checkout@v4
-    - run: |
-        cp --recursive ./. ~/
     - name: Sanitize
       run: |
-        bash -c "cd ~ && source .profile && sanitize_synced_files.sh && git diff --exit-code"
+        cp --recursive ./. ~/
+        cd ~
+        bash -c "source .profile && sanitize_synced_files.sh"
+        git diff --exit-code

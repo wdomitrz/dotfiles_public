@@ -13,7 +13,7 @@ jobs:
         python3 -m pip install --upgrade --user ruff
     - uses: actions/checkout@v4
     - run: |
-        cp --recursive ./. ~/ && cd ~
+        cp --recursive ./. ~/
     - name: Sanitize
       run: |
-        source ~/.profile && sanitize_synced_files.sh && git diff --exit-code
+        cd ~ && source ~/.profile && sanitize_synced_files.sh && git diff --exit-code

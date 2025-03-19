@@ -1,0 +1,19 @@
+name: sanitize_synced_files
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: debian:stable
+    steps:
+    - name: Dependencies
+      run: |
+        apt-get update --yes
+        apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt
+        python3 -m pip install --upgrade --user --break-system-packages ruff
+    - uses: actions/checkout@v4
+    - run: |
+        cp --recursive ./. ~/
+    - name: Sanitize
+      run: |
+        bash -c "cd ~ && source .profile && sanitize_synced_files.sh && git diff --exit-code"

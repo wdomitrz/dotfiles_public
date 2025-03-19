@@ -49,27 +49,13 @@ function format_a_file() {
         return 0 # Ignore dangling links
 
     case ${given_file_path} in
-    *.sh)
-        format_sh "${file_path}"
-        ;;
-    *.py)
-        format_py "${file_path}"
-        ;;
-    *.sorted.json)
-        format_sorted_json "${file_path}"
-        ;;
-    *.json)
-        format_json "${file_path}"
-        ;;
-    *.vim)
-        format_vim "${file_path}"
-        ;;
-    *.sorted.txt)
-        format_sorted_txt "${file_path}"
-        ;;
-    *.sorted_numeric.txt)
-        format_sorted_numeric_txt "${file_path}"
-        ;;
+    *.sh) format_sh "${file_path}" ;;
+    *.py) format_py "${file_path}" ;;
+    *.sorted.json) format_sorted_json "${file_path}" ;;
+    *.json) format_json "${file_path}" ;;
+    *.vim) format_vim "${file_path}" ;;
+    *.sorted.txt) format_sorted_txt "${file_path}" ;;
+    *.sorted_numeric.txt) format_sorted_numeric_txt "${file_path}" ;;
     *) ;;
     esac
 }

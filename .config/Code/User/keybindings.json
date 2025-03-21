@@ -72,11 +72,6 @@
         "when": "terminal.active"
     },
     {
-        "command": "workbench.actions.view.toggleProblems",
-        "comment": "Toggle problems view",
-        "key": "ctrl+y"
-    },
-    {
         "command": "workbench.action.togglePanel",
         "comment": "Toggle bottom panel",
         "key": "ctrl+j"

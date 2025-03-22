@@ -155,6 +155,7 @@
         "<C-[>": true,
         "<C-a>": true,
         "<C-d>": true,
+        "<C-o>": true,
         "<C-r>": true,
         "<C-u>": true,
         "<C-w>": true,

@@ -4,15 +4,17 @@ line-length = 88
 extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
-extend-select = [
-    "B", "C", "E", "F", "I", "RUF", "W"
-]
-ignore = [
-    "E501", "RUF005"
-]
+select = ["ANN001", "ANN2", "B", "C", "E", "F", "I", "RUF", "W"]
+ignore = ["C408", "E501", "RUF005", "RUF012"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 18
 
+[tool.ruff.lint.per-file-ignores]
+"**.notebook.py" = ["B018", "E402", "F704"]
+
 [tool.ruff.lint.flake8-annotations]
 suppress-none-returning = true
+
+[tool.basedpyright]
+analyzeUnannotatedFunctions = true

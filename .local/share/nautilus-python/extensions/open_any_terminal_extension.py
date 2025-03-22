@@ -3,6 +3,8 @@
 # https://github.com/Stunkymonkey/nautilus-open-any-terminal
 # GPL3 License
 
+# ruff: noqa: ANN001, ANN201, ANN202
+
 from gettext import gettext, textdomain
 from subprocess import call
 

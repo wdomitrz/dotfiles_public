@@ -5,6 +5,7 @@ geoclue-2-agent &
 i3_screen_locker.sh &
 i3status_run_file_updaters.sh &
 i3_theme_detection &
+set_audio.sh --both-filter "pci" --out-volume 40% --in-muted 1 --out-muted 1 &
 set_keymap.sh &
 xfce4-power-manager &
 i3_xrl --no-set-background &&

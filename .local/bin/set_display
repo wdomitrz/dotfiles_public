@@ -13,8 +13,9 @@ import re
 import subprocess
 import tempfile
 import textwrap
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Callable, Sequence
+from typing import Callable
 
 PRIMARY_ORDER_DEFAULT: tuple[str, ...] = ("screen", "rdp", "DP", "HDMI", "eDP")
 DEFAULT_FAILSAFE_DPI = DEFAULT_GNOME_DPI = 96
@@ -116,7 +117,7 @@ class Display:  # pylint: disable=too-many-instance-attributes
         above: str | None = None,
         below: str | None = None,
     ):
-        cmd = ["xrandr", "--output", self.name, "--auto"]
+        cmd: list[str] = ["xrandr", "--output", self.name, "--auto"]
 
         if self.is_primary:
             cmd += ["--primary"]
@@ -126,7 +127,7 @@ class Display:  # pylint: disable=too-many-instance-attributes
         elif left_of is not None:
             cmd += ["--left-of", left_of]
         elif right_of is not None:
-            cmd += ["--right-of", left_of]
+            cmd += ["--right-of", right_of]
         elif above is not None:
             cmd += ["--above", above]
         elif below is not None:
@@ -135,10 +136,10 @@ class Display:  # pylint: disable=too-many-instance-attributes
         if self.name.startswith("DP"):
             cmd += ["--set", "Broadcast RGB", "Full"]
 
-        subprocess.run(cmd, check=False)
+        _ = subprocess.run(cmd, check=False)
 
     def set_off(self):
-        subprocess.run(["xrandr", "--output", self.name, "--off"], check=False)
+        _ = subprocess.run(["xrandr", "--output", self.name, "--off"], check=False)
 
     def set_auto_or_off(self) -> None:
         if os.getenv("SINGLE_DISPLAY") == "1":
@@ -200,8 +201,8 @@ class DpiSettings:
                 os.path.join(config_dir, "config.rasi"), "r+", encoding="utf-8"
             ) as rofi_config_file:
                 rofi_config_contents = rofi_config_file.read()
-                rofi_config_file.seek(0)
-                rofi_config_file.write(
+                _ = rofi_config_file.seek(0)
+                _ = rofi_config_file.write(
                     textwrap.dedent(
                         f"""\
                         @import "dpi"
@@ -213,7 +214,7 @@ class DpiSettings:
         with open(
             os.path.join(config_dir, "dpi.rasi"), "w+", encoding="utf-8"
         ) as rofi_dpi_config_file:
-            rofi_dpi_config_file.write(
+            _ = rofi_dpi_config_file.write(
                 textwrap.dedent(
                     f"""\
                     configuration {{
@@ -225,7 +226,7 @@ class DpiSettings:
 
     @staticmethod
     def set_gnome_text_scaling_factor(scaling_factor: float) -> None:
-        subprocess.run(
+        _ = subprocess.run(
             [
                 *"gsettings set org.gnome.desktop.interface text-scaling-factor".split(),
                 str(scaling_factor),
@@ -236,15 +237,15 @@ class DpiSettings:
     @staticmethod
     def set_global_base_dpi(dpi: int) -> None:
         with tempfile.NamedTemporaryFile("w+") as config_file:
-            config_file.write(
+            _ = config_file.write(
                 textwrap.dedent(
                     f"""\
                     Xft.dpi: {dpi}
                     """
                 )
             )
-            config_file.seek(0)
-            subprocess.run(["xrdb", "-override", config_file.name], check=False)
+            _ = config_file.seek(0)
+            _ = subprocess.run(["xrdb", "-override", config_file.name], check=False)
 
     @classmethod
     def set_dpi(cls, dpi: int) -> None:
@@ -347,7 +348,7 @@ class Commands:
         show_dpi_parser.set_defaults(func=Commands.get_default_dpi)
 
         set_dpi_parser = subparsers.add_parser("set_dpi")
-        set_dpi_parser.add_argument(
+        _ = set_dpi_parser.add_argument(
             "--dpi", type=int, required=False, help="dpi to use"
         )
         set_dpi_parser.set_defaults(func=Commands.set_dpi)

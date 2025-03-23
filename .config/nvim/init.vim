@@ -1,6 +1,7 @@
 " Vim options
-" Automatically removing all trailing spaces
-autocmd BufWritePre * %s/\s\+$//e
+" Automatically removing all trailing spaces and blank trailing lines
+autocmd BufWritePre * %substitute/\s\+$//e
+autocmd BufWritePre * %substitute/$\n\+\%$//e
 " Disable spellcheck in terminal
 autocmd TermOpen * setlocal nospell
 " set options

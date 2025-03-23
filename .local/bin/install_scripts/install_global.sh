@@ -65,24 +65,48 @@ function not_sudo() {
     "$@"
 }
 
-function install_nvim_tar_given_locations() {
-    # appimage url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-    if [[ $# -ne 3 ]]; then
-        echo "expected 2 parameters: <save_dir> <link_dir> <sudo_or_not_sudo>"
+function install_to_given_location() {
+    if [[ $# -ne 6 ]]; then
+        echo "Usage: $0 <save_dir> <link_dir> <sudo_or_not_sudo> <url> <relative_binary_path> <decompression_option>"
         return 1
     fi
-    local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
+    local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3" url="$4" relative_binary_path="$5" decompression_option="$6"
 
     "${sudo_or_not_sudo}" mkdir --parents "${save_dir}" "${link_dir}"
 
-    wget_with_defaults.sh --max-redirect=1 https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz |
-        "${sudo_or_not_sudo}" tar xvz -C "${save_dir}"
+    wget_with_defaults.sh --max-redirect=1 "${url}" |
+        "${sudo_or_not_sudo}" tar --extract \
+            "${decompression_option}" \
+            --directory="${save_dir}"
 
-    "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/nvim-linux-x86_64/bin/nvim "${link_dir}"/
+    "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/"${relative_binary_path}" "${link_dir}"/
+}
+
+function install_nvim_tar_given_locations() {
+    # appimage url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+    [[ $# -ne 3 ]] && exit 1
+    local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
+    install_to_given_location "${save_dir}" "${link_dir}" "${sudo_or_not_sudo}" \
+        https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz \
+        nvim-linux-x86_64/bin/nvim \
+        --ungzip
 }
 
 function install_nvim_tar_as_system_nvim() {
     install_nvim_tar_given_locations /opt /usr/bin sudo
+}
+
+function install_kitty_given_location() {
+    [[ $# -ne 3 ]] && exit 1
+    local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
+    install_to_given_location "${save_dir}"/kitty "${link_dir}" "${sudo_or_not_sudo}" \
+        https://github.com/kovidgoyal/kitty/releases/download/v0.40.1/kitty-0.40.1-x86_64.txz \
+        bin/kitty \
+        --xz
+}
+
+function install_kitty_as_system_kitty() {
+    install_kitty_given_location /opt /usr/bin sudo
 }
 
 function install_dust() {
@@ -102,6 +126,7 @@ function install_global_main() {
 
     install_packages_external
     install_nvim_tar_as_system_nvim
+    install_kitty_as_system_kitty
     install_dust
     update_and_upgrade
 }

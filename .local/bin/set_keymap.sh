@@ -52,8 +52,8 @@ Hyper_L
 function set_keymap_base() {
     clear_all_options
 
-    tab_keycode=23
-    set_as_tap_hold "${tab_keycode}" Tab mod1 Hyper_L mod4
+    # tab_keycode=23
+    # set_as_tap_hold "${tab_keycode}" Tab mod1 Hyper_L mod4
     # space_keycode=65
     # set_as_tap_hold "${space_keycode}" space mod4 Super_R mod4
     caps_lock_keycode=66
@@ -65,8 +65,6 @@ function set_keymap_base() {
 function set_keymap_main() {
     set_keymap_base
     sleep 2
-    set_keymap_base
-    sleep 5
     set_keymap_base
 }
 

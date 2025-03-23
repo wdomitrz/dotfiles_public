@@ -2,11 +2,17 @@
 
 import pickle
 import sys
+from pathlib import Path
 
-for f in sys.argv[1:]:
-    with open(f, "rb") as file:
-        data = pickle.load(file)
-    try:
-        print(data)
-    except BrokenPipeError:
-        pass
+
+def main():
+    for f in map(Path, sys.argv[1:]):
+        data = pickle.load(f.open("rb"))  # pyright: ignore[reportAny]
+        try:
+            print(data)  # pyright: ignore[reportAny]
+        except BrokenPipeError:
+            pass
+
+
+if __name__ == "__main__":
+    main()

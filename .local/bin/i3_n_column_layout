@@ -22,7 +22,8 @@ def container_to_ignore(container: i3ipc.Con | None) -> bool:
 def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
     def resize_to_nth(i3: i3ipc.Connection, _event: i3ipc.WindowEvent) -> None:
         if container_to_ignore(container := i3.get_tree().find_focused()) or (
-            container.parent is not None
+            container is not None
+            and container.parent is not None
             and container.ipc_data["rect"]["y"]
             != container.parent.ipc_data["rect"]["y"]
         ):
@@ -34,7 +35,7 @@ def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
         if -n <= (size_delta - workspace_width // n):
             size_delta -= workspace_width // n
 
-        i3.command(f"resize set width {container_width - int(size_delta)}")
+        _ = i3.command(f"resize set width {container_width - int(size_delta)}")
 
     def up_to_n_colums(i3: i3ipc.Connection, _event: i3ipc.WindowEvent) -> None:
         if container_to_ignore(container := i3.get_tree().find_focused()):
@@ -46,7 +47,7 @@ def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
             else "vertical"
         )
 
-        i3.command(f"split {how_to_split}")
+        _ = i3.command(f"split {how_to_split}")
 
     i3.on(event=i3ipc.Event.WINDOW_CLOSE, handler=resize_to_nth)
     i3.on(event=i3ipc.Event.WINDOW_FOCUS, handler=up_to_n_colums)
@@ -56,7 +57,7 @@ def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
+    _ = parser.add_argument(
         "-n",
         "--number-of-columns",
         help="number of columns",

@@ -87,7 +87,7 @@ function install_nvim_tar_given_locations() {
     [[ $# -ne 3 ]] && exit 1
     local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
     install_to_given_location "${save_dir}" "${link_dir}" "${sudo_or_not_sudo}" \
-        https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz \
+        "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz" \
         nvim-linux-x86_64/bin/nvim \
         --ungzip
 }
@@ -100,7 +100,7 @@ function install_kitty_given_location() {
     [[ $# -ne 3 ]] && exit 1
     local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
     install_to_given_location "${save_dir}"/kitty "${link_dir}" "${sudo_or_not_sudo}" \
-        https://github.com/kovidgoyal/kitty/releases/download/v0.40.1/kitty-0.40.1-x86_64.txz \
+        "https://github.com/kovidgoyal/kitty/releases/download/v0.40.1/kitty-0.40.1-x86_64.txz" \
         bin/kitty \
         --xz
 }
@@ -126,7 +126,6 @@ function install_global_main() {
 
     install_packages_external
     install_nvim_tar_as_system_nvim
-    install_kitty_as_system_kitty
     install_dust
     update_and_upgrade
 }

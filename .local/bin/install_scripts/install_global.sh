@@ -96,19 +96,6 @@ function install_nvim_tar_as_system_nvim() {
     install_nvim_tar_given_locations /opt /usr/bin sudo
 }
 
-function install_kitty_given_location() {
-    [[ $# -ne 3 ]] && exit 1
-    local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
-    install_to_given_location "${save_dir}"/kitty "${link_dir}" "${sudo_or_not_sudo}" \
-        "https://github.com/kovidgoyal/kitty/releases/download/v0.40.1/kitty-0.40.1-x86_64.txz" \
-        bin/kitty \
-        --xz
-}
-
-function install_kitty_as_system_kitty() {
-    install_kitty_given_location /opt /usr/bin sudo
-}
-
 function install_dust() {
     install_deb_from_url "https://github.com/bootandy/dust/releases/download/v1.1.1/du-dust_1.1.1-1_amd64.deb"
 }

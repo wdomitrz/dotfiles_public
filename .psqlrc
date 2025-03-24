@@ -1,1 +1,1 @@
-\setenv PAGER 'less -S'
+\setenv PAGER 'terminal_pager'

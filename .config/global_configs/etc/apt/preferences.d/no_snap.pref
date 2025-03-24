@@ -1,6 +1,0 @@
-# To prevent repository packages from triggering the installation of Snap,
-# this file forbids snapd from being installed by APT.
-
-Package: snapd
-Pin: release a=*
-Pin-Priority: -10

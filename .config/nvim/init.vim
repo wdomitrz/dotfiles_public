@@ -130,5 +130,4 @@ let g:suda_smart_edit = 1
 " Plugins key mappings
 noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges
 noremap <C-p>       <cmd>History<cr>
-noremap <leader>bb  <cmd>Buffers<cr>
 noremap <leader>ff  <cmd>Files<cr>

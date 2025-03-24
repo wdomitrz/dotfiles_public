@@ -12,5 +12,7 @@ function list_extensions_to_install() {
 list_extensions_to_install |
     sed 's/^/--install-extension /g' | xargs --no-run-if-empty code --force
 
-comm -23 <(code --list-extensions | sort) <(list_extensions_to_install | sort) |
+comm -23 \
+    <(code --list-extensions | grep --invert-match "Extensions installed on " | sort) \
+    <(list_extensions_to_install | sort) |
     sed 's/^/--uninstall-extension /g' | xargs --no-run-if-empty code

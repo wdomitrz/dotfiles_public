@@ -179,6 +179,7 @@ vlc
 wakeonlan
 wget
 wine
+wine32
 wine64
 wireless-tools
 wireplumber

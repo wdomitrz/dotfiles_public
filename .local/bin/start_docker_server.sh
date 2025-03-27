@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 function start_docker_server_main() {
-    set -x
     suffix=""
     rebuild=false
     while [[ $# -gt 0 ]]; do

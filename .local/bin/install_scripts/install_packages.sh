@@ -11,11 +11,11 @@ function install_packages_from() {
 }
 
 function install_packages_base() {
-    install_packages_from "${HOME}"/.config/packages/packages_base.sorted.txt
+    install_packages_from "${HOME}"/.config/packages/packages.sorted.txt
 }
 
 function install_packages_rest() {
-    install_packages_from "${HOME}"/.config/packages/packages_rest.sorted.txt
+    install_packages_from "${HOME}"/.config/packages/packages_other.sorted.txt
 }
 
 function install_nvidia() {

@@ -126,6 +126,9 @@ endif
 
 " Plugin options
 let g:suda_smart_edit = 1
+let $FZF_DEFAULT_OPTS = '--reverse'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.0 } }
+let g:fzf_preview_window = []
 
 " Plugins key mappings
 noremap <C-/>       :Commentary<cr>|  " `:` to support visual mode ranges

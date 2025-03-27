@@ -1,5 +1,4 @@
 adwaita-icon-theme
-adwaita-icon-theme-full
 adwaita-qt
 adwaita-qt6
 amd64-microcode
@@ -54,7 +53,6 @@ modemmanager
 nautilus
 nautilus-admin
 nautilus-image-converter
-network-manager
 network-manager-gnome
 onboard
 os-prober
@@ -63,12 +61,10 @@ pipewire
 pipewire-audio
 pipewire-pulse
 policykit-1-gnome
-powertop
 printer-driver-all
 redshift-gtk
 rofi
 simple-scan
-software-properties-gtk
 system-config-printer
 thinkfan
 tlp
@@ -77,7 +73,6 @@ tpb
 transmission
 ttf-mscorefonts-installer
 unrar
-update-notifier
 vlc
 wine32
 winetricks

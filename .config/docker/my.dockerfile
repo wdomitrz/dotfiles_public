@@ -1,8 +1,14 @@
 FROM debian
 
 RUN dpkg --add-architecture i386 && apt-get update && apt-get upgrade --yes
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends openssh-server && \
-    mkdir /var/run/sshd && \
+
+# Install ssh server and packages
+ADD https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.config/packages/packages.sorted.txt /
+RUN cat /packages.sorted.txt | DEBIAN_FRONTEND=noninteractive xargs apt-get install --yes --no-install-recommends openssh-server && \
+    rm /packages.sorted.txt
+
+# Configure ssh
+RUN mkdir /var/run/sshd && \
     (echo "ChallengeResponseAuthentication no" && \
         echo "PasswordAuthentication no" && \
         echo "PermitRootLogin no" && \
@@ -10,14 +16,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends
         echo "UsePAM yes" && \
         echo "X11Forwarding yes" && \
         echo "X11UseLocalhost no") | tee --append /etc/ssh/sshd_config
-ADD https://raw.githubusercontent.com/wdomitrz/dotfiles_public/refs/heads/main/.config/packages/packages.sorted.txt /
-RUN cat /packages.sorted.txt | DEBIAN_FRONTEND=noninteractive xargs apt-get install --yes --no-install-recommends && \
-    rm /packages.sorted.txt
+
+# Configure locales
 RUN echo "locales locales/default_environment_locale select en_US.UTF-8" | debconf-set-selections && \
     echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" | debconf-set-selections && \
     rm --force --verbose "/etc/locale.gen" && \
     dpkg-reconfigure --frontend noninteractive locales
-
 
 # Add a new user
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers

@@ -5,4 +5,5 @@ firmware-realtek
 intel-microcode
 ttf-mscorefonts-installer
 unrar
+wine32
 winetricks

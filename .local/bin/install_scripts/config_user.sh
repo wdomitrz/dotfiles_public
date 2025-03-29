@@ -51,11 +51,19 @@ function configure_nautilus_open_terminal() {
     DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "${TERMINAL}"
 }
 
+function disable_screen_ai_for_chrome() {
+    chrom_screen_ai_path="${HOME}"/.config/google-chrome/screen_ai/
+    rm --force --recursive --verbose "${chrom_screen_ai_path}"
+    mkdir --parents "${chrom_screen_ai_path}"
+    chmod 000 "${chrom_screen_ai_path}"
+}
+
 function config_user_main() {
     set -euo pipefail
     set -x
 
     copy_user_configs
+    disable_screen_ai_for_chrome
     add_git_dotfiles_hooks
     set_shell_bash
     compile_glib_schemas

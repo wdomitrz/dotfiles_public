@@ -168,7 +168,7 @@ function main() {
     fi
 
     # Default values
-    out_volume=30% && in_volume=100% && out_muted=1 && in_muted=0
+    out_volume=40% && in_volume=100% && out_muted=1 && in_muted=0
     while [[ $# -gt 0 ]]; do
         case "$1" in
         --help) set_audio_help ;;

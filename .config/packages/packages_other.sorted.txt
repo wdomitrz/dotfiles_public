@@ -3,6 +3,8 @@ firmware-iwlwifi
 firmware-linux
 firmware-realtek
 intel-microcode
+nvidia-driver
+nvidia-smi
 ttf-mscorefonts-installer
 unrar
 wine32

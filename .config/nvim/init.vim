@@ -33,13 +33,6 @@ catch
     let &background = "dark"
 endtry
 
-" Remove when using only nvim-0.10+
-if ! has('nvim-0.10') |
-    highlight SpellBad cterm=undercurl ctermfg=NONE ctermbg=NONE
-    highlight ColorColumn ctermbg=darkgray
-    highlight Pmenu ctermbg=darkgray
-endif
-
 " Formatter
 function! Format_file()
     if &readonly | return | endif

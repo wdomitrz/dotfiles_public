@@ -8,9 +8,9 @@ function install_haskell_ghcup() {
     curl --fail --progress-bar --show-error --location --proto '=https' --tlsv1.2 https://get-ghcup.haskell.org | sh
 }
 
-function install_nvim_tar() {
+function install_nvim() {
     source "${HOME}"/.local/bin/install_scripts/install_global.sh --source-only
-    install_nvim_tar_given_locations "${HOME}"/.local/opt "${HOME}"/.local/bin not_sudo
+    install_nvim_given_locations "${HOME}"/.local/opt "${HOME}"/.local/bin not_sudo
 }
 
 function install_moonlight() {

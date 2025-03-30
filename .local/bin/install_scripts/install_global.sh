@@ -82,7 +82,7 @@ function install_to_given_location() {
     "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/"${relative_binary_path}" "${link_dir}"/
 }
 
-function install_nvim_tar_given_locations() {
+function install_nvim_given_locations() {
     # appimage url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
     [[ $# -ne 3 ]] && exit 1
     local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
@@ -92,8 +92,8 @@ function install_nvim_tar_given_locations() {
         --ungzip
 }
 
-function install_nvim_tar_as_system_nvim() {
-    install_nvim_tar_given_locations /opt /usr/bin sudo
+function install_system_nvim() {
+    install_nvim_given_locations /opt /usr/bin sudo
 }
 
 function install_dust() {
@@ -113,6 +113,7 @@ function install_global_main() {
 
     install_packages_external
     install_dust
+    install_system_nvim
     update_and_upgrade
 }
 

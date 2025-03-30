@@ -1,2 +1,4 @@
 #!/usr/bin/env sh
-exec notify-send "🎤 $(pactl get-source-mute @DEFAULT_SOURCE@)"
+pactl get-source-mute @DEFAULT_SOURCE@ |
+    sed -e 's/Mute: no/🎤/' -e 's/Mute: yes/🚫🎤/' |
+    xargs --delimiter='\n' notify-send

@@ -44,7 +44,7 @@ function enable_sources_and_install_packages() {
     read -r -a packages_to_install <<< "${packages_to_install}"
 
     sudo apt-get update --yes &&
-        sudo apt-get install --yes "${packages_to_install[@]}"
+        sudo apt-get install --yes --no-install-recommends "${packages_to_install[@]}"
 }
 
 function install_packages_external() {
@@ -103,7 +103,7 @@ function install_dust() {
 function install_usb_c_display_driver() {
     install_deb_from_url https://www.synaptics.com/sites/default/files/Ubuntu/pool/stable/main/all/synaptics-repository-keyring.deb
     sudo apt-get update --yes &&
-        sudo apt-get install --yes displaylink-driver evdi-dkms
+        sudo apt-get install --yes --no-install-recommends displaylink-driver evdi-dkms
 }
 
 function install_global_main() {

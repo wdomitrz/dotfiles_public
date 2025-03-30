@@ -52,7 +52,7 @@ function set_kitty_theme() {
 function set_background_theme() {
     local -r theme_path="${HOME}"/.local/share/backgrounds/backgrounds.dir
     set_theme_though_links "${theme_path}" "$@"
-    set_background
+    set_background.sh
 }
 
 function set_bat_theme() {

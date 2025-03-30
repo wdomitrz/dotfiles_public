@@ -1,6 +1,6 @@
 #!/usr/bin/env dex
 [Desktop Entry]
-Exec=set_theme toggle
+Exec=set_theme.sh toggle
 Icon=night-light-symbolic
 Name=Toggle dark/light theme
 Type=Application

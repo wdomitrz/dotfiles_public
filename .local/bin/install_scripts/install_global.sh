@@ -112,7 +112,6 @@ function install_global_main() {
     source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
 
     install_packages_external
-    install_nvim_tar_as_system_nvim
     install_dust
     update_and_upgrade
 }

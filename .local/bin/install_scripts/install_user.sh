@@ -86,8 +86,8 @@ function download_macos_wallpapers() {
     ln -rsf "${wallpapers_directory}"/10-15-Day.jpg "${wallpapers_directory_light}"/
 }
 
-function install_python_ruff() {
-    pip3 install --user --upgrade ruff
+function install_python_packages() {
+    pip3 install --break-system-packages --user --upgrade basedpyright ruff
 }
 
 function install_doc() {
@@ -140,7 +140,7 @@ function install_user_main() {
     set -euo pipefail
     set -x
 
-    install_python_ruff
+    install_python_packages
     install_rmz_and_cpz
     install_python_doc
 }

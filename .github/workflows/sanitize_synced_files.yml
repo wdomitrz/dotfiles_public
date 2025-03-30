@@ -9,8 +9,8 @@ jobs:
     - name: Dependencies
       run: |
         sudo apt-get update --yes
-        sudo apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt
-        python3 -m pip install --upgrade --user ruff
+        sudo apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt python3-i3ipc python3-pandas
+        python3 -m pip install --upgrade --user basedpyright ruff
     - uses: actions/checkout@v4
     - run: |
         cp --recursive ./. ~/

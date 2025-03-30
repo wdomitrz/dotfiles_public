@@ -304,7 +304,7 @@ def handle_click(line: str) -> None:
 
     block: Block | None = ALL_BLOCKS.get((data.get("name"), data.get("instance")))
     if block is None:
-        block: Block | None = ALL_BLOCKS.get(data.get("name"))
+        block = ALL_BLOCKS.get(data.get("name"))
 
     if block is None or block.on_click is None:
         return

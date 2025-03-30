@@ -11,7 +11,7 @@ from subprocess import call
 try:
     from urllib import unquote  # type: ignore
 
-    from urlparse import urlparse
+    from urlparse import urlparse  # pyright: ignore[reportMissingImports]
 except ImportError:
     from urllib.parse import unquote, urlparse
 
@@ -229,7 +229,7 @@ if Nautilus._version == "3.0":
                 self._create_accel_group()
 
         def _open_terminal(self, *args):
-            filename = unquote(self._uri[7:])
+            filename = unquote(self._uri[7:])  # type: ignore[reportOptionalSubscript]
             open_terminal_in_file(filename)
 
         def get_widget(self, uri, window):

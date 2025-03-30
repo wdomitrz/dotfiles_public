@@ -5,6 +5,8 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
+    "basedpyright.analysis.typeCheckingMode": "standard",
+    "basedpyright.analysis.useLibraryCodeForTypes": false,
     "breadcrumbs.enabled": false,
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,

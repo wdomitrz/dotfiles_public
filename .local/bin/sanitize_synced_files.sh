@@ -41,6 +41,13 @@ function lint_python_files() {
         xargs ruff check --quiet --extend-select I --fix
 }
 
+function type_python_files() {
+    list_git_files.sh | grep "\.py$" | xargs readlink --canonicalize |
+        xargs basedpyright --project "${HOME}"/.config/ruff/pyproject.toml |
+        not grep --invert-match "0 errors, 0 warnings, 0 notes"
+
+}
+
 function get_all_files_without_extensions() {
     for file in $(list_git_files.sh); do
         [[ -L ${file} ]] && continue # Ignore links
@@ -108,6 +115,7 @@ function sanitize_synced_main() {
     run_and_save lint_extension_links
     run_and_save lint_shell_files
     run_and_save format_all_files
+    run_and_save type_python_files
     wait_for_all
 }
 

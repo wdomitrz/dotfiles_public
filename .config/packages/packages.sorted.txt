@@ -54,7 +54,9 @@ file
 file-roller
 flameshot
 fonts-jetbrains-mono
+fonts-noto-cjk
 fonts-noto-color-emoji
+fonts-noto-core
 fwupd
 fzf
 gdb

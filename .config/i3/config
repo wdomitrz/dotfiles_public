@@ -157,7 +157,7 @@ bindsym $mod+s              exec --no-startup-id    rofi -show window
 # Lock screen
 bindsym $mod+n              exec --no-startup-id    lock
 # Change background
-bindsym $mod+y              exec --no-startup-id    set_theme toggle
+bindsym $mod+y              exec --no-startup-id    set_theme.sh toggle
 # Screenshot
 bindsym Print               exec --no-startup-id    flameshot gui
 bindsym $mod+p              exec --no-startup-id    flameshot gui
@@ -204,10 +204,10 @@ bindsym XF86AudioStop       exec --no-startup-id    playerctl stop
 
 # Autostart
 exec --no-startup-id            ~/.config/i3/my_auto_run.sh
-exec_always --no-startup-id     i3_n_column_layout --number-of-columns 2
+exec_always --no-startup-id     i3_n_column_layout.py --number-of-columns 2
 
 bar {
-    status_command i3status_wrapper
+    status_command i3status_wrapper.py
     position top
     modifier none
 }

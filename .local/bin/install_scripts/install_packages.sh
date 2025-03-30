@@ -14,16 +14,8 @@ function install_packages_base() {
     install_packages_from "${HOME}"/.config/packages/packages.sorted.txt
 }
 
-function install_packages_rest() {
+function install_packages_other() {
     install_packages_from "${HOME}"/.config/packages/packages_other.sorted.txt
-}
-
-function install_nvidia() {
-    if ! (lspci | grep --quiet --ignore-case nvidia); then
-        echo "Not installing nvidia driver, because it's not needed"
-        return 0
-    fi
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --install-recommends nvidia-driver
 }
 
 function install_packages_main() {
@@ -35,8 +27,7 @@ function install_packages_main() {
     install_packages_base
     config_global_start
     update_and_upgrade
-    install_packages_rest
-    install_nvidia
+    install_packages_other
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

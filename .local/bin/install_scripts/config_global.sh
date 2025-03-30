@@ -2,7 +2,8 @@
 
 function copy_global_configs() {
     check_integrity_of_tracked_dir.sh "${HOME}"/.config/global_configs &&
-        sudo cp --backup=numbered --verbose --recursive "${HOME}"/.config/global_configs/. /
+        sudo cp --update --backup=numbered --verbose --recursive \
+            "${HOME}"/.config/global_configs/. /
 }
 
 function fix_keychron_post_config_copy() {

@@ -62,7 +62,7 @@ def main():
         "--number-of-columns",
         help="number of columns",
         type=float,
-        default=3,
+        default=2,
     )
     args = parser.parse_args()
 

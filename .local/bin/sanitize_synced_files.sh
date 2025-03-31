@@ -43,7 +43,7 @@ function lint_python_files() {
 
 function type_python_files() {
     list_git_files.sh | grep "\.py$" | xargs readlink --canonicalize |
-        xargs basedpyright --project "${HOME}"/.config/ruff/pyproject.toml |
+        xargs basedpyright --project "${HOME}"/.config/python/pyproject.toml |
         not grep --invert-match "0 errors, 0 warnings, 0 notes"
 
 }

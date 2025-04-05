@@ -136,6 +136,17 @@
         "xadillax.viml"
     ],
     "remote.SSH.lockfilesInTmp": true,
+    "remote.extensionKind": {
+        "jimmyzjx.leaderkey": [
+            "ui"
+        ],
+        "pub.name": [
+            "ui"
+        ],
+        "vscodevim.vim": [
+            "ui"
+        ]
+    },
     "search.mode": "newEditor",
     "security.workspace.trust.banner": "always",
     "security.workspace.trust.startupPrompt": "always",

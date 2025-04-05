@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 function format_all_files() {
-    list_git_files.sh | xargs format.sh
+    git-ls | xargs format.sh
 }
 
 function lint_sources_files() {
-    for f in $(list_git_files.sh | grep "\.sourcesk$"); do
+    for f in $(git-ls | grep "\.sourcesk$"); do
         if grep --quiet '^Enabled: no$' "${f}" &&
             grep --quiet '^Signed-By:' "${f}"; then
             echo "${f} is not enabled, but already signed" && return 1
@@ -24,32 +24,32 @@ function lint_shell_files() {
     git_root="$(git rev-parse --show-toplevel)"
     (
         # Automatically apply fixes
-        list_git_files.sh | grep "\.sh$" | xargs readlink --canonicalize |
+        git-ls | grep "\.sh$" | xargs readlink --canonicalize |
             parallel shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff |
             sed "s|--- ${git_root}|--- a|g" |
             sed "s|+++ ${git_root}|+++ b|g" |
             patch --strip=1 --directory="${git_root}"
     ) || (
         # Show all errors
-        list_git_files.sh | grep "\.sh$" |
+        git-ls | grep "\.sh$" |
             parallel shellcheck --exclude=SC1091,SC2312 --enable=all
     )
 }
 
 function lint_python_files() {
-    list_git_files.sh | grep "\.py$" | xargs readlink --canonicalize |
+    git-ls | grep "\.py$" | xargs readlink --canonicalize |
         xargs ruff check --quiet --extend-select I --fix
 }
 
 function type_python_files() {
-    list_git_files.sh | grep "\.py$" | xargs readlink --canonicalize |
+    git-ls | grep "\.py$" | xargs readlink --canonicalize |
         xargs basedpyright --project "${HOME}"/.config/python/pyproject.toml |
         not grep --invert-match "0 errors, 0 warnings, 0 notes"
 
 }
 
 function get_all_files_without_extensions() {
-    for file in $(list_git_files.sh); do
+    for file in $(git-ls); do
         [[ -L ${file} ]] && continue # Ignore links
         base_file_name="$(basename "${file}")"
         [[ ${base_file_name} == ?*.* ]] && continue    # Check if the file has an extension
@@ -59,14 +59,14 @@ function get_all_files_without_extensions() {
 }
 
 function get_all_files_covered_by_extension_links() {
-    list_git_files.sh |
+    git-ls |
         (grep ".config/extension_links/" || true) |
         xargs --no-run-if-empty readlink --canonicalize |
         xargs --no-run-if-empty realpath --strip --relative-to="$(pwd)"
 }
 
 function dangling_extension_links() {
-    for file in $(list_git_files.sh |
+    for file in $(git-ls |
         grep ".config/extension_links/"); do
         [[ -L ${file} ]] || continue # Process only links
         readlink --canonicalize-existing "${file}" > /dev/null ||

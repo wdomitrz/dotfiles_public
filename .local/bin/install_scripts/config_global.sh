@@ -45,14 +45,6 @@ function update_locales() {
     sudo dpkg-reconfigure --frontend noninteractive locales
 }
 
-function install_and_config_ssh_server() {
-    if [[ -f "${HOME}/.local/bin/.config_sshd.sh" ]]; then
-        sudo apt-get update --yes &&
-            sudo apt-get install --yes openssh-server
-        "${HOME}"/.local/bin/.config_sshd.sh
-    fi
-}
-
 function fix_redshift() {
     # Disable problematic redshift autostart
     sudo rm --force /etc/systemd/user/default.target.wants/redshift*.service
@@ -121,7 +113,6 @@ function config_global_rest() {
     configure_touchpad
     create_swap_file
     fix_redshift
-    install_and_config_ssh_server
 }
 
 function configure_tpm2_non_root_disk_unlock() {

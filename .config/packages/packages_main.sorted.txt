@@ -120,6 +120,7 @@ ntfs-3g
 onboard
 openconnect
 openssh-client
+openssh-server
 os-prober
 pandoc
 parallel

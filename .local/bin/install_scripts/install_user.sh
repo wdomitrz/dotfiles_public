@@ -99,7 +99,7 @@ function install_doc() {
 
     mkdir --parents "${target_dir}"
     wget_with_defaults.sh "${url}" > "${package_file}"
-    unzip -q -d "${target_dir}"/ "${package_file}"
+    unzip -qud "${target_dir}"/ "${package_file}"
     rm "${package_file}"
 }
 

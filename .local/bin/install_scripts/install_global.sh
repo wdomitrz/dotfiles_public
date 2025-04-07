@@ -100,12 +100,6 @@ function install_dust() {
     install_deb_from_url "https://github.com/bootandy/dust/releases/download/v1.1.1/du-dust_1.1.1-1_amd64.deb"
 }
 
-function install_usb_c_display_driver() {
-    install_deb_from_url https://www.synaptics.com/sites/default/files/Ubuntu/pool/stable/main/all/synaptics-repository-keyring.deb
-    sudo apt-get update --yes &&
-        sudo apt-get install --yes --no-install-recommends displaylink-driver evdi-dkms
-}
-
 function install_global_main() {
     set -euo pipefail
     set -x

@@ -25,7 +25,7 @@ function todo_post_global_configs_copy() {
 }
 
 function add_user_to_groups() {
-    for group in docker input uinput kvm lpadmin audio netdev video libvirt; do
+    for group in sudo docker input uinput kvm lpadmin audio netdev video libvirt; do
         sudo groupadd "${group}" || true
         sudo usermod --append --groups "${group}" "${USER}" ||
             echo "Adding to ${group} failed"

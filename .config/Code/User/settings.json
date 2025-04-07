@@ -158,6 +158,7 @@
     "shellcheck.disableVersionCheck": true,
     "shellformat.flag": "--space-redirects",
     "telemetry.enableTelemetry": false,
+    "telemetry.feedback.enabled": false,
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.cwd": "${relativeFileDirname}",
     "terminal.integrated.enableMultiLinePasteWarning": "never",

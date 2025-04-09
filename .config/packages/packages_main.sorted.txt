@@ -29,6 +29,7 @@ compton
 cron
 cups
 curl
+dbus-user-session
 dbus-x11
 desktop-file-utils
 dex
@@ -91,6 +92,7 @@ kazam
 kitty
 kitty-shell-integration
 kitty-terminfo
+libasound2-plugins
 libavcodec-extra
 libblockdev-crypto2
 libgtk-3-bin
@@ -157,6 +159,7 @@ ripgrep
 rlwrap
 rofi
 rsync
+rtkit
 shellcheck
 shfmt
 simple-scan

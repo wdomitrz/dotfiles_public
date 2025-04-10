@@ -19,7 +19,6 @@ floating_modifier $mod
 
 # change focus
 bindsym $mod+$left          focus left
-bindsym $mod+semicolon      focus left
 bindsym $mod+Left           focus left
 bindsym $mod+$down          focus down
 bindsym $mod+Down           focus down

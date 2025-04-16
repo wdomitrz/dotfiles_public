@@ -254,6 +254,14 @@
             ]
         },
         {
+            "before": [
+                "<C-o>"
+            ],
+            "commands": [
+                "workbench.action.navigateBack"
+            ]
+        },
+        {
             "comment": "normal mode keybindings"
         },
         {
@@ -347,6 +355,14 @@
             ],
             "before": [
                 "%"
+            ]
+        },
+        {
+            "before": [
+                "<C-o>"
+            ],
+            "commands": [
+                "workbench.action.navigateBack"
             ]
         },
         {

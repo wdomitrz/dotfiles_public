@@ -1,33 +1,14 @@
 [
     {
         "command": "extension.vim_escape",
-        "comment": "Vim",
+        "comment": "Just in case",
         "key": "capslock",
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     {
-        "command": "extension.vim_escape",
-        "comment": "Interactive editor fixes; Overwrite interactive.input.clear",
-        "key": "escape",
-        "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && (resourceScheme == 'vscode-interactive' || activeEditor == 'workbench.editor.interactive')"
-    },
-    {
-        "command": "interactive.execute",
-        "comment": "Interactive editor fixes",
-        "key": "shift+enter",
-        "when": "activeEditor == 'workbench.editor.interactive'"
-    },
-    {
-        "command": "acceptSelectedSuggestion",
-        "comment": "accept suggestion even in interactive window",
-        "key": "enter",
-        "when": "acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus"
-    },
-    {
-        "command": "removeSecondaryCursors",
-        "comment": "Multi cursors",
-        "key": "shift+escape",
-        "when": "editorHasMultipleSelections && textInputFocus"
+        "command": "-interactive.input.clear",
+        "comment": "Interactive editor fixes; vim escape in an interactive editor",
+        "key": "escape"
     },
     {
         "command": "editor.action.insertCursorAbove",
@@ -42,28 +23,16 @@
         "when": "editorTextFocus"
     },
     {
-        "command": "editor.action.addSelectionToNextFindMatch",
-        "comment": "Multi cursors",
-        "key": "ctrl+k",
-        "when": "editorFocus"
-    },
-    {
         "command": "selectPrevSuggestion",
         "comment": "Scroll suggestions",
         "key": "shift+tab",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
     },
     {
         "command": "selectNextSuggestion",
         "comment": "Scroll suggestions",
         "key": "tab",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "command": "editor.action.triggerSuggest",
-        "comment": "Trigger suggestions",
-        "key": "alt+space",
-        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
     },
     {
         "command": "workbench.action.terminal.toggleTerminal",
@@ -72,20 +41,9 @@
         "when": "terminal.active"
     },
     {
-        "command": "workbench.action.togglePanel",
-        "comment": "Toggle bottom panel",
-        "key": "ctrl+j"
-    },
-    {
         "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
         "comment": "Fix spelling",
         "key": "ctrl+l"
-    },
-    {
-        "command": "actions.find",
-        "comment": "Fix ctrl+f malfunctioning sometimes",
-        "key": "ctrl+f",
-        "when": "editorFocus || editorIsOpen"
     },
     {
         "comment": "Easy navigation in quick open/QuickPick"

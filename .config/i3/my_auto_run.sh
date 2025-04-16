@@ -28,6 +28,6 @@ i3_xrl --no-set-background &&
         ) &
         while :; do
             set_background.sh
-            sleep 60
+            sleep 600
         done &
     )

@@ -26,6 +26,7 @@
     "editor.minimap.enabled": false,
     "editor.occurrencesHighlight": "multiFile",
     "editor.overviewRulerBorder": false,
+    "editor.peekWidgetDefaultFocus": "editor",
     "editor.renderLineHighlight": "none",
     "editor.rulers": [
         80,
@@ -60,6 +61,7 @@
     "git.enabled": true,
     "git.mergeEditor": true,
     "git.openRepositoryInParentFolders": "always",
+    "interactiveWindow.executeWithShiftEnter": true,
     "jupyter.askForKernelRestart": false,
     "keyboard.dispatch": "keyCode",
     "leaderkey.overrides.user": {
@@ -169,6 +171,7 @@
         "<C-[>": true,
         "<C-a>": true,
         "<C-d>": true,
+        "<C-k>": true,
         "<C-o>": true,
         "<C-r>": true,
         "<C-u>": true,
@@ -259,6 +262,14 @@
             ],
             "commands": [
                 "workbench.action.navigateBack"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "commands": [
+                "editor.action.addSelectionToNextFindMatch"
             ]
         },
         {
@@ -363,6 +374,14 @@
             ],
             "commands": [
                 "workbench.action.navigateBack"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "commands": [
+                "editor.action.addSelectionToNextFindMatch"
             ]
         },
         {

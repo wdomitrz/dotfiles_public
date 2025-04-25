@@ -87,10 +87,6 @@
             "command": "editor.action.showDefinitionPreviewHover",
             "name": "show type"
         },
-        "SPC f f": {
-            "command": "workbench.action.files.openFile",
-            "name": "Open file/folder"
-        },
         "SPC w t": {
             "commands": [
                 "workbench.action.compareEditor.focusOtherSide",
@@ -118,6 +114,7 @@
         "jacobdufault.fuzzy-search",
         "jimmyzjx.go-to-next-problem",
         "jimmyzjx.leaderkey",
+        "jimmyzjx.remote-commons",
         "jimmyzjx.ripgrep",
         "kahole.magit",
         "llvm-vs-code-extensions.vscode-clangd",

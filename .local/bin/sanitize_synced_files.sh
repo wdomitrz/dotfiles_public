@@ -109,7 +109,16 @@ function wait_for_all() {
     done
 }
 
+function gitignore_regenerate() {
+    git_root="$(git rev-parse --show-toplevel)"
+    (
+        echo '*'
+        git-ls | sed 's/^/!/g' | LC_ALL=C sort
+    ) > "${git_root}"/.gitignore
+}
+
 function sanitize_synced_main() {
+    run_and_save gitignore_regenerate
     run_and_save lint_sources_files
     run_and_save lint_python_files
     run_and_save lint_extension_links

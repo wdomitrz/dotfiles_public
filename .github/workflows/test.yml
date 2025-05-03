@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
-        dockerd
+        sudo dockerd
         docker build --tag test:local -f ./.config/docker/test.dockerfile .
   sanitize:
     runs-on: ubuntu-latest

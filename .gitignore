@@ -12,6 +12,7 @@
 !.config/displays_to_connect/.keep
 !.config/docker/my.dockerfile
 !.config/docker/my_example.dockerfile
+!.config/docker/test.dockerfile
 !.config/dpi/default_dpi_options.sorted_numeric.txt
 !.config/extension_links/.Xclients.sh
 !.config/extension_links/.bash_aliases.sh
@@ -106,7 +107,7 @@
 !.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 !.dmrc
 !.fehbg
-!.github/workflows/sanitize_synced_files.yml
+!.github/workflows/test.yml
 !.gitignore
 !.inputrc
 !.ipython/profile_default/ipython_config.py

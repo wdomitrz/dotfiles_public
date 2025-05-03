@@ -20,6 +20,7 @@ bolt
 breeze-icon-theme
 brightnessctl
 build-essential
+ca-certificates
 calc
 cheese
 clangd

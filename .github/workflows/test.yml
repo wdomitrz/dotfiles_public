@@ -1,8 +1,15 @@
-name: sanitize_synced_files
+name: test
 
 on: [push]
 
 jobs:
+  test_build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        docker build --tag test:local -f ./.config/docker/test.dockerfile .
   sanitize:
     runs-on: ubuntu-latest
     steps:

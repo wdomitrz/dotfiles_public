@@ -84,6 +84,7 @@ hwinfo
 i3
 i3status
 ibus
+initramfs-tools
 iputils-ping
 ipython3
 jq

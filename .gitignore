@@ -115,8 +115,7 @@
 !.local/bin/.keep
 !.local/bin/bat
 !.local/bin/cached_command.sh
-!.local/bin/cat_parquet.py
-!.local/bin/cat_pickle.py
+!.local/bin/cat.py
 !.local/bin/check_if_remote.sh
 !.local/bin/check_integrity_of_tracked_dir.sh
 !.local/bin/connect_displays.sh

@@ -11,4 +11,4 @@ WORKDIR /home/user
 COPY --chown=user:user "./.git" "./.git"
 RUN git checkout -- .
 RUN . ./.profile && DEBIAN_FRONTEND=noninteractive ./.local/bin/install_scripts/main.sh
-RUN . ./.profile && sanitize_synced_files.sh
+RUN . ./.profile && sanitize_synced_files.sh && git diff --exit-code

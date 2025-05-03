@@ -11,7 +11,7 @@ function fix_keychron_post_config_copy() {
 }
 
 function regenerate_grub_post_config_copy() {
-    sudo update-grub
+    sudo update-grub || true
 }
 
 function reconfigure_tlp_post_config_copy() {

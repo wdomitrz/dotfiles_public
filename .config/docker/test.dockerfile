@@ -2,6 +2,9 @@ FROM debian
 
 RUN apt-get update && apt-get install --yes --no-install-recommends ca-certificates git sudo
 
+# Mock update-grub
+RUN touch /usr/local/sbin/update-grub && chmod +x /usr/local/sbin/update-grub
+
 # Add a new user
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN useradd --create-home --shell /bin/bash --groups sudo user

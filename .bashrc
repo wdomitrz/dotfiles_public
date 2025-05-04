@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [[ -n ${BASHRC_LOADED} ]]; then return; fi
+if [[ -n ${BASHRC_LOADED-} ]]; then return; fi
 BASHRC_LOADED=1
 
 # Profile
@@ -62,7 +62,7 @@ fi
 ## Detect no color support
 ([[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null) || NO_COLORS=1
 
-if [[ -z ${NO_COLORS} ]]; then
+if [[ -z ${NO_COLORS-} ]]; then
     # Trick to make colors work well in tmux and in other scenarios
     [[ ${TERM} != "xterm-kitty" ]] && TERM=xterm-256color
 
@@ -78,8 +78,8 @@ if [[ -z ${NO_COLORS} ]]; then
     CLEAR="\[$(tput sgr0)\]"                # clear color
 fi
 
-if [[ -z ${PROMPT_FRONT_LOCAL} ]]; then PROMPT_FRONT_LOCAL=""; fi
-if [[ -z ${PROMPT_BACK_LOCAL} ]]; then PROMPT_BACK_LOCAL=""; fi
+if [[ -z ${PROMPT_FRONT_LOCAL-} ]]; then PROMPT_FRONT_LOCAL=""; fi
+if [[ -z ${PROMPT_BACK_LOCAL-} ]]; then PROMPT_BACK_LOCAL=""; fi
 PROMPT_FRONT="\
 ${USER_COLOR}\u${CLEAR}\
 ${AT_COLOR}@${CLEAR}\

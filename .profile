@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-if [ -n "${PROFILE_LOADED}" ]; then return; fi
+if [ -n "${PROFILE_LOADED-}" ]; then return; fi
 PROFILE_LOADED=1
 
 # set PATH so it includes user's private bin if it exists

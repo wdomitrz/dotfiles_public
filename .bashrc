@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-[[ -z ${BASHRC_LOADED} ]] || return
+if [[ -n ${BASHRC_LOADED} ]]; then return; fi
 BASHRC_LOADED=1
 
 # Profile
-[[ -f "${HOME}/.profile" ]] && source "${HOME}/.profile"
+if [[ -f "${HOME}/.profile" ]]; then source "${HOME}/.profile"; fi
 
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+if [[ $- != *i* ]]; then return; fi
 
-[[ -f "/etc/bashrc" ]] && source /etc/bashrc
+if [[ -f "/etc/bashrc" ]]; then source /etc/bashrc; fi
 
-[[ -f "${HOME}/.config/local/bashrc.sh" ]] && source "${HOME}/.config/local/bashrc.sh"
+if [[ -f "${HOME}/.config/local/bashrc.sh" ]]; then source "${HOME}/.config/local/bashrc.sh"; fi
 
 # Options
 shopt -s autocd       # Automatically change directory
@@ -78,8 +78,8 @@ if [[ -z ${NO_COLORS} ]]; then
     CLEAR="\[$(tput sgr0)\]"                # clear color
 fi
 
-[[ -z ${PROMPT_FRONT_LOCAL} ]] && PROMPT_FRONT_LOCAL=""
-[[ -z ${PROMPT_BACK_LOCAL} ]] && PROMPT_BACK_LOCAL=""
+if [[ -z ${PROMPT_FRONT_LOCAL} ]]; then PROMPT_FRONT_LOCAL=""; fi
+if [[ -z ${PROMPT_BACK_LOCAL} ]]; then PROMPT_BACK_LOCAL=""; fi
 PROMPT_FRONT="\
 ${USER_COLOR}\u${CLEAR}\
 ${AT_COLOR}@${CLEAR}\
@@ -112,14 +112,14 @@ fi
 PS1="${PROMPT_FRONT}${PROMPT_BACK}"
 
 # Improved search backwards
-[[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ]] && source /usr/share/doc/fzf/examples/key-bindings.bash
-[[ -f "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
+if [[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ]]; then source /usr/share/doc/fzf/examples/key-bindings.bash; fi
+if [[ -f "/usr/share/fzf/key-bindings.bash" ]]; then source /usr/share/fzf/key-bindings.bash; fi
 # Searching files and other completions (for example with `cat **<Tab>`, and processes with `kill -9 <Tab>`)
-[[ -f "/usr/share/bash-completion/completions/fzf" ]] && source /usr/share/bash-completion/completions/fzf
-[[ -f "/usr/share/fzf/completion.bash" ]] && source /usr/share/fzf/completion.bash
+if [[ -f "/usr/share/bash-completion/completions/fzf" ]]; then source /usr/share/bash-completion/completions/fzf; fi
+if [[ -f "/usr/share/fzf/completion.bash" ]]; then source /usr/share/fzf/completion.bash; fi
 
 # Aliases
-[[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
+if [[ -f "${HOME}/.bash_aliases" ]]; then source "${HOME}/.bash_aliases"; fi
 
 # Loading completed successfully
 true

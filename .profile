@@ -27,8 +27,8 @@ export GTK_A11Y=none
 
 if [ -f "${HOME}/.config/local/profile.sh" ]; then . "${HOME}/.config/local/profile.sh"; fi
 
-if [ -n "${BASH_VERSION}" ] && [ -f "${HOME}/.bash_profile" ]; then . "${HOME}/.bash_profile"; fi
-if [ -n "${BASH_VERSION}" ] && [ -f "${HOME}/.bashrc" ]; then . "${HOME}/.bashrc"; fi
+if [ -n "${BASH_VERSION-}" ] && [ -f "${HOME}/.bash_profile" ]; then . "${HOME}/.bash_profile"; fi
+if [ -n "${BASH_VERSION-}" ] && [ -f "${HOME}/.bashrc" ]; then . "${HOME}/.bashrc"; fi
 
 # Loading completed successfully
 true

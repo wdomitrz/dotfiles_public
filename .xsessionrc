@@ -1,16 +1,16 @@
 #!/usr/bin/env sh
 
-[ -z "${XSESSIONRC_LOADED}" ] || return
+if [ -z "${XSESSIONRC_LOADED-}" ]; then return; fi
 export XSESSIONRC_LOADED=1
 
 # Load profile
-[ -r "${HOME}/.profile" ] && . "${HOME}/.profile"
+if [ -r "${HOME}/.profile" ]; then . "${HOME}/.profile"; fi
 
 # Unlock gnome-keyring
-[ -n "${DESKTOP_SESSION}" ] && eval "$(gnome-keyring-daemon --start)" && export SSH_AUTH_SOCK
+if [ -n "${DESKTOP_SESSION}" ]; then eval "$(gnome-keyring-daemon --start)" && export SSH_AUTH_SOCK; fi
 
 # Set keymap
-[ -x "${HOME}/.local/bin/set_keymap.sh" ] && "${HOME}/.local/bin/set_keymap.sh" &
+if [ -x "${HOME}/.local/bin/set_keymap.sh" ]; then "${HOME}/.local/bin/set_keymap.sh"; fi
 
 # Set display
-[ -x "${HOME}/.local/bin/set_display.py" ] && "${HOME}/.local/bin/set_display.py"
+if [ -x "${HOME}/.local/bin/set_display.py" ]; then "${HOME}/.local/bin/set_display.py"; fi

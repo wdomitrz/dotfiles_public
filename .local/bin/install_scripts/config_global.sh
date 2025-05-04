@@ -137,7 +137,7 @@ function config_global_main() {
     set -euo pipefail
     set -x
 
-    config_global_start
+    # Only the part that is not used in install_packages
     config_global_rest
 }
 

@@ -2,8 +2,9 @@ FROM debian
 
 RUN apt-get update && apt-get install --yes --no-install-recommends ca-certificates git sudo
 
-# Mock update-grub
-RUN touch /usr/local/sbin/update-grub && chmod +x /usr/local/sbin/update-grub
+# Mocks
+RUN ln -s /usr/bin/true /usr/local/sbin/update-grub && \
+    ln -s /usr/bin/true /usr/sbin/swapon
 
 # Add a new user
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers

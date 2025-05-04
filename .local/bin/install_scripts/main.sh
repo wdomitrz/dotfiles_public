@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
+set -euo pipefail
 set -x
 
 source "${HOME}"/.profile
-
-set -euo pipefail
-
 export DEBIAN_FRONTEND=noninteractive
 
 "${HOME}"/.local/bin/install_scripts/install_packages.sh

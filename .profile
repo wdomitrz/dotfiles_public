@@ -1,19 +1,17 @@
 #!/usr/bin/env sh
-[ -z "${PROFILE_LOADED}" ] || return
+if [ -z "${PROFILE_LOADED}" ]; then return; fi
 PROFILE_LOADED=1
 
 # set PATH so it includes user's private bin if it exists
-[ -d "${HOME}/bin" ] && export PATH="${HOME}/bin:${PATH}"
-[ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
+if [ -d "${HOME}/bin" ]; then export PATH="${HOME}/bin:${PATH}"; fi
+if [ -d "${HOME}/.local/bin" ]; then export PATH="${HOME}/.local/bin:${PATH}"; fi
 
 # homebrew
-[ -d "${HOME}/.linuxbrew" ] && eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"
-
-# ghcup-env
-[ -f "${HOME}/.ghcup/env" ] && . "${HOME}/.ghcup/env"
-
-# Ruby user path
-[ -f "/usr/bin/ruby" ] && GEM_HOME="$(ruby -e 'puts Gem.user_dir')/bin" && export PATH="${GEM_HOME}:${PATH}"
+if [ -d "${HOME}/.linuxbrew" ]; then eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"; fi
+# ghcup
+if [ -f "${HOME}/.ghcup/env" ]; then . "${HOME}/.ghcup/env"; fi
+# Ruby
+if [ -f "/usr/bin/ruby" ]; then GEM_HOME="$(ruby -e 'puts Gem.user_dir')/bin" && export PATH="${GEM_HOME}:${PATH}"; fi
 
 export EDITOR=vim
 export VISUAL=vim
@@ -27,10 +25,10 @@ export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
 export GTK_A11Y=none
 
-[ -f "${HOME}/.config/local/profile.sh" ] && . "${HOME}/.config/local/profile.sh"
+if [ -f "${HOME}/.config/local/profile.sh" ]; then . "${HOME}/.config/local/profile.sh"; fi
 
-[ -n "${BASH_VERSION}" ] && [ -f "${HOME}/.bash_profile" ] && . "${HOME}/.bash_profile"
-[ -n "${BASH_VERSION}" ] && [ -f "${HOME}/.bashrc" ] && . "${HOME}/.bashrc"
+if [ -n "${BASH_VERSION}" ] && [ -f "${HOME}/.bash_profile" ]; then . "${HOME}/.bash_profile"; fi
+if [ -n "${BASH_VERSION}" ] && [ -f "${HOME}/.bashrc" ]; then . "${HOME}/.bashrc"; fi
 
 # Loading completed successfully
 true

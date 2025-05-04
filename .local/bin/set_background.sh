@@ -11,4 +11,4 @@
         else
             xsetroot -solid "#000000"
         fi
-    )
+    ) || true

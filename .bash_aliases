@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Make less more friendly for non-text input files (see lesspipe(1)).
-[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
+if [[ -x /usr/bin/lesspipe ]]; then eval "$(SHELL=/bin/sh lesspipe)"; fi
 
 # enable color support of ls and also add handy aliases
 if [[ -x /usr/bin/dircolors ]]; then
@@ -47,11 +47,11 @@ function DT() {
     disown
 }
 alias DT='DT '
-[[ -z ${TERMINAL+variable_unset} ]] || alias nt='DT "${TERMINAL}"'
+if [[ -n ${TERMINAL-} ]]; then alias nt='DT "${TERMINAL}"'; fi
 alias nv='nt -e nvim'
 
-[[ ${TERM} == "xterm-kitty" ]] && alias clear='printf "'"\E[H\E[3J"'"'
-[[ ${TERM} != "xterm-kitty" ]] && alias tmux='TERM=screen-256color tmux'
+if [[ ${TERM-} == "xterm-kitty" ]]; then alias clear='printf "'"\E[H\E[3J"'"'; fi
+if [[ ${TERM-} != "xterm-kitty" ]]; then alias tmux='TERM=screen-256color tmux'; fi
 
 # Package manager aliases
 alias pcin='sudo apt-get install'

@@ -2,6 +2,9 @@
 set -euo pipefail
 set -x
 
+source "${HOME}"/.profile
+export DEBIAN_FRONTEND=noninteractive
+
 "${HOME}"/.local/bin/install_scripts/install_packages.sh
 "${HOME}"/.local/bin/install_scripts/install_global.sh
 "${HOME}"/.local/bin/install_scripts/config_global.sh
@@ -10,3 +13,7 @@ set -x
 if [[ -f "${HOME}"/.local/bin/install_scripts/machine_specific.sh ]]; then
     "${HOME}"/.local/bin/install_scripts/machine_specific.sh
 fi
+
+# Sanitize and check if there is no change
+sanitize_synced_files.sh
+git diff --exit-code

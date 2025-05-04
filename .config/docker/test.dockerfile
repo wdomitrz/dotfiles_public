@@ -1,6 +1,6 @@
 FROM debian
 
-RUN apt-get update && apt-get install --yes --no-install-recommends ca-certificates git sudo
+RUN apt-get update && apt-get install --yes --no-install-recommends git sudo
 
 # Mocks
 RUN ln --force --symbolic /usr/bin/true /usr/local/sbin/update-grub && \
@@ -14,5 +14,4 @@ WORKDIR /home/user
 
 COPY --chown=user:user "./.git" "./.git"
 RUN git checkout -- .
-RUN . ./.profile && DEBIAN_FRONTEND=noninteractive USER=user ./.local/bin/install_scripts/main.sh
-RUN . ./.profile && sanitize_synced_files.sh && git diff --exit-code
+RUN USER=user ./.local/bin/install_scripts/main.sh

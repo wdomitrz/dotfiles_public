@@ -14,7 +14,7 @@ avahi-autoipd
 bash
 bash-completion
 bat
-bluetooth
+blueman
 bolt
 breeze-icon-theme
 brightnessctl
@@ -101,6 +101,7 @@ libimage-exiftool-perl
 libinput-tools
 libnotify-bin
 libpam-gnome-keyring
+libspa-0.2-bluetooth
 libtss2-rc0
 linux-headers-amd64
 locales

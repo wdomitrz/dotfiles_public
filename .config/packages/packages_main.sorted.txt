@@ -14,6 +14,7 @@ avahi-autoipd
 bash
 bash-completion
 bat
+bluetooth
 bolt
 breeze-icon-theme
 brightnessctl

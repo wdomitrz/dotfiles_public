@@ -3,24 +3,14 @@ name: test
 on: [push]
 
 jobs:
-  test_build:
+  test_build_and_sanitize:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: ${{ github.ref == 'refs/heads/public' || github.ref == 'refs/heads/main' }}
     steps:
     - uses: actions/checkout@v4
-    - run: |
-        docker build --tag test:local -f ./.config/docker/test.dockerfile .
-  sanitize:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Dependencies
+    - name: Build
       run: |
-        sudo apt-get update --yes
-        sudo apt-get install --yes --no-install-recommends git jq moreutils neovim parallel patch python3-pip shellcheck shfmt python3-i3ipc python3-pandas
-        python3 -m pip install --upgrade --user basedpyright ruff
-    - uses: actions/checkout@v4
-    - run: |
-        cp --recursive ./. ~/
+        docker build --tag test:local --file ./.config/docker/test.dockerfile .
     - name: Sanitize
       run: |
-        cd ~ && source ~/.profile && sanitize_synced_files.sh && git diff --exit-code
+        docker run test:local

@@ -15,4 +15,4 @@ WORKDIR /home/user
 COPY --chown=user:user "./.git" "./.git"
 RUN git checkout -- .
 RUN USER=user ./.local/bin/install_scripts/main.sh
-CMD .local/bin/sanitize_synced_files.sh
+CMD ./.local/bin/sanitize_synced_files.sh

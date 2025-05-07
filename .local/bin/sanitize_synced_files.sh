@@ -118,6 +118,8 @@ function gitignore_regenerate() {
 }
 
 function sanitize_synced_main() {
+    source "${HOME}"/.profile
+
     run_and_save gitignore_regenerate
     run_and_save lint_sources_files
     run_and_save lint_python_files

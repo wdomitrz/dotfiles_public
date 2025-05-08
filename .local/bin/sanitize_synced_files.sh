@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 function format_all_files() {
-    git-ls | xargs format.sh
+    git-ls | grep -v '.local/state/nvim/site/pack/plugins/opt/' | xargs format.sh
 }
 
 function lint_sources_files() {
@@ -49,7 +49,7 @@ function type_python_files() {
 }
 
 function get_all_files_without_extensions() {
-    for file in $(git-ls); do
+    for file in $(git-ls | grep -v '.local/state/nvim/site/pack/plugins/opt/'); do
         [[ -L ${file} ]] && continue # Ignore links
         base_file_name="$(basename "${file}")"
         [[ ${base_file_name} == ?*.* ]] && continue    # Check if the file has an extension

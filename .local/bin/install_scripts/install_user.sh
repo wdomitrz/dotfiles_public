@@ -136,12 +136,17 @@ function install_rmz_and_cpz() {
         --max-redirect=1
 }
 
+function install_nvim_plugins() {
+    git submodule update --init --recursive
+}
+
 function install_user_main() {
     set -euo pipefail
     set -x
 
     install_python_packages
     install_rmz_and_cpz
+    install_nvim_plugins
     install_python_doc
 }
 

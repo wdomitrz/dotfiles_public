@@ -32,6 +32,7 @@
 !.config/extension_links/.dmrc.ini
 !.config/extension_links/.fehbg.sh
 !.config/extension_links/.gitignore.txt
+!.config/extension_links/.gitmodules.ini
 !.config/extension_links/.inputrc.unknown
 !.config/extension_links/.local/bin/copy.sh
 !.config/extension_links/.local/bin/git-ls.sh
@@ -109,6 +110,7 @@
 !.fehbg
 !.github/workflows/test.yml
 !.gitignore
+!.gitmodules
 !.inputrc
 !.ipython/profile_default/ipython_config.py
 !.jupyter/custom/custom.css
@@ -220,6 +222,13 @@
 !.local/share/nautilus-python/extensions/open_any_terminal_extension.py
 !.local/share/nvim
 !.local/state/nvim/.keep
+!.local/state/nvim/site/pack/plugins/opt/fzf
+!.local/state/nvim/site/pack/plugins/opt/fzf.vim
+!.local/state/nvim/site/pack/plugins/opt/suda.vim
+!.local/state/nvim/site/pack/plugins/opt/vim-commentary
+!.local/state/nvim/site/pack/plugins/opt/vim-gitgutter
+!.local/state/nvim/site/pack/plugins/opt/vim-sleuth
+!.local/state/nvim/site/pack/plugins/opt/vim-surround
 !.npmrc
 !.profile
 !.psqlrc

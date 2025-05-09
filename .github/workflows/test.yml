@@ -5,12 +5,12 @@ on: [push]
 jobs:
   test_build_and_sanitize:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/public' || github.ref == 'refs/heads/main' }}
     steps:
     - uses: actions/checkout@v4
     - name: Build
       run: |
-        docker build --tag test:local --file ./.config/docker/test.dockerfile .
+        docker build --tag my_base:local --file ./.config/docker/my_base.dockerfile .
     - name: Sanitize
       run: |
+        docker build --tag test:local --file ./.config/docker/test.dockerfile .
         docker run test:local

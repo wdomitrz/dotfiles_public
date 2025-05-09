@@ -1,3 +1,0 @@
-FROM my:local
-
-RUN ...

@@ -11,7 +11,7 @@
 !.config/bat/config_light.config
 !.config/displays_to_connect/.keep
 !.config/docker/my.dockerfile
-!.config/docker/my_example.dockerfile
+!.config/docker/my_base.dockerfile
 !.config/docker/test.dockerfile
 !.config/dpi/default_dpi_options.sorted_numeric.txt
 !.config/extension_links/.Xclients.sh

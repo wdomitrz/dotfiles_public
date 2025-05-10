@@ -11,6 +11,7 @@ ADD --chown=user https://github.com/wdomitrz.keys ./.ssh/authorized_keys
 
 # Copy recent configs
 COPY --chown=user:user "./.git" "./.git"
+RUN git checkout -- .
 
 EXPOSE 22
 CMD sudo /usr/sbin/sshd -D

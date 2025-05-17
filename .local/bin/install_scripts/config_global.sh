@@ -99,6 +99,12 @@ function nordvpn_with_tailscale() {
     nordvpn whitelist add subnet fd7a:115c:a1e0::/48
 }
 
+function disable_code_logo() {
+    for f in /usr/share/code/resources/app/out/media/{letterpress-dark.svg,letterpress-hcDark.svg,letterpress-hcLight.svg,letterpress-light.svg}; do
+        sudo ln --symbolic --force /dev/null "${f}"
+    done
+}
+
 function config_global_start() {
     copy_global_configs
     update_locales
@@ -108,6 +114,7 @@ function config_global_start() {
 function config_global_rest() {
     todo_post_global_configs_copy
     add_user_to_groups
+    disable_code_logo
     configure_newt_palette
     udisk_allow_operations
     configure_touchpad

@@ -47,8 +47,9 @@ endfunction
 autocmd BufWritePost * silent call Format_file()
 
 " Key mappings
-" Use space as leader
+" Use space as leader and , as local leader
 let mapleader=" "
+let maplocalleader=","
 " Move line up/down when wrapped
 noremap j gj
 noremap k gk

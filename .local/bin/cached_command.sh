@@ -22,7 +22,7 @@ if [[ $# -eq 0 ]]; then
     usage_and_exit 1
 fi
 
-base_cache_dir="/run/user/$(id -u "${USER}")"
+base_cache_dir="/run/user/$(id --user)"
 
 if [[ ! -d ${base_cache_dir} ]]; then exec "$@"; fi
 

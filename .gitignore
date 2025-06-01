@@ -181,6 +181,7 @@
 !.local/bin/set_dpi.sh
 !.local/bin/set_keymap.sh
 !.local/bin/set_theme.sh
+!.local/bin/setup_scratch.sh
 !.local/bin/show_mic_status.sh
 !.local/bin/shutdown
 !.local/bin/sleep_forever.sh

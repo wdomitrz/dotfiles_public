@@ -25,6 +25,8 @@ export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
 export GTK_A11Y=none
 
+if [ -f "${HOME}/.local/bin/setup_scratch.sh" ]; then . "${HOME}/.local/bin/setup_scratch.sh"; fi
+
 if [ -f "${HOME}/.config/local/profile.sh" ]; then . "${HOME}/.config/local/profile.sh"; fi
 
 if [ -n "${BASH_VERSION-}" ] && [ -f "${HOME}/.bash_profile" ]; then . "${HOME}/.bash_profile"; fi

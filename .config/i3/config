@@ -148,7 +148,8 @@ bindsym $mod+b              bar mode toggle
 # kill focused window
 bindsym $mod+Shift+q        kill
 # Do notification action
-bindsym $mod+o              exec --no-startup-id    dunstctl context
+bindsym $mod+a              exec --no-startup-id    dunstctl context
+bindsym $mod+Shift+a        exec --no-startup-id    dunstctl close
 # Adjust display
 bindsym $mod+x              exec --no-startup-id    i3_xrl
 # Program launcher

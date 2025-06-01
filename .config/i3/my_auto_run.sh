@@ -19,13 +19,7 @@ i3_xrl --no-set-background &&
         ([ -f "${HOME}/.config/i3/my_auto_run.local.sh" ] && "${HOME}/.config/i3/my_auto_run.local.sh") &
         ibus-daemon --daemonize --replace &
         /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-        (
-            systemctl --user stop dunst
-            (
-                /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
-                /usr/lib64/xfce4/notifyd/xfce4-notifyd &
-            )
-        ) &
+        dunst &
         while :; do
             set_background.sh
             sleep 600

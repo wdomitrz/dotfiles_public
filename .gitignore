@@ -14,12 +14,14 @@
 !.config/docker/my_base.dockerfile
 !.config/docker/test.dockerfile
 !.config/dpi/default_dpi_options.sorted_numeric.txt
+!.config/dunst/dunstrc
 !.config/extension_links/.Xclients.sh
 !.config/extension_links/.bash_aliases.sh
 !.config/extension_links/.bash_logout.sh
 !.config/extension_links/.bashrc.sh
 !.config/extension_links/.config/Code/User/keybindings.json.sorted.json
 !.config/extension_links/.config/Code/User/settings.json.sorted.json
+!.config/extension_links/.config/dunst/dunstrc.ini
 !.config/extension_links/.config/git/config.ini
 !.config/extension_links/.config/global_configs/etc/apt/apt.conf.d/98_no_recommends.conf
 !.config/extension_links/.config/global_configs/etc/apt/apt.conf.d/98_no_suggests.conf
@@ -51,6 +53,7 @@
 !.config/extension_links/.xsession.sh
 !.config/extension_links/.xsessionrc.sh
 !.config/extension_links/LICENSE.txt
+!.config/fontconfig/fonts.conf
 !.config/git/config
 !.config/git/dotfiles/.keep
 !.config/git/gitignore.sorted.txt

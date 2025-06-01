@@ -2,7 +2,7 @@
 configuration {
     modi: "drun,window,ssh";
     show-icons: true;
-    font: "JetBrains Mono 13";
+    font: "monospace 13";
     kb-remove-to-eol: "";  /* Unmap Ctrl+k */
     kb-row-up: "Up,Control+p,ISO_Left_Tab,Ctrl+k";  /* Add Ctrl+k */
     kb-accept-entry: "Control+m,Return,KP_Enter";  /* Unmap Ctrl+j */

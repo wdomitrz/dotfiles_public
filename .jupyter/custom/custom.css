@@ -1,6 +1,6 @@
 .CodeMirror,
 pre {
-    font-family: "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace !important;
+    font-family: monospace !important;
 }
 
 .container {

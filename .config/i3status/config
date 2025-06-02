@@ -50,6 +50,6 @@ tztime local {
 }
 
 read_file file_updater_example {
-    path = "/dev/shm/i3status_files/file_updater_example.txt"
+    path = "~/.cache/i3status_files/file_updater_example.txt"
     color_good = "#f0f0f0"
 }

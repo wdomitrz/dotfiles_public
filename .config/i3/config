@@ -207,7 +207,7 @@ bindsym XF86AudioStop       exec --no-startup-id    playerctl stop
 # Autostart
 exec --no-startup-id            ~/.config/i3/my_auto_run.sh
 exec_always --no-startup-id     (cat "${HOME}"/.config/i3_n_column_layout/"$(hostname)".txt || true) | xargs i3_n_column_layout.py
-exec_always --no-startup-id     i3status_run_file_updaters.sh &
+exec_always --no-startup-id     i3status_run_file_updaters.sh
 
 bar {
     status_command i3status_wrapper.py

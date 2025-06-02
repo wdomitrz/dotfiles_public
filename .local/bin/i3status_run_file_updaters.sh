@@ -4,13 +4,20 @@ set -uo pipefail
 
 kill_others_with_given_name.sh "$(basename "$0")"
 
-created_files_dir="/dev/shm/i3status_files"
+base_dir="/run/user/$(id --user)"
+created_files_dir="${HOME}/.cache/i3status_files"
+if [[ -d ${base_dir} ]]; then
+    created_files_real_dir="${base_dir}/i3status_files"
+    ln --no-dereference --symbolic --force "${created_files_real_dir}" "${created_files_dir}"
+else
+    created_files_real_dir="${created_files_dir}"
+fi
+
 # shellcheck disable=SC2174
-# --mode=700 applied only to the deepest directory - as intended
-mkdir --parents --mode=700 "${created_files_dir}"
+mkdir --parents --mode=700 "${created_files_real_dir}"
 
 function cleanup_i3status_files_dir() {
-    rm --recursive "${created_files_dir}"
+    rm --recursive "${created_files_real_dir}"
 }
 trap cleanup_i3status_files_dir EXIT
 

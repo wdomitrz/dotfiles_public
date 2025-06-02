@@ -3,7 +3,6 @@
 fusuma &
 geoclue-2-agent &
 i3_screen_locker.sh &
-i3status_run_file_updaters.sh &
 i3_theme_detection &
 ( (cat "${HOME}"/.config/set_audio/"$(hostname)".txt || true) | xargs --no-run-if-empty set_audio.sh) &
 set_keymap.sh &

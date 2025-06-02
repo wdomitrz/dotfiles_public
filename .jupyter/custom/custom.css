@@ -3,21 +3,36 @@ pre {
     font-family: monospace !important;
 }
 
-.container {
-    width: 99% !important;
+.container,
+.notebook_app #notebook-container,
+.edit_app #texteditor-backdrop {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+div .prompt,
+.prompt {
+    min-width: 0;
 }
 
 @media (prefers-color-scheme: dark) {
-    body>#header {
-        background-color: #000;
-        color: #eee;
-    }
-
+    .CodeMirror-foldgutter,
+    .timing_area,
+    .kernel_indicator_name,
     span#login_widget>.button,
     #logout,
-    #shutdown {
-        background-color: #000 !important;
+    #shutdown,
+    ::-webkit-scrollbar-thumb {
+        background-color: #272727 !important;
         color: #eee !important;
+    }
+
+    ::-webkit-scrollbar {
+        background-color: #000 !important;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #373737 !important;
     }
 
     /*

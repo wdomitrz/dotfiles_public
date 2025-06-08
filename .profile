@@ -32,5 +32,12 @@ if [ -f "${HOME}/.config/local/profile.sh" ]; then . "${HOME}/.config/local/prof
 if [ -n "${BASH_VERSION-}" ] && [ -f "${HOME}/.bash_profile" ]; then . "${HOME}/.bash_profile"; fi
 if [ -n "${BASH_VERSION-}" ] && [ -f "${HOME}/.bashrc" ]; then . "${HOME}/.bashrc"; fi
 
+if [ -d /dev/shm ]; then # ~/scratch
+    SCRATCH_REAL_LOCATION=/dev/shm/scratch_"$(id --user)"
+    # shellcheck disable=SC2174
+    mkdir --parents --mode=700 "${SCRATCH_REAL_LOCATION}" || true
+    ln --no-dereference --symbolic --force "${SCRATCH_REAL_LOCATION}" "${HOME}"/scratch
+fi
+
 # Loading completed successfully
 true

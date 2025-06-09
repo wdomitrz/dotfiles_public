@@ -25,6 +25,7 @@
 !.config/extension_links/.config/git/config.ini
 !.config/extension_links/.config/global_configs/etc/apt/apt.conf.d/98_no_recommends.conf
 !.config/extension_links/.config/global_configs/etc/apt/apt.conf.d/98_no_suggests.conf
+!.config/extension_links/.config/global_configs/etc/default/google-chrome.ini
 !.config/extension_links/.config/global_configs/etc/default/grub.conf
 !.config/extension_links/.config/global_configs/etc/default/keyboard.conf
 !.config/extension_links/.config/global_configs/etc/network/interfaces.conf

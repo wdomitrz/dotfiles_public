@@ -62,6 +62,7 @@
 !.config/global_configs/etc/apt/apt.conf.d/98_no_recommends
 !.config/global_configs/etc/apt/apt.conf.d/98_no_suggests
 !.config/global_configs/etc/apt/sources.list
+!.config/global_configs/etc/apt/sources.list.d/caddy.sources
 !.config/global_configs/etc/apt/sources.list.d/chrome_remote_desktop.sources
 !.config/global_configs/etc/apt/sources.list.d/debian.sources
 !.config/global_configs/etc/apt/sources.list.d/google_chrome.sources
@@ -219,6 +220,8 @@
 !.local/share/backgrounds/.keep
 !.local/share/backgrounds/backgrounds_dark.dir/.keep
 !.local/share/backgrounds/backgrounds_light.dir/.keep
+!.local/share/code-server/User
+!.local/share/code-server/extensions
 !.local/share/doc/.keep
 !.local/share/fonts/.keep
 !.local/share/git-core/contrib/completion/git-prompt.sh
@@ -239,6 +242,7 @@
 !.psqlrc
 !.vscode-server/data/Machine
 !.vscode-server/extensions
+!.vscode/extensions/.keep
 !.xprofile
 !.xsession
 !.xsessionrc

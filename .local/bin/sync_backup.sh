@@ -10,6 +10,7 @@ function copy_data() {
     rsync \
         --archive --verbose \
         --partial --progress \
+        --compress \
         --exclude Oxford \
         "${from_location}/data/" "${where_and_to_location}/data"
 }

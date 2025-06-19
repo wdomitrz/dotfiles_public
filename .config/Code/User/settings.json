@@ -161,7 +161,7 @@
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.cwd": "${relativeFileDirname}",
     "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "terminal.integrated.fontLigatures": true,
+    "terminal.integrated.fontLigatures.enabled": true,
     "terminal.integrated.localEchoEnabled": "off",
     "update.showReleaseNotes": false,
     "vim.handleKeys": {
@@ -419,7 +419,7 @@
     "window.autoDetectColorScheme": true,
     "window.commandCenter": false,
     "window.menuBarVisibility": "toggle",
-    "window.openFoldersInNewWindow": "off",
+    "window.openFoldersInNewWindow": "on",
     "window.titleBarStyle": "native",
     "workbench.activityBar.location": "hidden",
     "workbench.editor.editorActionsLocation": "hidden",

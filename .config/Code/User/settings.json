@@ -163,6 +163,8 @@
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.fontLigatures.enabled": true,
     "terminal.integrated.localEchoEnabled": "off",
+    "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+    "terminal.integrated.tabs.enabled": false,
     "update.showReleaseNotes": false,
     "vim.handleKeys": {
         "<C-[>": true,

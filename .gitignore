@@ -191,6 +191,7 @@
 !.local/bin/sync_backup.sh
 !.local/bin/terminal_pager
 !.local/bin/toggle_mouse.sh
+!.local/bin/upload_server.py
 !.local/bin/vi
 !.local/bin/vim
 !.local/bin/vimdiff

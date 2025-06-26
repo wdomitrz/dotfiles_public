@@ -86,8 +86,14 @@ function download_macos_wallpapers() {
     ln -rsf "${wallpapers_directory}"/10-15-Day.jpg "${wallpapers_directory_light}"/
 }
 
-function install_python_packages() {
-    pip3 install --break-system-packages --user --upgrade basedpyright ruff
+function install_uv() {
+    wget_with_defaults.sh --max-redirect=3 https://astral.sh/uv/install.sh | sh
+}
+
+function install_python_tools() {
+    install_uv
+    uv tool install basedpyright
+    uv tool install ruff
 }
 
 function install_doc() {
@@ -144,7 +150,7 @@ function install_user_main() {
     set -euo pipefail
     set -x
 
-    install_python_packages
+    install_python_tools
     install_rmz_and_cpz
     install_nvim_plugins
     install_python_doc

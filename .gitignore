@@ -58,6 +58,8 @@
 !.config/git/config
 !.config/git/dotfiles/.keep
 !.config/git/gitignore.sorted.txt
+!.config/git/hooks/post-commit
+!.config/git/hooks/pre-commit
 !.config/global_configs/etc/NetworkManager/conf.d/10-globally-managed-devices.conf
 !.config/global_configs/etc/apt/apt.conf.d/98_no_recommends
 !.config/global_configs/etc/apt/apt.conf.d/98_no_suggests

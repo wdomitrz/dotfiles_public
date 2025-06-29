@@ -6,6 +6,12 @@ function copy_user_configs() {
             "${HOME}"/.config/user_configs/. "${HOME}"/
 }
 
+function copy_git_hooks() {
+    check_integrity_of_tracked_dir.sh "${HOME}"/.config/git/hooks &&
+        ln --relative --symbolic --force \
+            "${HOME}"/.config/git/hooks/* "${HOME}"/.git/hooks/
+}
+
 function set_shell() {
     shell="$1"
 
@@ -64,6 +70,7 @@ function config_user_main() {
     set -x
 
     copy_user_configs
+    copy_git_hooks
     disable_screen_ai_for_chrome
     add_git_dotfiles_hooks
     set_shell_bash

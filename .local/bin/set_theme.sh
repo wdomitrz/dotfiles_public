@@ -95,7 +95,7 @@ function set_theme_local() {
 }
 
 function set_theme() {
-    # ssh -Y localhost -- "$(typeset -f); set_theme_local" "$@" &
+    # ssh localhost -- "$(typeset -f); set_theme_local" "$@" &
     set_theme_local "$@"
 }
 

@@ -12,9 +12,6 @@
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "editor.acceptSuggestionOnEnter": "on",
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "always"
-    },
     "editor.cursorBlinking": "solid",
     "editor.cursorSurroundingLines": 1024,
     "editor.fontFamily": "monospace",
@@ -40,6 +37,7 @@
     "editor.suggest.matchOnWordStartOnly": false,
     "editor.tabCompletion": "on",
     "editor.wordWrap": "on",
+    "explorer.autoReveal": false,
     "extensions.experimental.affinity": {
         "jimmyzjx.leaderkey": 1,
         "vscodevim.vim": 1

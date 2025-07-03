@@ -222,8 +222,11 @@
 !.local/share/applications/web/telegram.desktop
 !.local/share/applications/web/whatsapp.desktop
 !.local/share/backgrounds/.keep
+!.local/share/backgrounds/backgrounds_both.dir/.keep
 !.local/share/backgrounds/backgrounds_dark.dir/.keep
+!.local/share/backgrounds/backgrounds_dark.dir/backgrounds_both.dir
 !.local/share/backgrounds/backgrounds_light.dir/.keep
+!.local/share/backgrounds/backgrounds_light.dir/backgrounds_both.dir
 !.local/share/code-server/User
 !.local/share/code-server/extensions
 !.local/share/doc/.keep

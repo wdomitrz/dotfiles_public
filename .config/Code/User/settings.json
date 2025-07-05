@@ -12,6 +12,9 @@
     "cSpell.language": "en,pl",
     "cSpell.useGitignore": false,
     "editor.acceptSuggestionOnEnter": "on",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
     "editor.cursorBlinking": "solid",
     "editor.cursorSurroundingLines": 1024,
     "editor.fontFamily": "monospace",

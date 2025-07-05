@@ -1,43 +1,4 @@
 #!/usr/bin/env bash
-function format_json() {
-    jq --indent 4 . -- "$@" | sponge "$@"
-}
-export -f format_json
-
-function format_py() {
-    ruff format --quiet "$@"
-}
-export -f format_py
-
-function format_sh() {
-    shfmt --indent 4 --space-redirects --simplify --write "$@"
-}
-export -f format_sh
-
-function format_sorted_json() {
-    jq --indent 4 --sort-keys . -- "$@" | sponge "$@"
-}
-export -f format_sorted_json
-
-function format_sorted_numeric_txt() {
-    sort --numeric-sort --output "$1"{,}
-}
-export -f format_sorted_numeric_txt
-
-function format_sorted_txt() {
-    sort --output "$1"{,}
-}
-export -f format_sorted_txt
-
-function format_vim() {
-    nvim --headless \
-        -c 'silent norm gg=G' \
-        -c 'silent wqa' \
-        -- "$@" \
-        2> /dev/null
-}
-export -f format_vim
-
 function format_a_file() {
     set -euo pipefail
     if [[ $# -eq 0 ]]; then
@@ -45,19 +6,23 @@ function format_a_file() {
         return 1
     fi
     given_file_path="$1"
-    file_path="$(realpath --quiet "${given_file_path}")" ||
-        return 0 # Ignore dangling links
 
-    case ${given_file_path} in
-    *.sh) format_sh "${file_path}" ;;
-    *.py) format_py "${file_path}" ;;
-    *.sorted.json) format_sorted_json "${file_path}" ;;
-    *.json) format_json "${file_path}" ;;
-    *.vim) format_vim "${file_path}" ;;
-    *.sorted.txt) format_sorted_txt "${file_path}" ;;
-    *.sorted_numeric.txt) format_sorted_numeric_txt "${file_path}" ;;
-    *) ;;
+    resolved_file_path="$(realpath --quiet "${given_file_path}")" ||
+        return 0 # Ignore dangling links
+    if [[ -d ${resolved_file_path} ]] || [[ ! -w ${resolved_file_path} ]]; then
+        return 0 # Ignore directories and non-writeable files
+    fi
+
+    # Only supported file types
+    case "$1" in
+    *.sh | *.py | *.sorted.json | *.json | *.vim | *.sorted.txt | *.sorted_numeric.txt) ;;
+    *) return 0 ;;
     esac
+
+    # shellcheck disable=SC2002
+    cat "${given_file_path}" |
+        format_stdin.sh "${given_file_path}" |
+        sponge "${given_file_path}"
 }
 export -f format_a_file
 

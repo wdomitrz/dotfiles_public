@@ -34,18 +34,6 @@ catch
     let &background = "dark"
 endtry
 
-" Formatter
-function! Format_file()
-    if &readonly | return | endif
-    if match(expand('%:p'), "^suda://") != -1 | return | endif
-
-    " Actually run the formatting
-    !format.sh %
-    " Reload the formatted file
-    edit!
-endfunction
-autocmd BufWritePost * silent call Format_file()
-
 " Key mappings
 " Use space as leader and , as local leader
 let mapleader=" "
@@ -103,6 +91,7 @@ function! Terminal_toggle()
 endfunction
 noremap  <C-space>  <cmd>call Terminal_toggle()<cr>
 tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
+nnoremap <C-.>      <cmd>lua vim.lsp.buf.code_action()<CR>
 
 
 " Plugins
@@ -129,3 +118,16 @@ noremap <C-p>               <cmd>History<cr>
 noremap <leader>ff          <cmd>Files<cr>
 noremap <leader>sf          <cmd>Rg<cr>
 noremap <leader><leader>    <cmd>Commands<cr>
+
+" packadd nvim-lspconfig
+
+" LSP
+lua vim.lsp.config['my_format'] = { cmd = { 'simple_format_server.py', 'format_stdin.sh', '{file_path}' }, filetypes = { 'bash', 'sh', 'python', 'json', 'jsonc', 'vim', 'text'  } }
+lua vim.lsp.enable('my_format')
+lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
+lua vim.lsp.enable('shls')
+lua vim.lsp.config['ruff'] = { cmd = { 'ruff', 'server' }, filetypes = { 'python' } }
+lua vim.lsp.enable('ruff')
+lua vim.lsp.config['basedpyright'] = { cmd = { "basedpyright-langserver", "--stdio"  }, filetypes = { 'python' } }
+
+autocmd BufWritePre * silent lua vim.lsp.buf.format()

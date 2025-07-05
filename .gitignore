@@ -142,6 +142,7 @@
 !.local/bin/fix_internet_post_install.sh
 !.local/bin/fix_touchpad.sh
 !.local/bin/format.sh
+!.local/bin/format_stdin.sh
 !.local/bin/geoclue-2-agent
 !.local/bin/git-ls
 !.local/bin/git-prev_merge_commit.sh
@@ -187,8 +188,10 @@
 !.local/bin/set_dpi.sh
 !.local/bin/set_keymap.sh
 !.local/bin/set_theme.sh
+!.local/bin/shls.py
 !.local/bin/show_mic_status.sh
 !.local/bin/shutdown
+!.local/bin/simple_format_server.py
 !.local/bin/sleep_forever.sh
 !.local/bin/start_docker_server.sh
 !.local/bin/sync_backup.sh

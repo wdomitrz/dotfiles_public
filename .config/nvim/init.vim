@@ -53,7 +53,7 @@ inoremap <C-l> <C-g>u<esc>[s1z=`]a<c-g>u
 noremap <C-l> [s1z=
 " LSP
 " Code action
-nnoremap <C-.> <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <C-.> <cmd>CodeAction<CR>
 " Tab completion
 function! Tab_complete()
     " Cycle through completions
@@ -121,7 +121,8 @@ noremap <leader><leader>    <cmd>Commands<cr>
 
 " LSP
 " Commands
-command! Format lua vim.lsp.buf.format()
+command! Format     lua vim.lsp.buf.format()
+command! CodeAction lua vim.lsp.buf.code_action()
 " Automatic bindings
 autocmd BufWritePre * silent Format
 

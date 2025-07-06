@@ -38,7 +38,7 @@ function format_stdin_main() {
     *.json | json) format_json ;;
     *.vim | vim) format_vim ;;
     *.sorted.txt | sorted_txt | sorted) format_sorted_txt ;;
-    *.sorted_numeric.txt | sorted_numeric_txt) format_sorted_numeric_txt ;;
+    *.sorted_numeric.txt | sorted_numeric_txt | sorted_numeric) format_sorted_numeric_txt ;;
     *) cat ;;
     esac
 }

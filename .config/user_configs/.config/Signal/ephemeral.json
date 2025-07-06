@@ -1,10 +1,10 @@
 {
-    "theme-setting": "system",
-    "spell-check": true,
-    "window": {
-        "autoHideMenuBar": true
-    },
-    "shown-tray-notice": true,
-    "localeOverride": "pl",
-    "system-tray-setting": "MinimizeToAndStartInSystemTray"
+  "theme-setting": "system",
+  "spell-check": true,
+  "window": {
+    "autoHideMenuBar": true
+  },
+  "shown-tray-notice": true,
+  "localeOverride": "pl",
+  "system-tray-setting": "MinimizeToAndStartInSystemTray"
 }

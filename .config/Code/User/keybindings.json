@@ -1,113 +1,113 @@
 [
-    {
-        "command": "extension.vim_escape",
-        "comment": "Just in case",
-        "key": "capslock",
-        "when": "editorTextFocus && vim.active && !inDebugRepl"
-    },
-    {
-        "command": "-interactive.input.clear",
-        "comment": "Interactive editor fixes; vim escape in an interactive editor",
-        "key": "escape"
-    },
-    {
-        "command": "editor.action.insertCursorAbove",
-        "comment": "Multi cursors",
-        "key": "ctrl+shift+k",
-        "when": "editorTextFocus"
-    },
-    {
-        "command": "editor.action.insertCursorBelow",
-        "comment": "Multi cursors",
-        "key": "ctrl+shift+j",
-        "when": "editorTextFocus"
-    },
-    {
-        "command": "selectPrevSuggestion",
-        "comment": "Scroll suggestions",
-        "key": "shift+tab",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
-    },
-    {
-        "command": "selectNextSuggestion",
-        "comment": "Scroll suggestions",
-        "key": "tab",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
-    },
-    {
-        "command": "workbench.action.terminal.toggleTerminal",
-        "comment": "Open drop-down terminal",
-        "key": "ctrl+space",
-        "when": "terminal.active"
-    },
-    {
-        "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
-        "comment": "Fix spelling",
-        "key": "ctrl+l"
-    },
-    {
-        "comment": "Easy navigation in quick open/QuickPick"
-    },
-    {
-        "command": "workbench.action.quickOpenSelectNext",
-        "key": "ctrl+j",
-        "when": "inQuickOpen"
-    },
-    {
-        "command": "workbench.action.quickOpenSelectPrevious",
-        "key": "ctrl+k",
-        "when": "inQuickOpen"
-    },
-    {
-        "comment": "Easy navigation in suggestion/intellisense"
-    },
-    {
-        "command": "selectNextSuggestion",
-        "key": "ctrl+j",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "command": "selectPrevSuggestion",
-        "key": "ctrl+k",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "comment": "Easy navigation in parameter hint (i.e. traverse the hints when there's multiple overload for one method)"
-    },
-    {
-        "command": "showNextParameterHint",
-        "key": "ctrl+j",
-        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
-    },
-    {
-        "command": "showPrevParameterHint",
-        "key": "ctrl+k",
-        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
-    },
-    {
-        "comment": "Easy navigation in code action"
-    },
-    {
-        "command": "selectNextCodeAction",
-        "key": "ctrl+j",
-        "when": "codeActionMenuVisible"
-    },
-    {
-        "command": "selectPrevCodeAction",
-        "key": "ctrl+k",
-        "when": "codeActionMenuVisible"
-    },
-    {
-        "comment": "Add ctrl+h/l to navigate in file browser"
-    },
-    {
-        "command": "file-browser.stepOut",
-        "key": "ctrl+h",
-        "when": "inFileBrowser"
-    },
-    {
-        "command": "file-browser.stepIn",
-        "key": "ctrl+l",
-        "when": "inFileBrowser"
-    }
+  {
+    "command": "extension.vim_escape",
+    "comment": "Just in case",
+    "key": "capslock",
+    "when": "editorTextFocus && vim.active && !inDebugRepl"
+  },
+  {
+    "command": "-interactive.input.clear",
+    "comment": "Interactive editor fixes; vim escape in an interactive editor",
+    "key": "escape"
+  },
+  {
+    "command": "editor.action.insertCursorAbove",
+    "comment": "Multi cursors",
+    "key": "ctrl+shift+k",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "editor.action.insertCursorBelow",
+    "comment": "Multi cursors",
+    "key": "ctrl+shift+j",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "selectPrevSuggestion",
+    "comment": "Scroll suggestions",
+    "key": "shift+tab",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+  },
+  {
+    "command": "selectNextSuggestion",
+    "comment": "Scroll suggestions",
+    "key": "tab",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+  },
+  {
+    "command": "workbench.action.terminal.toggleTerminal",
+    "comment": "Open drop-down terminal",
+    "key": "ctrl+space",
+    "when": "terminal.active"
+  },
+  {
+    "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
+    "comment": "Fix spelling",
+    "key": "ctrl+l"
+  },
+  {
+    "comment": "Easy navigation in quick open/QuickPick"
+  },
+  {
+    "command": "workbench.action.quickOpenSelectNext",
+    "key": "ctrl+j",
+    "when": "inQuickOpen"
+  },
+  {
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "key": "ctrl+k",
+    "when": "inQuickOpen"
+  },
+  {
+    "comment": "Easy navigation in suggestion/intellisense"
+  },
+  {
+    "command": "selectNextSuggestion",
+    "key": "ctrl+j",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "command": "selectPrevSuggestion",
+    "key": "ctrl+k",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "comment": "Easy navigation in parameter hint (i.e. traverse the hints when there's multiple overload for one method)"
+  },
+  {
+    "command": "showNextParameterHint",
+    "key": "ctrl+j",
+    "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+  },
+  {
+    "command": "showPrevParameterHint",
+    "key": "ctrl+k",
+    "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+  },
+  {
+    "comment": "Easy navigation in code action"
+  },
+  {
+    "command": "selectNextCodeAction",
+    "key": "ctrl+j",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "command": "selectPrevCodeAction",
+    "key": "ctrl+k",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "comment": "Add ctrl+h/l to navigate in file browser"
+  },
+  {
+    "command": "file-browser.stepOut",
+    "key": "ctrl+h",
+    "when": "inFileBrowser"
+  },
+  {
+    "command": "file-browser.stepIn",
+    "key": "ctrl+l",
+    "when": "inFileBrowser"
+  }
 ]

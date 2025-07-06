@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-function format_json() { jq --indent 4 . -; }
+function format_json() { jq . -; }
 
 function format_py() { ruff format -; }
 
 function format_sh() { shfmt --indent 4 --space-redirects --simplify -; }
 
-function format_sorted_json() { jq --indent 4 --sort-keys . -; }
+function format_sorted_json() { jq --sort-keys . -; }
 
 function format_sorted_numeric_txt() { sort --numeric-sort -; }
 

@@ -1,6 +1,6 @@
 {
-    "data-root": "/home/docker-data",
-    "features": {
-        "buildkit": true
-    }
+  "data-root": "/home/docker-data",
+  "features": {
+    "buildkit": true
+  }
 }

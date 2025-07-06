@@ -8,5 +8,5 @@ fi
 code --list-extensions | grep --invert-match "^Extensions installed on " |
     jq --null-input --raw-input '{"remote.SSH.defaultExtensions": [inputs]}' |
     jq 'add' --slurp "${settings_file}" - |
-    jq --sort-keys --indent 4 |
+    format_stdin.sh json |
     sponge "${settings_file}"

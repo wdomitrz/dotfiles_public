@@ -1,438 +1,424 @@
 {
-    "[python]": {
-        "editor.defaultFormatter": "charliermarsh.ruff"
+  "basedpyright.analysis.typeCheckingMode": "standard",
+  "basedpyright.analysis.useLibraryCodeForTypes": false,
+  "breadcrumbs.enabled": false,
+  "cSpell.diagnosticLevel": "Hint",
+  "cSpell.language": "en,pl",
+  "cSpell.useGitignore": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSurroundingLines": 1024,
+  "editor.fontFamily": "monospace",
+  "editor.fontLigatures": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.glyphMargin": false,
+  "editor.inlayHints.enabled": "on",
+  "editor.lineNumbers": "off",
+  "editor.minimap.enabled": false,
+  "editor.occurrencesHighlight": "multiFile",
+  "editor.overviewRulerBorder": false,
+  "editor.peekWidgetDefaultFocus": "editor",
+  "editor.renderLineHighlight": "none",
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.showFoldingControls": "never",
+  "editor.suggest.matchOnWordStartOnly": false,
+  "editor.tabCompletion": "on",
+  "editor.wordWrap": "on",
+  "explorer.autoReveal": false,
+  "extensions.experimental.affinity": {
+    "jimmyzjx.leaderkey": 1,
+    "vscodevim.vim": 1
+  },
+  "extensions.ignoreRecommendations": true,
+  "files.associations": {
+    "**/.ssh/config": "ssh_config",
+    "**/.ssh/configs/*.conf": "ssh_config",
+    "**/i3/config": "i3",
+    "*.build": "json",
+    "*.task": "json"
+  },
+  "files.autoSave": "onFocusChange",
+  "files.insertFinalNewline": true,
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "files.simpleDialog.enable": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "git.enabled": true,
+  "git.openRepositoryInParentFolders": "always",
+  "interactiveWindow.executeWithShiftEnter": true,
+  "jupyter.askForKernelRestart": false,
+  "keyboard.dispatch": "keyCode",
+  "leaderkey.overrides.user": {
+    ", e": "Error...",
+    ", e N": {
+      "command": "go-to-next-problem.next",
+      "name": "next error in file"
     },
-    "[shellscript]": {
-        "editor.defaultFormatter": "foxundermoon.shell-format"
+    ", e P": {
+      "command": "go-to-next-problem.prev",
+      "name": "previous error in file"
     },
-    "basedpyright.analysis.typeCheckingMode": "standard",
-    "basedpyright.analysis.useLibraryCodeForTypes": false,
-    "breadcrumbs.enabled": false,
-    "cSpell.diagnosticLevel": "Hint",
-    "cSpell.language": "en,pl",
-    "cSpell.useGitignore": false,
-    "editor.acceptSuggestionOnEnter": "on",
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit"
+    ", e n": {
+      "command": "go-to-next-problem.nextInFiles",
+      "name": "next error"
     },
-    "editor.cursorBlinking": "solid",
-    "editor.cursorSurroundingLines": 1024,
-    "editor.fontFamily": "monospace",
-    "editor.fontLigatures": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.glyphMargin": false,
-    "editor.inlayHints.enabled": "on",
-    "editor.lineNumbers": "off",
-    "editor.minimap.enabled": false,
-    "editor.occurrencesHighlight": "multiFile",
-    "editor.overviewRulerBorder": false,
-    "editor.peekWidgetDefaultFocus": "editor",
-    "editor.renderLineHighlight": "none",
-    "editor.rulers": [
-        80,
-        100
-    ],
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
-    "editor.showFoldingControls": "never",
-    "editor.stickyScroll.enabled": true,
-    "editor.suggest.matchOnWordStartOnly": false,
-    "editor.tabCompletion": "on",
-    "editor.wordWrap": "on",
-    "explorer.autoReveal": false,
-    "extensions.experimental.affinity": {
-        "jimmyzjx.leaderkey": 1,
-        "vscodevim.vim": 1
+    ", e p": {
+      "command": "go-to-next-problem.prevInFiles",
+      "name": "previous error"
     },
-    "extensions.ignoreRecommendations": true,
-    "files.associations": {
-        "**/.ssh/config": "ssh_config",
-        "**/.ssh/configs/*.conf": "ssh_config",
-        "**/i3/config": "i3",
-        "*.build": "json",
-        "*.task": "json"
+    ", h": "Hover...",
+    ", h t": {
+      "command": "editor.action.showDefinitionPreviewHover",
+      "name": "show type"
     },
-    "files.autoGuessEncoding": true,
-    "files.autoSave": "onFocusChange",
-    "files.insertFinalNewline": true,
-    "files.saveConflictResolution": "overwriteFileOnDisk",
-    "files.simpleDialog.enable": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "git.enabled": true,
-    "git.mergeEditor": true,
-    "git.openRepositoryInParentFolders": "always",
-    "interactiveWindow.executeWithShiftEnter": true,
-    "jupyter.askForKernelRestart": false,
-    "keyboard.dispatch": "keyCode",
-    "leaderkey.overrides.user": {
-        ", e": "Error...",
-        ", e N": {
-            "command": "go-to-next-problem.next",
-            "name": "next error in file"
-        },
-        ", e P": {
-            "command": "go-to-next-problem.prev",
-            "name": "previous error in file"
-        },
-        ", e n": {
-            "command": "go-to-next-problem.nextInFiles",
-            "name": "next error"
-        },
-        ", e p": {
-            "command": "go-to-next-problem.prevInFiles",
-            "name": "previous error"
-        },
-        ", h": "Hover...",
-        ", h t": {
-            "command": "editor.action.showDefinitionPreviewHover",
-            "name": "show type"
-        },
-        "SPC w t": {
-            "commands": [
-                "workbench.action.compareEditor.focusOtherSide",
-                {
-                    "args": {
-                        "to": "viewPortCenter"
-                    },
-                    "command": "cursorMove"
-                }
-            ],
-            "name": "toggle diff view"
+    "SPC w t": {
+      "commands": [
+        "workbench.action.compareEditor.focusOtherSide",
+        {
+          "args": {
+            "to": "viewPortCenter"
+          },
+          "command": "cursorMove"
         }
+      ],
+      "name": "toggle diff view"
+    }
+  },
+  "notebook.experimental.remoteSave": true,
+  "notebook.formatOnCellExecution": true,
+  "notebook.formatOnSave.enabled": true,
+  "path-autocomplete.triggerOutsideStrings": true,
+  "remote.SSH.defaultExtensions": [
+    "charliermarsh.ruff",
+    "davidanson.vscode-markdownlint",
+    "dcasella.i3",
+    "detachhead.basedpyright",
+    "foxundermoon.shell-format",
+    "ionutvmi.path-autocomplete",
+    "jacobdufault.fuzzy-search",
+    "jimmyzjx.go-to-next-problem",
+    "jimmyzjx.leaderkey",
+    "jimmyzjx.remote-commons",
+    "jimmyzjx.ripgrep",
+    "kahole.magit",
+    "llvm-vs-code-extensions.vscode-clangd",
+    "mechatroner.rainbow-csv",
+    "ms-python.python",
+    "ms-toolsai.jupyter",
+    "ms-toolsai.jupyter-keymap",
+    "ms-toolsai.jupyter-renderers",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-ssh-edit",
+    "ms-vscode.hexeditor",
+    "ms-vscode.makefile-tools",
+    "stkb.rewrap",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-polish",
+    "timonwong.shellcheck",
+    "vscodevim.vim",
+    "xadillax.viml"
+  ],
+  "remote.SSH.lockfilesInTmp": true,
+  "remote.extensionKind": {
+    "jimmyzjx.leaderkey": [
+      "ui"
+    ],
+    "pub.name": [
+      "ui"
+    ],
+    "vscodevim.vim": [
+      "ui"
+    ]
+  },
+  "search.mode": "newEditor",
+  "security.workspace.trust.banner": "always",
+  "security.workspace.trust.startupPrompt": "always",
+  "settingsSync.keybindingsPerPlatform": false,
+  "shellcheck.customArgs": [
+    "--exclude=SC1091,SC2312",
+    "--enable=all"
+  ],
+  "shellcheck.disableVersionCheck": true,
+  "shellformat.flag": "--space-redirects",
+  "telemetry.enableTelemetry": false,
+  "telemetry.feedback.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.cwd": "${relativeFileDirname}",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.localEchoEnabled": "off",
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.tabs.enabled": false,
+  "update.showReleaseNotes": false,
+  "vim.handleKeys": {
+    "<C-[>": true,
+    "<C-a>": true,
+    "<C-d>": true,
+    "<C-k>": true,
+    "<C-o>": true,
+    "<C-r>": true,
+    "<C-u>": true,
+    "<C-w>": true,
+    "<C-x>": true
+  },
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "<C-a>"
+      ],
+      "commands": [
+        "editor.action.selectAll"
+      ]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "comment": "normal/visual mode keybindings"
     },
-    "notebook.experimental.remoteSave": true,
-    "notebook.formatOnCellExecution": true,
-    "notebook.formatOnSave.enabled": true,
-    "path-autocomplete.triggerOutsideStrings": true,
-    "remote.SSH.defaultExtensions": [
-        "charliermarsh.ruff",
-        "davidanson.vscode-markdownlint",
-        "dcasella.i3",
-        "detachhead.basedpyright",
-        "foxundermoon.shell-format",
-        "ionutvmi.path-autocomplete",
-        "jacobdufault.fuzzy-search",
-        "jimmyzjx.go-to-next-problem",
-        "jimmyzjx.leaderkey",
-        "jimmyzjx.remote-commons",
-        "jimmyzjx.ripgrep",
-        "kahole.magit",
-        "llvm-vs-code-extensions.vscode-clangd",
-        "mechatroner.rainbow-csv",
-        "ms-python.python",
-        "ms-toolsai.jupyter",
-        "ms-toolsai.jupyter-keymap",
-        "ms-toolsai.jupyter-renderers",
-        "ms-vscode-remote.remote-ssh",
-        "ms-vscode-remote.remote-ssh-edit",
-        "ms-vscode.hexeditor",
-        "ms-vscode.makefile-tools",
-        "stkb.rewrap",
-        "streetsidesoftware.code-spell-checker",
-        "streetsidesoftware.code-spell-checker-polish",
-        "timonwong.shellcheck",
-        "vscodevim.vim",
-        "xadillax.viml"
-    ],
-    "remote.SSH.lockfilesInTmp": true,
-    "remote.extensionKind": {
-        "jimmyzjx.leaderkey": [
-            "ui"
-        ],
-        "pub.name": [
-            "ui"
-        ],
-        "vscodevim.vim": [
-            "ui"
-        ]
+    {
+      "before": [
+        "<leader>"
+      ],
+      "commands": [
+        {
+          "args": [
+            "leaderkeyState",
+            "SPC"
+          ],
+          "command": "_setContext"
+        },
+        {
+          "args": "SPC",
+          "command": "leaderkey.render"
+        }
+      ]
     },
-    "search.mode": "newEditor",
-    "security.workspace.trust.banner": "always",
-    "security.workspace.trust.startupPrompt": "always",
-    "settingsSync.keybindingsPerPlatform": false,
-    "shellcheck.customArgs": [
-        "--exclude=SC1091,SC2312",
-        "--enable=all"
-    ],
-    "shellcheck.disableVersionCheck": true,
-    "shellformat.flag": "--space-redirects",
-    "telemetry.enableTelemetry": false,
-    "telemetry.feedback.enabled": false,
-    "telemetry.telemetryLevel": "off",
-    "terminal.integrated.cwd": "${relativeFileDirname}",
-    "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "terminal.integrated.fontLigatures.enabled": true,
-    "terminal.integrated.localEchoEnabled": "off",
-    "terminal.integrated.shellIntegration.decorationsEnabled": "never",
-    "terminal.integrated.tabs.enabled": false,
-    "update.showReleaseNotes": false,
-    "vim.handleKeys": {
-        "<C-[>": true,
-        "<C-a>": true,
-        "<C-d>": true,
-        "<C-k>": true,
-        "<C-o>": true,
-        "<C-r>": true,
-        "<C-u>": true,
-        "<C-w>": true,
-        "<C-x>": true
+    {
+      "before": [
+        ","
+      ],
+      "commands": [
+        {
+          "args": [
+            "leaderkeyState",
+            ","
+          ],
+          "command": "_setContext"
+        },
+        {
+          "args": ",",
+          "command": "leaderkey.render"
+        }
+      ]
     },
-    "vim.hlsearch": true,
-    "vim.insertModeKeyBindings": [
+    {
+      "after": [
+        "g",
+        "j"
+      ],
+      "before": [
+        "j"
+      ]
+    },
+    {
+      "after": [
+        "g",
+        "k"
+      ],
+      "before": [
+        "k"
+      ]
+    },
+    {
+      "after": [
+        "%"
+      ],
+      "before": [
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "<C-o>"
+      ],
+      "commands": [
+        "workbench.action.navigateBack"
+      ]
+    },
+    {
+      "before": [
+        "<C-k>"
+      ],
+      "commands": [
+        "editor.action.addSelectionToNextFindMatch"
+      ]
+    },
+    {
+      "comment": "normal mode keybindings"
+    },
+    {
+      "before": [
+        "u"
+      ],
+      "commands": [
+        "undo"
+      ]
+    },
+    {
+      "before": [
+        "<C-r>"
+      ],
+      "commands": [
+        "redo"
+      ]
+    },
+    {
+      "before": [
+        "K"
+      ],
+      "commands": [
+        "editor.action.showHover"
+      ]
+    }
+  ],
+  "vim.useCtrlKeys": false,
+  "vim.useSystemClipboard": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "comment": "normal/visual mode keybindings"
+    },
+    {
+      "before": [
+        "<leader>"
+      ],
+      "commands": [
         {
-            "before": [
-                "<C-a>"
-            ],
-            "commands": [
-                "editor.action.selectAll"
-            ]
+          "args": [
+            "leaderkeyState",
+            "SPC"
+          ],
+          "command": "_setContext"
+        },
+        {
+          "args": "SPC",
+          "command": "leaderkey.render"
         }
-    ],
-    "vim.leader": "<space>",
-    "vim.normalModeKeyBindingsNonRecursive": [
+      ]
+    },
+    {
+      "before": [
+        ","
+      ],
+      "commands": [
         {
-            "comment": "normal/visual mode keybindings"
+          "args": [
+            "leaderkeyState",
+            ","
+          ],
+          "command": "_setContext"
         },
         {
-            "before": [
-                "<leader>"
-            ],
-            "commands": [
-                {
-                    "args": [
-                        "leaderkeyState",
-                        "SPC"
-                    ],
-                    "command": "_setContext"
-                },
-                {
-                    "args": "SPC",
-                    "command": "leaderkey.render"
-                }
-            ]
-        },
-        {
-            "before": [
-                ","
-            ],
-            "commands": [
-                {
-                    "args": [
-                        "leaderkeyState",
-                        ","
-                    ],
-                    "command": "_setContext"
-                },
-                {
-                    "args": ",",
-                    "command": "leaderkey.render"
-                }
-            ]
-        },
-        {
-            "after": [
-                "g",
-                "j"
-            ],
-            "before": [
-                "j"
-            ]
-        },
-        {
-            "after": [
-                "g",
-                "k"
-            ],
-            "before": [
-                "k"
-            ]
-        },
-        {
-            "after": [
-                "%"
-            ],
-            "before": [
-                "%"
-            ]
-        },
-        {
-            "before": [
-                "<C-o>"
-            ],
-            "commands": [
-                "workbench.action.navigateBack"
-            ]
-        },
-        {
-            "before": [
-                "<C-k>"
-            ],
-            "commands": [
-                "editor.action.addSelectionToNextFindMatch"
-            ]
-        },
-        {
-            "comment": "normal mode keybindings"
-        },
-        {
-            "before": [
-                "u"
-            ],
-            "commands": [
-                "undo"
-            ]
-        },
-        {
-            "before": [
-                "<C-r>"
-            ],
-            "commands": [
-                "redo"
-            ]
-        },
-        {
-            "before": [
-                "K"
-            ],
-            "commands": [
-                "editor.action.showHover"
-            ]
+          "args": ",",
+          "command": "leaderkey.render"
         }
-    ],
-    "vim.useCtrlKeys": false,
-    "vim.useSystemClipboard": true,
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "comment": "normal/visual mode keybindings"
-        },
-        {
-            "before": [
-                "<leader>"
-            ],
-            "commands": [
-                {
-                    "args": [
-                        "leaderkeyState",
-                        "SPC"
-                    ],
-                    "command": "_setContext"
-                },
-                {
-                    "args": "SPC",
-                    "command": "leaderkey.render"
-                }
-            ]
-        },
-        {
-            "before": [
-                ","
-            ],
-            "commands": [
-                {
-                    "args": [
-                        "leaderkeyState",
-                        ","
-                    ],
-                    "command": "_setContext"
-                },
-                {
-                    "args": ",",
-                    "command": "leaderkey.render"
-                }
-            ]
-        },
-        {
-            "after": [
-                "g",
-                "j"
-            ],
-            "before": [
-                "j"
-            ]
-        },
-        {
-            "after": [
-                "g",
-                "k"
-            ],
-            "before": [
-                "k"
-            ]
-        },
-        {
-            "after": [
-                "%"
-            ],
-            "before": [
-                "%"
-            ]
-        },
-        {
-            "before": [
-                "<C-o>"
-            ],
-            "commands": [
-                "workbench.action.navigateBack"
-            ]
-        },
-        {
-            "before": [
-                "<C-k>"
-            ],
-            "commands": [
-                "editor.action.addSelectionToNextFindMatch"
-            ]
-        },
-        {
-            "comment": "visual mode keybindings"
-        },
-        {
-            "after": [
-                "p",
-                "g",
-                "v",
-                "y"
-            ],
-            "before": [
-                "p"
-            ]
-        },
-        {
-            "after": [
-                ">",
-                "g",
-                "v"
-            ],
-            "before": [
-                ">"
-            ]
-        },
-        {
-            "after": [
-                "<",
-                "g",
-                "v"
-            ],
-            "before": [
-                "<"
-            ]
-        }
-    ],
-    "window.autoDetectColorScheme": true,
-    "window.commandCenter": false,
-    "window.menuBarVisibility": "toggle",
-    "window.openFoldersInNewWindow": "off",
-    "window.titleBarStyle": "native",
-    "workbench.activityBar.location": "hidden",
-    "workbench.editor.editorActionsLocation": "hidden",
-    "workbench.editor.showTabs": "none",
-    "workbench.enableExperiments": false,
-    "workbench.layoutControl.enabled": false,
-    "workbench.sideBar.location": "right",
-    "workbench.startupEditor": "none",
-    "workbench.statusBar.visible": false,
-    "workbench.tips.enabled": false,
-    "workbench.welcomePage.walkthroughs.openOnInstall": false
+      ]
+    },
+    {
+      "after": [
+        "g",
+        "j"
+      ],
+      "before": [
+        "j"
+      ]
+    },
+    {
+      "after": [
+        "g",
+        "k"
+      ],
+      "before": [
+        "k"
+      ]
+    },
+    {
+      "after": [
+        "%"
+      ],
+      "before": [
+        "%"
+      ]
+    },
+    {
+      "before": [
+        "<C-o>"
+      ],
+      "commands": [
+        "workbench.action.navigateBack"
+      ]
+    },
+    {
+      "before": [
+        "<C-k>"
+      ],
+      "commands": [
+        "editor.action.addSelectionToNextFindMatch"
+      ]
+    },
+    {
+      "comment": "visual mode keybindings"
+    },
+    {
+      "after": [
+        "p",
+        "g",
+        "v",
+        "y"
+      ],
+      "before": [
+        "p"
+      ]
+    },
+    {
+      "after": [
+        ">",
+        "g",
+        "v"
+      ],
+      "before": [
+        ">"
+      ]
+    },
+    {
+      "after": [
+        "<",
+        "g",
+        "v"
+      ],
+      "before": [
+        "<"
+      ]
+    }
+  ],
+  "window.autoDetectColorScheme": true,
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "toggle",
+  "window.openFoldersInNewWindow": "off",
+  "window.titleBarStyle": "native",
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.editorActionsLocation": "hidden",
+  "workbench.editor.showTabs": "none",
+  "workbench.enableExperiments": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "workbench.statusBar.visible": false,
+  "workbench.tips.enabled": false,
+  "workbench.welcomePage.walkthroughs.openOnInstall": false
 }

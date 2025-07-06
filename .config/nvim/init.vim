@@ -8,7 +8,6 @@ autocmd TermOpen * setlocal nospell
 set autochdir
 set breakindent
 set clipboard=unnamedplus
-set colorcolumn=80,100
 set completeopt=menuone,noinsert,noselect
 set complete=.,w,b,u,U,k,kspell,s,i,t
 set foldmethod=syntax foldlevelstart=99
@@ -52,6 +51,9 @@ vnoremap < <gv
 " Correct spelling
 inoremap <C-l> <C-g>u<esc>[s1z=`]a<c-g>u
 noremap <C-l> [s1z=
+" LSP
+" Code action
+nnoremap <C-.> <cmd>lua vim.lsp.buf.code_action()<CR>
 " Tab completion
 function! Tab_complete()
     " Cycle through completions
@@ -91,7 +93,6 @@ function! Terminal_toggle()
 endfunction
 noremap  <C-space>  <cmd>call Terminal_toggle()<cr>
 tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
-nnoremap <C-.>      <cmd>lua vim.lsp.buf.code_action()<CR>
 
 
 " Plugins
@@ -107,7 +108,6 @@ endif
 
 
 " Plugin options
-let g:suda_smart_edit = 1
 let $FZF_DEFAULT_OPTS = '--reverse'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.0 } }
 let g:fzf_preview_window = []
@@ -119,9 +119,13 @@ noremap <leader>ff          <cmd>Files<cr>
 noremap <leader>sf          <cmd>Rg<cr>
 noremap <leader><leader>    <cmd>Commands<cr>
 
-" packadd nvim-lspconfig
-
 " LSP
+" Commands
+command! Format lua vim.lsp.buf.format()
+" Automatic bindings
+autocmd BufWritePre * silent Format
+
+" Configs
 lua vim.lsp.config['my_format'] = { cmd = { 'simple_format_server.py', 'format_stdin.sh', '{file_path}' }, filetypes = { 'bash', 'sh', 'python', 'json', 'jsonc', 'vim', 'text'  } }
 lua vim.lsp.enable('my_format')
 lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
@@ -129,5 +133,3 @@ lua vim.lsp.enable('shls')
 lua vim.lsp.config['ruff'] = { cmd = { 'ruff', 'server' }, filetypes = { 'python' } }
 lua vim.lsp.enable('ruff')
 lua vim.lsp.config['basedpyright'] = { cmd = { "basedpyright-langserver", "--stdio"  }, filetypes = { 'python' } }
-
-autocmd BufWritePre * silent lua vim.lsp.buf.format()

@@ -242,6 +242,7 @@
 !.local/state/nvim/.keep
 !.local/state/nvim/site/pack/plugins/opt/fzf
 !.local/state/nvim/site/pack/plugins/opt/fzf.vim
+!.local/state/nvim/site/pack/plugins/opt/nvim-lspconfig
 !.local/state/nvim/site/pack/plugins/opt/suda.vim
 !.local/state/nvim/site/pack/plugins/opt/vim-commentary
 !.local/state/nvim/site/pack/plugins/opt/vim-gitgutter

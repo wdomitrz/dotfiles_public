@@ -53,7 +53,9 @@ inoremap <C-l> <C-g>u<esc>[s1z=`]a<c-g>u
 noremap <C-l> [s1z=
 " LSP
 " Code action
-nnoremap <C-.> <cmd>CodeAction<CR>
+noremap <C-.>           <cmd>CodeAction<CR>
+noremap <localleader>en <cmd>NextDiagnostic<CR>
+noremap <localleader>ep <cmd>PreviousDiagnostic<CR>
 " Tab completion
 function! Tab_complete()
     " Cycle through completions
@@ -99,6 +101,7 @@ tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
 if ! $VIM_DISABLE_PLUG
     packadd fzf
     packadd fzf.vim
+    packadd nvim-lspconfig
     packadd suda.vim
     packadd vim-commentary
     packadd vim-gitgutter
@@ -121,16 +124,22 @@ noremap <leader><leader>    <cmd>Commands<cr>
 
 " LSP
 " Commands
-command! Format     lua vim.lsp.buf.format()
-command! CodeAction lua vim.lsp.buf.code_action()
+command! Format             lua vim.lsp.buf.format()
+command! CodeAction         lua vim.lsp.buf.code_action()
+command! NextDiagnostic     lua vim.diagnostic.goto_next()
+command! PreviousDiagnostic lua vim.diagnostic.goto_prev()
 " Automatic bindings
 autocmd BufWritePre * silent Format
-
-" Configs
+" Custom configs
+if ! has('nvim-0.11')
+    lua vim.lsp.config = {}
+endif
 lua vim.lsp.config['my_format'] = { cmd = { 'simple_format_server.py', 'format_stdin.sh', '{file_path}' }, filetypes = { 'bash', 'sh', 'python', 'json', 'jsonc', 'vim', 'text'  } }
-lua vim.lsp.enable('my_format')
 lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
-lua vim.lsp.enable('shls')
-lua vim.lsp.config['ruff'] = { cmd = { 'ruff', 'server' }, filetypes = { 'python' } }
-lua vim.lsp.enable('ruff')
-lua vim.lsp.config['basedpyright'] = { cmd = { "basedpyright-langserver", "--stdio"  }, filetypes = { 'python' } }
+" Chosen servers
+if has('nvim-0.11')
+    lua vim.lsp.enable('my_format')
+    lua vim.lsp.enable('shls')
+    lua vim.lsp.enable('ruff')
+    lua vim.lsp.enable('clangd')
+endif

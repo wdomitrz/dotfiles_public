@@ -19,3 +19,6 @@
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-surround"]
 	path = .local/state/nvim/site/pack/plugins/opt/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule ".local/state/nvim/site/pack/plugins/opt/nvim-lspconfig"]
+	path = .local/state/nvim/site/pack/plugins/opt/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig

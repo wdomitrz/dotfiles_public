@@ -53,8 +53,13 @@ def get_server(*, format_command: list[str]) -> LanguageServer:
                 )
             ]
         except subprocess.CalledProcessError as e:
-            logging.error(f"shfmt error: {e.stderr}")
-            ls.show_message_log(f"shfmt error: {e.stderr}")
+            error_info = dict(
+                format_command=format_command,
+                formated_file=doc.path,
+                stderr=e.stderr,
+            )
+            logging.error("formatter error: %s", error_info)
+            ls.show_message_log(f"formatter error: {error_info}")
             return []
 
     return server

@@ -136,16 +136,17 @@ def parse_diagnostic(
 def lint(
     *, ls: LanguageServer, doc: TextDocument, file_uri: str
 ) -> list[DiagnosticAndCodeAction]:
+    DIAGNOSTICS_COMMAND = [
+        "shellcheck",
+        "-",
+        "--exclude=SC1091,SC2312",
+        "--enable=all",
+        "--format=json1",
+    ]
     try:
         diagnostics = json.loads(
             subprocess.run(
-                [
-                    "shellcheck",
-                    "-",
-                    "--exclude=SC1091,SC2312",
-                    "--enable=all",
-                    "--format=json1",
-                ],
+                DIAGNOSTICS_COMMAND,
                 input=doc.source,
                 capture_output=True,
                 text=True,
@@ -156,8 +157,13 @@ def lint(
             parse_diagnostic(file_uri=file_uri, **d) for d in diagnostics["comments"]
         ]
     except subprocess.CalledProcessError as e:
-        logging.error(f"shellcheck error: {e.stderr}")
-        ls.show_message_log(f"shellcheck error: {e.stderr}")
+        error_info = dict(
+            diagnostics_command=DIAGNOSTICS_COMMAND,
+            formated_file=doc.path,
+            stderr=e.stderr,
+        )
+        logging.error("diagnostics error: %s", error_info)
+        ls.show_message_log(f"diagnostics error: {error_info}")
         return []
 
 

@@ -31,7 +31,8 @@ function format_stdin() {
 
 function get_filetype() {
     case "$1" in
-    *.sh | *.profile | *.bashrc) echo sh ;;
+    *.sh | *.profile | *.bashrc | *.bash_aliases | *.bash_logout | \
+        *.fehbg | *.Xclients | .xsessionrc | .xsession) echo sh ;;
     *.py) echo py ;;
     *.sorted.json) echo sorted_json ;;
     *.json) echo json ;;

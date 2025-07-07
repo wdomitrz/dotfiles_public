@@ -2,6 +2,8 @@
 " Automatically removing all trailing spaces and blank trailing lines
 autocmd BufWritePre * %substitute/\s\+$//e
 autocmd BufWritePre * %substitute/$\n\+\%$//e
+" Formatting
+autocmd BufWritePre * silent Format
 " Disable spellcheck in terminal
 autocmd TermOpen * setlocal nospell
 " set options
@@ -32,6 +34,17 @@ try
 catch
     let &background = "dark"
 endtry
+
+" Commands
+function! Format_fn()
+    let current_pos = getpos(".")
+    execute '%!format.sh stdin --filename %'
+    call setpos(".", current_pos)
+endfunction
+command! Format             call Format_fn()
+command! CodeAction         lua vim.lsp.buf.code_action()
+command! NextDiagnostic     lua vim.diagnostic.goto_next()
+command! PreviousDiagnostic lua vim.diagnostic.goto_prev()
 
 " Key mappings
 " Use space as leader and , as local leader
@@ -122,23 +135,9 @@ noremap <leader>ff          <cmd>Files<cr>
 noremap <leader>sf          <cmd>Rg<cr>
 noremap <leader><leader>    <cmd>Commands<cr>
 
-" LSP
-" Commands
-command! Format             lua vim.lsp.buf.format()
-command! CodeAction         lua vim.lsp.buf.code_action()
-command! NextDiagnostic     lua vim.diagnostic.goto_next()
-command! PreviousDiagnostic lua vim.diagnostic.goto_prev()
-" Automatic bindings
-autocmd BufWritePre * silent Format
-" Custom configs
-if ! has('nvim-0.11')
-    lua vim.lsp.config = {}
-endif
-lua vim.lsp.config['my_format'] = { cmd = { 'simple_format_server.py', 'format_stdin.sh', '{file_path}' }, filetypes = { 'bash', 'sh', 'python', 'json', 'jsonc', 'vim', 'text'  } }
-lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
-" Chosen servers
+" LSP servers
 if has('nvim-0.11')
-    lua vim.lsp.enable('my_format')
+    lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
     lua vim.lsp.enable('shls')
     lua vim.lsp.enable('ruff')
     lua vim.lsp.enable('clangd')

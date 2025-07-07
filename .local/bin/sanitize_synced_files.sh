@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 function format_all_files() {
-    git-ls | grep -v '.local/state/nvim/site/pack/plugins/opt/' | xargs format.sh
+    git-ls | grep -v '.local/state/nvim/site/pack/plugins/opt/' | xargs format.sh files
 }
 
 function lint_sources_files() {

@@ -22,7 +22,7 @@ function start_docker_server_main() {
     fi
 
     if "${rebuild}"; then
-        docker build --tag my"${suffix}":local - < "${docker_file}" || return 1
+        docker build --tag my"${suffix}":local --file "${docker_file}" "${HOME}" || return 1
     fi
 
     echo "Starting ssh server. Press Ctrl-C to stop it"

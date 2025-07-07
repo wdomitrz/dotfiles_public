@@ -153,6 +153,7 @@
   "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.tabs.enabled": false,
+  "update.mode": "manual",
   "update.showReleaseNotes": false,
   "vim.handleKeys": {
     "<C-[>": true,

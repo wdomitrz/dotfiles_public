@@ -1,8 +1,71 @@
 #!/usr/bin/env bash
-function format_a_file() {
+function format_json() { jq . -; }
+function format_py() { ruff format -; }
+function format_sh() { shfmt --indent 4 --space-redirects --simplify -; }
+function format_sorted_json() { LC_ALL=C jq --sort-keys . -; }
+function format_sorted_numeric_txt() { LC_ALL=C sort --numeric-sort -; }
+function format_sorted_txt() { LC_ALL=C sort -; }
+function format_vim() { format_vim.sh; }
+
+function format_stdin() {
+    set -euo pipefail
+    if [[ $# -ne 1 ]]; then
+        echo "${FUNCNAME[*]}: Expected file type"
+        return 1
+    fi
+    case "$1" in
+    sh | bash | shellscript) format_sh ;;
+    py | python) format_py ;;
+    sorted_json) format_sorted_json ;;
+    json) format_json ;;
+    vim) format_vim ;;
+    sorted_txt | sorted) format_sorted_txt ;;
+    sorted_numeric_txt | sorted_numeric) format_sorted_numeric_txt ;;
+    unknown) cat ;;
+    *)
+        echo "Unsupported filetype '$1'"
+        return 1
+        ;;
+    esac
+}
+
+function get_filetype() {
+    case "$1" in
+    *.sh | *.profile | *.bashrc) echo sh ;;
+    *.py) echo py ;;
+    *.sorted.json) echo sorted_json ;;
+    *.json) echo json ;;
+    *.vim) echo vim ;;
+    *.sorted.txt) echo sorted_txt ;;
+    *.sorted_numeric.txt) echo sorted_numeric_txt ;;
+    *) echo unknown ;;
+    esac
+}
+
+function format_stdin_main() {
+    if [[ $# -eq 0 ]]; then
+        echo "${FUNCNAME[*]}: Expected a flag with value"
+        return 1
+    fi
+    case "$1" in
+    --filename)
+        filetype="$(get_filetype "$2")"
+        shift 2
+        ;;
+    --filetype)
+        filetype="$2"
+        shift 2
+        ;;
+    *) echo "Unsupported argument: $1" && return 1 ;;
+    esac
+
+    format_stdin "${filetype}"
+}
+
+function format_file() {
     set -euo pipefail
     if [[ $# -eq 0 ]]; then
-        echo "${FUNCNAME[*]}: Expected exactly one argument"
+        echo "${FUNCNAME[*]}: Expected file path"
         return 1
     fi
     given_file_path="$1"
@@ -14,27 +77,48 @@ function format_a_file() {
     fi
 
     # Only supported file types
-    case "$1" in
-    *.sh | *.py | *.sorted.json | *.json | *.vim | *.sorted.txt | *.sorted_numeric.txt) ;;
-    *) return 0 ;;
-    esac
+    filetype="$(get_filetype "$1")"
+
+    if [[ ${filetype} == "unknown" ]]; then
+        return 0
+    fi
 
     # shellcheck disable=SC2002
     cat "${given_file_path}" |
-        format_stdin.sh "${given_file_path}" |
+        format_stdin "${filetype}" |
         sponge "${given_file_path}"
 }
-export -f format_a_file
+
+function format_files_main() {
+    if [[ $# -eq 0 ]]; then
+        echo "${FUNCNAME[*]}: Expected files paths"
+        return 1
+    fi
+    while IFS= read -r -d '' f; do
+        format_file "${f}"
+    done < <(find "$@" -print0)
+    wait
+}
 
 function format_main() {
     set -euo pipefail
     if [[ $# -eq 0 ]]; then
-        echo "Usage: $0 <file_path> [<file_path>]*"
+        echo "${FUNCNAME[*]}: Expected subcommand"
         return 1
     fi
-    find "$@" | LC_ALL=C exec parallel format_a_file
+    case "$1" in
+    stdin)
+        shift 1
+        LC_ALL=C format_stdin_main "$@"
+        ;;
+    files)
+        shift 1
+        LC_ALL=C format_files_main "$@"
+        ;;
+    *) echo "Unsupported subcommand: $1" && return 1 ;;
+    esac
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
-    format_main "${@}"
+    LC_ALL=C format_main "${@}"
 fi

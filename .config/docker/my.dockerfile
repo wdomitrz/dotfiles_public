@@ -2,8 +2,8 @@ FROM my_base:local
 
 # Configure ssh
 RUN sudo mkdir /var/run/sshd && \
-    (echo "UsePAM yes" && echo "X11UseLocalhost no") | \
-        sudo tee --append /etc/ssh/sshd_config
+    (echo "UsePAM yes" && cat /etc/ssh/sshd_config) | \
+        sudo sponge /etc/ssh/sshd_config
 
 # Add ssh keys
 RUN mkdir --parents ./.ssh

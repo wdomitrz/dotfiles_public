@@ -142,7 +142,7 @@
 !.local/bin/fix_internet_post_install.sh
 !.local/bin/fix_touchpad.sh
 !.local/bin/format.sh
-!.local/bin/format_stdin.sh
+!.local/bin/format_vim.sh
 !.local/bin/geoclue-2-agent
 !.local/bin/git-ls
 !.local/bin/git-prev_merge_commit.sh

@@ -61,6 +61,7 @@
 !.config/git/hooks/post-commit
 !.config/git/hooks/pre-commit
 !.config/global_configs/etc/NetworkManager/conf.d/10-globally-managed-devices.conf
+!.config/global_configs/etc/X11/xorg.conf.d/40_tap_to_click.conf
 !.config/global_configs/etc/apt/apt.conf.d/98_no_recommends
 !.config/global_configs/etc/apt/apt.conf.d/98_no_suggests
 !.config/global_configs/etc/apt/sources.list
@@ -186,6 +187,7 @@
 !.local/bin/set_background.sh
 !.local/bin/set_display.py
 !.local/bin/set_dpi.sh
+!.local/bin/set_external_touchpad.sh
 !.local/bin/set_keymap.sh
 !.local/bin/set_theme.sh
 !.local/bin/shls.py

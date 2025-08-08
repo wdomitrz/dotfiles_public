@@ -10,7 +10,7 @@
   },
   "editor.cursorBlinking": "solid",
   "editor.cursorSurroundingLines": 1024,
-  "editor.fontFamily": "monospace",
+  "editor.fontFamily": "'JetBrains Mono', monospace",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,

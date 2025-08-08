@@ -13,6 +13,7 @@ set clipboard=unnamedplus
 set completeopt=menuone,noinsert,noselect
 set complete=.,w,b,u,U,k,kspell,s,i,t
 set foldmethod=syntax foldlevelstart=99
+set ignorecase smartcase
 set laststatus=0
 set linebreak
 set list
@@ -21,7 +22,6 @@ set noswapfile nowritebackup
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024
 set shortmess=IAc
-set smartcase
 set spell spelllang=en,pl
 set splitright splitbelow
 set tabstop=4 softtabstop=-1 shiftwidth=0 expandtab

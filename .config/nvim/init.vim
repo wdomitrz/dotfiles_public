@@ -130,7 +130,7 @@ let g:fzf_preview_window = []
 
 " Plugins key mappings
 noremap <C-/>               :Commentary<cr>|  " `:` to support visual mode ranges
-noremap <C-p>               <cmd>History<cr>
+noremap <leader>o           <cmd>History<cr>
 noremap <leader>ff          <cmd>Files<cr>
 noremap <leader>sf          <cmd>Rg<cr>
 noremap <leader><leader>    <cmd>Commands<cr>

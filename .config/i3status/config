@@ -36,7 +36,6 @@ battery all {
     last_full_capacity = true
     hide_seconds = true
     integer_battery_capacity = false
-    # format = "%status %percentage %remaining"
     format = "%status %percentage"
     format_down = ""
     status_chr = "🔌"

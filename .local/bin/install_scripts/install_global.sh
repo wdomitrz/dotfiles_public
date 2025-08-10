@@ -96,17 +96,12 @@ function install_system_nvim() {
     install_nvim_given_locations /opt /usr/bin sudo
 }
 
-function install_dust() {
-    install_deb_from_url "https://github.com/bootandy/dust/releases/download/v1.1.1/du-dust_1.1.1-1_amd64.deb"
-}
-
 function install_global_main() {
     set -euo pipefail
     set -x
     source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
 
     install_packages_external
-    install_dust
     install_system_nvim
     update_and_upgrade
 }

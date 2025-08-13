@@ -8,5 +8,5 @@ tput civis
 
 clear
 while read -rn1 -s; do
-    clear
+  clear
 done

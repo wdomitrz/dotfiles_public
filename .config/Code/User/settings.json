@@ -8,6 +8,21 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "basedpyright.analysis.typeCheckingMode": "standard",
   "basedpyright.analysis.useLibraryCodeForTypes": false,
   "breadcrumbs.enabled": false,
@@ -112,6 +127,7 @@
     "davidanson.vscode-markdownlint",
     "dcasella.i3",
     "detachhead.basedpyright",
+    "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
     "ionutvmi.path-autocomplete",
     "jacobdufault.fuzzy-search",

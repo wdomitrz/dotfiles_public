@@ -9,19 +9,19 @@ set_external_touchpad.sh &
 set_keymap.sh &
 xfce4-power-manager &
 i3_xrl --no-set-background &&
-    (
-        (check_if_remote.sh || (
-            blueman-applet &
-            signal-desktop &
-            nm-applet &
-            redshift-gtk &
-        )) &
-        ([ -f "${HOME}/.config/i3/my_auto_run.local.sh" ] && "${HOME}/.config/i3/my_auto_run.local.sh") &
-        ibus-daemon --daemonize --replace &
-        /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-        dunst &
-        while :; do
-            set_background.sh
-            sleep 600
-        done &
-    )
+  (
+    (check_if_remote.sh || (
+      blueman-applet &
+      signal-desktop &
+      nm-applet &
+      redshift-gtk &
+    )) &
+    ([ -f "${HOME}/.config/i3/my_auto_run.local.sh" ] && "${HOME}/.config/i3/my_auto_run.local.sh") &
+    ibus-daemon --daemonize --replace &
+    /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+    dunst &
+    while :; do
+      set_background.sh
+      sleep 600
+    done &
+  )

@@ -4,15 +4,15 @@ scrollback_buffer_file="$(mktemp)"
 cat > "${scrollback_buffer_file}"
 
 if [ $# -eq 0 ]; then
-    cursor_position="" # Empty position means last line
+  cursor_position="" # Empty position means last line
 else
-    cursor_position="$(echo 1 "-$#" "$@" | sed 's/ /+/g' | bc)"
+  cursor_position="$(echo 1 "-$#" "$@" | sed 's/ /+/g' | bc)"
 fi
 
 nvim \
-    -c "set clipboard=unnamedplus nonumber laststatus=0" \
-    -c "map q :qa!<CR> | map a <Nop> | map A <Nop> | map i <Nop> | map I <Nop>" \
-    -c "silent terminal cat '${scrollback_buffer_file}' -" \
-    "+${cursor_position}"
+  -c "set clipboard=unnamedplus nonumber laststatus=0" \
+  -c "map q :qa!<CR> | map a <Nop> | map A <Nop> | map i <Nop> | map I <Nop>" \
+  -c "silent terminal cat '${scrollback_buffer_file}' -" \
+  "+${cursor_position}"
 
 rm --force "${scrollback_buffer_file}"

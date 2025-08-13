@@ -6,6 +6,6 @@ destination="$1"
 ssh-copy-id "${destination}"
 scp "${HOME}"/.ssh/authorized_keys "${destination}":~/.ssh/authorized_keys
 scp \
-    "${HOME}"/.bashrc "${HOME}"/.bash_aliases "${HOME}"/.profile \
-    "${HOME}"/.local/bin/.config_sshd.sh \
-    "${destination}":
+  "${HOME}"/.bashrc "${HOME}"/.bash_aliases "${HOME}"/.profile \
+  "${HOME}"/.local/bin/.config_sshd.sh \
+  "${destination}":

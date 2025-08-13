@@ -37,12 +37,10 @@ dex
 dict
 dkms
 dmenu
-docker-cli
 docker-compose
 docker.io
 dosfstools
 drawing
-du-dust
 dunst
 efibootmgr
 entr

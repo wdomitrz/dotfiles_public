@@ -1,13 +1,13 @@
 Enabled: yes
 Types: deb
 URIs: http://deb.debian.org/debian
-Suites: stable stable-updates
+Suites: bookworm bookworm-updates
 Components: main contrib non-free-firmware non-free
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 Enabled: yes
 Types: deb
 URIs: http://deb.debian.org/debian-security
-Suites: stable-security
+Suites: bookworm-security
 Components: main contrib non-free-firmware non-free
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg

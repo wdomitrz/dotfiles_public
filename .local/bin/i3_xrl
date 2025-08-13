@@ -3,5 +3,5 @@ set_display.py
 connect_displays.sh
 i3_res
 if [ "$#" -ne 1 ] || [ "${1}" != "--no-set-background" ]; then
-    set_background.sh
+  set_background.sh
 fi

@@ -39,23 +39,23 @@ bind 'TAB':menu-complete
 bind "set menu-complete-display-prefix on"
 
 yank_line_to_clipboard() {
-    echo "${READLINE_LINE}" | xclip -in -selection clipboard
+  echo "${READLINE_LINE}" | xclip -in -selection clipboard
 }
 bind -m vi-command -x '"yy": yank_line_to_clipboard'
 
 kill_line_to_clipboard() {
-    yank_line_to_clipboard
-    READLINE_LINE=""
+  yank_line_to_clipboard
+  READLINE_LINE=""
 }
 bind -m vi-command -x '"dd": kill_line_to_clipboard'
 
 # enable programmable completion features
 if ! shopt -oq posix; then
-    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-        source /usr/share/bash-completion/bash_completion
-    elif [[ -f /etc/bash_completion ]]; then
-        source /etc/bash_completion
-    fi
+  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+    source /usr/share/bash-completion/bash_completion
+  elif [[ -f /etc/bash_completion ]]; then
+    source /etc/bash_completion
+  fi
 fi
 
 # Prompt
@@ -63,19 +63,19 @@ fi
 ([[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null) || NO_COLORS=1
 
 if [[ -z ${NO_COLORS-} ]]; then
-    # Trick to make colors work well in tmux and in other scenarios
-    [[ ${TERM} != "xterm-kitty" ]] && TERM=xterm-256color
+  # Trick to make colors work well in tmux and in other scenarios
+  [[ ${TERM} != "xterm-kitty" ]] && TERM=xterm-256color
 
-    # Colors
-    USER_COLOR="\[$(tput setaf 10)\]"       # green
-    AT_COLOR="\[$(tput setaf 11)\]"         # yellow
-    HOST_COLOR="\[$(tput setaf 14)\]"       # cyan
-    EXIT_STATUS_COLOR="\[$(tput setaf 9)\]" # red
-    DATE_COLOR="\[$(tput setaf 208)\]"      # orange
-    TIME_COLOR="\[$(tput setaf 13)\]"       # magenta
-    PATH_COLOR="\[$(tput setaf 6)\]"        # light blue
-    PROMPT_COLOR="\[$(tput setaf 4)\]"      # blue
-    CLEAR="\[$(tput sgr0)\]"                # clear color
+  # Colors
+  USER_COLOR="\[$(tput setaf 10)\]"       # green
+  AT_COLOR="\[$(tput setaf 11)\]"         # yellow
+  HOST_COLOR="\[$(tput setaf 14)\]"       # cyan
+  EXIT_STATUS_COLOR="\[$(tput setaf 9)\]" # red
+  DATE_COLOR="\[$(tput setaf 208)\]"      # orange
+  TIME_COLOR="\[$(tput setaf 13)\]"       # magenta
+  PATH_COLOR="\[$(tput setaf 6)\]"        # light blue
+  PROMPT_COLOR="\[$(tput setaf 4)\]"      # blue
+  CLEAR="\[$(tput sgr0)\]"                # clear color
 fi
 
 if [[ -z ${PROMPT_FRONT_LOCAL-} ]]; then PROMPT_FRONT_LOCAL=""; fi
@@ -95,18 +95,18 @@ ${PROMPT_COLOR}\$${CLEAR} "
 
 ## Git
 if source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2> /dev/null ||
-    source /usr/lib/git-core/git-sh-prompt 2> /dev/null ||
-    source /usr/share/git-core/contrib/completion/git-prompt.sh 2> /dev/null; then
+  source /usr/lib/git-core/git-sh-prompt 2> /dev/null ||
+  source /usr/share/git-core/contrib/completion/git-prompt.sh 2> /dev/null; then
 
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    export GIT_PS1_SHOWSTASHSTATE=true
-    export GIT_PS1_SHOWUNTRACKEDFILES=true
-    export GIT_PS1_SHOWUPSTREAM="auto"
-    export GIT_PS1_SHOWCOLORHINTS=true
-    export GIT_PS1_SHOWCONFLICTSTATE=no
+  export GIT_PS1_SHOWDIRTYSTATE=true
+  export GIT_PS1_SHOWSTASHSTATE=true
+  export GIT_PS1_SHOWUNTRACKEDFILES=true
+  export GIT_PS1_SHOWUPSTREAM="auto"
+  export GIT_PS1_SHOWCOLORHINTS=true
+  export GIT_PS1_SHOWCONFLICTSTATE=no
 
-    # shellcheck disable=SC2016
-    PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'
+  # shellcheck disable=SC2016
+  PROMPT_FRONT="${PROMPT_FRONT}"'$(__git_ps1)'
 fi
 
 PS1="${PROMPT_FRONT}${PROMPT_BACK}"

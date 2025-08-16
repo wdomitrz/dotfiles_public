@@ -19,9 +19,29 @@ alias gla='git log --all --graph --oneline --decorate --date-order'
 # let aliases work after sudo (see http://askubuntu.com/a/22043)
 alias sudo='sudo '
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed --expression='\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" ; paplay /usr/share/sounds/freedesktop/stereo/message-new-instant.oga'
+function alert() {
+  local -r stdout_file="$(mktemp)"
+  local -r stderr_file="$(mktemp)"
+  local -r start_time="$(date +%s.%N)"
+
+  "$@" > >(tee "${stdout_file}") 2> >(tee "${stderr_file}" >&2)
+
+  local -r exit_code="$?"
+  local -r end_time="$(date +%s.%N)"
+
+  local -r runtime_seconds=$(echo "${end_time} - ${start_time}" | bc -l)
+  local -r runtime=$(date -d@0"${runtime_seconds}" -u +%H:%M:%S.%N | head -c 10)
+
+  local -r stdout="$(cat "${stdout_file}")"
+  local -r stderr="$(cat "${stderr_file}")"
+  rm --force "${stdout_file}" "${stderr_file}"
+
+  notify-send "Finished [${exit_code}] after ${runtime}" "\$ $*
+${stdout}
+${stderr}
+"
+}
+alias alert='alert '
 
 alias fzfcommandsearch="compgen -c | sort --unique | fzf --preview 'shopt -s expand_aliases; source ~/.bashrc; type {}'"
 

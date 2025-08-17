@@ -32,8 +32,19 @@ function alert() {
   local -r runtime_seconds=$(echo "${end_time} - ${start_time}" | bc -l)
   local -r runtime=$(date -d@0"${runtime_seconds}" -u +%H:%M:%S.%N | head -c 10)
 
-  local -r stdout="$(cat "${stdout_file}")"
-  local -r stderr="$(cat "${stderr_file}")"
+  function cat_file_compact() {
+    [[ $# -ne 1 ]] && return 1
+    if [[ $(wc -l < "${stdout_file}") -gt 8 ]]; then
+      head -n 4 "${stdout_file}" &&
+        echo "..." &&
+        tail -n 4 "${stdout_file}"
+    else
+      head "${stdout_file}"
+    fi
+  }
+  export -f cat_file_compact
+  local -r stdout="$(cat_file_compact "${stdout_file}")"
+  local -r stderr="$(cat_file_compact "${stderr_file}")"
   rm --force "${stdout_file}" "${stderr_file}"
 
   notify-send "Finished [${exit_code}] after ${runtime}" "\$ $*
@@ -100,4 +111,8 @@ alias pcsi='apt list --installed'
 alias pcls='apt list'
 alias pcsim='apt-mark showmanual'
 
-alias pcyall='sudo apt-get update --yes && sudo apt-get dist-upgrade --yes && sudo apt-get autoremove --purge --yes'
+function pcyall() {
+  sudo apt-get update --yes &&
+    sudo apt-get dist-upgrade --yes &&
+    sudo apt-get autoremove --purge --yes
+}

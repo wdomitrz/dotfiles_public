@@ -41,6 +41,7 @@ docker-compose
 docker.io
 dosfstools
 drawing
+du-dust
 dunst
 efibootmgr
 entr

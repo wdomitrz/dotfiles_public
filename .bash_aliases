@@ -81,9 +81,6 @@ alias DT='DT '
 if [[ -n ${TERMINAL-} ]]; then alias nt='DT "${TERMINAL}"'; fi
 alias nv='nt -e nvim'
 
-if [[ ${TERM-} == "xterm-kitty" ]]; then alias clear='printf "'"\E[H\E[3J"'"'; fi
-if [[ ${TERM-} != "xterm-kitty" ]]; then alias tmux='TERM=screen-256color tmux'; fi
-
 # Package manager aliases
 alias pcin='sudo apt-get install'
 

@@ -41,18 +41,6 @@ function update_locales() {
   sudo dpkg-reconfigure --frontend noninteractive locales
 }
 
-function fix_redshift() {
-  # Disable problematic redshift autostart
-  sudo rm --force /etc/systemd/user/default.target.wants/redshift*.service
-}
-
-function configure_newt_palette() {
-  # Set the original palette as a default option
-  update-alternatives --query newt-palette &&
-    sudo update-alternatives --set newt-palette /etc/newt/palette.original ||
-    echo "no newt-palette"
-}
-
 function configure_external_power_sleep() {
   sudo sed --in-place=".bck" --regexp-extended "s/^#?(HandleLidSwitchExternalPower)\s*=\s*[a-z]*/\1=lock/g" /etc/systemd/logind.conf
   sudo sed --in-place=".bck" --regexp-extended "s/^#?(HandleLidSwitchDocked)\s*=\s*[a-z]*/\1=lock/g" /etc/systemd/logind.conf
@@ -68,13 +56,6 @@ function create_swap_file() {
     echo "${swapfile_location} none    swap    sw    0   0" |
       sudo tee -a /etc/fstab
   fi
-}
-
-function configure_touchpad() {
-  local -r config_file="/usr/share/X11/xorg.conf.d/40-libinput.conf"
-  # Tap to click
-  grep --quiet 'Option "Tapping" "on"' "${config_file}" ||
-    sudo sed --in-place 's/^\(\( *\)Identifier "[a-zA-Z0-9 ]*touchpad[a-zA-Z0-9 ]*" *\)$/\1\n\2Option "Tapping" "on"/' "${config_file}"
 }
 
 function udisk_allow_operations() {
@@ -103,11 +84,8 @@ function config_global_start() {
 function config_global_rest() {
   todo_post_global_configs_copy
   add_user_to_groups
-  configure_newt_palette
   udisk_allow_operations
-  configure_touchpad
   create_swap_file
-  fix_redshift
 }
 
 function configure_tpm2_non_root_disk_unlock() {

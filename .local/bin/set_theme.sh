@@ -39,14 +39,10 @@ function set_theme_though_links() {
   ln --symbolic --relative --force "${styled_theme_path}" "${theme_path}"
 }
 
-function set_kitty_theme() {
-  local -r theme_path="${HOME}"/.config/kitty/theme.conf
+function set_alacritty_theme() {
+  local -r theme_path="${HOME}"/.config/alacritty/theme.toml
   set_theme_though_links "${theme_path}" "$@"
-
-  (pidof kitty || true) |
-    xargs --no-run-if-empty ps --format pid:1,tty:1 --no-headers --pid |
-    grep "?" | cut --fields=1 --delimiter=" " |
-    xargs --no-run-if-empty kill -SIGUSR1
+  touch "${theme_path}"
 }
 
 function set_background_theme() {
@@ -86,7 +82,7 @@ function set_theme_local() {
   set_local_theme "${dark_or_light}" &
   set_gtk3_theme "${dark_or_light}" &
   set_gtk4_theme "${dark_or_light}" &
-  set_kitty_theme "${dark_or_light}" &
+  set_alacritty_theme "${dark_or_light}" &
   set_background_theme "${dark_or_light}" &
   set_bat_theme "${dark_or_light}" &
   set_nvim_theme "${dark_or_light}" &
@@ -101,7 +97,7 @@ function set_theme() {
 
 function get_theme() {
   local -r theme_file="${HOME}"/.config/theme/theme.txt
-  [[ -f ${theme_file} ]] && cat "${theme_file}"
+  [[ -f ${theme_file} ]] && cat "${theme_file}" || echo light
 }
 
 function toggle_theme() {

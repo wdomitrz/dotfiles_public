@@ -23,15 +23,6 @@ function set_shell_bash() {
   set_shell /usr/bin/bash
 }
 
-function add_git_dotfiles_hooks() {
-  ln --relative --symbolic --force "${HOME}"/.local/bin/pre_commit_hook.sh "${HOME}"/.git/hooks/pre-commit
-  ln --relative --symbolic --force "${HOME}"/.local/bin/post_commit_hook.sh "${HOME}"/.git/hooks/post-commit
-}
-
-function disable_core_file() {
-  ulimit -c 0
-}
-
 function update_tldr() {
   tldr --update
 }
@@ -53,7 +44,7 @@ function compile_glib_schemas() {
 
 function configure_nautilus_open_terminal() {
   compile_glib_schemas
-  # Open kitty from nautilus
+  # Open $TERMINAL from nautilus
   [[ -z ${TERMINAL+variable_unset} ]] && echo "Variable TERMINAL is not set" && return 1
   DISPLAY=:0 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "${TERMINAL}"
 }
@@ -72,13 +63,12 @@ function config_user_main() {
   copy_user_configs
   copy_git_hooks
   disable_screen_ai_for_chrome
-  add_git_dotfiles_hooks
   set_shell_bash
   compile_glib_schemas
   update_tldr
   configure_nautilus_open_terminal
   install_code_extensions.sh
-  "${HOME}"/.local/bin/set_theme.sh dark
+  set_theme.sh dark
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

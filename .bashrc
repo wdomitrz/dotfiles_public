@@ -63,9 +63,6 @@ fi
 ([[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null) || NO_COLORS=1
 
 if [[ -z ${NO_COLORS-} ]]; then
-  # Trick to make colors work well in tmux and in other scenarios
-  [[ ${TERM} != "xterm-kitty" ]] && TERM=xterm-256color
-
   # Colors
   USER_COLOR="\[$(tput setaf 10)\]"       # green
   AT_COLOR="\[$(tput setaf 11)\]"         # yellow

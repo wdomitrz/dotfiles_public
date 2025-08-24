@@ -3,6 +3,7 @@ acpi-call-dkms
 adwaita-icon-theme
 adwaita-qt
 adwaita-qt6
+alacritty
 apparmor
 apt
 apt-file
@@ -95,9 +96,6 @@ iputils-ping
 ipython3
 jq
 kazam
-kitty
-kitty-shell-integration
-kitty-terminfo
 libasound2-plugins
 libavcodec-extra
 libblockdev-crypto3

@@ -8,6 +8,8 @@
 !.config/Code/User/keybindings.json
 !.config/Code/User/settings.json
 !.config/alacritty/alacritty.toml
+!.config/alacritty/theme_dark.toml
+!.config/alacritty/theme_light.toml
 !.config/bat/config_dark.config
 !.config/bat/config_light.config
 !.config/displays_to_connect/.keep

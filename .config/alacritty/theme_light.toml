@@ -1,0 +1,37 @@
+
+################################################################
+# AGPL License
+################################################################
+# Adapted by Witalis Domitrz <witekdomitrz@gmail.com>
+# Based on:
+## name: Doom One Light
+## author: Henrik Lissner <https://github.com/hlissner>
+## license: MIT
+## blurb: Doom Emacs flagship theme based on atom One Light
+
+[colors.primary]
+foreground = "#383a42"
+background = "#fafafa"
+
+[colors]
+cursor = {cursor="#383a42"}
+
+[colors.normal]
+black = "#383a42"
+red = "#e45649"
+green = "#50a14f"
+yellow = "#986801"
+blue = "#4078f2"
+magenta = "#a626a4"
+cyan = "#005478"
+white = "#f0f0f0"
+
+[colors.bright]
+black = "#c6c7c7"
+red = "#e45649"
+green = "#50a14f"
+yellow = "#986801"
+blue = "#4078f2"
+magenta = "#b751b6"
+cyan = "#0184bc"
+white = "#383a42"

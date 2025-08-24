@@ -7,6 +7,7 @@
 !.cache/vm_images/.keep
 !.config/Code/User/keybindings.json
 !.config/Code/User/settings.json
+!.config/alacritty/alacritty.toml
 !.config/bat/config_dark.config
 !.config/bat/config_light.config
 !.config/displays_to_connect/.keep
@@ -60,7 +61,6 @@
 !.config/git/gitignore.sorted.txt
 !.config/git/hooks/post-commit
 !.config/git/hooks/pre-commit
-!.config/global_configs/etc/NetworkManager/conf.d/10-globally-managed-devices.conf
 !.config/global_configs/etc/X11/xorg.conf.d/40_tap_to_click.conf
 !.config/global_configs/etc/apt/apt.conf.d/98_no_recommends
 !.config/global_configs/etc/apt/apt.conf.d/98_no_suggests
@@ -88,9 +88,6 @@
 !.config/i3/config
 !.config/i3/my_auto_run.sh
 !.config/i3status/config
-!.config/kitty/kitty.conf
-!.config/kitty/theme_dark.conf
-!.config/kitty/theme_light.conf
 !.config/mimeapps.list
 !.config/nvim/init.vim
 !.config/nvim/theme_dark.txt
@@ -232,8 +229,6 @@
 !.local/share/backgrounds/backgrounds_light.dir/backgrounds_both.dir
 !.local/share/code-server/User
 !.local/share/code-server/extensions
-!.local/share/doc/.keep
-!.local/share/fonts/.keep
 !.local/share/git-core/contrib/completion/git-prompt.sh
 !.local/share/glib-2.0/schemas/com.github.stunkymonkey.nautilus-open-any-terminal.gschema.xml
 !.local/share/icons/.keep

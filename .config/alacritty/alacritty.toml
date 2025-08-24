@@ -1,0 +1,11 @@
+[keyboard]
+bindings = [
+  {key="h", mods="Control|Shift", mode="~Search", action="ToggleViMode"},
+  {key="q", mode="Vi|~Search", action="ToggleViMode"},
+  {key="q", mode="Vi|~Search", action="ScrollToBottom"},
+]
+
+[general]
+import = [
+  "theme.toml"
+]

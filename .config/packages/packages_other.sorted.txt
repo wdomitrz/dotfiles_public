@@ -1,4 +1,5 @@
 amd64-microcode
+firmware-intel-graphics
 firmware-iwlwifi
 firmware-linux
 firmware-realtek

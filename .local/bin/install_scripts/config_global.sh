@@ -6,11 +6,8 @@ function copy_global_configs() {
       "${HOME}"/.config/global_configs/. /
 }
 
-function fix_keychron_post_config_copy() {
-  sudo update-initramfs -u
-}
-
 function regenerate_grub_post_config_copy() {
+  sudo update-initramfs -u
   sudo update-grub
 }
 
@@ -19,7 +16,6 @@ function reconfigure_tlp_post_config_copy() {
 }
 
 function todo_post_global_configs_copy() {
-  fix_keychron_post_config_copy
   regenerate_grub_post_config_copy
   reconfigure_tlp_post_config_copy
 }
@@ -96,7 +92,6 @@ function udisk_allow_operations() {
 
 function nordvpn_with_tailscale() {
   nordvpn whitelist add subnet 100.64.0.0/10
-  nordvpn whitelist add subnet fd7a:115c:a1e0::/48
 }
 
 function config_global_start() {

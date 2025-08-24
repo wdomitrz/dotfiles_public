@@ -1,10 +1,12 @@
-FROM debian:bookworm
+FROM debian:trixie
 
 RUN apt-get update && \
-    apt-get install --yes --no-install-recommends git sudo
+    apt-get install --yes --no-install-recommends \
+       git sudo openssh-server moreutils
 
-# Install before the main set of packages to avoid dependency problems
-RUN apt-get install --yes --no-install-recommends bluetooth
+# Configure ssh
+RUN (echo "UsePAM yes" && cat /etc/ssh/sshd_config) | \
+        sponge /etc/ssh/sshd_config
 
 # Mocks
 RUN ln --force --symbolic /usr/bin/true /usr/local/sbin/update-grub && \
@@ -18,8 +20,15 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
 USER user
 WORKDIR /home/user
 
-# Copy configs
+# Add ssh keys
+RUN mkdir --parents ./.ssh
+ADD --chown=user https://github.com/wdomitrz.keys ./.ssh/authorized_keys
+
+# Add configs
 COPY --chown=user:user "./.git" "./.git"
 RUN git checkout -- .
 
 RUN USER=user ./.local/bin/install_scripts/main.sh
+
+EXPOSE 22
+CMD sudo /usr/sbin/sshd -D

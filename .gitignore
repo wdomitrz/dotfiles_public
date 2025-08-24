@@ -73,8 +73,6 @@
 !.config/global_configs/etc/apt/sources.list.d/signal.sources
 !.config/global_configs/etc/apt/sources.list.d/tailscale.sources
 !.config/global_configs/etc/apt/sources.list.d/vscode.sources
-!.config/global_configs/etc/bluetooth/input.conf
-!.config/global_configs/etc/bluetooth/main.conf
 !.config/global_configs/etc/default/google-chrome
 !.config/global_configs/etc/default/grub
 !.config/global_configs/etc/default/keyboard

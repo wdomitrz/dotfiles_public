@@ -26,7 +26,7 @@ local function set_theme()
 end
 
 local function watch_theme_change()
-    local event_cb = function(err)
+    local function event_cb(err)
         if err then
         else
             vim.schedule(set_theme)

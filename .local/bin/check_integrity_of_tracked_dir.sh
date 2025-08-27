@@ -4,11 +4,11 @@ function check_if_all_files_are_tracked() {
   set -uo pipefail
   local files_location="$1"
   diff <(
-    find "${files_location}" -type f -follow |
-      sed --regexp-extended "s|^${HOME}/||" | sort
+    find "${files_location}" -type f -follow \
+      | sed --regexp-extended "s|^${HOME}/||" | sort
   ) <(
-    git --git-dir="${HOME}"/.git ls-tree --full-tree --name-only -r HEAD "${files_location}" |
-      sort
+    git --git-dir="${HOME}"/.git ls-tree --full-tree --name-only -r HEAD "${files_location}" \
+      | sort
   )
 }
 
@@ -21,8 +21,8 @@ function check_integrity_of_tracked_files() {
 function checko_integrity_of_tracked_dir() {
   set -uo pipefail
   local files_location="$1"
-  check_if_all_files_are_tracked "${files_location}" &&
-    check_integrity_of_tracked_files "${files_location}"
+  check_if_all_files_are_tracked "${files_location}" \
+    && check_integrity_of_tracked_files "${files_location}"
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

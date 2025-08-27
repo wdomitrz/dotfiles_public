@@ -115,18 +115,18 @@ function main() {
   fi
   theme="$1"
   case "${theme}" in
-  light)
-    set_theme "light"
-    ;;
-  dark)
-    set_theme "dark"
-    ;;
-  toggle)
-    toggle_theme
-    ;;
-  *)
-    help_and_exit
-    ;;
+    light)
+      set_theme "light"
+      ;;
+    dark)
+      set_theme "dark"
+      ;;
+    toggle)
+      toggle_theme
+      ;;
+    *)
+      help_and_exit
+      ;;
   esac
 
 }

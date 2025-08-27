@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
 function copy_user_configs() {
-  check_integrity_of_tracked_dir.sh "${HOME}"/.config/user_configs &&
-    cp --update --backup=numbered --verbose --recursive \
+  check_integrity_of_tracked_dir.sh "${HOME}"/.config/user_configs \
+    && cp --update --backup=numbered --verbose --recursive \
       "${HOME}"/.config/user_configs/. "${HOME}"/
 }
 
 function copy_git_hooks() {
-  check_integrity_of_tracked_dir.sh "${HOME}"/.config/git/hooks &&
-    ln --relative --symbolic --force \
+  check_integrity_of_tracked_dir.sh "${HOME}"/.config/git/hooks \
+    && ln --relative --symbolic --force \
       "${HOME}"/.config/git/hooks/* "${HOME}"/.git/hooks/
 }
 
 function set_shell() {
   shell="$1"
 
-  sudo chsh -s "${shell}" "${USER}" ||
-    chsh -s "${shell}"
+  sudo chsh -s "${shell}" "${USER}" \
+    || chsh -s "${shell}"
 }
 
 function set_shell_bash() {
@@ -28,13 +28,13 @@ function update_tldr() {
 }
 
 function add_bookmarks() {
-  [[ -f "${HOME}/.config/gtk-3.0/bookmarks" ]] ||
-    (mkdir --parents "${HOME}"/.config/gtk-3.0 &&
-      touch "${HOME}"/.config/gtk-3.0/bookmarks)
+  [[ -f "${HOME}/.config/gtk-3.0/bookmarks" ]] \
+    || (mkdir --parents "${HOME}"/.config/gtk-3.0 \
+      && touch "${HOME}"/.config/gtk-3.0/bookmarks)
 
   for d in Documents Downloads Music Pictures Videos; do
-    grep --quiet "${d}" "${HOME}"/.config/gtk-3.0/bookmarks ||
-      echo "file://$(pwd)/${d}" >> "${HOME}"/.config/gtk-3.0/bookmarks
+    grep --quiet "${d}" "${HOME}"/.config/gtk-3.0/bookmarks \
+      || echo "file://$(pwd)/${d}" >> "${HOME}"/.config/gtk-3.0/bookmarks
   done
 }
 

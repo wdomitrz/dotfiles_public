@@ -16,8 +16,8 @@ function checkout_public() {
 
 function update_to_local_copy() {
   git checkout "${local_public_branch}" -- "$(git rev-parse --show-toplevel)"
-  git diff "${local_public_branch}" --name-only --diff-filter=A |
-    xargs --no-run-if-empty git rm
+  git diff "${local_public_branch}" --name-only --diff-filter=A \
+    | xargs --no-run-if-empty git rm
   git commit --message="some changes"
 }
 
@@ -65,19 +65,19 @@ if [[ $# -ne 1 ]]; then
 fi
 
 case "$1" in
-diff)
-  set -euo pipefail
-  diff_public
-  ;;
-publish)
-  set -xeuo pipefail
-  dotfiles_publish_to_public_main
-  ;;
---source-only)
-  true
-  ;;
-*)
-  echo "Unrecognized argument '$1'"
-  exit 1
-  ;;
+  diff)
+    set -euo pipefail
+    diff_public
+    ;;
+  publish)
+    set -xeuo pipefail
+    dotfiles_publish_to_public_main
+    ;;
+  --source-only)
+    true
+    ;;
+  *)
+    echo "Unrecognized argument '$1'"
+    exit 1
+    ;;
 esac

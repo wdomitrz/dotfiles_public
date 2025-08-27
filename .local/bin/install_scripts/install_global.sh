@@ -24,14 +24,14 @@ function enable_source_and_list_packages() {
   key_source=$(grep 'key_source: ' "${sources_file}" | sed 's/key_source: //g')
   (
     echo "Signed-By:"
-    wget_with_defaults.sh "${key_source}" | sponge |
-      sed --expression='s|^$|.|g' --expression='s|^| |g'
+    wget_with_defaults.sh "${key_source}" | sponge \
+      | sed --expression='s|^$|.|g' --expression='s|^| |g'
   ) | sudo sponge -a "${sources_file}"
 
   sudo sed --in-place 's/^Enabled: no$/Enabled: yes/g' "${sources_file}"
 
-  (grep '^packages_to_install: ' "${sources_file}" || true) |
-    sed 's/packages_to_install: //g'
+  (grep '^packages_to_install: ' "${sources_file}" || true) \
+    | sed 's/packages_to_install: //g'
 }
 
 function enable_sources_and_install_packages() {
@@ -43,8 +43,8 @@ function enable_sources_and_install_packages() {
   done
   read -r -a packages_to_install <<< "${packages_to_install}"
 
-  sudo apt-get update --yes &&
-    sudo apt-get install --yes --no-install-recommends "${packages_to_install[@]}"
+  sudo apt-get update --yes \
+    && sudo apt-get install --yes --no-install-recommends "${packages_to_install[@]}"
 }
 
 function install_packages_external() {
@@ -74,8 +74,8 @@ function install_to_given_location() {
 
   "${sudo_or_not_sudo}" mkdir --parents "${save_dir}" "${link_dir}"
 
-  wget_with_defaults.sh --max-redirect=1 "${url}" |
-    "${sudo_or_not_sudo}" tar --extract \
+  wget_with_defaults.sh --max-redirect=1 "${url}" \
+    | "${sudo_or_not_sudo}" tar --extract \
       "${decompression_option}" \
       --directory="${save_dir}"
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 function format_json() { jq . -; }
 function format_py() { ruff format -; }
-function format_sh() { shfmt --indent 2 --space-redirects --simplify -; }
+function format_sh() { shfmt --indent 2 --binary-next-line --case-indent --space-redirects --simplify -; }
 function format_sorted_json() { LC_ALL=C jq --sort-keys . -; }
 function format_sorted_numeric_txt() { LC_ALL=C sort --numeric-sort -; }
 function format_sorted_txt() { LC_ALL=C sort -; }
@@ -14,32 +14,32 @@ function format_stdin() {
     return 1
   fi
   case "$1" in
-  sh | bash | shellscript) format_sh ;;
-  py | python) format_py ;;
-  sorted_json) format_sorted_json ;;
-  json) format_json ;;
-  vim) format_vim ;;
-  sorted_txt | sorted) format_sorted_txt ;;
-  sorted_numeric_txt | sorted_numeric) format_sorted_numeric_txt ;;
-  unknown) cat ;;
-  *)
-    echo "Unsupported filetype '$1'"
-    return 1
-    ;;
+    sh | bash | shellscript) format_sh ;;
+    py | python) format_py ;;
+    sorted_json) format_sorted_json ;;
+    json) format_json ;;
+    vim) format_vim ;;
+    sorted_txt | sorted) format_sorted_txt ;;
+    sorted_numeric_txt | sorted_numeric) format_sorted_numeric_txt ;;
+    unknown) cat ;;
+    *)
+      echo "Unsupported filetype '$1'"
+      return 1
+      ;;
   esac
 }
 
 function get_filetype() {
   case "$1" in
-  *.sh | *.profile | *.bashrc | *.bash_aliases | *.bash_logout | \
-    *.fehbg | *.Xclients | .xsessionrc | .xsession) echo sh ;;
-  *.py) echo py ;;
-  *.sorted.json) echo sorted_json ;;
-  *.json) echo json ;;
-  *.vim) echo vim ;;
-  *.sorted.txt) echo sorted_txt ;;
-  *.sorted_numeric.txt) echo sorted_numeric_txt ;;
-  *) echo unknown ;;
+    *.sh | *.profile | *.bashrc | *.bash_aliases | *.bash_logout | \
+      *.fehbg | *.Xclients | .xsessionrc | .xsession) echo sh ;;
+    *.py) echo py ;;
+    *.sorted.json) echo sorted_json ;;
+    *.json) echo json ;;
+    *.vim) echo vim ;;
+    *.sorted.txt) echo sorted_txt ;;
+    *.sorted_numeric.txt) echo sorted_numeric_txt ;;
+    *) echo unknown ;;
   esac
 }
 
@@ -49,15 +49,15 @@ function format_stdin_main() {
     return 1
   fi
   case "$1" in
-  --filename)
-    filetype="$(get_filetype "$2")"
-    shift 2
-    ;;
-  --filetype)
-    filetype="$2"
-    shift 2
-    ;;
-  *) echo "Unsupported argument: $1" && return 1 ;;
+    --filename)
+      filetype="$(get_filetype "$2")"
+      shift 2
+      ;;
+    --filetype)
+      filetype="$2"
+      shift 2
+      ;;
+    *) echo "Unsupported argument: $1" && return 1 ;;
   esac
 
   format_stdin "${filetype}"
@@ -71,8 +71,8 @@ function format_file() {
   fi
   given_file_path="$1"
 
-  resolved_file_path="$(realpath --quiet "${given_file_path}")" ||
-    return 0 # Ignore dangling links
+  resolved_file_path="$(realpath --quiet "${given_file_path}")" \
+    || return 0 # Ignore dangling links
   if [[ -d ${resolved_file_path} ]] || [[ ! -w ${resolved_file_path} ]]; then
     return 0 # Ignore directories and non-writeable files
   fi
@@ -85,9 +85,9 @@ function format_file() {
   fi
 
   # shellcheck disable=SC2002
-  cat "${given_file_path}" |
-    format_stdin "${filetype}" |
-    sponge "${given_file_path}"
+  cat "${given_file_path}" \
+    | format_stdin "${filetype}" \
+    | sponge "${given_file_path}"
 }
 
 function format_files_main() {
@@ -108,15 +108,15 @@ function format_main() {
     return 1
   fi
   case "$1" in
-  stdin)
-    shift 1
-    LC_ALL=C format_stdin_main "$@"
-    ;;
-  files)
-    shift 1
-    LC_ALL=C format_files_main "$@"
-    ;;
-  *) echo "Unsupported subcommand: $1" && return 1 ;;
+    stdin)
+      shift 1
+      LC_ALL=C format_stdin_main "$@"
+      ;;
+    files)
+      shift 1
+      LC_ALL=C format_files_main "$@"
+      ;;
+    *) echo "Unsupported subcommand: $1" && return 1 ;;
   esac
 }
 

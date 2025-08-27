@@ -34,12 +34,13 @@ function alert() {
 
   function cat_file_compact() {
     [[ $# -ne 1 ]] && return 1
-    if [[ $(wc -l < "${stdout_file}") -gt 8 ]]; then
-      head -n 4 "${stdout_file}" \
+    local -r file_path="$1"
+    if [[ $(wc -l < "${file_path}") -gt 8 ]]; then
+      head -n 4 "${file_path}" \
         && echo "..." \
-        && tail -n 4 "${stdout_file}"
+        && tail -n 4 "${file_path}"
     else
-      head "${stdout_file}"
+      head "${file_path}"
     fi
   }
   export -f cat_file_compact

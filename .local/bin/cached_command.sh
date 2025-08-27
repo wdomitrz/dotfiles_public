@@ -8,14 +8,14 @@ function usage_and_exit() {
 
 overwrite=false
 case "$1" in
--h | --help)
-  usage_and_exit 0
-  ;;
---overwrite)
-  overwrite=true
-  shift 1
-  ;;
-*) ;;
+  -h | --help)
+    usage_and_exit 0
+    ;;
+  --overwrite)
+    overwrite=true
+    shift 1
+    ;;
+  *) ;;
 esac
 
 if [[ $# -eq 0 ]]; then

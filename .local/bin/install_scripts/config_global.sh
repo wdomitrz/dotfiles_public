@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 function copy_global_configs() {
-  check_integrity_of_tracked_dir.sh "${HOME}"/.config/global_configs &&
-    sudo cp --update --backup=numbered --verbose --recursive \
+  check_integrity_of_tracked_dir.sh "${HOME}"/.config/global_configs \
+    && sudo cp --update --backup=numbered --verbose --recursive \
       "${HOME}"/.config/global_configs/. /
 }
 
@@ -21,10 +21,10 @@ function todo_post_global_configs_copy() {
 }
 
 function add_user_to_groups() {
-  for group in sudo docker input uinput kvm lpadmin audio netdev video libvirt; do
+  for group in sudo audio video users netdev bluetooth docker lpadmin nordvpn kvm input uinput libvirt; do
     sudo groupadd "${group}" || true
-    sudo usermod --append --groups "${group}" "${USER}" ||
-      echo "Adding to ${group} failed"
+    sudo usermod --append --groups "${group}" "${USER}" \
+      || echo "Adding to ${group} failed"
   done
 }
 
@@ -33,10 +33,10 @@ function enable_32_bit_architecture() {
 }
 
 function update_locales() {
-  echo "locales locales/default_environment_locale select en_US.UTF-8" |
-    sudo debconf-set-selections
-  echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" |
-    sudo debconf-set-selections
+  echo "locales locales/default_environment_locale select en_US.UTF-8" \
+    | sudo debconf-set-selections
+  echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" \
+    | sudo debconf-set-selections
   sudo rm --force --verbose "/etc/locale.gen"
   sudo dpkg-reconfigure --frontend noninteractive locales
 }
@@ -53,8 +53,8 @@ function create_swap_file() {
     sudo chmod 600 "${swapfile_location}"
     sudo mkswap "${swapfile_location}"
     sudo swapon "${swapfile_location}"
-    echo "${swapfile_location} none    swap    sw    0   0" |
-      sudo tee -a /etc/fstab
+    echo "${swapfile_location} none    swap    sw    0   0" \
+      | sudo tee -a /etc/fstab
   fi
 }
 

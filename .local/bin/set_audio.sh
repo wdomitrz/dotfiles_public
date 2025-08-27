@@ -6,9 +6,13 @@ function list_cards() {
 
 function get_cards_profiles() {
   card="$1"
-  pactl list cards |
-    awk '/^Card /{f=0} f; /Name: '"${card}"'/{f=1}' |   # Get properties of a card
-    awk '/Active Profile:/{f=0} f; /Profiles:$/{f=1}' | # Get profiles
+  pactl list cards \
+    | awk '/^Card /{f=0} f; /Name: '"${card}"'/{f=1}' \
+    |
+    # Get properties of a card
+    awk '/Active Profile:/{f=0} f; /Profiles:$/{f=1}' \
+    |
+    # Get profiles
     sed 's/^[ \t]*//' | cut -d ' ' -f 1 | sed 's/:$//g' # Select profiles only
 }
 
@@ -39,15 +43,15 @@ function set_card_profile() {
   card="$1"
 
   case "$2" in
-  out) profiles_filter=output_only ;;
-  in) profiles_filter=input_only ;;
-  both) profiles_filter=output_and_input_and_only_output ;;
-  off) profiles_filter=off_filter ;;
-  *) echo "Unsupported profile filter: $2" && return 1 ;;
+    out) profiles_filter=output_only ;;
+    in) profiles_filter=input_only ;;
+    both) profiles_filter=output_and_input_and_only_output ;;
+    off) profiles_filter=off_filter ;;
+    *) echo "Unsupported profile filter: $2" && return 1 ;;
   esac
 
-  profile="$(get_cards_profiles "${card}" |
-    "${profiles_filter}" | head --lines=1)"
+  profile="$(get_cards_profiles "${card}" \
+    | "${profiles_filter}" | head --lines=1)"
   if [[ -z ${profile} ]]; then
     echo "No ${profiles_filter} match for ${card}"
     return
@@ -68,16 +72,16 @@ function set_cards() {
     in_card_filter="$2"
   fi
 
-  for card in $(list_cards |
-    grep --invert-match "${out_card_filter}" |
-    grep --invert-match "${in_card_filter}"); do
+  for card in $(list_cards \
+    | grep --invert-match "${out_card_filter}" \
+    | grep --invert-match "${in_card_filter}"); do
     set_card_profile "${card}" off
   done
 
-  out_card="$(list_cards |
-    (grep "${out_card_filter}" || true) | head --lines=1)"
-  in_card="$(list_cards |
-    (grep "${in_card_filter}" || true) | head --lines=1)"
+  out_card="$(list_cards \
+    | (grep "${out_card_filter}" || true) | head --lines=1)"
+  in_card="$(list_cards \
+    | (grep "${in_card_filter}" || true) | head --lines=1)"
 
   if [[ ${out_card} == "${in_card}" ]]; then
     if [[ -z ${out_card} ]]; then
@@ -104,8 +108,8 @@ function list_sinks() {
 }
 
 function list_sources() {
-  pactl list short sources | cut --field 2 |
-    grep --invert-match "\.monitor$"
+  pactl list short sources | cut --field 2 \
+    | grep --invert-match "\.monitor$"
 }
 
 function disable_sink_or_source() {
@@ -128,8 +132,8 @@ function set_default_sink_or_source() {
   volume="$3"
   muted="$4" # 0 or 1
 
-  which=$(list_"${what}"s |
-    (grep "${filter}" || true) | head --lines=1)
+  which=$(list_"${what}"s \
+    | (grep "${filter}" || true) | head --lines=1)
   if [[ -z ${which} ]]; then
     echo "No ${what} matching ${filter}"
     return 0
@@ -171,15 +175,15 @@ function main() {
   out_volume=40% && in_volume=100% && out_muted=1 && in_muted=0
   while [[ $# -gt 0 ]]; do
     case "$1" in
-    --help) set_audio_help ;;
-    --both-filter) out_filter="$2" && in_filter="$2" && shift 2 ;;
-    --out-filter) out_filter="$2" && shift 2 ;;
-    --in-filter) in_filter="$2" && shift 2 ;;
-    --out-volume) out_volume="$2" && shift 2 ;;
-    --in-volume) in_volume="$2" && shift 2 ;;
-    --out-muted) out_muted="$2" && shift 2 ;;
-    --in-muted) in_muted="$2" && shift 2 ;;
-    *) echo "Unknown param $1" && exit 1 ;;
+      --help) set_audio_help ;;
+      --both-filter) out_filter="$2" && in_filter="$2" && shift 2 ;;
+      --out-filter) out_filter="$2" && shift 2 ;;
+      --in-filter) in_filter="$2" && shift 2 ;;
+      --out-volume) out_volume="$2" && shift 2 ;;
+      --in-volume) in_volume="$2" && shift 2 ;;
+      --out-muted) out_muted="$2" && shift 2 ;;
+      --in-muted) in_muted="$2" && shift 2 ;;
+      *) echo "Unknown param $1" && exit 1 ;;
     esac
   done
 

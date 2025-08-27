@@ -8,8 +8,8 @@ i3_theme_detection &
 set_external_touchpad.sh &
 set_keymap.sh &
 xfce4-power-manager &
-i3_xrl --no-set-background &&
-  (
+i3_xrl --no-set-background \
+  && (
     (check_if_remote.sh || (
       blueman-applet &
       signal-desktop &

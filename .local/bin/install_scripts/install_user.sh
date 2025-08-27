@@ -11,8 +11,8 @@ function install_nvim() {
 
 wallpapers_directory_base="${HOME}"/.local/share/backgrounds
 function download_sequoia_wallpaper() {
-  wget_with_defaults.sh 'https://drive.usercontent.google.com/download?id=1g9TyTAv2Xw_zyAOyRS_hAdI2wq3SU44q&export=download&authuser=0' |
-    pv | sponge "${wallpapers_directory_base}"/backgrounds_both.dir/Sequoia-Sunrise.heic
+  wget_with_defaults.sh 'https://drive.usercontent.google.com/download?id=1g9TyTAv2Xw_zyAOyRS_hAdI2wq3SU44q&export=download&authuser=0' \
+    | pv | sponge "${wallpapers_directory_base}"/backgrounds_both.dir/Sequoia-Sunrise.heic
 }
 
 function install_uv() {

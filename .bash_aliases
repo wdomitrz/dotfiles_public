@@ -35,9 +35,9 @@ function alert() {
   function cat_file_compact() {
     [[ $# -ne 1 ]] && return 1
     if [[ $(wc -l < "${stdout_file}") -gt 8 ]]; then
-      head -n 4 "${stdout_file}" &&
-        echo "..." &&
-        tail -n 4 "${stdout_file}"
+      head -n 4 "${stdout_file}" \
+        && echo "..." \
+        && tail -n 4 "${stdout_file}"
     else
       head "${stdout_file}"
     fi
@@ -109,7 +109,7 @@ alias pcls='apt list'
 alias pcsim='apt-mark showmanual'
 
 function pcyall() {
-  sudo apt-get update --yes &&
-    sudo apt-get dist-upgrade --yes &&
-    sudo apt-get autoremove --purge --yes
+  sudo apt-get update --yes \
+    && sudo apt-get dist-upgrade --yes \
+    && sudo apt-get autoremove --purge --yes
 }

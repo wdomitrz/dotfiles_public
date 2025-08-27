@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 function update_and_upgrade() {
-  sudo apt-get update --yes &&
-    sudo apt-get dist-upgrade --yes
+  sudo apt-get update --yes \
+    && sudo apt-get dist-upgrade --yes
 }
 
 function install_packages_from() {

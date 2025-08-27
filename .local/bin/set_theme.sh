@@ -58,7 +58,8 @@ function set_bat_theme() {
 
 function set_nvim_theme() {
   local -r theme_path="${HOME}"/.config/nvim/theme.txt
-  set_theme_though_links "${theme_path}" "$@"
+  local -r dark_or_light="$1"
+  echo "${dark_or_light}" > "${theme_path}"
 }
 
 function set_rofi_theme() {

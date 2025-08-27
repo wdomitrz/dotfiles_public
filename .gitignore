@@ -92,8 +92,7 @@
 !.config/i3status/config
 !.config/mimeapps.list
 !.config/nvim/init.vim
-!.config/nvim/theme_dark.txt
-!.config/nvim/theme_light.txt
+!.config/nvim/theme.lua
 !.config/packages/packages_main.sorted.txt
 !.config/packages/packages_nvidia.sorted.txt
 !.config/packages/packages_other.sorted.txt
@@ -140,7 +139,7 @@
 !.local/bin/fix_internet_post_install.sh
 !.local/bin/fix_touchpad.sh
 !.local/bin/format.sh
-!.local/bin/format_vim.sh
+!.local/bin/format_nvim.sh
 !.local/bin/geoclue-2-agent
 !.local/bin/git-ls
 !.local/bin/git-prev_merge_commit.sh

@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
-tmp_file="$(mktemp --suffix=.vim)"
+set -eu
+file_extension="$1"
+tmp_file="$(mktemp --suffix=."${file_extension}")"
 cat > "${tmp_file}"
 
 nvim --clean --headless \

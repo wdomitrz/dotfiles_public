@@ -29,11 +29,7 @@ set undofile
 set whichwrap+=<,>,h,l,[,]
 
 " Theme
-try
-    let &background = readfile($HOME . "/.config/nvim/theme.txt")[0]
-catch
-    let &background = "dark"
-endtry
+source $HOME/.config/nvim/theme.lua
 
 " Commands
 function! Format_fn()

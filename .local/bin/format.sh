@@ -5,7 +5,8 @@ function format_sh() { shfmt --indent 2 --binary-next-line --case-indent --space
 function format_sorted_json() { LC_ALL=C jq --sort-keys . -; }
 function format_sorted_numeric_txt() { LC_ALL=C sort --numeric-sort -; }
 function format_sorted_txt() { LC_ALL=C sort -; }
-function format_vim() { format_vim.sh; }
+function format_vim() { format_nvim.sh vim; }
+function format_lua() { format_nvim.sh lua; }
 
 function format_stdin() {
   set -euo pipefail
@@ -19,6 +20,7 @@ function format_stdin() {
     sorted_json) format_sorted_json ;;
     json) format_json ;;
     vim) format_vim ;;
+    lua) format_lua ;;
     sorted_txt | sorted) format_sorted_txt ;;
     sorted_numeric_txt | sorted_numeric) format_sorted_numeric_txt ;;
     unknown) cat ;;
@@ -37,6 +39,7 @@ function get_filetype() {
     *.sorted.json) echo sorted_json ;;
     *.json) echo json ;;
     *.vim) echo vim ;;
+    *.lua) echo lua ;;
     *.sorted.txt) echo sorted_txt ;;
     *.sorted_numeric.txt) echo sorted_numeric_txt ;;
     *) echo unknown ;;

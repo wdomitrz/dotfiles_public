@@ -177,7 +177,7 @@ def media_block() -> Block:
             "playerctl metadata title".split()
         )
         playerctl_status_process = run_command_blocking("playerctl status".split())
-    except FileNotFoundError:
+    except (FileNotFoundError, OSError):
         return replace(ALL_BLOCKS["media_info"], full_text="")
 
     if (

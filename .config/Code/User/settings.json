@@ -24,7 +24,7 @@
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "mkhl.shfmt"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -132,7 +132,6 @@
     "dcasella.i3",
     "detachhead.basedpyright",
     "esbenp.prettier-vscode",
-    "foxundermoon.shell-format",
     "ionutvmi.path-autocomplete",
     "jacobdufault.fuzzy-search",
     "jimmyzjx.go-to-next-problem",
@@ -141,6 +140,7 @@
     "jimmyzjx.ripgrep",
     "llvm-vs-code-extensions.vscode-clangd",
     "mechatroner.rainbow-csv",
+    "mkhl.shfmt",
     "ms-python.python",
     "ms-toolsai.jupyter",
     "ms-toolsai.jupyter-keymap",
@@ -177,7 +177,13 @@
     "--enable=all"
   ],
   "shellcheck.disableVersionCheck": true,
-  "shellformat.flag": "--space-redirects",
+  "shfmt.executableArgs": [
+    "--indent=2",
+    "--binary-next-line",
+    "--case-indent",
+    "--space-redirects",
+    "--simplify"
+  ],
   "telemetry.enableTelemetry": false,
   "telemetry.feedback.enabled": false,
   "telemetry.telemetryLevel": "off",

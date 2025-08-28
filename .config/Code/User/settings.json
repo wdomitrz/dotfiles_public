@@ -35,9 +35,7 @@
   "cSpell.diagnosticLevel": "Hint",
   "cSpell.language": "en,pl",
   "cSpell.useGitignore": false,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  },
+  "editor.acceptSuggestionOnEnter": "on",
   "editor.cursorBlinking": "solid",
   "editor.cursorSurroundingLines": 1024,
   "editor.fontFamily": "'JetBrains Mono', monospace",

@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+set -eu
+
 main_branch_file="${HOME}"/.config/git/dotfiles/main_branch.sorted.txt
 
 if [ -e "${main_branch_file}" ] \

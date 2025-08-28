@@ -20,3 +20,4 @@ suppress-none-returning = true
 analyzeUnannotatedFunctions = true
 typeCheckingMode = "standard"
 useLibraryCodeForTypes = false
+reportMissingImports = false

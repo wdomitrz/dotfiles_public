@@ -1,43 +1,33 @@
 {
-  "[c]": {
-    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-  },
-  "[cpp]": {
-    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
-  },
-  "[shellscript]": {
-    "editor.defaultFormatter": "mkhl.shfmt"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "basedpyright.analysis.typeCheckingMode": "standard",
   "basedpyright.analysis.useLibraryCodeForTypes": false,
   "breadcrumbs.enabled": false,
   "cSpell.diagnosticLevel": "Hint",
   "cSpell.language": "en,pl",
   "cSpell.useGitignore": false,
+  "custom-format.formatters": [
+    { "command": "format.sh stdin --filename $FILE", "language": "plaintext" },
+    { "command": "format.sh stdin --filetype c", "language": "c" },
+    { "command": "format.sh stdin --filetype cpp", "language": "cpp" },
+    { "command": "format.sh stdin --filetype cuda", "language": "cuda-cpp" },
+    { "command": "format.sh stdin --filetype json", "language": "json" },
+    { "command": "format.sh stdin --filetype jsonc", "language": "jsonc" },
+    { "command": "format.sh stdin --filetype lua", "language": "lua" },
+    { "command": "format.sh stdin --filetype py", "language": "python" },
+    { "command": "format.sh stdin --filetype sh", "language": "shellscript" },
+    { "command": "format.sh stdin --filetype vim", "language": "viml" }
+  ],
   "editor.acceptSuggestionOnEnter": "on",
   "editor.cursorBlinking": "solid",
   "editor.cursorSurroundingLines": 1024,
+  "editor.defaultFormatter": "Vehmloewff.custom-format",
   "editor.fontFamily": "'JetBrains Mono', monospace",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": true,
@@ -104,20 +94,13 @@
       "name": "show type"
     },
     "SPC o o": {
-      "commands": [
-        "workbench.action.quickOpen"
-      ],
+      "commands": ["workbench.action.quickOpen"],
       "name": "quick open"
     },
     "SPC w t": {
       "commands": [
         "workbench.action.compareEditor.focusOtherSide",
-        {
-          "args": {
-            "to": "viewPortCenter"
-          },
-          "command": "cursorMove"
-        }
+        { "args": { "to": "viewPortCenter" }, "command": "cursorMove" }
       ],
       "name": "toggle diff view"
     }
@@ -140,7 +123,6 @@
     "jimmyzjx.ripgrep",
     "llvm-vs-code-extensions.vscode-clangd",
     "mechatroner.rainbow-csv",
-    "mkhl.shfmt",
     "ms-python.python",
     "ms-toolsai.jupyter",
     "ms-toolsai.jupyter-keymap",
@@ -153,29 +135,21 @@
     "streetsidesoftware.code-spell-checker",
     "streetsidesoftware.code-spell-checker-polish",
     "timonwong.shellcheck",
+    "vehmloewff.custom-format",
     "vscodevim.vim",
     "xadillax.viml"
   ],
   "remote.SSH.lockfilesInTmp": true,
   "remote.extensionKind": {
-    "jimmyzjx.leaderkey": [
-      "ui"
-    ],
-    "pub.name": [
-      "ui"
-    ],
-    "vscodevim.vim": [
-      "ui"
-    ]
+    "jimmyzjx.leaderkey": ["ui"],
+    "pub.name": ["ui"],
+    "vscodevim.vim": ["ui"]
   },
   "search.mode": "newEditor",
   "security.workspace.trust.banner": "always",
   "security.workspace.trust.startupPrompt": "always",
   "settingsSync.keybindingsPerPlatform": false,
-  "shellcheck.customArgs": [
-    "--exclude=SC1091,SC2312",
-    "--enable=all"
-  ],
+  "shellcheck.customArgs": ["--exclude=SC1091,SC2312", "--enable=all"],
   "shellcheck.disableVersionCheck": true,
   "shfmt.executableArgs": [
     "--indent=2",
@@ -208,244 +182,68 @@
   },
   "vim.hlsearch": true,
   "vim.insertModeKeyBindings": [
-    {
-      "before": [
-        "<C-a>"
-      ],
-      "commands": [
-        "editor.action.selectAll"
-      ]
-    }
+    { "before": ["<C-a>"], "commands": ["editor.action.selectAll"] }
   ],
   "vim.leader": "<space>",
   "vim.normalModeKeyBindingsNonRecursive": [
+    { "comment": "normal/visual mode keybindings" },
     {
-      "comment": "normal/visual mode keybindings"
-    },
-    {
-      "before": [
-        "<leader>"
-      ],
+      "before": ["<leader>"],
       "commands": [
-        {
-          "args": [
-            "leaderkeyState",
-            "SPC"
-          ],
-          "command": "_setContext"
-        },
-        {
-          "args": "SPC",
-          "command": "leaderkey.render"
-        }
+        { "args": ["leaderkeyState", "SPC"], "command": "_setContext" },
+        { "args": "SPC", "command": "leaderkey.render" }
       ]
     },
     {
-      "before": [
-        ","
-      ],
+      "before": [","],
       "commands": [
-        {
-          "args": [
-            "leaderkeyState",
-            ","
-          ],
-          "command": "_setContext"
-        },
-        {
-          "args": ",",
-          "command": "leaderkey.render"
-        }
+        { "args": ["leaderkeyState", ","], "command": "_setContext" },
+        { "args": ",", "command": "leaderkey.render" }
       ]
     },
+    { "after": ["g", "j"], "before": ["j"] },
+    { "after": ["g", "k"], "before": ["k"] },
+    { "after": ["%"], "before": ["%"] },
+    { "before": ["<C-o>"], "commands": ["workbench.action.navigateBack"] },
     {
-      "after": [
-        "g",
-        "j"
-      ],
-      "before": [
-        "j"
-      ]
+      "before": ["<C-k>"],
+      "commands": ["editor.action.addSelectionToNextFindMatch"]
     },
-    {
-      "after": [
-        "g",
-        "k"
-      ],
-      "before": [
-        "k"
-      ]
-    },
-    {
-      "after": [
-        "%"
-      ],
-      "before": [
-        "%"
-      ]
-    },
-    {
-      "before": [
-        "<C-o>"
-      ],
-      "commands": [
-        "workbench.action.navigateBack"
-      ]
-    },
-    {
-      "before": [
-        "<C-k>"
-      ],
-      "commands": [
-        "editor.action.addSelectionToNextFindMatch"
-      ]
-    },
-    {
-      "comment": "normal mode keybindings"
-    },
-    {
-      "before": [
-        "u"
-      ],
-      "commands": [
-        "undo"
-      ]
-    },
-    {
-      "before": [
-        "<C-r>"
-      ],
-      "commands": [
-        "redo"
-      ]
-    },
-    {
-      "before": [
-        "K"
-      ],
-      "commands": [
-        "editor.action.showHover"
-      ]
-    }
+    { "comment": "normal mode keybindings" },
+    { "before": ["u"], "commands": ["undo"] },
+    { "before": ["<C-r>"], "commands": ["redo"] },
+    { "before": ["K"], "commands": ["editor.action.showHover"] }
   ],
   "vim.useCtrlKeys": false,
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
+    { "comment": "normal/visual mode keybindings" },
     {
-      "comment": "normal/visual mode keybindings"
-    },
-    {
-      "before": [
-        "<leader>"
-      ],
+      "before": ["<leader>"],
       "commands": [
-        {
-          "args": [
-            "leaderkeyState",
-            "SPC"
-          ],
-          "command": "_setContext"
-        },
-        {
-          "args": "SPC",
-          "command": "leaderkey.render"
-        }
+        { "args": ["leaderkeyState", "SPC"], "command": "_setContext" },
+        { "args": "SPC", "command": "leaderkey.render" }
       ]
     },
     {
-      "before": [
-        ","
-      ],
+      "before": [","],
       "commands": [
-        {
-          "args": [
-            "leaderkeyState",
-            ","
-          ],
-          "command": "_setContext"
-        },
-        {
-          "args": ",",
-          "command": "leaderkey.render"
-        }
+        { "args": ["leaderkeyState", ","], "command": "_setContext" },
+        { "args": ",", "command": "leaderkey.render" }
       ]
     },
+    { "after": ["g", "j"], "before": ["j"] },
+    { "after": ["g", "k"], "before": ["k"] },
+    { "after": ["%"], "before": ["%"] },
+    { "before": ["<C-o>"], "commands": ["workbench.action.navigateBack"] },
     {
-      "after": [
-        "g",
-        "j"
-      ],
-      "before": [
-        "j"
-      ]
+      "before": ["<C-k>"],
+      "commands": ["editor.action.addSelectionToNextFindMatch"]
     },
-    {
-      "after": [
-        "g",
-        "k"
-      ],
-      "before": [
-        "k"
-      ]
-    },
-    {
-      "after": [
-        "%"
-      ],
-      "before": [
-        "%"
-      ]
-    },
-    {
-      "before": [
-        "<C-o>"
-      ],
-      "commands": [
-        "workbench.action.navigateBack"
-      ]
-    },
-    {
-      "before": [
-        "<C-k>"
-      ],
-      "commands": [
-        "editor.action.addSelectionToNextFindMatch"
-      ]
-    },
-    {
-      "comment": "visual mode keybindings"
-    },
-    {
-      "after": [
-        "p",
-        "g",
-        "v",
-        "y"
-      ],
-      "before": [
-        "p"
-      ]
-    },
-    {
-      "after": [
-        ">",
-        "g",
-        "v"
-      ],
-      "before": [
-        ">"
-      ]
-    },
-    {
-      "after": [
-        "<",
-        "g",
-        "v"
-      ],
-      "before": [
-        "<"
-      ]
-    }
+    { "comment": "visual mode keybindings" },
+    { "after": ["p", "g", "v", "y"], "before": ["p"] },
+    { "after": [">", "g", "v"], "before": [">"] },
+    { "after": ["<", "g", "v"], "before": ["<"] }
   ],
   "window.autoDetectColorScheme": true,
   "window.commandCenter": false,

@@ -125,8 +125,8 @@ function sanitize_synced_main() {
   run_and_save lint_python_files
   run_and_save lint_extension_links
   run_and_save lint_shell_files
-  run_and_save format_all_files
   run_and_save type_python_files
+  run_and_save format_all_files
   wait_for_all
 }
 

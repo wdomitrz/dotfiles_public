@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ -z "$(docker images --quiet --filter 'reference=prettier:local')" ]]; then
+  echo "\
+FROM debian:stable
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends npm
+RUN npm install --global prettier@next
+" | docker build --tag prettier:local - &> /dev/null
+fi
+
+if [[ -z "$(docker ps --filter 'name=prettier-container' --quiet)" ]]; then
+  docker run --interactive --detach=true \
+    --name prettier-container \
+    prettier:local &> /dev/null
+  nohup sh -c 'sleep "10m" && docker rm --force prettier-container' &> /dev/null &
+fi
+
+exec docker exec --interactive prettier-container prettier "$@"

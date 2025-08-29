@@ -1,9 +1,7 @@
 {
   "theme-setting": "system",
   "spell-check": true,
-  "window": {
-    "autoHideMenuBar": true
-  },
+  "window": { "autoHideMenuBar": true },
   "shown-tray-notice": true,
   "localeOverride": "pl",
   "system-tray-setting": "MinimizeToAndStartInSystemTray"

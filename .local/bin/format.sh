@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-function format_json() { jq . -; }
+function format_json() { jq --compact-output . - | prettier --parser json; }
 function format_py() { ruff format -; }
 function format_sh() { shfmt --indent=2 --binary-next-line --case-indent --space-redirects --simplify -; }
-function format_sorted_json() { LC_ALL=C jq --sort-keys . -; }
+function format_c_cpp() { clang-format -; }
+function format_sorted_json() { LC_ALL=C jq --compact-output --sort-keys . - | format_json; }
 function format_sorted_numeric_txt() { LC_ALL=C sort --numeric-sort -; }
 function format_sorted_txt() { LC_ALL=C sort -; }
 function format_vim() { format_nvim.sh vim; }
@@ -17,8 +18,9 @@ function format_stdin() {
   case "$1" in
     sh | bash | shellscript) format_sh ;;
     py | python) format_py ;;
+    c | cpp | cuda) format_c_cpp ;;
     sorted_json) format_sorted_json ;;
-    json) format_json ;;
+    json | jsonc) format_json ;;
     vim) format_vim ;;
     lua) format_lua ;;
     sorted_txt | sorted) format_sorted_txt ;;
@@ -36,6 +38,9 @@ function get_filetype() {
     *.sh | *.profile | *.bashrc | *.bash_aliases | *.bash_logout | \
       *.fehbg | *.Xclients | .xsessionrc | .xsession) echo sh ;;
     *.py) echo py ;;
+    *.c | *.h) echo c ;;
+    *.C | *.cc | *.cpp | *.H | *.hh | *.hpp) echo cpp ;;
+    *.cu) echo cuda ;;
     *.sorted.json) echo sorted_json ;;
     *.json) echo json ;;
     *.vim) echo vim ;;

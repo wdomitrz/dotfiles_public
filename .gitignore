@@ -48,6 +48,7 @@
 !.config/extension_links/.local/bin/not.sh
 !.config/extension_links/.local/bin/not_sudo.sh
 !.config/extension_links/.local/bin/paste_clipboard.sh
+!.config/extension_links/.local/bin/prettier.sh
 !.config/extension_links/.local/bin/terminal_pager.sh
 !.config/extension_links/.local/bin/vim.sh
 !.config/extension_links/.local/bin/vimdiff.sh
@@ -170,6 +171,7 @@
 !.local/bin/paste_clipboard
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh
+!.local/bin/prettier
 !.local/bin/propagate_config_to.sh
 !.local/bin/qr_from_clipboard.sh
 !.local/bin/reboot

@@ -45,9 +45,7 @@
     "comment": "Fix spelling",
     "key": "ctrl+l"
   },
-  {
-    "comment": "Easy navigation in quick open/QuickPick"
-  },
+  { "comment": "Easy navigation in quick open/QuickPick" },
   {
     "command": "workbench.action.quickOpenSelectNext",
     "key": "ctrl+j",
@@ -58,9 +56,7 @@
     "key": "ctrl+k",
     "when": "inQuickOpen"
   },
-  {
-    "comment": "Easy navigation in suggestion/intellisense"
-  },
+  { "comment": "Easy navigation in suggestion/intellisense" },
   {
     "command": "selectNextSuggestion",
     "key": "ctrl+j",
@@ -84,9 +80,7 @@
     "key": "ctrl+k",
     "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
   },
-  {
-    "comment": "Easy navigation in code action"
-  },
+  { "comment": "Easy navigation in code action" },
   {
     "command": "selectNextCodeAction",
     "key": "ctrl+j",
@@ -97,17 +91,11 @@
     "key": "ctrl+k",
     "when": "codeActionMenuVisible"
   },
-  {
-    "comment": "Add ctrl+h/l to navigate in file browser"
-  },
+  { "comment": "Add ctrl+h/l to navigate in file browser" },
   {
     "command": "file-browser.stepOut",
     "key": "ctrl+h",
     "when": "inFileBrowser"
   },
-  {
-    "command": "file-browser.stepIn",
-    "key": "ctrl+l",
-    "when": "inFileBrowser"
-  }
+  { "command": "file-browser.stepIn", "key": "ctrl+l", "when": "inFileBrowser" }
 ]

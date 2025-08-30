@@ -39,6 +39,7 @@ dex
 dict
 dkms
 dmenu
+docker-buildx
 docker-cli
 docker-compose
 docker.io

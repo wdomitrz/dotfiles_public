@@ -50,13 +50,7 @@
     "vscodevim.vim": 1
   },
   "extensions.ignoreRecommendations": true,
-  "files.associations": {
-    "**/.ssh/config": "ssh_config",
-    "**/.ssh/configs/*.conf": "ssh_config",
-    "**/i3/config": "i3",
-    "*.build": "json",
-    "*.task": "json"
-  },
+  "files.associations": { "**/i3/config": "i3" },
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.saveConflictResolution": "overwriteFileOnDisk",

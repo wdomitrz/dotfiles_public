@@ -13,3 +13,7 @@ export DEBIAN_FRONTEND=noninteractive
 if [[ -f "${HOME}"/.local/bin/install_scripts/machine_specific.sh ]]; then
   "${HOME}"/.local/bin/install_scripts/machine_specific.sh
 fi
+
+# Sanitize and check if there is no change
+sanitize_synced_files.sh
+git diff --exit-code

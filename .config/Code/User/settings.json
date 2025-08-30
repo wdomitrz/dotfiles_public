@@ -2,8 +2,6 @@
   "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "basedpyright.analysis.typeCheckingMode": "standard",
@@ -151,13 +149,6 @@
   "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.customArgs": ["--exclude=SC1091,SC2312", "--enable=all"],
   "shellcheck.disableVersionCheck": true,
-  "shfmt.executableArgs": [
-    "--indent=2",
-    "--binary-next-line",
-    "--case-indent",
-    "--space-redirects",
-    "--simplify"
-  ],
   "telemetry.enableTelemetry": false,
   "telemetry.feedback.enabled": false,
   "telemetry.telemetryLevel": "off",

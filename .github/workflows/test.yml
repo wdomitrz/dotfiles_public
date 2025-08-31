@@ -1,6 +1,10 @@
 name: test
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - main
 
 jobs:
   test_build_and_sanitize:

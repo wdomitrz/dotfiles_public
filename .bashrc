@@ -38,12 +38,12 @@ bind 'TAB':menu-complete
 # Perform partial completion on the first Tab
 bind "set menu-complete-display-prefix on"
 
-yank_line_to_clipboard() {
+function yank_line_to_clipboard() {
   echo "${READLINE_LINE}" | xclip -in -selection clipboard
 }
 bind -m vi-command -x '"yy": yank_line_to_clipboard'
 
-kill_line_to_clipboard() {
+function kill_line_to_clipboard() {
   yank_line_to_clipboard
   READLINE_LINE=""
 }

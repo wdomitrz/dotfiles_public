@@ -37,6 +37,8 @@ function! Format_fn()
     execute '%!format.sh stdin --filename %'
     call setpos(".", current_pos)
 endfunction
+set formatexpr=Format_fn()
+
 command! Format             call Format_fn()
 command! CodeAction         lua vim.lsp.buf.code_action()
 command! NextDiagnostic     lua vim.diagnostic.goto_next()

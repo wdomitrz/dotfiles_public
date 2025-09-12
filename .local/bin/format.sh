@@ -68,7 +68,23 @@ function format_stdin_main() {
     *) echo "Unsupported argument: $1" && return 1 ;;
   esac
 
-  format_stdin "${filetype}"
+  local -r in_file="$(mktemp)"
+  local -r out_file="$(mktemp)"
+  local -r err_file="$(mktemp)"
+  # shellcheck disable=SC2064
+  trap "rm --force -- '${in_file}' '${out_file}' '${err_file}'" EXIT
+
+  set +e
+  tee "${in_file}" | format_stdin "${filetype}" > "${out_file}" 2> "${err_file}"
+  local -r formater_exit_code="${PIPESTATUS[1]}"
+  set -e
+
+  if [[ ${formater_exit_code} -ne 0 ]]; then
+    cat "${in_file}"
+    return "${formater_exit_code}"
+  fi
+
+  cat "${out_file}"
 }
 
 function format_file() {
@@ -94,7 +110,7 @@ function format_file() {
 
   # shellcheck disable=SC2002
   cat "${given_file_path}" \
-    | format_stdin "${filetype}" \
+    | format_stdin_main --filename "${filetype}" \
     | sponge "${given_file_path}"
 }
 

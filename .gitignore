@@ -141,7 +141,6 @@
 !.local/bin/format.sh
 !.local/bin/format_json.py
 !.local/bin/format_nvim.sh
-!.local/bin/format_stdin.sh
 !.local/bin/geoclue-2-agent
 !.local/bin/git-ls
 !.local/bin/git-prev_merge_commit.sh

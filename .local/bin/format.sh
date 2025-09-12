@@ -25,9 +25,8 @@ function format_files_main() {
     return 1
   fi
   while IFS= read -r -d '' f; do
-    format_file "${f}" &
+    format_file "${f}"
   done < <(find "$@" -print0)
-  wait
 }
 
 function format_main() {

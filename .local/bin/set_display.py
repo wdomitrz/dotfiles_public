@@ -19,7 +19,7 @@ from typing import Callable
 
 PRIMARY_ORDER_DEFAULT: tuple[str, ...] = ("screen", "rdp", "DP", "HDMI", "eDP")
 DEFAULT_FAILSAFE_DPI = DEFAULT_GNOME_DPI = 96
-ADDITIONAL_MULT = 1.125
+ADDITIONAL_MULT = 1.0
 LAPTOP_SCREEN_DIVISOR = 1.4
 INCH_TO_MM = 25.4
 

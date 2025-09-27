@@ -24,7 +24,7 @@ function lint_shell_files() {
   git_root="$(git rev-parse --show-toplevel)"
   (
     # Automatically apply fixes
-    git-ls | grep "\.sh$" | xargs readlink --canonicalize \
+    git-ls | grep "\.sh$" | xargs readlink -f \
       | parallel shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff \
       | sed "s|--- ${git_root}|--- a|g" \
       | sed "s|+++ ${git_root}|+++ b|g" \
@@ -37,13 +37,13 @@ function lint_shell_files() {
 }
 
 function lint_python_files() {
-  git-ls | grep "\.py$" | xargs readlink --canonicalize \
+  git-ls | grep "\.py$" | xargs readlink -f \
     | xargs ruff check --quiet --extend-select I --fix
 }
 
 function type_python_files() {
-  git-ls | grep "\.py$" | xargs readlink --canonicalize \
-    | xargs basedpyright --project "${HOME}"/.config/python/pyproject.toml \
+  git-ls | grep "\.py$" | xargs readlink -f \
+    | xargs basedpyright --pythonversion 3.10 --project "${HOME}"/.config/python/pyproject.toml \
     | not grep --invert-match "0 errors, 0 warnings, 0 notes"
 
 }
@@ -61,15 +61,16 @@ function get_all_files_without_extensions() {
 function get_all_files_covered_by_extension_links() {
   git-ls \
     | (grep ".config/extension_links/" || true) \
-    | xargs --no-run-if-empty readlink --canonicalize \
-    | xargs --no-run-if-empty realpath --strip --relative-to="$(pwd)"
+    | xargs --no-run-if-empty readlink -f \
+    | xargs --no-run-if-empty realpath -q \
+    | sed "s|^$(pwd)/||g"
 }
 
 function dangling_extension_links() {
   for file in $(git-ls \
     | grep ".config/extension_links/"); do
     [[ -L ${file} ]] || continue # Process only links
-    readlink --canonicalize-existing "${file}" > /dev/null \
+    readlink -f "${file}" > /dev/null \
       || echo "${file}"
   done
 }
@@ -89,26 +90,14 @@ function lint_extension_links() {
 }
 
 # Parallel execution with tracking processes ###################################
-declare -A running_processes
-declare -a running_processes_names
-
 function run_and_save() {
   set -euo pipefail
   name="$1"
-  running_processes_names+=("${name}")
   (
     "$@"
     echo -n "${name}"
     echo -e "\tdone"
   ) &
-  running_processes["${name}"]="$!"
-}
-
-function wait_for_all() {
-  for name in "${running_processes_names[@]}"; do
-    pid="${running_processes[${name}]}"
-    wait "${pid}"
-  done
 }
 
 function gitignore_regenerate() {
@@ -129,7 +118,7 @@ function sanitize_synced_main() {
   run_and_save lint_shell_files
   run_and_save format_all_files
   run_and_save type_python_files
-  wait_for_all
+  wait
 }
 
 ################################################################################

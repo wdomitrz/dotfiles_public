@@ -14,7 +14,7 @@ readarray -t ALL_BRANCHES < <(get_config_file "${HOME}"/.config/git/dotfiles/all
 
 function merge_with_main_branch {
   current_branch="$1"
-  git checkout "${current_branch}"
+  git checkout "${current_branch}" --
   if ! git merge --no-edit "${MAIN_BRANCH}"; then
     git status -s | grep "^DU " \
       | cut --delimiter ' ' --fields 2- \
@@ -24,7 +24,7 @@ function merge_with_main_branch {
 }
 
 function go_back_push_and_cleanup {
-  git checkout "${MAIN_BRANCH}"
+  git checkout "${MAIN_BRANCH}" --
   git push --all --force-with-lease
   git branch --delete "${MAIN_BRANCH}" "${ALL_BRANCHES[@]}" || echo "Branches removed"
 }

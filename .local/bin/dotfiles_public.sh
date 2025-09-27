@@ -11,7 +11,7 @@ function get_public() {
 }
 
 function checkout_public() {
-  git checkout "${public_branch}"
+  git checkout "${public_branch}" --
 }
 
 function update_to_local_copy() {
@@ -36,7 +36,7 @@ function remove_remote() {
 }
 function cleanup() {
   starting_branch="$1"
-  git checkout "${starting_branch}"
+  git checkout "${starting_branch}" --
   git branch --delete "${public_branch}"
   remove_remote
 }

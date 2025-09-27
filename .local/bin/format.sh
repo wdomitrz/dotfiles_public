@@ -72,7 +72,7 @@ function format_stdin_main() {
   local -r out_file="$(mktemp)"
   local -r err_file="$(mktemp)"
   # shellcheck disable=SC2064
-  trap "rm --force -- '${in_file}' '${out_file}' '${err_file}'" EXIT
+  trap "rm -f -- '${in_file}' '${out_file}' '${err_file}'" EXIT
 
   set +e
   tee "${in_file}" | format_stdin "${filetype}" > "${out_file}" 2> "${err_file}"
@@ -95,7 +95,7 @@ function format_file() {
   fi
   given_file_path="$1"
 
-  resolved_file_path="$(realpath --quiet "${given_file_path}")" \
+  resolved_file_path="$(realpath -q "${given_file_path}")" \
     || return 0 # Ignore dangling links
   if [[ -d ${resolved_file_path} ]] || [[ ! -w ${resolved_file_path} ]]; then
     return 0 # Ignore directories and non-writeable files

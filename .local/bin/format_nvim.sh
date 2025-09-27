@@ -12,4 +12,4 @@ nvim --clean --headless \
   2> /dev/null
 
 cat "${tmp_file}"
-rm --force "${tmp_file}"
+rm -f "${tmp_file}"

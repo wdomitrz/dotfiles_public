@@ -8,6 +8,7 @@ if [ -d "${HOME}/.local/bin" ]; then export PATH="${HOME}/.local/bin:${PATH}"; f
 
 # homebrew
 if [ -d "${HOME}/.linuxbrew" ]; then eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"; fi
+if [ -d "/opt/homebrew" ]; then eval "$("/opt/homebrew/bin/brew" shellenv)"; fi
 # ghcup
 if [ -f "${HOME}/.ghcup/env" ]; then . "${HOME}/.ghcup/env"; fi
 # Ruby
@@ -19,6 +20,7 @@ export MANPAGER='vim -c Man!'
 export ALTERNATE_EDITOR=""
 export TERMINAL=alacritty
 export LANG="en_US.UTF-8"
+export LC_CTYPE="${LANG}"
 export LANGUAGE="en_US"
 export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"

@@ -9,3 +9,6 @@ bindings = [
 import = [
   "theme.toml"
 ]
+
+[font]
+normal = {family="JetBrains Mono", style="Regular"}

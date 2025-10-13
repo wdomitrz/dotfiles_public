@@ -1,4 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# dependencies = [
+#     "pandas",
+# ]
+# ///
+
 import argparse
 import sys
 from pathlib import Path
@@ -8,7 +15,7 @@ from typing import Any
 def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> Any:
     match fp.suffix:
         case ".parquet" | ".pqt" | ".pq":
-            import pandas as pd  # pyright: ignore[reportMissingImports]
+            import pandas as pd
 
             return pd.read_parquet(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pickle" | ".pkl":
@@ -16,7 +23,7 @@ def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> Any:
 
             return pickle.loads(fp.read_bytes())
         case ".csv":
-            import pandas as pd  # pyright: ignore[reportMissingImports]
+            import pandas as pd
 
             return pd.read_csv(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pt":

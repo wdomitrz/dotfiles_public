@@ -1,9 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
 ################################################################
 # Copyright (c) 2021 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-
 
 import contextlib
 import functools

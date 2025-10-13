@@ -1,8 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
 ################################################################
 # Copyright (c) 2022 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
+
 from __future__ import annotations
 
 import argparse

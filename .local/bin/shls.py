@@ -3,13 +3,14 @@
 # Copyright (c) 2025 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-
+#
 # /// script
 # dependencies = [
 #     "lsprotocol",
-#     "pygls",
+#     "pygls==1.3",
 # ]
 # ///
+
 import json
 import logging
 import subprocess

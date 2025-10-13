@@ -5,7 +5,7 @@ geoclue-2-agent &
 i3_screen_locker.sh &
 i3_theme_detection &
 ( (cat "${HOME}"/.config/set_audio/"$(hostname)".txt || true) | xargs --no-run-if-empty set_audio.sh) &
-set_external_touchpad.sh &
+set_touchpads.sh &
 set_keymap.sh &
 xfce4-power-manager &
 i3_xrl --no-set-background \

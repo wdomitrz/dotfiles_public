@@ -184,9 +184,10 @@
 !.local/bin/set_background.sh
 !.local/bin/set_display.py
 !.local/bin/set_dpi.sh
-!.local/bin/set_external_touchpad.sh
 !.local/bin/set_keymap.sh
 !.local/bin/set_theme.sh
+!.local/bin/set_touchpad.sh
+!.local/bin/set_touchpads.sh
 !.local/bin/shls.py
 !.local/bin/show_mic_status.sh
 !.local/bin/shutdown

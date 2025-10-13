@@ -2,7 +2,7 @@
 set -eu
 
 # Default values
-touchpad_name='Hailuck Co.,Ltd PTP TouchPad Touchpad' && reversed=false
+reversed=false
 
 while [ $# -gt 0 ]; do
   case "$1" in

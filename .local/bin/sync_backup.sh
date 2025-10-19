@@ -15,7 +15,7 @@ function copy_data() {
     "${from_location}/data/" "${where_and_to_location}/data"
 }
 
-function do_local_versioning() {
+function do_rest() {
   set -euo pipefail
 
   to_location="$1"
@@ -24,23 +24,6 @@ function do_local_versioning() {
   set -x
 
   make
-  git add -- files.txt files_only.txt
-  git commit --message="sync up"
-
-  set +x
-  cd -
-}
-
-function push_up() {
-  set -euo pipefail
-
-  to_location="$1"
-
-  cd "${to_location}"
-  set -x
-
-  git push
-  git fetch
 
   set +x
   cd -
@@ -66,8 +49,7 @@ function main() {
   fi
 
   copy_data "${from_location}" "${where}:${to_location}"
-  ssh "${where}" -- "$(typeset -f); do_local_versioning" "${to_location}"
-  ssh -A "${where}" -- "$(typeset -f); push_up" "${to_location}"
+  ssh -A "${where}" -- "$(typeset -f); do_rest" "${to_location}"
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

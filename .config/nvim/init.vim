@@ -10,6 +10,7 @@ autocmd TermOpen * setlocal nospell
 set autochdir
 set breakindent
 set clipboard=unnamedplus
+set cmdheight=0
 set completeopt=menuone,noinsert,noselect
 set complete=.,w,b,u,U,k,kspell,s,i,t
 set foldmethod=syntax foldlevelstart=99
@@ -128,7 +129,7 @@ let g:fzf_preview_window = []
 
 " Plugins key mappings
 noremap <C-/>               :Commentary<cr>|  " `:` to support visual mode ranges
-noremap <leader>oo          <cmd>History<cr>
+noremap <C-p>               <cmd>History<cr>
 noremap <leader>ff          <cmd>Files<cr>
 noremap <leader>sf          <cmd>Rg<cr>
 noremap <leader><leader>    <cmd>Commands<cr>

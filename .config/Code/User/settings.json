@@ -85,10 +85,6 @@
       "command": "editor.action.showDefinitionPreviewHover",
       "name": "show type"
     },
-    "SPC o o": {
-      "commands": ["workbench.action.quickOpen"],
-      "name": "quick open"
-    },
     "SPC w t": {
       "commands": [
         "workbench.action.compareEditor.focusOtherSide",

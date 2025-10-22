@@ -56,7 +56,6 @@
 !.config/extension_links/.psqlrc.unknown
 !.config/extension_links/.xsession.sh
 !.config/extension_links/.xsessionrc.sh
-!.config/extension_links/LICENSE.txt
 !.config/fontconfig/fonts.conf
 !.config/git/config
 !.config/git/dotfiles/.keep
@@ -257,7 +256,7 @@
 !.xsessionrc
 !Documents/.keep
 !Downloads/.keep
-!LICENSE
+!LICENSE.md
 !Music/.keep
 !Pictures/.keep
 !README.md

@@ -1,1 +1,0 @@
-../../../../.local/bin/paste_clipboard

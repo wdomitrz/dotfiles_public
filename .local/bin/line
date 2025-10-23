@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+set -eu
+
+line_number="$1"
+shift
+cat "$@" | head -n "${line_number}" | tail -n 1

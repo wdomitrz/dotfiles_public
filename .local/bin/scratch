@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+set -eu
+
+fp="$(mktemp)"
+chmod 600 "${fp}"
+echo "${fp}"
+exec "${EDITOR:-vim}" "${fp}" "$@"

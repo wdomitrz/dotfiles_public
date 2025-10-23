@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+set -eu
+
+script_name="$1"
+script_path="${HOME}"/.local/bin/"${script_name}"
+script_link=${HOME}/.config/extension_links/.local/bin/"${script_name}".sh
+
+if [ ! -e "${script_path}" ]; then
+  echo '#!/usr/bin/env sh
+set -eu
+
+' > "${script_path}"
+
+  chmod +x "${script_path}"
+fi
+
+ln -frs "${script_path}" "${script_link}"
+git --git-dir="${HOME}"/.git add --intent-to-add --force \
+  "${script_path}" "${script_link}"
+
+exec "${EDITOR:-vim}" "${script_path}"

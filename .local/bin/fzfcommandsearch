@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compgen -c | sort --unique | exec fzf --preview 'shopt -s expand_aliases; source ~/.bashrc; type {}'

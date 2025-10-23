@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -eu
+
+exec git log --all --graph --oneline --decorate --date-order "$@"

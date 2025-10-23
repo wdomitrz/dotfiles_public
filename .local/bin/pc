@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+set -eu
+
+case "$1" in
+  in) command='sudo apt-get install' ;;
+  ud) command='sudo apt-get update' ;;
+  ug) command='sudo apt-get dist-upgrade' ;;
+  yall) command='pcyall' ;;
+  ar) command='sudo apt-get autoremove --purge' ;;
+  pn) command='sudo apt-get purge' ;;
+  um) command='sudo apt-mark auto' ;;
+  cl) command='sudo apt-get clean' ;;
+  cal) command='sudo apt-get autoclean' ;;
+  sa) command='apt search' ;;
+  sf) command='apt-file search' ;;
+  lf) command='apt-file list' ;;
+  why) command='aptitude why' ;;
+  whynot) command='aptitude why-not' ;;
+  dep) command='apt-cache depends' ;;
+  depi) command='apt-cache depends --installed' ;;
+  rdep) command='apt-cache rdepends' ;;
+  rdepi) command='apt-cache rdepends --installed' ;;
+  si) command='apt list --installed' ;;
+  ls) command='apt list' ;;
+  sim) command='apt-mark showmanual' ;;
+  *) echo "Unsupported profile filter: $1" && return 1 ;;
+esac
+
+shift
+exec ${command} "$@"

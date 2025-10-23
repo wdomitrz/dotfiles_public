@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -eu
+
+("$@") 2> /dev/null

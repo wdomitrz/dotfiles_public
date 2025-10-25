@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
-set -eu
-
 temp_dir="$(mktemp -d)"
 chmod -R 0700 "${temp_dir}"
-cd "${temp_dir}"
+echo "${temp_dir}"
+cd "${temp_dir}" || false

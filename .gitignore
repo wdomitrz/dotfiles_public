@@ -1,6 +1,5 @@
 *
 !.Xclients
-!.bash_aliases
 !.bash_logout
 !.bashrc
 !.cache/.keep
@@ -19,7 +18,6 @@
 !.config/dpi/default_dpi_options.sorted_numeric.txt
 !.config/dunst/dunstrc
 !.config/extension_links/.Xclients.sh
-!.config/extension_links/.bash_aliases.sh
 !.config/extension_links/.bash_logout.sh
 !.config/extension_links/.bashrc.sh
 !.config/extension_links/.config/Code/User/keybindings.json.sorted.json

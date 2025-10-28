@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-fp="$(mktemp)"
+fp="$(mktemp --suffix="_scratch")"
 chmod 600 "${fp}"
 echo "${fp}"
 exec "${EDITOR:-vim}" "${fp}" "$@"

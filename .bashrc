@@ -116,7 +116,21 @@ if [[ -f "/usr/share/bash-completion/completions/fzf" ]]; then source /usr/share
 if [[ -f "/usr/share/fzf/completion.bash" ]]; then source /usr/share/fzf/completion.bash; fi
 
 # Aliases
-if [[ -f "${HOME}/.bash_aliases" ]]; then source "${HOME}/.bash_aliases"; fi
+if [[ -x /usr/bin/dircolors ]]; then
+  (test -r "${HOME}/.dircolors" && eval "$(dircolors --bourne-shell "${HOME}/.dircolors")") || eval "$(dircolors --bourne-shell)"
+fi
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# let aliases work after sudo (see http://askubuntu.com/a/22043)
+alias sudo='sudo '
+alias alert='alert '
+alias bb='bb '
+
+if [[ ${TERM-} == "alacritty" ]]; then alias clear='clear && printf "'"\E[3J"'"'; fi
+
+alias tempe='. ~/.local/bin/tempe'
 
 # Loading completed successfully
 true

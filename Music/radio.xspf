@@ -10,11 +10,19 @@
 			</extension>
 		</track>
 		<track>
+			<location>https://stream85.polskieradio.pl/live/rytm.sdp/playlist.m3u8</location>
+			<title>Chopin</title>
+			<duration>29951</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>1</vlc:id>
+			</extension>
+		</track>
+		<track>
 			<location>https://stream11.polskieradio.pl/pr1/pr1.sdp/playlist.m3u8</location>
 			<title>Jedynka</title>
 			<duration>29952</duration>
 			<extension application="http://www.videolan.org/vlc/playlist/0">
-				<vlc:id>1</vlc:id>
+				<vlc:id>2</vlc:id>
 			</extension>
 		</track>
 		<track>
@@ -22,7 +30,7 @@
 			<title>Dwójka</title>
 			<duration>30015</duration>
 			<extension application="http://www.videolan.org/vlc/playlist/0">
-				<vlc:id>2</vlc:id>
+				<vlc:id>3</vlc:id>
 			</extension>
 		</track>
 		<track>
@@ -30,7 +38,7 @@
 			<title>Trójka</title>
 			<duration>30016</duration>
 			<extension application="http://www.videolan.org/vlc/playlist/0">
-				<vlc:id>3</vlc:id>
+				<vlc:id>4</vlc:id>
 			</extension>
 		</track>
 		<track>
@@ -38,14 +46,14 @@
 			<title>Czwórka</title>
 			<duration>30015</duration>
 			<extension application="http://www.videolan.org/vlc/playlist/0">
-				<vlc:id>4</vlc:id>
+				<vlc:id>5</vlc:id>
 			</extension>
 		</track>
 		<track>
 			<location>https://rs101-krk.rmfstream.pl/rmf_fm</location>
 			<title>RMF FM</title>
 			<extension application="http://www.videolan.org/vlc/playlist/0">
-				<vlc:id>5</vlc:id>
+				<vlc:id>6</vlc:id>
 			</extension>
 		</track>
 	</trackList>
@@ -56,5 +64,6 @@
 		<vlc:item tid="3"/>
 		<vlc:item tid="4"/>
 		<vlc:item tid="5"/>
+		<vlc:item tid="6"/>
 	</extension>
 </playlist>

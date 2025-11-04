@@ -18,3 +18,5 @@
 
 [advice]
     detachedHead = false
+[push]
+    autoSetupRemote = true

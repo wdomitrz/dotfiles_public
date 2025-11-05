@@ -43,7 +43,7 @@ function lint_python_files() {
 
 function type_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
-    | xargs basedpyright --pythonversion 3.10 --project "${HOME}"/.config/python/pyproject.toml \
+    | xargs basedpyright --pythonversion 3.10 --project "$(git rev-parse --show-toplevel)"/.config/python/pyproject.toml \
     | not grep --invert-match "0 errors, 0 warnings, 0 notes"
 
 }
@@ -109,7 +109,8 @@ function gitignore_regenerate() {
 }
 
 function sanitize_synced_main() {
-  source "${HOME}"/.profile
+  source "$(git rev-parse --show-toplevel)"/.profile
+  cd "$(git rev-parse --show-toplevel)" || return 1
 
   run_and_save gitignore_regenerate
   run_and_save lint_sources_files

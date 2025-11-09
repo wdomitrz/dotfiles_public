@@ -53,8 +53,12 @@ bind -m vi-command -x '"dd": kill_line_to_clipboard'
 if ! shopt -oq posix; then
   if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     source /usr/share/bash-completion/bash_completion
-  elif [[ -f /etc/bash_completion ]]; then
+  fi
+  if [[ -f /etc/bash_completion ]]; then
     source /etc/bash_completion
+  fi
+  if [[ -f /opt/homebrew/etc/bash_completion ]]; then
+    source /opt/homebrew/etc/bash_completion
   fi
 fi
 
@@ -91,7 +95,8 @@ ${PATH_COLOR}\w${CLEAR}\n\
 ${PROMPT_COLOR}\$${CLEAR} "
 
 ## Git
-if source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2> /dev/null \
+if source /opt/homebrew/etc/bash_completion.d/git-prompt.sh 2> /dev/null \
+  || source "${HOME}/.local/share/git-core/contrib/completion/git-prompt.sh" 2> /dev/null \
   || source /usr/lib/git-core/git-sh-prompt 2> /dev/null \
   || source /usr/share/git-core/contrib/completion/git-prompt.sh 2> /dev/null; then
 
@@ -108,12 +113,18 @@ fi
 
 PS1="${PROMPT_FRONT}${PROMPT_BACK}"
 
-# Improved search backwards
+# fzf - improved search backwards and completion
+## v1
 if [[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ]]; then source /usr/share/doc/fzf/examples/key-bindings.bash; fi
-if [[ -f "/usr/share/fzf/key-bindings.bash" ]]; then source /usr/share/fzf/key-bindings.bash; fi
-# Searching files and other completions (for example with `cat **<Tab>`, and processes with `kill -9 <Tab>`)
 if [[ -f "/usr/share/bash-completion/completions/fzf" ]]; then source /usr/share/bash-completion/completions/fzf; fi
+## v2
+if [[ -f "/usr/share/fzf/key-bindings.bash" ]]; then source /usr/share/fzf/key-bindings.bash; fi
 if [[ -f "/usr/share/fzf/completion.bash" ]]; then source /usr/share/fzf/completion.bash; fi
+## v3
+if [[ -n "$(brew --prefix fzf 2> /dev/null)" ]]; then
+  if [[ -f "$(brew --prefix fzf)/shell/key-bindings.bash" ]]; then source "$(brew --prefix fzf)/shell/key-bindings.bash"; fi
+  if [[ -f "$(brew --prefix fzf)/shell/completion.bash" ]]; then source "$(brew --prefix fzf)/shell/completion.bash"; fi
+fi
 
 # Aliases
 if [[ -x /usr/bin/dircolors ]]; then

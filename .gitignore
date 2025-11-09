@@ -109,6 +109,7 @@
 !.config/i3/config
 !.config/i3/my_auto_run.sh
 !.config/i3status/config
+!.config/karabiner/karabiner.json
 !.config/mimeapps.list
 !.config/nvim/init.vim
 !.config/nvim/theme.lua

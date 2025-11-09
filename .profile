@@ -9,6 +9,7 @@ if [ -d "${HOME}/.local/bin" ]; then export PATH="${HOME}/.local/bin:${PATH}"; f
 # homebrew
 if [ -d "${HOME}/.linuxbrew" ]; then eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"; fi
 if [ -d "/opt/homebrew" ]; then eval "$("/opt/homebrew/bin/brew" shellenv)"; fi
+if [ -d "${HOME}/.local/bin" ]; then export PATH="/opt/homebrew/opt/findutils/libexec/gnubin/:${PATH}"; fi
 # ghcup
 if [ -f "${HOME}/.ghcup/env" ]; then . "${HOME}/.ghcup/env"; fi
 # Ruby
@@ -26,6 +27,7 @@ export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
 export GTK_A11Y=none
+export HOMEBREW_NO_ANALYTICS=1
 
 if [ -f "${HOME}/.local/bin/setup_scratch.sh" ]; then . "${HOME}/.local/bin/setup_scratch.sh"; fi
 

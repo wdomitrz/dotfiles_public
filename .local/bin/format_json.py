@@ -3,6 +3,10 @@
 # Copyright (c) 2025 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
+#
+# /// script
+# requires-python = ">=3.12"
+# ///
 
 import argparse
 import json

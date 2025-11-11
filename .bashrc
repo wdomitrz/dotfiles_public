@@ -143,5 +143,11 @@ if [[ ${TERM-} == "alacritty" ]]; then alias clear='clear && printf "'"\E[3J"'"'
 
 alias tempe='. ~/.local/bin/tempe'
 
+function pcyall() {
+  sudo apt-get update --yes \
+    && sudo apt-get dist-upgrade --yes \
+    && sudo apt-get autoremove --purge --yes
+}
+
 # Loading completed successfully
 true

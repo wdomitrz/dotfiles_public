@@ -60,7 +60,6 @@
 !.config/extension_links/.local/bin/not_sudo.sh
 !.config/extension_links/.local/bin/pasta.sh
 !.config/extension_links/.local/bin/pc.sh
-!.config/extension_links/.local/bin/pcyall.sh
 !.config/extension_links/.local/bin/pint.sh
 !.config/extension_links/.local/bin/scratch.sh
 !.config/extension_links/.local/bin/tempe.sh
@@ -203,7 +202,6 @@
 !.local/bin/not_sudo
 !.local/bin/pasta
 !.local/bin/pc
-!.local/bin/pcyall
 !.local/bin/pint
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh

@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-set -eu
-
-sudo apt-get update --yes \
-  && sudo apt-get dist-upgrade --yes \
-  && sudo apt-get autoremove --purge --yes

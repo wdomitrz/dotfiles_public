@@ -1,9 +1,0 @@
-Enabled: no
-Types: deb
-URIs: https://dl.cloudsmith.io/public/caddy/stable/deb/debian
-Suites: any-version
-Components: main
-Architectures: amd64
-key_source: https://dl.cloudsmith.io/public/caddy/stable/gpg.key
-package_source: https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt
-packages_to_install: caddy

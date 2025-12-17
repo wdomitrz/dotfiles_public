@@ -1,8 +1,8 @@
 Enabled: no
 Types: deb
 URIs: https://pkgs.tailscale.com/stable/debian
-Suites: bookworm
+Suites: trixie
 Components: main
-key_source: https://pkgs.tailscale.com/stable/debian/bookworm.asc
+key_source: https://pkgs.tailscale.com/stable/debian/trixie.asc
 package_source: https://tailscale.com/install.sh
 packages_to_install: tailscale

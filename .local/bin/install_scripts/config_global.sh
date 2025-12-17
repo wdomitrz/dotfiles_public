@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 function copy_global_configs() {
-  check_integrity_of_tracked_dir.sh "${HOME}"/.config/global_configs \
+  check_integrity_of_tracked_dir.sh "${HOME}"/.config/etc \
     && sudo cp --update --backup=numbered --verbose --recursive \
-      "${HOME}"/.config/global_configs/. /
+      "${HOME}"/.config/etc/. /etc/
 }
 
 function regenerate_grub_post_config_copy() {

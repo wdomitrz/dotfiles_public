@@ -42,9 +42,9 @@ bindsym $mod+v              split toggle
 # enter fullscreen mode for the focused container
 bindsym $mod+f              fullscreen toggle
 # toggle tiling / floating
-bindsym $mod+Shift+space    floating toggle
+bindsym $mod+Shift+w        floating toggle
 # change focus between tiling / floating windows
-bindsym $mod+space          focus mode_toggle
+bindsym $mod+w              focus mode_toggle
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+s        move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
@@ -153,7 +153,8 @@ bindsym $mod+Shift+a        exec --no-startup-id    dunstctl context
 # Adjust display
 bindsym $mod+x              exec --no-startup-id    i3_xrl
 # Program launcher
-bindsym $mod+d              exec --no-startup-id    run_menu.sh || i3-dmenu-desktop
+bindsym $mod+d              exec --no-startup-id    run_menu.sh
+bindsym $mod+space          exec --no-startup-id    run_menu.sh
 # Application switcher
 bindsym $mod+s              exec --no-startup-id    rofi -show window
 # Lock screen

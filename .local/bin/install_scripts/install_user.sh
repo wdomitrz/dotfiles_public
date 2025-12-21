@@ -9,20 +9,14 @@ function install_nvim() {
   install_nvim_given_locations "${HOME}"/.local/opt "${HOME}"/.local/bin not_sudo
 }
 
-wallpapers_directory_base="${HOME}"/.local/share/backgrounds
-function download_sequoia_wallpaper() {
-  wget_with_defaults.sh 'https://drive.usercontent.google.com/download?id=1g9TyTAv2Xw_zyAOyRS_hAdI2wq3SU44q&export=download&authuser=0' \
-    | pv | sponge "${wallpapers_directory_base}"/backgrounds_both.dir/Sequoia-Sunrise.heic
-}
-
 function install_uv() {
   wget_with_defaults.sh --max-redirect=3 https://astral.sh/uv/install.sh | sh
 }
 
 function install_python_tools() {
   install_uv
-  uv tool install basedpyright
-  uv tool install ruff
+  uv tool install basedpyright --force
+  uv tool install ruff --force
 }
 
 function install_doc() {
@@ -76,7 +70,6 @@ function install_user_main() {
   install_python_tools
   install_rmz_and_cpz
   install_nvim_plugins
-  download_sequoia_wallpaper
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

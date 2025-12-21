@@ -79,6 +79,7 @@ gnome-keyring
 gnome-multi-writer
 gnome-screenshot
 gnome-sound-recorder
+gnome-sudoku
 gnome-system-monitor
 gnome-themes-extra
 gparted

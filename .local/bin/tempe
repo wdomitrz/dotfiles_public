@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-temp_dir="$(mktemp -d --suffix=_tempe)"
-chmod -R 0700 "${temp_dir}"
-echo "${temp_dir}"
-cd "${temp_dir}" || false

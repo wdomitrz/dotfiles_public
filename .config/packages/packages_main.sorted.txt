@@ -119,6 +119,7 @@ modemmanager
 moreutils
 nautilus
 nautilus-admin
+ncat
 ncdu
 neovim
 net-tools

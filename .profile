@@ -7,7 +7,7 @@ if [ -d "${HOME}/bin" ]; then export PATH="${HOME}/bin:${PATH}"; fi
 if [ -d "${HOME}/.local/bin" ]; then export PATH="${HOME}/.local/bin:${PATH}"; fi
 
 # homebrew
-if [ -d "${HOME}/.linuxbrew" ]; then eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"; fi
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
 if [ -d "/opt/homebrew" ]; then eval "$("/opt/homebrew/bin/brew" shellenv)"; fi
 if [ -d "${HOME}/.local/bin" ]; then export PATH="/opt/homebrew/opt/findutils/libexec/gnubin/:${PATH}"; fi
 # ghcup

@@ -56,11 +56,6 @@ function install_packages_external() {
     vscode.sources
 }
 
-function install_chrome_remote_desktop() {
-  enable_sources_and_install_packages chrome_remote_desktop.sources
-  echo "Configure Chrome Remote Desktop at" "https://remotedesktop.google.com/headless"
-}
-
 function not_sudo() {
   "$@"
 }
@@ -80,6 +75,10 @@ function install_to_given_location() {
       --directory="${save_dir}"
 
   "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/"${relative_binary_path}" "${link_dir}"/
+}
+
+function no_graphical_target() {
+  sudo systemctl set-default multi-user.target
 }
 
 function install_nvim_given_locations() {

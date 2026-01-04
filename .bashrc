@@ -131,8 +131,13 @@ if [[ -x /usr/bin/dircolors ]]; then
   (test -r "${HOME}/.dircolors" && eval "$(dircolors --bourne-shell "${HOME}/.dircolors")") || eval "$(dircolors --bourne-shell)"
 fi
 
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+alias l='ls --color=auto -C'
+alias la='ls --color=auto -la'
+alias ll='ls --color=auto -l'
+
+alias pint='ping 8.8.8.8'
 
 # let aliases work after sudo (see http://askubuntu.com/a/22043)
 alias sudo='sudo '
@@ -141,13 +146,36 @@ alias bb='bb '
 
 if [[ ${TERM-} == "alacritty" ]]; then alias clear='clear && printf "'"\E[3J"'"'; fi
 
-alias tempe='. ~/.local/bin/tempe'
+function tempe() {
+  temp_dir="$(mktemp -d --suffix=_tempe)"
+  chmod -R 0700 "${temp_dir}"
+  echo "${temp_dir}"
+  cd "${temp_dir}" || false
+}
 
+# Package manager
 function pcyall() {
   sudo apt-get update --yes \
     && sudo apt-get dist-upgrade --yes \
     && sudo apt-get autoremove --purge --yes
 }
+alias pcin='sudo apt-get install'
+alias pcud='sudo apt-get update'
+alias pcug='sudo apt-get dist-upgrade'
+alias pcar='sudo apt-get autoremove --purge'
+alias pcum='sudo apt-mark auto'
+alias pcsa='apt search'
+alias pcsf='apt-file search'
+alias pclf='apt-file list'
+alias pcwhy='aptitude why'
+alias pcwhyn='aptitude why-not'
+alias pcdep='apt-cache depends'
+alias pcdepi='apt-cache depends --installed'
+alias pcrdep='apt-cache rdepends'
+alias pcrdepi='apt-cache rdepends --installed'
+alias pcsi='apt list --installed'
+alias pcls='apt list'
+alias pcsim='apt-mark showmanual'
 
 # Loading completed successfully
 true

@@ -23,7 +23,6 @@
 !.config/etc/apt/apt.conf.d/98_no_recommends
 !.config/etc/apt/apt.conf.d/98_no_suggests
 !.config/etc/apt/sources.list
-!.config/etc/apt/sources.list.d/chrome_remote_desktop.sources
 !.config/etc/apt/sources.list.d/debian.sources
 !.config/etc/apt/sources.list.d/google_chrome.sources
 !.config/etc/apt/sources.list.d/nordvpn.sources
@@ -71,20 +70,14 @@
 !.config/extension_links/.local/bin/gla.sh
 !.config/extension_links/.local/bin/i3_res.sh
 !.config/extension_links/.local/bin/i3_xrl.sh
-!.config/extension_links/.local/bin/l.sh
-!.config/extension_links/.local/bin/la.sh
 !.config/extension_links/.local/bin/line.sh
-!.config/extension_links/.local/bin/ll.sh
 !.config/extension_links/.local/bin/lock.sh
 !.config/extension_links/.local/bin/lower.sh
 !.config/extension_links/.local/bin/mksh.sh
 !.config/extension_links/.local/bin/not.sh
 !.config/extension_links/.local/bin/not_sudo.sh
 !.config/extension_links/.local/bin/pasta.sh
-!.config/extension_links/.local/bin/pc.sh
-!.config/extension_links/.local/bin/pint.sh
 !.config/extension_links/.local/bin/scratch.sh
-!.config/extension_links/.local/bin/tempe.sh
 !.config/extension_links/.local/bin/terminal_pager.sh
 !.config/extension_links/.local/bin/timer.sh
 !.config/extension_links/.local/bin/today.sh
@@ -189,11 +182,8 @@
 !.local/bin/install_scripts/install_user.sh
 !.local/bin/install_scripts/main.sh
 !.local/bin/kill_others_with_given_name.sh
-!.local/bin/l
-!.local/bin/la
 !.local/bin/line
 !.local/bin/list_backgrounds.sh
-!.local/bin/ll
 !.local/bin/lock
 !.local/bin/lower
 !.local/bin/mksh
@@ -201,8 +191,6 @@
 !.local/bin/not
 !.local/bin/not_sudo
 !.local/bin/pasta
-!.local/bin/pc
-!.local/bin/pint
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh
 !.local/bin/propagate_config_to.sh
@@ -230,7 +218,6 @@
 !.local/bin/sleep_forever.sh
 !.local/bin/start_docker_server.sh
 !.local/bin/sync_backup.sh
-!.local/bin/tempe
 !.local/bin/terminal_pager
 !.local/bin/timer
 !.local/bin/today

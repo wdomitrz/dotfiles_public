@@ -18,7 +18,7 @@ function update_to_local_copy() {
   git checkout "${local_public_branch}" -- "$(git rev-parse --show-toplevel)"
   git diff "${local_public_branch}" --name-only --diff-filter=A \
     | xargs --no-run-if-empty git rm
-  git commit --message="some changes"
+  git commit --message="_"
 }
 
 function compare_with_local_copy() {

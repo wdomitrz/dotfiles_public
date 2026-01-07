@@ -50,7 +50,6 @@
 !.config/extension_links/.config/etc/default/google-chrome.ini
 !.config/extension_links/.config/etc/default/grub.conf
 !.config/extension_links/.config/etc/default/keyboard.conf
-!.config/extension_links/.config/etc/default/tailscaled.conf
 !.config/extension_links/.config/etc/network/interfaces.conf
 !.config/extension_links/.config/git/config.ini
 !.config/extension_links/.config/i3/config.conf

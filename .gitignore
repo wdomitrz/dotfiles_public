@@ -83,6 +83,7 @@
 !.config/extension_links/.local/bin/upper.sh
 !.config/extension_links/.local/bin/vim.sh
 !.config/extension_links/.local/bin/vimdiff.sh
+!.config/extension_links/.local/bin/xterm.sh
 !.config/extension_links/.npmrc.ini
 !.config/extension_links/.profile.sh
 !.config/extension_links/.psqlrc.unknown

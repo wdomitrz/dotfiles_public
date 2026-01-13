@@ -14,7 +14,7 @@ function lint_sources_files() {
       echo "${f} is not signed, and doesn't have a key_source" && return 1
     fi
     if grep --quiet '^Enabled: yes$' "${f}" \
-      && grep --quiet '^Signed-By:' "${f}"; then
+      && (! grep --quiet '^Signed-By:' "${f}"); then
       echo "${f} is enabled, but not signed" && return 1
     fi
   done
@@ -66,27 +66,48 @@ function get_all_files_covered_by_extension_links() {
     | sed "s|^$(pwd)/||g"
 }
 
-function dangling_extension_links() {
+function cleanup_extension_links() {
   for file in $(git-ls \
     | grep ".config/extension_links/"); do
-    [[ -L ${file} ]] || continue # Process only links
-    readlink -f "${file}" > /dev/null \
-      || echo "${file}"
+    [[ -L ${file} ]] || continue
+    local target
+    target="$(readlink -f "${file}")"
+    local relative_target
+    relative_target="$(realpath --relative-to="$(pwd)" "${target}")"
+    if [[ ! -e ${target} ]] || [[ ! -f ${target} ]] || [[ ${relative_target} == ".config/extension_links/"* ]]; then
+      git rm --force "${file}"
+    fi
   done
 }
 
-function lint_extension_links() {
-  dangling_extension_links | not grep "?*"
+function create_extension_links() {
+  local git_root
+  git_root="$(git rev-parse --show-toplevel)"
+  local extension_links_dir=".config/extension_links"
 
-  get_all_files_covered_by_extension_links \
-    | (grep "^.config/extension_links/" || true) \
-    | not grep "?*"
+  while IFS= read -r file; do
+    [[ -z ${file} ]] && continue
+    local link_path="${extension_links_dir}/${file}.unknown"
+    local link_dir
+    link_dir="$(dirname "${link_path}")"
 
-  comm -23 <(
+    local depth
+    depth="$(echo "${link_path}" | tr -cd '/' | wc -c)"
+    local prefix=""
+    for ((i = 0; i < depth; i++)); do
+      prefix="../${prefix}"
+    done
+
+    mkdir -p "${git_root}/${link_dir}"
+
+    echo "Creating extension link: ${link_path} -> ${prefix}${file}"
+    ln -s "${prefix}${file}" "${git_root}/${link_path}"
+    git add --force --intent-to-add "${link_path}"
+  done < <(comm -23 <(
     get_all_files_without_extensions | sort
   ) <(
     get_all_files_covered_by_extension_links | sort
-  ) | not grep "?*"
+  ))
 }
 
 # Parallel execution with tracking processes ###################################
@@ -115,7 +136,8 @@ function sanitize_synced_main() {
   run_and_save gitignore_regenerate
   run_and_save lint_sources_files
   run_and_save lint_python_files
-  run_and_save lint_extension_links
+  run_and_save cleanup_extension_links
+  run_and_save create_extension_links
   run_and_save lint_shell_files
   run_and_save format_all_files
   run_and_save type_python_files

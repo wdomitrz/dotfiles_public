@@ -1,1 +1,2 @@
-/usr/bin/kitty
+#!/usr/bin/env bash
+exec -a "$0" "${TERMINAL:-/usr/bin/xterm}" "$@"

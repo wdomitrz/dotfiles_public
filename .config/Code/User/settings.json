@@ -10,6 +10,7 @@
   "cSpell.diagnosticLevel": "Hint",
   "cSpell.language": "en,pl",
   "cSpell.useGitignore": false,
+  "chat.disableAIFeatures": true,
   "custom-format.formatters": [
     { "command": "format.sh stdin --filename $FILE", "language": "plaintext" },
     { "command": "format.sh stdin --filetype c", "language": "c" },

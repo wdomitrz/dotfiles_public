@@ -52,7 +52,6 @@
   },
   "extensions.ignoreRecommendations": true,
   "files.associations": { "**/i3/config": "i3" },
-  "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "files.simpleDialog.enable": true,

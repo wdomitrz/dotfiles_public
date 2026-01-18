@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
 settings_file="${HOME}/.config/Code/User/settings.json"
 if [[ $# -ge 1 ]]; then
   settings_file="$1"

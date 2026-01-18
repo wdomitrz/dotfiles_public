@@ -67,8 +67,8 @@ function config_user_main() {
   compile_glib_schemas
   update_tldr
   configure_nautilus_open_terminal
-  install_code_extensions.sh
   set_theme.sh dark
+  install_code_extensions.sh || true
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

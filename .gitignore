@@ -89,6 +89,7 @@
 !.config/extension_links/.npmrc.ini
 !.config/extension_links/.profile.sh
 !.config/extension_links/.psqlrc.unknown
+!.config/extension_links/.sudo_as_admin_successful.unknown
 !.config/extension_links/.xsession.sh
 !.config/extension_links/.xsessionrc.sh
 !.config/fontconfig/fonts.conf
@@ -283,6 +284,7 @@
 !.npmrc
 !.profile
 !.psqlrc
+!.sudo_as_admin_successful
 !.vscode-server/data/Machine
 !.vscode-server/extensions
 !.vscode/extensions/.keep

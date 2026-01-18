@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -eu
 
-exec uvx ruff "$@"
+exec uvx --quiet ruff "$@"

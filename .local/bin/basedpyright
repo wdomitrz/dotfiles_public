@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -eu
 
-exec uvx basedpyright "$@"
+exec uvx --quiet basedpyright "$@"

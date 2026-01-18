@@ -13,12 +13,6 @@ function install_uv() {
   wget_with_defaults.sh --max-redirect=3 https://astral.sh/uv/install.sh | sh
 }
 
-function install_python_tools() {
-  install_uv
-  uv tool install basedpyright --force
-  uv tool install ruff --force
-}
-
 function install_doc() {
   local url="$1"
   local name="$2"
@@ -67,7 +61,7 @@ function install_user_main() {
   set -euo pipefail
   set -x
 
-  install_python_tools
+  install_uv
   install_rmz_and_cpz
   install_nvim_plugins
 }

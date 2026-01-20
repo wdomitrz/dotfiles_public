@@ -36,6 +36,7 @@ function get_binary_from() {
   wget_with_defaults.sh "$@" "${url}" > "${file_path}"
   if ! echo "${checksum_sha256} ${file_path}" | sha256sum --check; then
     echo "Wrong checksum for ${url}"
+    rm --force "${file_path}"
     return 1
   fi
 

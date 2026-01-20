@@ -33,17 +33,7 @@ function enable_32_bit_architecture() {
 }
 
 function update_locales() {
-  echo "locales locales/default_environment_locale select en_US.UTF-8" \
-    | sudo debconf-set-selections
-  echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8, pl_PL.UTF-8 UTF-8" \
-    | sudo debconf-set-selections
-  sudo rm --force --verbose "/etc/locale.gen"
   sudo dpkg-reconfigure --frontend noninteractive locales
-}
-
-function configure_external_power_sleep() {
-  sudo sed --in-place=".bck" --regexp-extended "s/^#?(HandleLidSwitchExternalPower)\s*=\s*[a-z]*/\1=lock/g" /etc/systemd/logind.conf
-  sudo sed --in-place=".bck" --regexp-extended "s/^#?(HandleLidSwitchDocked)\s*=\s*[a-z]*/\1=lock/g" /etc/systemd/logind.conf
 }
 
 function create_swap_file() {

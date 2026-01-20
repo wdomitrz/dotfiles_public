@@ -34,10 +34,12 @@
 !.config/etc/default/keyboard
 !.config/etc/docker/daemon.json
 !.config/etc/grub.d/99_my_theme.sh
+!.config/etc/locale.gen
 !.config/etc/modprobe.d/hid_apple.conf
 !.config/etc/modprobe.d/iwlwifi.conf
 !.config/etc/network/interfaces
 !.config/etc/ssh/sshd_config.d/01_my_sshd.conf
+!.config/etc/systemd/logind.conf
 !.config/etc/tlp.d/90_tlp_battery_threshold.conf
 !.config/extension_links/.Xclients.sh
 !.config/extension_links/.bash_logout.sh

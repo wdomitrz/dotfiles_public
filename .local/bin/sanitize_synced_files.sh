@@ -68,12 +68,13 @@ function get_all_files_covered_by_extension_links() {
 function cleanup_extension_links() {
   for file in $(git-ls \
     | grep ".config/extension_links/"); do
-    [[ -L ${file} ]] || continue
+    if [[ ! -L ${file} ]]; then
+      git rm --force "${file}"
+      continue
+    fi
     local target
     target="$(readlink -f "${file}")"
-    local relative_target
-    relative_target="$(realpath --relative-to="$(pwd)" "${target}")"
-    if [[ ! -e ${target} ]] || [[ ! -f ${target} ]] || [[ ${relative_target} == ".config/extension_links/"* ]]; then
+    if [[ ! -e ${target} ]] || [[ ! -f ${target} ]]; then
       git rm --force "${file}"
     fi
   done

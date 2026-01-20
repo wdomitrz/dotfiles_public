@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
+source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
 
 function update_and_upgrade() {
-  sudo apt-get update --yes \
-    && sudo apt-get dist-upgrade --yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get update --yes --quiet=2 \
+    && sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --yes --quiet=2
 }
 
 function install_packages_from() {
   packages_file="$1"
-  xargs sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends < "${packages_file}"
+  xargs sudo DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes --quiet=2 < "${packages_file}"
 }
 
 function install_packages_from_main() {
@@ -20,24 +22,23 @@ function install_packages_from_other() {
 
 function install_packages_from_nvidia() {
   if ! (lspci | grep --quiet --ignore-case nvidia); then
-    echo "nvidia driver not needed"
     return 0
+  else
+    install_packages_from "${HOME}"/.config/packages/packages_nvidia.sorted.txt
   fi
-  install_packages_from "${HOME}"/.config/packages/packages_nvidia.sorted.txt
 }
 
 function install_packages_main() {
   set -euo pipefail
-  set -x
   source "${HOME}"/.local/bin/install_scripts/config_global.sh --source-only
 
-  copy_global_configs
-  update_and_upgrade
-  install_packages_from_main
-  config_global_start
-  update_and_upgrade
-  install_packages_from_other
-  install_packages_from_nvidia
+  print_and_run copy_global_configs
+  print_and_run update_and_upgrade
+  print_and_run install_packages_from_main
+  print_and_run config_global_start
+  print_and_run update_and_upgrade
+  print_and_run install_packages_from_other
+  print_and_run install_packages_from_nvidia
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

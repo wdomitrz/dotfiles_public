@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
+source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
 
 function install_deb_from_url() {
   link="$1"
   package_file="$(mktemp /tmp/XXXXXX.deb)"
   wget_with_defaults.sh --max-redirect=1 "${link}" > "${package_file}"
-  sudo apt-get install --yes --no-install-recommends "${package_file}"
+  sudo DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes --quiet=2 "${package_file}"
   rm "${package_file}"
 }
 
@@ -13,7 +15,6 @@ function enable_source_and_list_packages() {
   sources_file=/etc/apt/sources.list.d/"$1"
 
   if grep --quiet '^Enabled: yes$' "${sources_file}"; then
-    echo 1>&2 "${sources_file} already enabled"
     return 0
   fi
   if grep --quiet '^Signed-By:$' "${sources_file}"; then
@@ -43,8 +44,9 @@ function enable_sources_and_install_packages() {
   done
   read -r -a packages_to_install <<< "${packages_to_install}"
 
-  sudo apt-get update --yes \
-    && sudo apt-get install --yes --no-install-recommends "${packages_to_install[@]}"
+  sudo DEBIAN_FRONTEND=noninteractive apt-get update --yes --quiet=2 \
+    && sudo DEBIAN_FRONTEND=noninteractive \
+      apt-get install --yes --quiet=2 "${packages_to_install[@]}"
 }
 
 function install_packages_external() {
@@ -72,7 +74,8 @@ function install_to_given_location() {
   wget_with_defaults.sh --max-redirect=1 "${url}" \
     | "${sudo_or_not_sudo}" tar --extract \
       "${decompression_option}" \
-      --directory="${save_dir}"
+      --directory="${save_dir}" \
+      --no-show-progress
 
   "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/"${relative_binary_path}" "${link_dir}"/
 }
@@ -97,12 +100,11 @@ function install_system_nvim() {
 
 function install_global_main() {
   set -euo pipefail
-  set -x
   source "${HOME}"/.local/bin/install_scripts/install_packages.sh --source-only
 
-  install_packages_external
-  install_system_nvim
-  update_and_upgrade
+  print_and_run install_packages_external
+  print_and_run install_system_nvim
+  print_and_run update_and_upgrade
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

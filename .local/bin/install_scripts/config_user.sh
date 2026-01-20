@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
 
 function copy_user_configs() {
   check_integrity_of_tracked_dir.sh "${HOME}"/.config/user_configs \
-    && cp --update --backup=numbered --verbose --recursive \
+    && cp --update --backup=numbered --recursive \
       "${HOME}"/.config/user_configs/. "${HOME}"/
 }
 
@@ -21,10 +22,6 @@ function set_shell() {
 
 function set_shell_bash() {
   set_shell /usr/bin/bash
-}
-
-function update_tldr() {
-  tldr --update
 }
 
 function add_bookmarks() {
@@ -51,24 +48,22 @@ function configure_nautilus_open_terminal() {
 
 function disable_screen_ai_for_chrome() {
   chrom_screen_ai_path="${HOME}"/.config/google-chrome/screen_ai/
-  rm --force --recursive --verbose "${chrom_screen_ai_path}"
+  rm --force --recursive "${chrom_screen_ai_path}"
   mkdir --parents "${chrom_screen_ai_path}"
   chmod 000 "${chrom_screen_ai_path}"
 }
 
 function config_user_main() {
   set -euo pipefail
-  set -x
 
-  copy_user_configs
-  copy_git_hooks
-  disable_screen_ai_for_chrome
-  set_shell_bash
-  compile_glib_schemas
-  update_tldr
-  configure_nautilus_open_terminal
-  set_theme.sh dark
-  install_code_extensions.sh || true
+  print_and_run copy_user_configs
+  print_and_run copy_git_hooks
+  print_and_run disable_screen_ai_for_chrome
+  print_and_run set_shell_bash
+  print_and_run compile_glib_schemas
+  print_and_run configure_nautilus_open_terminal
+  print_and_run set_theme.sh dark
+  print_and_run install_code_extensions.sh || true
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

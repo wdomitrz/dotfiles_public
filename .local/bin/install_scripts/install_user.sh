@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
 
 function install_haskell_ghcup() {
   curl --fail --progress-bar --show-error --location --proto '=https' --tlsv1.2 https://get-ghcup.haskell.org | sh
@@ -10,7 +11,8 @@ function install_nvim() {
 }
 
 function install_uv() {
-  wget_with_defaults.sh --max-redirect=3 https://astral.sh/uv/install.sh | sh
+  wget_with_defaults.sh --max-redirect=3 --no-show-progress https://astral.sh/uv/install.sh \
+    | sh -s -- --quiet
 }
 
 function install_doc() {
@@ -34,7 +36,7 @@ function get_binary_from() {
 
   file_path="${HOME}/.local/bin/${name}"
   wget_with_defaults.sh "$@" "${url}" > "${file_path}"
-  if ! echo "${checksum_sha256} ${file_path}" | sha256sum --check; then
+  if ! echo "${checksum_sha256} ${file_path}" | sha256sum --check --quiet; then
     echo "Wrong checksum for ${url}"
     rm --force "${file_path}"
     return 1
@@ -47,11 +49,11 @@ function install_rmz_and_cpz() {
   get_binary_from rmz \
     "54f643c6ba170d613c65c48697000faf68d9c77611c10458ea5b1eac99799d25" \
     "https://github.com/SUPERCILEX/fuc/releases/download/3.0.1/x86_64-unknown-linux-gnu-rmz" \
-    --max-redirect=1
+    --max-redirect=1 --no-show-progress
   get_binary_from cpz \
     "cf8147eda901948c643975e3c29d4b10db9fbfdc475585d57f1446dfaa2fa16f" \
     "https://github.com/SUPERCILEX/fuc/releases/download/3.0.1/x86_64-unknown-linux-gnu-cpz" \
-    --max-redirect=1
+    --max-redirect=1 --no-show-progress
 }
 
 function install_nvim_plugins() {
@@ -60,11 +62,10 @@ function install_nvim_plugins() {
 
 function install_user_main() {
   set -euo pipefail
-  set -x
 
-  install_uv
-  install_rmz_and_cpz
-  install_nvim_plugins
+  print_and_run install_uv
+  print_and_run install_rmz_and_cpz
+  print_and_run install_nvim_plugins
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

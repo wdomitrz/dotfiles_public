@@ -121,6 +121,7 @@
 !.config/ruff/pyproject.toml
 !.config/set_audio/.keep
 !.config/set_audio/x1.txt
+!.config/tealdeer/config.toml
 !.config/theme/theme_dark.txt
 !.config/theme/theme_light.txt
 !.config/tmux/tmux.conf

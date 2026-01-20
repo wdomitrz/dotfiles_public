@@ -1,28 +1,24 @@
 #!/usr/bin/env bash
+source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
 
 function copy_global_configs() {
   check_integrity_of_tracked_dir.sh "${HOME}"/.config/etc \
-    && sudo cp --update --backup=numbered --verbose --recursive \
+    && sudo cp --update --backup=numbered --recursive \
       "${HOME}"/.config/etc/. /etc/
 }
 
 function regenerate_grub_post_config_copy() {
-  sudo update-initramfs -u
-  sudo update-grub
+  sudo update-initramfs -u > /dev/null
+  sudo update-grub 2> /dev/null
 }
 
 function reconfigure_tlp_post_config_copy() {
   sudo systemctl restart tlp || true
 }
 
-function todo_post_global_configs_copy() {
-  regenerate_grub_post_config_copy
-  reconfigure_tlp_post_config_copy
-}
-
 function add_user_to_groups() {
   for group in sudo audio video users netdev bluetooth docker lpadmin nordvpn kvm input uinput libvirt; do
-    sudo groupadd "${group}" || true
+    sudo groupadd --force "${group}"
     sudo usermod --append --groups "${group}" "${USER}" \
       || echo "Adding to ${group} failed"
   done
@@ -33,7 +29,7 @@ function enable_32_bit_architecture() {
 }
 
 function update_locales() {
-  sudo dpkg-reconfigure --frontend noninteractive locales
+  sudo dpkg-reconfigure --frontend noninteractive locales 2> /dev/null
 }
 
 function create_swap_file() {
@@ -65,19 +61,6 @@ function nordvpn_with_tailscale() {
   nordvpn whitelist add subnet 100.64.0.0/10
 }
 
-function config_global_start() {
-  copy_global_configs
-  update_locales
-  enable_32_bit_architecture
-}
-
-function config_global_rest() {
-  todo_post_global_configs_copy
-  add_user_to_groups
-  udisk_allow_operations
-  create_swap_file
-}
-
 function configure_tpm2_non_root_disk_unlock() {
   echo "Don't use this function" && exit 1
 
@@ -96,12 +79,29 @@ function configure_tpm2_non_root_disk_unlock() {
   sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/nvme0n1p3
 }
 
+function todo_post_global_configs_copy() {
+  print_and_run regenerate_grub_post_config_copy
+  print_and_run reconfigure_tlp_post_config_copy
+}
+
+function config_global_start() {
+  print_and_run copy_global_configs
+  print_and_run update_locales
+  print_and_run enable_32_bit_architecture
+}
+
+function config_global_rest() {
+  print_and_run todo_post_global_configs_copy
+  print_and_run add_user_to_groups
+  print_and_run udisk_allow_operations
+  print_and_run create_swap_file
+}
+
 function config_global_main() {
   set -euo pipefail
-  set -x
 
   # Only the part that is not used in install_packages
-  config_global_rest
+  print_and_run config_global_rest
 }
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then

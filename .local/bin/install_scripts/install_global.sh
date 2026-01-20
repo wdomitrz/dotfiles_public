@@ -71,11 +71,10 @@ function install_to_given_location() {
 
   "${sudo_or_not_sudo}" mkdir --parents "${save_dir}" "${link_dir}"
 
-  wget_with_defaults.sh --max-redirect=1 "${url}" \
+  wget_with_defaults.sh --max-redirect=1 --no-show-progress "${url}" \
     | "${sudo_or_not_sudo}" tar --extract \
       "${decompression_option}" \
-      --directory="${save_dir}" \
-      --no-show-progress
+      --directory="${save_dir}"
 
   "${sudo_or_not_sudo}" ln --symbolic --relative --force "${save_dir}"/"${relative_binary_path}" "${link_dir}"/
 }

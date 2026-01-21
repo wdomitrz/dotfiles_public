@@ -188,6 +188,7 @@
 !.local/bin/install_scripts/install_packages.sh
 !.local/bin/install_scripts/install_user.sh
 !.local/bin/install_scripts/main.sh
+!.local/bin/install_scripts/print_and_run.sh
 !.local/bin/kill_others_with_given_name.sh
 !.local/bin/line
 !.local/bin/list_backgrounds.sh

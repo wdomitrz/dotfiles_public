@@ -15,6 +15,11 @@ function install_uv() {
     | sh -s -- --quiet
 }
 
+function install_uv_tools() {
+  uv tool install --quiet ruff
+  uv tool install --quiet basedpyright
+}
+
 function install_doc() {
   local url="$1"
   local name="$2"
@@ -64,6 +69,7 @@ function install_user_main() {
   set -euo pipefail
 
   print_and_run install_uv
+  print_and_run install_uv_tools
   print_and_run install_rmz_and_cpz
   print_and_run install_nvim_plugins
 }

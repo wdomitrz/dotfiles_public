@@ -64,7 +64,6 @@
 !.config/extension_links/.inputrc.unknown
 !.config/extension_links/.local/bin/I.sh
 !.config/extension_links/.local/bin/alert.sh
-!.config/extension_links/.local/bin/basedpyright.sh
 !.config/extension_links/.local/bin/bb.sh
 !.config/extension_links/.local/bin/copy.sh
 !.config/extension_links/.local/bin/fzfcommandsearch.sh
@@ -79,7 +78,6 @@
 !.config/extension_links/.local/bin/not.sh
 !.config/extension_links/.local/bin/not_sudo.sh
 !.config/extension_links/.local/bin/pasta.sh
-!.config/extension_links/.local/bin/ruff.sh
 !.config/extension_links/.local/bin/scratch.sh
 !.config/extension_links/.local/bin/terminal_pager.sh
 !.config/extension_links/.local/bin/timer.sh
@@ -142,7 +140,6 @@
 !.local/bin/.keep
 !.local/bin/I
 !.local/bin/alert
-!.local/bin/basedpyright
 !.local/bin/bat
 !.local/bin/bb
 !.local/bin/cached_command.sh
@@ -206,7 +203,6 @@
 !.local/bin/reboot
 !.local/bin/reboot_if_no_internet.sh
 !.local/bin/remove_etc_resolv_conf.sh
-!.local/bin/ruff
 !.local/bin/run_menu.sh
 !.local/bin/sanitize_synced_files.sh
 !.local/bin/save_code_extensions.sh

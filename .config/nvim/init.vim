@@ -87,6 +87,7 @@ inoremap <expr> <tab>   Tab_complete()
 inoremap <expr> <S-tab> pumvisible() ? "\<C-p>" : "\<S-tab>"
 " Terminal shortcut
 function! Terminal_toggle()
+    let l:cwd = isdirectory(expand('%:p')) ? expand('%:p') : expand('%:p:h')
     if exists("s:terminal_buffer") && nvim_buf_is_valid(s:terminal_buffer)
         let l:windows_with_buffer = win_findbuf(s:terminal_buffer)
         if empty(l:windows_with_buffer)
@@ -99,6 +100,7 @@ function! Terminal_toggle()
         endif
     else
         new
+        execute 'lcd ' . fnameescape(l:cwd)
         let s:terminal_buffer = bufnr()
         terminal
         setlocal nobuflisted

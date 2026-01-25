@@ -110,6 +110,14 @@ endfunction
 noremap  <C-space>  <cmd>call Terminal_toggle()<cr>
 tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
 
+" LSP servers
+if has('nvim-0.11')
+    lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
+    lua vim.lsp.enable('shls')
+    lua vim.lsp.enable('ruff')
+    lua vim.lsp.enable('clangd')
+endif
+
 " Plugin options
 let $FZF_DEFAULT_OPTS = '--reverse'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.0 } }
@@ -122,14 +130,6 @@ noremap <C-p>               <cmd>History<cr>
 noremap <leader>ff          <cmd>FindFile<cr>
 noremap <leader>sf          <cmd>Rg<cr>
 noremap <leader><leader>    <cmd>Commands<cr>
-
-" LSP servers
-if has('nvim-0.11')
-    lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
-    lua vim.lsp.enable('shls')
-    lua vim.lsp.enable('ruff')
-    lua vim.lsp.enable('clangd')
-endif
 
 " Plugins
 packadd findfile.nvim

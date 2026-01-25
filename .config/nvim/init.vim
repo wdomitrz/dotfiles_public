@@ -29,9 +29,6 @@ set tabstop=4 softtabstop=-1 shiftwidth=0 expandtab
 set undofile
 set whichwrap+=<,>,h,l,[,]
 
-" Theme
-source $HOME/.config/nvim/theme.lua
-
 " Commands
 function! Format_fn()
     let current_pos = getpos(".")
@@ -136,6 +133,7 @@ packadd findfile.nvim
 packadd fzf
 packadd fzf.vim
 packadd nvim-lspconfig
+packadd theme_watcher.nvim
 packadd vim-commentary
 packadd vim-gitgutter
 packadd vim-sleuth

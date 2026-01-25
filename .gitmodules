@@ -25,3 +25,6 @@
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-suda"]
 	path = .local/state/nvim/site/pack/plugins/opt/vim-suda
 	url = https://github.com/lambdalisue/vim-suda
+[submodule ".local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim"]
+	path = .local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim
+	url = https://github.com/wdomitrz/theme_watcher.nvim

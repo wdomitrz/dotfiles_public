@@ -107,7 +107,6 @@
 !.config/karabiner/karabiner.json
 !.config/mimeapps.list
 !.config/nvim/init.vim
-!.config/nvim/theme.lua
 !.config/packages/packages_main.sorted.txt
 !.config/packages/packages_nvidia.sorted.txt
 !.config/packages/packages_other.sorted.txt
@@ -277,6 +276,7 @@
 !.local/state/nvim/site/pack/plugins/opt/fzf
 !.local/state/nvim/site/pack/plugins/opt/fzf.vim
 !.local/state/nvim/site/pack/plugins/opt/nvim-lspconfig
+!.local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim
 !.local/state/nvim/site/pack/plugins/opt/vim-commentary
 !.local/state/nvim/site/pack/plugins/opt/vim-gitgutter
 !.local/state/nvim/site/pack/plugins/opt/vim-sleuth

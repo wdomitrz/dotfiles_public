@@ -110,25 +110,11 @@ endfunction
 noremap  <C-space>  <cmd>call Terminal_toggle()<cr>
 tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
 
-
-" Plugins
-if ! $VIM_DISABLE_PLUG
-    packadd findfile.nvim
-    packadd fzf
-    packadd fzf.vim
-    packadd nvim-lspconfig
-    packadd suda.vim
-    packadd vim-commentary
-    packadd vim-gitgutter
-    packadd vim-sleuth
-    packadd vim-surround
-endif
-
-
 " Plugin options
 let $FZF_DEFAULT_OPTS = '--reverse'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.0 } }
 let g:fzf_preview_window = []
+let g:suda_smart_edit = 1
 
 " Plugins key mappings
 noremap <C-/>               :Commentary<cr>|  " `:` to support visual mode ranges
@@ -144,3 +130,14 @@ if has('nvim-0.11')
     lua vim.lsp.enable('ruff')
     lua vim.lsp.enable('clangd')
 endif
+
+" Plugins
+packadd findfile.nvim
+packadd fzf
+packadd fzf.vim
+packadd nvim-lspconfig
+packadd vim-commentary
+packadd vim-gitgutter
+packadd vim-sleuth
+packadd vim-suda
+packadd vim-surround

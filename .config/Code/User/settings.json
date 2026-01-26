@@ -4,10 +4,7 @@
   "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "basedpyright.analysis.typeCheckingMode": "standard",
-  "basedpyright.analysis.useLibraryCodeForTypes": false,
   "breadcrumbs.enabled": false,
-  "cSpell.diagnosticLevel": "Hint",
   "cSpell.language": "en,pl",
   "cSpell.useGitignore": false,
   "chat.disableAIFeatures": true,
@@ -29,7 +26,6 @@
   "editor.defaultFormatter": "Vehmloewff.custom-format",
   "editor.fontFamily": "'JetBrains Mono', monospace",
   "editor.fontLigatures": true,
-  "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.glyphMargin": false,
   "editor.inlayHints.enabled": "on",
@@ -37,15 +33,12 @@
   "editor.minimap.enabled": false,
   "editor.occurrencesHighlight": "multiFile",
   "editor.overviewRulerBorder": false,
-  "editor.peekWidgetDefaultFocus": "editor",
-  "editor.renderLineHighlight": "none",
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "editor.showFoldingControls": "never",
   "editor.suggest.matchOnWordStartOnly": false,
   "editor.tabCompletion": "on",
   "editor.wordWrap": "on",
-  "explorer.autoReveal": false,
   "extensions.experimental.affinity": {
     "jimmyzjx.leaderkey": 1,
     "vscodevim.vim": 1
@@ -63,7 +56,6 @@
   "jupyter.askForKernelRestart": false,
   "keyboard.dispatch": "keyCode",
   "leaderkey.overrides.user": {
-    ", e": "Error...",
     ", e N": {
       "command": "go-to-next-problem.next",
       "name": "next error in file"
@@ -79,18 +71,6 @@
     ", e p": {
       "command": "go-to-next-problem.prevInFiles",
       "name": "previous error"
-    },
-    ", h": "Hover...",
-    ", h t": {
-      "command": "editor.action.showDefinitionPreviewHover",
-      "name": "show type"
-    },
-    "SPC w t": {
-      "commands": [
-        "workbench.action.compareEditor.focusOtherSide",
-        { "args": { "to": "viewPortCenter" }, "command": "cursorMove" }
-      ],
-      "name": "toggle diff view"
     }
   },
   "notebook.experimental.remoteSave": true,
@@ -133,10 +113,8 @@
     "pub.name": ["ui"],
     "vscodevim.vim": ["ui"]
   },
-  "search.mode": "newEditor",
   "security.workspace.trust.banner": "always",
   "security.workspace.trust.startupPrompt": "always",
-  "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.customArgs": ["--exclude=SC1091,SC2312", "--enable=all"],
   "shellcheck.disableVersionCheck": true,
   "telemetry.enableTelemetry": false,
@@ -144,11 +122,9 @@
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.cwd": "${relativeFileDirname}",
   "terminal.integrated.enableMultiLinePasteWarning": "never",
-  "terminal.integrated.fontLigatures.enabled": true,
   "terminal.integrated.localEchoEnabled": "off",
-  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.suggest.enabled": false,
   "terminal.integrated.tabs.enabled": false,
-  "update.mode": "manual",
   "update.showReleaseNotes": false,
   "vim.handleKeys": {
     "<C-[>": true,

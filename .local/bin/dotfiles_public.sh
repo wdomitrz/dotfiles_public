@@ -44,19 +44,20 @@ function cleanup() {
 function dotfiles_publish_to_public_main() {
   set -euo pipefail
   starting_branch="$(git rev-parse --abbrev-ref HEAD)"
+  # shellcheck disable=SC2064
+  trap "cleanup '${starting_branch}'" EXIT INT TERM
   get_public
   checkout_public
   update_to_local_copy
   push
-  cleanup "${starting_branch}"
 }
 
 function diff_public() {
+  trap remove_remote EXIT INT TERM
   get_public
   echo "DIFF BEGINS"
   git diff "${public_upstream}"/"${public_branch}" "${local_public_branch}"
   echo "DIFF ENDS"
-  remove_remote
 }
 
 if [[ $# -ne 1 ]]; then

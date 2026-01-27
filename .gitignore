@@ -272,7 +272,6 @@
 !.local/share/nautilus-python/extensions/open_any_terminal_extension.py
 !.local/share/nvim
 !.local/state/nvim/.keep
-!.local/state/nvim/site/pack/plugins/opt/findfile.nvim
 !.local/state/nvim/site/pack/plugins/opt/fzf
 !.local/state/nvim/site/pack/plugins/opt/fzf.vim
 !.local/state/nvim/site/pack/plugins/opt/nvim-lspconfig

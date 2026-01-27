@@ -19,9 +19,6 @@
 [submodule ".local/state/nvim/site/pack/plugins/opt/nvim-lspconfig"]
 	path = .local/state/nvim/site/pack/plugins/opt/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
-[submodule ".local/state/nvim/site/pack/plugins/opt/findfile.nvim"]
-	path = .local/state/nvim/site/pack/plugins/opt/findfile.nvim
-	url = https://github.com/wdomitrz/findfile.nvim
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-suda"]
 	path = .local/state/nvim/site/pack/plugins/opt/vim-suda
 	url = https://github.com/lambdalisue/vim-suda

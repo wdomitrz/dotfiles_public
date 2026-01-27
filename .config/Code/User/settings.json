@@ -45,6 +45,7 @@
   },
   "extensions.ignoreRecommendations": true,
   "files.associations": { "**/i3/config": "i3" },
+  "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "files.simpleDialog.enable": true,
@@ -126,19 +127,9 @@
   "terminal.integrated.suggest.enabled": false,
   "terminal.integrated.tabs.enabled": false,
   "update.showReleaseNotes": false,
-  "vim.handleKeys": {
-    "<C-[>": true,
-    "<C-a>": true,
-    "<C-d>": true,
-    "<C-k>": true,
-    "<C-o>": true,
-    "<C-r>": true,
-    "<C-u>": true,
-    "<C-w>": true,
-    "<C-x>": true
-  },
+  "vim.handleKeys": { "<C-l>": false },
   "vim.hlsearch": true,
-  "vim.insertModeKeyBindings": [
+  "vim.insertModeKeyBindingsNonRecursive": [
     { "before": ["<C-a>"], "commands": ["editor.action.selectAll"] }
   ],
   "vim.leader": "<space>",
@@ -166,12 +157,18 @@
       "before": ["<C-k>"],
       "commands": ["editor.action.addSelectionToNextFindMatch"]
     },
+    { "before": ["<C-f>"], "commands": ["actions.find"] },
+    { "before": ["<C-p>"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["<C-s>"], "commands": ["workbench.action.files.save"] },
+    { "before": ["<C-S-p>"], "commands": ["workbench.action.showCommands"] },
+    { "before": ["<C-S-z>"], "commands": ["redo"] },
+    { "before": ["<C-z>"], "commands": ["undo"] },
     { "comment": "normal mode keybindings" },
     { "before": ["u"], "commands": ["undo"] },
     { "before": ["<C-r>"], "commands": ["redo"] },
     { "before": ["K"], "commands": ["editor.action.showHover"] }
   ],
-  "vim.useCtrlKeys": false,
+  "vim.useCtrlKeys": true,
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
     { "comment": "normal/visual mode keybindings" },
@@ -197,6 +194,12 @@
       "before": ["<C-k>"],
       "commands": ["editor.action.addSelectionToNextFindMatch"]
     },
+    { "before": ["<C-f>"], "commands": ["actions.find"] },
+    { "before": ["<C-p>"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["<C-s>"], "commands": ["workbench.action.files.save"] },
+    { "before": ["<C-S-p>"], "commands": ["workbench.action.showCommands"] },
+    { "before": ["<C-S-z>"], "commands": ["redo"] },
+    { "before": ["<C-z>"], "commands": ["undo"] },
     { "comment": "visual mode keybindings" },
     { "after": ["p", "g", "v", "y"], "before": ["p"] },
     { "after": [">", "g", "v"], "before": [">"] },

@@ -25,3 +25,6 @@
 [submodule ".local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim"]
 	path = .local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim
 	url = https://github.com/wdomitrz/theme_watcher.nvim
+[submodule ".local/state/nvim/site/pack/plugins/opt/findfile.nvim"]
+	path = .local/state/nvim/site/pack/plugins/opt/findfile.nvim
+	url = https://github.com/wdomitrz/findfile.nvim

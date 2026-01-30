@@ -20,8 +20,9 @@
 !.config/dpi/default_dpi_options.sorted_numeric.txt
 !.config/dunst/dunstrc
 !.config/etc/X11/xorg.conf.d/40_tap_to_click.conf
-!.config/etc/apt/apt.conf.d/98_no_recommends
-!.config/etc/apt/apt.conf.d/98_no_suggests
+!.config/etc/apt/apt.conf.d/97_my_unattended_upgrades.conf
+!.config/etc/apt/apt.conf.d/98_no_recommends.conf
+!.config/etc/apt/apt.conf.d/98_no_suggests.conf
 !.config/etc/apt/sources.list
 !.config/etc/apt/sources.list.d/debian.sources
 !.config/etc/apt/sources.list.d/google_chrome.sources
@@ -40,6 +41,8 @@
 !.config/etc/network/interfaces
 !.config/etc/ssh/sshd_config.d/01_my_sshd.conf
 !.config/etc/systemd/logind.conf
+!.config/etc/systemd/system/apt-daily-upgrade.timer.d/override.conf
+!.config/etc/systemd/system/apt-daily.timer.d/override.conf
 !.config/etc/tlp.d/90_tlp_battery_threshold.conf
 !.config/extension_links/.Xclients.sh
 !.config/extension_links/.bash_logout.sh
@@ -47,8 +50,6 @@
 !.config/extension_links/.config/Code/User/keybindings.json.sorted.json
 !.config/extension_links/.config/Code/User/settings.json.sorted.json
 !.config/extension_links/.config/dunst/dunstrc.ini
-!.config/extension_links/.config/etc/apt/apt.conf.d/98_no_recommends.conf
-!.config/extension_links/.config/etc/apt/apt.conf.d/98_no_suggests.conf
 !.config/extension_links/.config/etc/default/google-chrome.ini
 !.config/extension_links/.config/etc/default/grub.conf
 !.config/extension_links/.config/etc/default/keyboard.conf

@@ -32,6 +32,12 @@ function update_locales() {
   sudo dpkg-reconfigure --frontend noninteractive locales 2> /dev/null
 }
 
+function enable_unattended_upgrades() {
+  sudo systemctl daemon-reload
+  sudo systemctl enable --now unattended-upgrades
+  sudo systemctl enable --now apt-daily.timer apt-daily-upgrade.timer
+}
+
 function create_swap_file() {
   local -r swapfile_location="/home/swapfile"
   if ! [[ -f ${swapfile_location} ]]; then
@@ -95,6 +101,7 @@ function config_global_rest() {
   print_and_run add_user_to_groups
   print_and_run udisk_allow_operations
   print_and_run create_swap_file
+  print_and_run enable_unattended_upgrades
 }
 
 function config_global_main() {

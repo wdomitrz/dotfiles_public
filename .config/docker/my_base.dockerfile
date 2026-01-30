@@ -9,7 +9,9 @@ RUN (echo "UsePAM yes" && cat /etc/ssh/sshd_config) | \
         sponge /etc/ssh/sshd_config
 
 # Mocks
-RUN ln --force --symbolic /usr/bin/true /usr/local/sbin/update-grub && \
+RUN true && \
+    ln --force --symbolic /usr/bin/true /usr/bin/systemctl && \
+    ln --force --symbolic /usr/bin/true /usr/local/sbin/update-grub && \
     ln --force --symbolic /usr/bin/true /usr/sbin/mkswap && \
     ln --force --symbolic /usr/bin/true /usr/sbin/swapon && \
     true

@@ -13,7 +13,7 @@ function regenerate_grub_post_config_copy() {
 }
 
 function reconfigure_tlp_post_config_copy() {
-  sudo systemctl restart tlp || true
+  sudo systemctl restart tlp
 }
 
 function add_user_to_groups() {

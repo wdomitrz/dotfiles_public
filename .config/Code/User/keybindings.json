@@ -41,6 +41,12 @@
     "when": "terminal.active"
   },
   {
+    "command": "workbench.action.terminal.split",
+    "comment": "Split terminal",
+    "key": "ctrl+\\",
+    "when": "terminalFocus"
+  },
+  {
     "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
     "comment": "Fix spelling",
     "key": "ctrl+l"

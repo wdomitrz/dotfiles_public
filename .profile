@@ -8,12 +8,9 @@ if [ -d "${HOME}/.local/bin" ]; then export PATH="${HOME}/.local/bin:${PATH}"; f
 
 # homebrew
 if [ -d "/home/linuxbrew/.linuxbrew" ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
-if [ -d "/opt/homebrew" ]; then eval "$("/opt/homebrew/bin/brew" shellenv)"; fi
-if [ -d "${HOME}/.local/bin" ]; then export PATH="/opt/homebrew/opt/findutils/libexec/gnubin/:${PATH}"; fi
+if [ -d "/opt/homebrew" ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 # ghcup
 if [ -f "${HOME}/.ghcup/env" ]; then . "${HOME}/.ghcup/env"; fi
-# Ruby
-if [ -f "/usr/bin/ruby" ]; then GEM_HOME="$(ruby -e 'puts Gem.user_dir')/bin" && export PATH="${GEM_HOME}:${PATH}"; fi
 
 export EDITOR=vim
 export VISUAL=vim

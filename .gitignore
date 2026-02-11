@@ -88,6 +88,7 @@
 !.config/extension_links/.local/bin/vimdiff.sh
 !.config/extension_links/.local/bin/xterm.sh
 !.config/extension_links/.npmrc.ini
+!.config/extension_links/.parallel/will-cite.unknown
 !.config/extension_links/.profile.sh
 !.config/extension_links/.psqlrc.unknown
 !.config/extension_links/.sudo_as_admin_successful.unknown
@@ -284,6 +285,7 @@
 !.local/state/nvim/site/pack/plugins/opt/vim-suda
 !.local/state/nvim/site/pack/plugins/opt/vim-surround
 !.npmrc
+!.parallel/will-cite
 !.profile
 !.psqlrc
 !.sudo_as_admin_successful

@@ -1,1 +1,1 @@
-c.TerminalInteractiveShell.editing_mode = "vi"  # noqa: F821 # pyright: ignore[reportUndefinedVariable]
+c.TerminalInteractiveShell.editing_mode = "vi"  # noqa: F821 # ty:ignore[unresolved-reference]

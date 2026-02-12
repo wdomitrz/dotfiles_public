@@ -11,11 +11,11 @@ from subprocess import call
 try:
     from urllib import unquote  # type: ignore
 
-    from urlparse import urlparse  # pyright: ignore[reportMissingImports]
+    from urlparse import urlparse  # ty:ignore[unresolved-import]
 except ImportError:
     from urllib.parse import unquote, urlparse
 
-from gi import require_version
+from gi import require_version  # ty:ignore[unresolved-import]
 
 try:
     require_version("Gtk", "4.0")
@@ -24,7 +24,7 @@ except ValueError:
     require_version("Gtk", "3.0")
     require_version("Nautilus", "3.0")
 
-from gi.repository import Gio, GObject, Gtk, Nautilus
+from gi.repository import Gio, GObject, Gtk, Nautilus  # ty:ignore[unresolved-import]
 
 TERM_WORKDIR_PARAMS = {
     "alacritty": "--working-directory ",
@@ -229,7 +229,7 @@ if Nautilus._version == "3.0":
                 self._create_accel_group()
 
         def _open_terminal(self, *args):
-            filename = unquote(self._uri[7:])  # type: ignore[reportOptionalSubscript]
+            filename = unquote(self._uri[7:])
             open_terminal_in_file(filename)
 
         def get_widget(self, uri, window):

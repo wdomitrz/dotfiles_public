@@ -17,7 +17,7 @@ function install_uv() {
 
 function install_uv_tools() {
   uv tool install --quiet ruff
-  uv tool install --quiet basedpyright
+  uv tool install --quiet ty
 }
 
 function install_doc() {

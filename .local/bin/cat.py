@@ -15,7 +15,7 @@ from typing import Any
 def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> Any:
     match fp.suffix:
         case ".parquet" | ".pqt" | ".pq":
-            import pandas as pd
+            import pandas as pd  # ty:ignore[unresolved-import]
 
             return pd.read_parquet(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pickle" | ".pkl":
@@ -23,11 +23,11 @@ def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> Any:
 
             return pickle.loads(fp.read_bytes())
         case ".csv":
-            import pandas as pd
+            import pandas as pd  # ty:ignore[unresolved-import]
 
             return pd.read_csv(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pt":
-            import torch  # pyright: ignore[reportMissingImports]
+            import torch  # ty:ignore[unresolved-import]
 
             return torch.load(fp, map_location="cpu", weights_only=weights_only)
         case suffix:

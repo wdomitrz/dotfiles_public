@@ -79,10 +79,10 @@
   "notebook.formatOnSave.enabled": true,
   "path-autocomplete.triggerOutsideStrings": true,
   "remote.SSH.defaultExtensions": [
+    "astral-sh.ty",
     "charliermarsh.ruff",
     "davidanson.vscode-markdownlint",
     "dcasella.i3",
-    "detachhead.basedpyright",
     "esbenp.prettier-vscode",
     "ionutvmi.path-autocomplete",
     "jacobdufault.fuzzy-search",

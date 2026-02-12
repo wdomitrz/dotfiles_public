@@ -18,6 +18,4 @@ suppress-none-returning = true
 
 [tool.basedpyright]
 analyzeUnannotatedFunctions = true
-typeCheckingMode = "standard"
-useLibraryCodeForTypes = false
-reportMissingImports = false
+typeCheckingMode = "strict"

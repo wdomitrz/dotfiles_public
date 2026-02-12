@@ -17,7 +17,7 @@ import logging
 import subprocess
 from dataclasses import dataclass
 
-from lsprotocol.types import (  # pyright: ignore[reportMissingImports]
+from lsprotocol.types import (  # ty:ignore[unresolved-import]
     TEXT_DOCUMENT_CODE_ACTION,
     TEXT_DOCUMENT_DIAGNOSTIC,
     AnnotatedTextEdit,
@@ -38,8 +38,8 @@ from lsprotocol.types import (  # pyright: ignore[reportMissingImports]
     TextEdit,
     WorkspaceEdit,
 )
-from pygls.server import LanguageServer  # pyright: ignore[reportMissingImports]
-from pygls.workspace import TextDocument  # pyright: ignore[reportMissingImports]
+from pygls.server import LanguageServer  # ty:ignore[unresolved-import]
+from pygls.workspace import TextDocument  # ty:ignore[unresolved-import]
 
 SEVERITY_MAPPING: dict[str, DiagnosticSeverity] = dict(
     error=DiagnosticSeverity.Error,

@@ -16,14 +16,14 @@ import argparse
 import logging
 import subprocess
 
-from lsprotocol.types import (  # pyright: ignore[reportMissingImports]
+from lsprotocol.types import (  # ty:ignore[unresolved-import]
     TEXT_DOCUMENT_FORMATTING,
     DocumentFormattingParams,
     Position,
     Range,
     TextEdit,
 )
-from pygls.server import LanguageServer  # pyright: ignore[reportMissingImports]
+from pygls.server import LanguageServer  # ty:ignore[unresolved-import]
 
 
 def get_server(*, format_command: list[str]) -> LanguageServer:

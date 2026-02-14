@@ -1,11 +1,11 @@
 " Vim options
 " Automatically removing all trailing spaces and blank trailing lines
-autocmd BufWritePre * %substitute/\s\+$//e
-autocmd BufWritePre * %substitute/$\n\+\%$//e
+autocmd BufWritePre * silent %substitute/\s\+$//e
+autocmd BufWritePre * silent %substitute/$\n\+\%$//e
 " Formatting
 autocmd BufWritePre * silent Format
 " Disable spellcheck in terminal
-autocmd TermOpen * setlocal nospell
+autocmd TermOpen * silent setlocal nospell
 " set options
 set autochdir
 set breakindent
@@ -22,7 +22,7 @@ set nonumber
 set noswapfile nowritebackup
 set omnifunc=syntaxcomplete#Complete
 set scrolloff=1024
-set shortmess=IAc
+set shortmess=IAcF
 set spell spelllang=en,pl
 set splitright splitbelow
 set tabstop=4 softtabstop=-1 shiftwidth=0 expandtab

@@ -41,6 +41,11 @@
     "when": "terminal.active"
   },
   {
+    "command": "workbench.action.terminal.new",
+    "comment": "New terminal",
+    "key": "ctrl+shift+space"
+  },
+  {
     "command": "workbench.action.terminal.split",
     "comment": "Split terminal",
     "key": "ctrl+\\",

@@ -63,10 +63,6 @@ function udisk_allow_operations() {
   done
 }
 
-function nordvpn_with_tailscale() {
-  nordvpn whitelist add subnet 100.64.0.0/10
-}
-
 function configure_tpm2_non_root_disk_unlock() {
   echo "Don't use this function" && exit 1
 
@@ -85,11 +81,6 @@ function configure_tpm2_non_root_disk_unlock() {
   sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/nvme0n1p3
 }
 
-function todo_post_global_configs_copy() {
-  print_and_run regenerate_grub_post_config_copy
-  print_and_run reconfigure_tlp_post_config_copy
-}
-
 function config_global_start() {
   print_and_run copy_global_configs
   print_and_run update_locales
@@ -97,7 +88,8 @@ function config_global_start() {
 }
 
 function config_global_rest() {
-  print_and_run todo_post_global_configs_copy
+  print_and_run regenerate_grub_post_config_copy
+  print_and_run reconfigure_tlp_post_config_copy
   print_and_run add_user_to_groups
   print_and_run udisk_allow_operations
   print_and_run create_swap_file

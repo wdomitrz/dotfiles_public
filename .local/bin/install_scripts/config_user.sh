@@ -13,26 +13,11 @@ function copy_git_hooks() {
       "${HOME}"/.config/git/hooks/* "${HOME}"/.git/hooks/
 }
 
-function set_shell() {
-  shell="$1"
+function set_shell_bash() {
+  shell=/usr/bin/bash
 
   sudo chsh -s "${shell}" "${USER}" \
     || chsh -s "${shell}"
-}
-
-function set_shell_bash() {
-  set_shell /usr/bin/bash
-}
-
-function add_bookmarks() {
-  [[ -f "${HOME}/.config/gtk-3.0/bookmarks" ]] \
-    || (mkdir --parents "${HOME}"/.config/gtk-3.0 \
-      && touch "${HOME}"/.config/gtk-3.0/bookmarks)
-
-  for d in Documents Downloads Music Pictures Videos; do
-    grep --quiet "${d}" "${HOME}"/.config/gtk-3.0/bookmarks \
-      || echo "file://$(pwd)/${d}" >> "${HOME}"/.config/gtk-3.0/bookmarks
-  done
 }
 
 function compile_glib_schemas() {

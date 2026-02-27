@@ -237,6 +237,7 @@
 !.local/bin/vim
 !.local/bin/vimdiff
 !.local/bin/wget_with_defaults.sh
+!.local/bin/xsecurelock_saver_feh.sh
 !.local/bin/xterm
 !.local/share/applications/.keep
 !.local/share/applications/my/app_switcher.desktop

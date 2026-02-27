@@ -23,6 +23,7 @@ export LANGUAGE="en_US"
 export XSECURELOCK_SHOW_DATETIME=1
 export XSECURELOCK_DATETIME_FORMAT="%F %A %T"
 export XSECURELOCK_BLANK_TIMEOUT=0
+export XSECURELOCK_SAVER="${HOME}"/.local/bin/xsecurelock_saver_feh.sh
 export GTK_A11Y=none
 export HOMEBREW_NO_ANALYTICS=1
 

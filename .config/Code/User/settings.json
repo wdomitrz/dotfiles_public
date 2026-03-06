@@ -127,7 +127,7 @@
   "terminal.integrated.suggest.enabled": false,
   "terminal.integrated.tabs.enabled": false,
   "update.showReleaseNotes": false,
-  "vim.handleKeys": { "<C-l>": false },
+  "vim.handleKeys": { "<C-b>": false, "<C-l>": false },
   "vim.hlsearch": true,
   "vim.insertModeKeyBindingsNonRecursive": [
     { "before": ["<C-a>"], "commands": ["editor.action.selectAll"] }

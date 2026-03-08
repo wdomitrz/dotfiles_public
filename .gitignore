@@ -138,7 +138,6 @@
 !.inputrc
 !.ipython/profile_default/ipython_config.py
 !.jupyter/custom/custom.css
-!.local/bin/.config_sshd.sh
 !.local/bin/.keep
 !.local/bin/I
 !.local/bin/alert
@@ -219,6 +218,7 @@
 !.local/bin/set_theme.sh
 !.local/bin/set_touchpad.sh
 !.local/bin/set_touchpads.sh
+!.local/bin/setup_pi.sh
 !.local/bin/shls.py
 !.local/bin/show_mic_status.sh
 !.local/bin/shutdown

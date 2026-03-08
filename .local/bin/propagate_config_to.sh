@@ -1,11 +1,7 @@
 #!/usr/bin/env sh
-
-[ -z "$1" ] && return
+[ ! $# -eq 1 ] && return 1
 destination="$1"
 
-ssh-copy-id "${destination}"
-scp "${HOME}"/.ssh/authorized_keys "${destination}":~/.ssh/authorized_keys
-scp \
-  "${HOME}"/.bashrc "${HOME}"/.profile \
-  "${HOME}"/.local/bin/.config_sshd.sh \
-  "${destination}":
+ssh-copy-id "${destination}" 2> /dev/null
+scp -q "${HOME}"/.ssh/authorized_keys "${destination}":~/.ssh/authorized_keys
+scp -q "${HOME}"/.bashrc "${HOME}"/.profile "${destination}":

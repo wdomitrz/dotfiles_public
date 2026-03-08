@@ -1,6 +1,6 @@
 #!/usr/bin/env dex
 [Desktop Entry]
-Exec=sh -c "tailscale down && nordvpn set killswitch on && nordvpn connect"
+Exec=sh -c "tailscale down && nordvpn set killswitch on && nordvpn set autoconnect on && nordvpn connect"
 Icon=nordvpn
 Name=VPN NordVPN on, tailscale down
 Terminal=true

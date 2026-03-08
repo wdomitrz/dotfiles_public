@@ -8,8 +8,10 @@ function update_and_upgrade() {
 
 function install_packages_from() {
   packages_file="$1"
-  xargs sudo DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes --quiet=2 < "${packages_file}"
+  # shellcheck disable=SC2002
+  cat "${packages_file}" \
+    | xargs sudo DEBIAN_FRONTEND=noninteractive \
+      apt-get install --yes --quiet=2
 }
 
 function install_packages_from_main() {

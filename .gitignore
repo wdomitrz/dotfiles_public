@@ -43,6 +43,7 @@
 !.config/etc/systemd/logind.conf
 !.config/etc/systemd/system/apt-daily-upgrade.timer.d/override.conf
 !.config/etc/systemd/system/apt-daily.timer.d/override.conf
+!.config/etc/systemd/system/unattended-upgrades.service.d/override.conf
 !.config/etc/tlp.d/90_tlp_battery_threshold.conf
 !.config/extension_links/.Xclients.sh
 !.config/extension_links/.bash_logout.sh

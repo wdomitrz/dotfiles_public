@@ -1,0 +1,2 @@
+PORT="41641"
+FLAGS="--tun=userspace-networking --socks5-server=localhost:1055"

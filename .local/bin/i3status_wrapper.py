@@ -61,9 +61,27 @@ def handle_volume(*, button: int, modifiers: list[str], **_) -> None:
     elif button in [5, 6]:
         cmd = f"pactl set-sink-volume @DEFAULT_SINK@ -{volume_mult}%".split()
     else:
-        raise RuntimeError(f"Unknown button: {button}")
+        return
     run_command_blocking(cmd)
     run_command_background(REFRESH_STATUS_CMD)
+
+
+def handle_mic(*, button: int, modifiers: list[str], **_) -> None:
+    if button in [1, 2]:
+        cmd = "pactl set-source-mute @DEFAULT_SOURCE@ toggle".split()
+    else:
+        return
+    run_command_blocking(cmd)
+    run_command_background(REFRESH_STATUS_CMD)
+
+
+def handle_sound(*, instance: str, **data) -> None:
+    if instance.startswith("default"):
+        return handle_volume(instance=instance, **data)
+    elif "Capture" in instance:
+        return handle_mic(instance=instance, **data)
+    else:
+        return
 
 
 @dataclass(kw_only=True, frozen=True)
@@ -164,7 +182,7 @@ ALL_BLOCKS: dict[tuple[str, str] | str, Block] = {
             name="media_info",
             on_click=run_command_on_click("playerctl play-pause".split(), refresh=True),
         ),
-        Block(name="volume", on_click=handle_volume),
+        Block(name="volume", on_click=handle_sound),
     ]
 }
 

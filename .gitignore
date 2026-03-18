@@ -222,7 +222,6 @@
 !.local/bin/set_touchpads.sh
 !.local/bin/setup_pi.sh
 !.local/bin/shls.py
-!.local/bin/show_mic_status.sh
 !.local/bin/shutdown
 !.local/bin/simple_format_server.py
 !.local/bin/sleep_forever.sh

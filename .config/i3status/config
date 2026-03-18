@@ -5,6 +5,7 @@ general {
 }
 
 order += "volume default"
+order += "volume mic"
 order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
@@ -15,6 +16,13 @@ volume default {
     format = "🔈 %volume"
     format_muted = "🔇 %volume"
     device = "default"
+}
+
+volume mic {
+    format = "🎙️"
+    format_muted = "🚫"
+    device = "hw:0"
+    mixer = "Capture"
 }
 
 ipv6 {

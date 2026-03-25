@@ -115,12 +115,10 @@
 !.config/packages/packages_main.sorted.txt
 !.config/packages/packages_nvidia.sorted.txt
 !.config/packages/packages_other.sorted.txt
-!.config/python/pyproject.toml
 !.config/redshift.conf
 !.config/rofi/config.rasi
 !.config/rofi/theme_dark.rasi
 !.config/rofi/theme_light.rasi
-!.config/ruff/pyproject.toml
 !.config/set_audio/.keep
 !.config/set_audio/x1.txt
 !.config/tealdeer/config.toml

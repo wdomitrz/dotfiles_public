@@ -43,7 +43,8 @@ function lint_python_files() {
 
 function type_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
-    | xargs ty check --quiet --error all
+    | xargs basedpyright --pythonversion 3.10 \
+    | not grep --invert-match "0 errors, 0 warnings, 0 notes"
 }
 
 function get_all_files_without_extensions() {

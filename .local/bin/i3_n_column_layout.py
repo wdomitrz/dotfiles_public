@@ -13,7 +13,7 @@
 import argparse
 from typing import Literal
 
-import i3ipc  # ty:ignore[unresolved-import]
+import i3ipc
 
 
 def container_to_ignore(container: i3ipc.Con | None) -> bool:

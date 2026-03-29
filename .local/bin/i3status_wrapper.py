@@ -4,6 +4,19 @@
 # AGPL License
 ################################################################
 
+# pyright: reportDeprecated = false
+# pyright: reportUnknownParameterType = false
+# pyright: reportMissingTypeArgument = false
+# pyright: reportUnusedCallResult = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportUnusedParameter = false
+# pyright: reportMissingParameterType = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportAny = false
+# pyright: reportUnnecessaryIsInstance = false
+# pyright: reportUnreachable = false
+
 import contextlib
 import functools
 import itertools

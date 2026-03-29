@@ -6,6 +6,13 @@
 # ]
 # ///
 
+# pyright: reportAny = false
+# pyright: reportExplicitAny = false
+# pyright: reportMissingImports = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportUnusedCallResult = false
+
 import argparse
 import sys
 from pathlib import Path

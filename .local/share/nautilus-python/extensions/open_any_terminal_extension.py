@@ -4,6 +4,7 @@
 # GPL3 License
 
 # ruff: noqa: ANN001, ANN201, ANN202
+# pyright: reportAttributeAccessIssue=false, reportUnknownVariableType=false, reportMissingImports=false, reportUnusedCallResult=false, reportUnknownParameterType=false, reportMissingParameterType=false, reportUnknownMemberType=false, reportUnusedParameter=false, reportUntypedBaseClass=false, reportMissingSuperCall=false, reportUnannotatedClassAttribute=false, reportOptionalSubscript=false,reportUnknownArgumentType=false, reportIgnoreCommentWithoutRule=false
 
 from gettext import gettext, textdomain
 from subprocess import call

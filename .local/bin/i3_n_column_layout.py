@@ -10,6 +10,13 @@
 # ]
 # ///
 
+# pyright: reportMissingImports = false
+# pyright: reportUnknownParameterType = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportAny = false
+
 import argparse
 from typing import Literal
 

@@ -12,6 +12,16 @@
 # ]
 # ///
 
+# pyright: reportMissingImports = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportUnknownParameterType = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportUntypedFunctionDecorator = false
+# pyright: reportUnusedFunction = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportAny = false
+# pyright: reportUnusedCallResult = false
+
 import argparse
 import logging
 import subprocess

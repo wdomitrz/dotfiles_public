@@ -4,6 +4,13 @@
 # AGPL License
 ################################################################
 
+# pyright: reportUnknownParameterType = false
+# pyright: reportMissingParameterType = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportMissingTypeArgument = false
+# pyright: reportAny = false
+
 from __future__ import annotations
 
 import argparse

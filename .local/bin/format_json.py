@@ -8,6 +8,15 @@
 # requires-python = ">=3.12"
 # ///
 
+# pyright: reportUnknownParameterType = false
+# pyright: reportMissingTypeArgument = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportAny = false
+# pyright: reportExplicitAny = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportUnusedCallResult = false
+
 import argparse
 import json
 import sys

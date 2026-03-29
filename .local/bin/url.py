@@ -1,4 +1,11 @@
 #!/usr/bin/env -S uv run --script
+
+# pyright: reportUnknownMemberType = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportUnusedCallResult = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportAny = false
+
 import argparse
 import json
 from urllib.parse import parse_qsl, urlparse

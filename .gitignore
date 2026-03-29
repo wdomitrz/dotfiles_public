@@ -17,6 +17,7 @@
 !.config/docker/my.dockerfile
 !.config/docker/my_base.dockerfile
 !.config/docker/test.dockerfile
+!.config/dotfiles/pyrightconfig.json
 !.config/dpi/default_dpi_options.sorted_numeric.txt
 !.config/dunst/dunstrc
 !.config/etc/X11/xorg.conf.d/40_tap_to_click.conf

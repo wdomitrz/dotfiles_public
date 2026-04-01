@@ -11,17 +11,17 @@
 #     "pygls==1.3",
 # ]
 # ///
-
-# pyright: reportMissingImports = false
-# pyright: reportUnknownVariableType = false
-# pyright: reportUnknownMemberType = false
-# pyright: reportUnknownArgumentType = false
-# pyright: reportUnknownParameterType = false
-# pyright: reportUnusedParameter = false
-# pyright: reportMissingTypeArgument = false
+#
 # pyright: reportAny = false
+# pyright: reportMissingImports = false
+# pyright: reportMissingTypeArgument = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportUnknownParameterType = false
+# pyright: reportUnknownVariableType = false
 # pyright: reportUntypedFunctionDecorator = false
 # pyright: reportUnusedFunction = false
+# pyright: reportUnusedParameter = false
 
 import json
 import logging

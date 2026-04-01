@@ -3,17 +3,15 @@
 # Copyright (c) 2022 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-
-# pyright: reportUnknownParameterType = false
-# pyright: reportMissingParameterType = false
-# pyright: reportUnknownArgumentType = false
-# pyright: reportUnknownMemberType = false
-# pyright: reportMissingTypeArgument = false
-# pyright: reportAny = false
+#
+# /// script
+# dependencies = [
+#     "typer",
+# ]
+# ///
 
 from __future__ import annotations
 
-import argparse
 import glob
 import math
 import os
@@ -23,7 +21,8 @@ import tempfile
 import textwrap
 from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Callable
+
+import typer  # pyright: ignore[reportMissingImports]
 
 PRIMARY_ORDER_DEFAULT: tuple[str, ...] = ("screen", "rdp", "DP", "HDMI", "eDP")
 DEFAULT_FAILSAFE_DPI = DEFAULT_GNOME_DPI = 96
@@ -33,7 +32,7 @@ INCH_TO_MM = 25.4
 
 
 @dataclass(kw_only=True)
-class Display:  # pylint: disable=too-many-instance-attributes
+class Display:
     name: str
     is_connected: bool
     is_primary: bool
@@ -113,18 +112,18 @@ class Display:  # pylint: disable=too-many-instance-attributes
             if not display_info_line.startswith(" ")
         ]
 
-    def set_primary(self, **kwargs) -> None:
+    def set_primary(self, **kwargs: str | None) -> None:
         self.is_primary = True
         return self.set_auto(**kwargs)
 
-    def set_auto(  # pylint: disable=too-many-arguments
+    def set_auto(
         self,
         same_as: str | None = None,
         left_of: str | None = None,
         right_of: str | None = None,
         above: str | None = None,
         below: str | None = None,
-    ):
+    ) -> None:
         cmd: list[str] = ["xrandr", "--output", self.name, "--auto"]
 
         if self.is_primary:
@@ -146,7 +145,7 @@ class Display:  # pylint: disable=too-many-instance-attributes
 
         _ = subprocess.run(cmd, check=False)
 
-    def set_off(self):
+    def set_off(self) -> None:
         _ = subprocess.run(["xrandr", "--output", self.name, "--off"], check=False)
 
     def set_auto_or_off(self) -> None:
@@ -191,7 +190,6 @@ class DpiSettings:
         if not os.path.isdir(config_dir):
             return
 
-        # Check if config imports dpi.rasi
         add_dpi_import = False
         try:
             with open(
@@ -281,7 +279,7 @@ class DpiSettings:
                     and math.gcd(*size) == 1
                 )
             ):
-                return DEFAULT_FAILSAFE_DPI  # If cannot get the dpi, return the default
+                return DEFAULT_FAILSAFE_DPI
 
             return INCH_TO_MM * ADDITIONAL_MULT * max(resolution) / max(size)
 
@@ -291,7 +289,6 @@ class DpiSettings:
     def get_forced_dpi(forced_dpi: int | None = None) -> int | None:
         if forced_dpi is not None:
             return forced_dpi
-        # Check the environmental variable
         env_dpi = os.getenv("DPI")
         if env_dpi is not None and env_dpi != "":
             return int(env_dpi)
@@ -314,60 +311,36 @@ class DpiSettings:
         )
 
 
-class Commands:
-    @staticmethod
-    def set_dpi(dpi: int | None = None):
-        DpiSettings.set_dpi(DpiSettings.get_default_dpi(forced_dpi=dpi))
+app = typer.Typer()  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType]
 
+
+class Commands:
+    @app.command()  # pyright: ignore[reportUnknownMemberType, reportUntypedFunctionDecorator]
     @staticmethod
-    def get_default_dpi(dpi: int | None = None):
+    def show_dpi(dpi: int | None = None) -> None:
+        """Display inferred dpi."""
         print(DpiSettings.get_default_dpi(forced_dpi=dpi))
 
+    @app.command()  # pyright: ignore[reportUnknownMemberType, reportUntypedFunctionDecorator]
     @staticmethod
-    def set_display(**get_dpi_kwargs: int | None) -> None:
-        displays = Display.get_all_displays()
-        primary_display = GettingPrimaryDisplay.new(displays)
+    def set_dpi(dpi: int | None = None) -> None:
+        DpiSettings.set_dpi(DpiSettings.get_default_dpi(forced_dpi=dpi))
 
-        # Turn primary display on
-        primary_display.set_primary()
-        displays = Display.get_all_displays()  # After we got the new primary display
-        DpiSettings.set_dpi(DpiSettings.get_default_dpi(**get_dpi_kwargs))
-
-        # Turn off all disconnected display
-        for display in displays:
-            if not display.is_connected:
-                display.set_off()
-
-        # Deal with other connected displays
-        for display in displays:
-            if display.is_connected and not display.is_primary:
-                display.set_auto_or_off()
-
+    @app.callback(invoke_without_command=True)  # pyright: ignore[reportUnknownMemberType, reportUntypedFunctionDecorator]
     @staticmethod
-    def parse_arguments() -> argparse.Namespace:
-        parser = argparse.ArgumentParser()
-        parser.set_defaults(func=Commands.set_display)
-        subparsers = parser.add_subparsers(title="subcommands")
+    def set_display(ctx: typer.Context) -> None:  # pyright: ignore[reportUnknownParameterType, reportUnknownMemberType]
+        if ctx.invoked_subcommand is not None:  # pyright: ignore[reportUnknownMemberType]
+            return
 
-        show_dpi_parser = subparsers.add_parser(
-            "show_dpi", description="Display inferred dpi."
-        )
+        GettingPrimaryDisplay.new(Display.get_all_displays()).set_primary()
+        DpiSettings.set_dpi(DpiSettings.get_default_dpi())
 
-        show_dpi_parser.set_defaults(func=Commands.get_default_dpi)
-
-        set_dpi_parser = subparsers.add_parser("set_dpi")
-        _ = set_dpi_parser.add_argument(
-            "--dpi", type=int, required=False, help="dpi to use"
-        )
-        set_dpi_parser.set_defaults(func=Commands.set_dpi)
-
-        args = parser.parse_args()
-        return args
-
-
-def main(*, func: Callable, **kwargs):
-    func(**kwargs)
+        for d in Display.get_all_displays():
+            if not d.is_connected:
+                d.set_off()
+            elif not d.is_primary:
+                d.set_auto_or_off()
 
 
 if __name__ == "__main__":
-    main(**vars(Commands.parse_arguments()))
+    app()

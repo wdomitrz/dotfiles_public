@@ -7,20 +7,20 @@
 # /// script
 # dependencies = [
 #     "i3ipc",
+#     "typer",
 # ]
 # ///
-
-# pyright: reportMissingImports = false
+#
 # pyright: reportUnknownParameterType = false
 # pyright: reportUnknownMemberType = false
 # pyright: reportUnknownVariableType = false
 # pyright: reportUnknownArgumentType = false
-# pyright: reportAny = false
 
-import argparse
+from dataclasses import dataclass
 from typing import Literal
 
-import i3ipc
+import i3ipc  # pyright: ignore[reportMissingImports]
+import typer  # pyright: ignore[reportMissingImports]
 
 
 def container_to_ignore(container: i3ipc.Con | None) -> bool:
@@ -70,21 +70,19 @@ def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
     i3.on(event=i3ipc.Event.WINDOW_NEW, handler=resize_to_nth)
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    _ = parser.add_argument(
-        "-n",
-        "--number-of-columns",
-        help="number of columns",
-        type=float,
-        default=2,
-    )
-    args = parser.parse_args()
+@dataclass(kw_only=True, frozen=True)
+class Args:
+    number_of_columns: float = 2.0
 
+    def __post_init__(self) -> None:
+        return main(self)
+
+
+def main(args: Args):
     i3 = i3ipc.Connection()
     n_column_layout(i3, n=args.number_of_columns)
     i3.main()
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(Args)

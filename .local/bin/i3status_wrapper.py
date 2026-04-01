@@ -3,19 +3,19 @@
 # Copyright (c) 2021 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-
+#
+# pyright: reportAny = false
 # pyright: reportDeprecated = false
-# pyright: reportUnknownParameterType = false
-# pyright: reportMissingTypeArgument = false
-# pyright: reportUnusedCallResult = false
-# pyright: reportUnknownVariableType = false
-# pyright: reportUnusedParameter = false
 # pyright: reportMissingParameterType = false
+# pyright: reportMissingTypeArgument = false
 # pyright: reportUnknownArgumentType = false
 # pyright: reportUnknownMemberType = false
-# pyright: reportAny = false
+# pyright: reportUnknownParameterType = false
+# pyright: reportUnknownVariableType = false
 # pyright: reportUnnecessaryIsInstance = false
 # pyright: reportUnreachable = false
+# pyright: reportUnusedCallResult = false
+# pyright: reportUnusedParameter = false
 
 import contextlib
 import functools

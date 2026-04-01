@@ -5,23 +5,23 @@
 ################################################################
 #
 # /// script
+# dependencies = [
+#     "typer",
+# ]
 # requires-python = ">=3.12"
 # ///
 
-# pyright: reportUnknownParameterType = false
-# pyright: reportMissingTypeArgument = false
-# pyright: reportUnknownArgumentType = false
-# pyright: reportUnknownVariableType = false
-# pyright: reportAny = false
-# pyright: reportExplicitAny = false
-# pyright: reportUnknownMemberType = false
-# pyright: reportUnusedCallResult = false
+from __future__ import annotations
 
-import argparse
 import json
 import sys
 from dataclasses import dataclass
-from typing import Any, NamedTuple
+from typing import NamedTuple, TypeAlias, cast
+
+import typer  # pyright: ignore[reportMissingImports]
+
+JSONScalar: TypeAlias = None | bool | int | float | str
+JSON: TypeAlias = JSONScalar | list["JSON"] | dict[str, "JSON"]
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -33,7 +33,7 @@ class JSONDumper:
         single_lined: str
         expanded: str
 
-    def _dumps_list(self, xs: list, *, indent: str) -> PartialDump:
+    def _dumps_list(self, xs: list[JSON], *, indent: str) -> PartialDump:
         if len(xs) == 0:
             return JSONDumper.PartialDump(single_lined="[]", expanded="[]")
 
@@ -65,7 +65,7 @@ class JSONDumper:
             ),
         )
 
-    def _dumps_dict(self, xs: dict, *, indent: str) -> PartialDump:
+    def _dumps_dict(self, xs: dict[str, JSON], *, indent: str) -> PartialDump:
         if len(xs) == 0:
             return JSONDumper.PartialDump(single_lined="{}", expanded="{}")
 
@@ -106,7 +106,7 @@ class JSONDumper:
             ),
         )
 
-    def _dumps_helper(self, x: Any, *, indent: str) -> PartialDump:
+    def _dumps_helper(self, x: JSON, *, indent: str) -> PartialDump:
         if isinstance(x, list):
             return self._dumps_list(x, indent=indent)
         elif isinstance(x, dict):
@@ -115,7 +115,7 @@ class JSONDumper:
             r = json.dumps(x)
             return JSONDumper.PartialDump(single_lined=r, expanded=r)
 
-    def dumps(self, x: Any) -> str:
+    def dumps(self, x: JSON) -> str:
         r = self._dumps_helper(x, indent="")
         if len(r.single_lined) <= self.line_length:
             return r.single_lined
@@ -123,23 +123,24 @@ class JSONDumper:
             return r.expanded
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--indent", type=int, default=2)
-    parser.add_argument("--sort_keys".replace("_", "-"), type=bool, default=False)
-    parser.add_argument("--line_length".replace("_", "-"), type=int, default=80)
-    return parser.parse_args()
+@dataclass(kw_only=True, frozen=True)
+class Args:
+    indent: int = 2
+    sort_keys: bool = False
+    line_length: int = 80
+
+    def __post_init__(self) -> None:
+        return main(self)
 
 
-def main():
-    args = parse_args()
-    data = json.loads(sys.stdin.read())
+def main(args: Args) -> None:
+    data = cast(JSON, json.loads(sys.stdin.read()))
     if args.sort_keys:
-        data = json.loads(json.dumps(data, sort_keys=True, indent=None))
+        data = cast(JSON, json.loads(json.dumps(data, sort_keys=True, indent=None)))
     print(
         JSONDumper(indent=" " * args.indent, line_length=args.line_length).dumps(data)
     )
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(Args)  # pyright: ignore[reportUnknownMemberType]

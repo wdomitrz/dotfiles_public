@@ -3,23 +3,23 @@
 # /// script
 # dependencies = [
 #     "pandas",
+#     "typer",
 # ]
 # ///
-
-# pyright: reportAny = false
-# pyright: reportExplicitAny = false
+#
 # pyright: reportMissingImports = false
 # pyright: reportUnknownMemberType = false
 # pyright: reportUnknownVariableType = false
-# pyright: reportUnusedCallResult = false
 
-import argparse
 import sys
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import cast
+
+import typer
 
 
-def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> Any:
+def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> object:
     match fp.suffix:
         case ".parquet" | ".pqt" | ".pq":
             import pandas as pd
@@ -28,7 +28,7 @@ def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> Any:
         case ".pickle" | ".pkl":
             import pickle
 
-            return pickle.loads(fp.read_bytes())
+            return cast(object, pickle.loads(fp.read_bytes()))
         case ".csv":
             import pandas as pd
 
@@ -41,17 +41,18 @@ def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> Any:
             raise NotImplementedError(f"Unsupported {suffix=} for {fp}")
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("paths", type=Path, nargs="+")
-    parser.add_argument("--sep", type=str, default="\t")
-    parser.add_argument("--weights_only".replace("_", "-"), type=bool, default=False)
-    parser.add_argument("--pd_show_index".replace("_", "-"), type=bool, default=False)
-    return parser.parse_args()
+@dataclass(frozen=True, kw_only=True)
+class Args:
+    paths: list[Path]
+    sep: str = "\t"
+    weights_only: bool = False
+    pd_show_index: bool = False
+
+    def __post_init__(self) -> None:
+        return main(self)
 
 
-def main() -> None:
-    args = parse_args()
+def main(args: Args) -> None:
     for fp in args.paths:
         try:
             data = cat(
@@ -68,4 +69,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(Args)

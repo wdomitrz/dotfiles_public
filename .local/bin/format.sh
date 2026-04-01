@@ -3,7 +3,7 @@ function format_json() { format_json.py; }
 function format_py() { ruff format -; }
 function format_sh() { shfmt --indent=2 --binary-next-line --case-indent --space-redirects --simplify -; }
 function format_c_cpp() { clang-format -; }
-function format_sorted_json() { LC_ALL=C format_json.py --sort-keys=True; }
+function format_sorted_json() { LC_ALL=C format_json.py --sort-keys; }
 function format_sorted_numeric_txt() { LC_ALL=C sort --numeric-sort -; }
 function format_sorted_txt() { LC_ALL=C sort -; }
 function format_vim() { format_nvim.sh vim; }

@@ -4,6 +4,9 @@ general {
     interval = 1
 }
 
+order += "tztime nyc"
+order += "tztime ldn"
+order += "tztime hkg"
 order += "volume default"
 order += "volume mic"
 order += "ipv6"
@@ -55,6 +58,21 @@ battery all {
 
 tztime local {
     format = "📆 %F %A 🕗 %T"
+}
+
+tztime nyc {
+    format = "🇺🇸 %T"
+    timezone = "America/New_York"
+}
+
+tztime ldn {
+    format = "🇬🇧 %T"
+    timezone = "Europe/London"
+}
+
+tztime hkg {
+    format = "🇭🇰 %T"
+    timezone = "Asia/Hong_Kong"
 }
 
 read_file file_updater_example {

@@ -8,24 +8,26 @@
 # requires-python = ">=3.12"
 # dependencies = [
 #     "lsprotocol",
+#     "typer",
 #     "pygls==1.3",
 # ]
 # ///
-
-# pyright: reportMissingImports = false
-# pyright: reportUnknownVariableType = false
-# pyright: reportUnknownParameterType = false
-# pyright: reportUnknownMemberType = false
-# pyright: reportUntypedFunctionDecorator = false
-# pyright: reportUnusedFunction = false
-# pyright: reportUnknownArgumentType = false
+#
 # pyright: reportAny = false
+# pyright: reportMissingImports = false
+# pyright: reportUnknownArgumentType = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportUnknownParameterType = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportUntypedFunctionDecorator = false
 # pyright: reportUnusedCallResult = false
+# pyright: reportUnusedFunction = false
 
-import argparse
 import logging
 import subprocess
+from dataclasses import dataclass
 
+import typer
 from lsprotocol.types import (
     TEXT_DOCUMENT_FORMATTING,
     DocumentFormattingParams,
@@ -77,17 +79,18 @@ def get_server(*, format_command: list[str]) -> LanguageServer:
     return server
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("format_command", type=str, nargs="+")
-    return parser.parse_args()
+@dataclass(kw_only=True, frozen=True)
+class Args:
+    format_command: list[str]
+
+    def __post_init__(self) -> None:
+        return main(self)
 
 
-def main() -> None:
-    args = parse_args()
+def main(args: Args) -> None:
     server = get_server(format_command=args.format_command)
     return server.start_io()
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(Args)

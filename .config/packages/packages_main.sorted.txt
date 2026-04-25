@@ -29,6 +29,7 @@ clangd
 cmake
 command-not-found
 compton
+coreutils
 cron
 cups
 curl
@@ -37,8 +38,8 @@ dbus-x11
 desktop-file-utils
 dex
 dict
+diffutils
 dkms
-dmenu
 docker-buildx
 docker-cli
 docker-compose
@@ -60,6 +61,7 @@ feh
 ffmpeg
 file
 file-roller
+findutils
 flameshot
 fonts-dejavu
 fonts-jetbrains-mono
@@ -85,10 +87,12 @@ gnome-themes-extra
 gparted
 gpg
 gpm
+grep
 grub-efi-amd64-signed
 grub2
 gwakeonlan
 gzip
+hostname
 htop
 hwinfo
 i3
@@ -99,6 +103,8 @@ iputils-ping
 ipython3
 jq
 kazam
+laptop-detect
+less
 libasound2-plugins
 libavcodec-extra
 libblockdev-crypto3
@@ -113,6 +119,7 @@ linux-headers-amd64
 locales
 lshw
 man-db
+manpages
 mate-polkit-bin
 mobile-broadband-provider-info
 modemmanager
@@ -165,6 +172,7 @@ rlwrap
 rofi
 rsync
 rtkit
+sed
 shellcheck
 shfmt
 simple-scan
@@ -183,9 +191,11 @@ tmux
 tp-smapi-dkms
 transmission
 tree
+unar
 unattended-upgrades
 units
 unzip
+util-linux
 vim-tiny
 vlc
 wakeonlan
@@ -213,6 +223,7 @@ xsel
 xserver-xorg-video-intel
 xss-lock
 xterm
+xz-utils
 zathura
 zip
 zstd

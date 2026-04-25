@@ -41,6 +41,7 @@
 !.config/etc/modprobe.d/hid_apple.conf
 !.config/etc/modprobe.d/iwlwifi.conf
 !.config/etc/network/interfaces
+!.config/etc/polkit-1/rules.d/99_allow_udisks2.rules
 !.config/etc/ssh/sshd_config.d/01_my_sshd.conf
 !.config/etc/systemd/logind.conf
 !.config/etc/systemd/system/apt-daily-upgrade.timer.d/override.conf
@@ -130,6 +131,7 @@
 !.config/user_configs/.config/Signal/Preferences
 !.config/user_configs/.config/Signal/ephemeral.json
 !.config/user_configs/.config/transmission/settings.json
+!.config/uv/uv.toml
 !.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 !.dmrc
 !.fehbg
@@ -176,8 +178,6 @@
 !.local/bin/i3_set_dpi.sh
 !.local/bin/i3_theme_detection
 !.local/bin/i3_xrl
-!.local/bin/i3status_file_updaters/.keep
-!.local/bin/i3status_run_file_updaters.sh
 !.local/bin/i3status_wrapper.py
 !.local/bin/import
 !.local/bin/install_code_extensions.sh

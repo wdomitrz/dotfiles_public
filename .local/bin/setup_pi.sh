@@ -54,6 +54,12 @@ function setup_unattended_upgrades() {
   ssh "${where}" 'sudo systemctl daemon-reload && sudo systemctl enable --now unattended-upgrades'
 }
 
+function setup_udisk2_perms() {
+  where="$1"
+
+  copy_config_file "${where}" /etc/polkit-1/rules.d/99_allow_udisks2.rules
+}
+
 function setup_tailscale() {
   where="$1"
 
@@ -68,6 +74,7 @@ function all() {
   print_and_run config_ssh "${where}"
   print_and_run update_packages "${where}"
   print_and_run install_packages "${where}"
+  print_and_run setup_udisk2_perms "${where}"
   print_and_run setup_unattended_upgrades "${where}"
   print_and_run setup_tailscale "${where}"
   print_and_run upgrade_packages "${where}"

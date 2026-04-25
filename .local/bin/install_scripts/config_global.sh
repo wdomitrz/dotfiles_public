@@ -50,19 +50,6 @@ function create_swap_file() {
   fi
 }
 
-function udisk_allow_operations() {
-  for operation in \
-    '"org.freedesktop.udisks2.encrypted-unlock"' \
-    '"org.freedesktop.udisks2.encrypted-unlock-system"' \
-    '"org.freedesktop.udisks2.filesystem-mount"'; do
-    for group in allow_any allow_inactive allow_active; do
-      sudo sed -i \
-        '/'"${operation}"'/,/'"${group}"'/{/'"${group}"'/{s/auth_admin[_keep]*/yes/;}}' \
-        /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
-    done
-  done
-}
-
 function configure_tpm2_non_root_disk_unlock() {
   echo "Don't use this function" && exit 1
 

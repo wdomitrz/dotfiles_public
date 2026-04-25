@@ -78,7 +78,6 @@ function config_global_rest() {
   print_and_run regenerate_grub_post_config_copy
   print_and_run reconfigure_tlp_post_config_copy
   print_and_run add_user_to_groups
-  print_and_run udisk_allow_operations
   print_and_run create_swap_file
   print_and_run enable_unattended_upgrades
 }

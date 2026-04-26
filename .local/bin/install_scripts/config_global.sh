@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
+source "${HOME}"/.local/bin/install_scripts/utils.sh
 
 function copy_global_configs() {
   check_integrity_of_tracked_dir.sh "${HOME}"/.config/etc \
@@ -34,7 +34,7 @@ function update_locales() {
 
 function enable_unattended_upgrades() {
   sudo systemctl daemon-reload
-  sudo systemctl enable --now unattended-upgrades
+  sudo systemctl enable --now unattended-upgrades --quiet
   sudo systemctl enable --now apt-daily.timer apt-daily-upgrade.timer
 }
 

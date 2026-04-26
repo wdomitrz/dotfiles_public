@@ -1,16 +1,8 @@
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env python3
 ################################################################
 # Copyright (c) 2025 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-#
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "lsprotocol",
-#     "pygls==1.3",
-# ]
-# ///
 #
 # pyright: reportAny = false
 # pyright: reportMissingImports = false

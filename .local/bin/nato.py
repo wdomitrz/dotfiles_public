@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env python3
 import sys
 
 nato_alphabet: dict[str, str] = {

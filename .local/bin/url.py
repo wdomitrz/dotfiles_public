@@ -1,12 +1,4 @@
-#!/usr/bin/env -S uv run --script
-#
-# /// script
-# dependencies = [
-#     "typer",
-# ]
-# ///
-#
-
+#!/usr/bin/env python3
 import json
 from dataclasses import dataclass
 from urllib.parse import parse_qsl, urlparse

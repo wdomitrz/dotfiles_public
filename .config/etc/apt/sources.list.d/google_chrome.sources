@@ -5,5 +5,6 @@ Suites: stable
 Components: main
 Architectures: amd64
 key_source: https://dl.google.com/linux/linux_signing_key.pub
+key_sha256: 54dea5f6c2a26091578cf52a999cebc6b64df478d37ad4dce96376b711e3b27c
 package_source: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 packages_to_install: google-chrome-stable

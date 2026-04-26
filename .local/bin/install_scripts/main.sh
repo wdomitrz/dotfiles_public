@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
+source "${HOME}"/.local/bin/install_scripts/utils.sh
 
 source "${HOME}"/.profile
 

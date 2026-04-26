@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
+source "${HOME}"/.local/bin/install_scripts/utils.sh
 
 function copy_user_configs() {
   check_integrity_of_tracked_dir.sh "${HOME}"/.config/user_configs \

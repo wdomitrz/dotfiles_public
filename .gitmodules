@@ -1,30 +1,30 @@
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-gitgutter"]
-	path = .local/state/nvim/site/pack/plugins/opt/vim-gitgutter
+	path = .local/opt/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
 [submodule ".local/state/nvim/site/pack/plugins/opt/fzf"]
-	path = .local/state/nvim/site/pack/plugins/opt/fzf
+	path = .local/opt/fzf
 	url = https://github.com/junegunn/fzf.git
 [submodule ".local/state/nvim/site/pack/plugins/opt/fzf.vim"]
-	path = .local/state/nvim/site/pack/plugins/opt/fzf.vim
+	path = .local/opt/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-commentary"]
-	path = .local/state/nvim/site/pack/plugins/opt/vim-commentary
+	path = .local/opt/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-sleuth"]
-	path = .local/state/nvim/site/pack/plugins/opt/vim-sleuth
+	path = .local/opt/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth.git
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-surround"]
-	path = .local/state/nvim/site/pack/plugins/opt/vim-surround
+	path = .local/opt/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule ".local/state/nvim/site/pack/plugins/opt/nvim-lspconfig"]
-	path = .local/state/nvim/site/pack/plugins/opt/nvim-lspconfig
+	path = .local/opt/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
 [submodule ".local/state/nvim/site/pack/plugins/opt/vim-suda"]
-	path = .local/state/nvim/site/pack/plugins/opt/vim-suda
+	path = .local/opt/vim-suda
 	url = https://github.com/lambdalisue/vim-suda
 [submodule ".local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim"]
-	path = .local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim
+	path = .local/opt/theme_watcher.nvim
 	url = https://github.com/wdomitrz/theme_watcher.nvim
 [submodule ".local/state/nvim/site/pack/plugins/opt/findfile.nvim"]
-	path = .local/state/nvim/site/pack/plugins/opt/findfile.nvim
+	path = .local/opt/findfile.nvim
 	url = https://github.com/wdomitrz/findfile.nvim

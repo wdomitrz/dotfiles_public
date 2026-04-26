@@ -4,5 +4,6 @@ URIs: https://pkgs.tailscale.com/stable/debian
 Suites: trixie
 Components: main
 key_source: https://pkgs.tailscale.com/stable/debian/trixie.asc
+key_sha256: 53c6f7dfbd774839d9f37e6c5022ba952108aba9a0e556a56f292a9eb605d7cf
 package_source: https://tailscale.com/install.sh
 packages_to_install: tailscale

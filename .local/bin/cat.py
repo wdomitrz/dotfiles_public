@@ -1,11 +1,4 @@
-#!/usr/bin/env -S uv run --script
-#
-# /// script
-# dependencies = [
-#     "pandas",
-#     "typer",
-# ]
-# ///
+#!/usr/bin/env python3
 #
 # pyright: reportMissingImports = false
 # pyright: reportUnknownMemberType = false

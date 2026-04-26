@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
+source "${HOME}"/.local/bin/install_scripts/utils.sh
 
 function update_and_upgrade() {
   sudo DEBIAN_FRONTEND=noninteractive apt-get update --yes --quiet=2 \

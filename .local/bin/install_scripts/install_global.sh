@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
-source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
+source "${HOME}"/.local/bin/install_scripts/utils.sh
 
 function install_deb_from_url() {
-  link="$1"
   package_file="$(mktemp /tmp/XXXXXX.deb)"
-  wget_with_defaults.sh --max-redirect=1 "${link}" > "${package_file}"
+  download_and_verify "$@" > "${package_file}"
   sudo DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes --quiet=2 "${package_file}"
-  rm "${package_file}"
+  rm --force "${package_file}"
 }
 
 function enable_source_and_list_packages() {
@@ -23,9 +22,10 @@ function enable_source_and_list_packages() {
   fi
 
   key_source=$(grep 'key_source: ' "${sources_file}" | sed 's/key_source: //g')
+  key_sha256=$(grep 'key_sha256: ' "${sources_file}" | sed 's/key_sha256: //g')
   (
     echo "Signed-By:"
-    wget_with_defaults.sh "${key_source}" | sponge \
+    download_and_verify "${key_sha256}" "${key_source}" | sponge \
       | sed --expression='s|^$|.|g' --expression='s|^| |g'
   ) | sudo sponge -a "${sources_file}"
 
@@ -63,15 +63,17 @@ function not_sudo() {
 }
 
 function install_to_given_location() {
-  if [[ $# -ne 6 ]]; then
-    echo "Usage: $0 <save_dir> <link_dir> <sudo_or_not_sudo> <url> <relative_binary_path> <decompression_option>"
-    return 1
-  fi
-  local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3" url="$4" relative_binary_path="$5" decompression_option="$6"
+  local -r save_dir="$1" \
+    link_dir="$2" \
+    sudo_or_not_sudo="$3" \
+    url="$4" \
+    checksum_sha256="$5" \
+    relative_binary_path="$6" \
+    decompression_option="$7"
 
   "${sudo_or_not_sudo}" mkdir --parents "${save_dir}" "${link_dir}"
 
-  wget_with_defaults.sh --max-redirect=1 --no-show-progress "${url}" \
+  download_and_verify "${checksum_sha256}" "${url}" \
     | "${sudo_or_not_sudo}" tar --extract \
       "${decompression_option}" \
       --directory="${save_dir}"
@@ -83,12 +85,13 @@ function no_graphical_target() {
   sudo systemctl set-default multi-user.target
 }
 
-function install_nvim_given_locations() {
+function install_nvim() {
   # appimage url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
   [[ $# -ne 3 ]] && exit 1
   local -r save_dir="$1" link_dir="$2" sudo_or_not_sudo="$3"
   install_to_given_location "${save_dir}" "${link_dir}" "${sudo_or_not_sudo}" \
-    "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz" \
+    'https://github.com/neovim/neovim/releases/download/v0.12.2/nvim-linux-x86_64.tar.gz' \
+    '31cf85945cb600d96cdf69f88bc68bec814acbff50863c5546adef3a1bcef260' \
     nvim-linux-x86_64/bin/nvim \
     --ungzip
 }

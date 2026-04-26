@@ -1,15 +1,8 @@
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env python3
 ################################################################
 # Copyright (c) 2024 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-#
-# /// script
-# dependencies = [
-#     "i3ipc",
-#     "typer",
-# ]
-# ///
 #
 # pyright: reportUnknownParameterType = false
 # pyright: reportUnknownMemberType = false

@@ -1,15 +1,8 @@
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env python3
 ################################################################
 # Copyright (c) 2025 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-#
-# /// script
-# dependencies = [
-#     "typer",
-# ]
-# requires-python = ">=3.12"
-# ///
 
 from __future__ import annotations
 

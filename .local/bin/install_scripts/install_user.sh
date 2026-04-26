@@ -1,64 +1,74 @@
 #!/usr/bin/env bash
-source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
-
-function install_haskell_ghcup() {
-  curl --fail --progress-bar --show-error --location --proto '=https' --tlsv1.2 https://get-ghcup.haskell.org | sh
-}
-
-function install_nvim() {
-  source "${HOME}"/.local/bin/install_scripts/install_global.sh --source-only
-  install_nvim_given_locations "${HOME}"/.local/opt "${HOME}"/.local/bin not_sudo
-}
+source "${HOME}"/.local/bin/install_scripts/utils.sh
 
 function install_uv() {
-  wget_with_defaults.sh --max-redirect=3 --no-show-progress https://astral.sh/uv/install.sh \
-    | sh -s -- --quiet
+  source "${HOME}"/.local/bin/install_scripts/install_global.sh --source-only
+
+  archive_name='uv-x86_64-unknown-linux-gnu'
+  install_to_given_location \
+    "${HOME}"/.local/opt \
+    "${HOME}"/.local/bin \
+    not_sudo \
+    "https://github.com/astral-sh/uv/releases/download/0.11.7/${archive_name}.tar.gz" \
+    '6681d691eb7f9c00ac6a3af54252f7ab29ae72f0c8f95bdc7f9d1401c23ea868' \
+    "${archive_name}"/uv \
+    --ungzip
+
+  ln --relative --symbolic --force \
+    "${HOME}"/.local/opt/"${archive_name}"/uvx \
+    "${HOME}"/.local/bin/
 }
 
-function install_uv_tools() {
-  uv tool install --quiet ruff
+function install_ruff() {
+  source "${HOME}"/.local/bin/install_scripts/install_global.sh --source-only
+
+  archive_name='ruff-x86_64-unknown-linux-gnu'
+  install_to_given_location \
+    "${HOME}"/.local/opt \
+    "${HOME}"/.local/bin \
+    not_sudo \
+    https://github.com/astral-sh/ruff/releases/download/0.15.12/"${archive_name}".tar.gz \
+    '5e26a7811f7db364864ace00cced53003556a37b63f3c987e340b18207776f1c' \
+    "${archive_name}"/ruff \
+    --ungzip
+}
+
+function install_basedpyright() {
   uv tool install --quiet basedpyright
 }
 
 function install_doc() {
-  local url="$1"
-  local name="$2"
+  local -r name="$1"
+  shift 1
   local target_dir="${HOME}/.local/share/doc/${name}"
   local package_file
   package_file="$(mktemp /tmp/XXXXXX.zip)"
 
   mkdir --parents "${target_dir}"
-  wget_with_defaults.sh "${url}" > "${package_file}"
+  download_and_verify "$@" > "${package_file}"
   unzip -qud "${target_dir}"/ "${package_file}"
   rm "${package_file}"
 }
 
-function get_binary_from() {
-  name="$1"
-  checksum_sha256="$2"
-  url="$3"
-  shift 3
-
-  file_path="${HOME}/.local/bin/${name}"
-  wget_with_defaults.sh "$@" "${url}" > "${file_path}"
-  if ! echo "${checksum_sha256} ${file_path}" | sha256sum --check --quiet; then
-    echo "Wrong checksum for ${url}"
-    rm --force "${file_path}"
-    return 1
-  fi
-
-  chmod +x "${file_path}"
-}
-
 function install_rmz_and_cpz() {
-  get_binary_from rmz \
-    "54f643c6ba170d613c65c48697000faf68d9c77611c10458ea5b1eac99799d25" \
-    "https://github.com/SUPERCILEX/fuc/releases/download/3.0.1/x86_64-unknown-linux-gnu-rmz" \
-    --max-redirect=1 --no-show-progress
-  get_binary_from cpz \
-    "cf8147eda901948c643975e3c29d4b10db9fbfdc475585d57f1446dfaa2fa16f" \
-    "https://github.com/SUPERCILEX/fuc/releases/download/3.0.1/x86_64-unknown-linux-gnu-cpz" \
-    --max-redirect=1 --no-show-progress
+  subdir=fuc
+  mkdir --parents "${HOME}"/.local/opt/"${subdir}"
+
+  download_and_verify \
+    '54f643c6ba170d613c65c48697000faf68d9c77611c10458ea5b1eac99799d25' \
+    'https://github.com/SUPERCILEX/fuc/releases/download/3.0.1/x86_64-unknown-linux-gnu-rmz' \
+    > "${HOME}"/.local/opt/"${subdir}"/rmz
+  download_and_verify \
+    'cf8147eda901948c643975e3c29d4b10db9fbfdc475585d57f1446dfaa2fa16f' \
+    'https://github.com/SUPERCILEX/fuc/releases/download/3.0.1/x86_64-unknown-linux-gnu-cpz' \
+    > "${HOME}"/.local/opt/"${subdir}"/cpz
+
+  for what in rmz cpz; do
+    chmod +x "${HOME}"/.local/opt/"${subdir}"/"${what}"
+    ln --relative --symbolic --force \
+      "${HOME}"/.local/opt/"${subdir}"/"${what}" \
+      "${HOME}"/.local/bin/
+  done
 }
 
 function install_nvim_plugins() {
@@ -69,7 +79,8 @@ function install_user_main() {
   set -euo pipefail
 
   print_and_run install_uv
-  print_and_run install_uv_tools
+  print_and_run install_ruff
+  print_and_run install_basedpyright
   print_and_run install_rmz_and_cpz
   print_and_run install_nvim_plugins
 }

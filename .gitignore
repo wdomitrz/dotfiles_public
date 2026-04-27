@@ -84,6 +84,7 @@
 !.config/extension_links/.local/bin/not.sh
 !.config/extension_links/.local/bin/not_sudo.sh
 !.config/extension_links/.local/bin/pasta.sh
+!.config/extension_links/.local/bin/pdiff.sh
 !.config/extension_links/.local/bin/scratch.sh
 !.config/extension_links/.local/bin/terminal_pager.sh
 !.config/extension_links/.local/bin/timer.sh
@@ -198,6 +199,7 @@
 !.local/bin/not
 !.local/bin/not_sudo
 !.local/bin/pasta
+!.local/bin/pdiff
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh
 !.local/bin/propagate_config_to.sh
@@ -244,6 +246,7 @@
 !.local/opt/fzf
 !.local/opt/fzf.vim
 !.local/opt/nvim-lspconfig
+!.local/opt/pdiff
 !.local/opt/theme_watcher.nvim
 !.local/opt/vim-commentary
 !.local/opt/vim-gitgutter

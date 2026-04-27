@@ -3,56 +3,67 @@
 # Copyright (c) 2024 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
-#
-# pyright: reportUnknownParameterType = false
-# pyright: reportUnknownMemberType = false
-# pyright: reportUnknownVariableType = false
-# pyright: reportUnknownArgumentType = false
 
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, cast
 
-import i3ipc  # pyright: ignore[reportMissingImports]
-import typer  # pyright: ignore[reportMissingImports]
+import i3ipc  # pyright: ignore[reportMissingTypeStubs]
+import typer
 
 
-def container_to_ignore(container: i3ipc.Con | None) -> bool:
+def container_to_ignore(container: i3ipc.Con) -> bool:
     return (
-        container is None
-        or "_on" in container.floating  # Floating
-        or container.fullscreen_mode == 1  # Full screen
-        or container.parent.layout == "stacked"
-        or container.parent.layout == "tabbed"
+        "_on" in container.floating  # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
+        or getattr(container, "fullscreen_mode", 0) == 1
+        or container.parent.layout in ["stacked", "tabbed"]  # pyright: ignore[reportUnknownMemberType]
     )
 
 
+def get_container_width(container: i3ipc.Con) -> int:
+    return cast(int, container.rect.width)
+
+
+def get_workspace_width(container: i3ipc.Con) -> int:
+    workspace = container.workspace()
+    assert workspace is not None
+    return cast(int, workspace.rect.width)
+
+
 def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
-    def resize_to_nth(i3: i3ipc.Connection, _event: i3ipc.WindowEvent) -> None:
-        if container_to_ignore(container := i3.get_tree().find_focused()) or (
-            container is not None
-            and container.parent is not None
-            and container.ipc_data["rect"]["y"]
-            != container.parent.ipc_data["rect"]["y"]
+    def resize_to_nth(i3: i3ipc.Connection, event: i3ipc.events.IpcBaseEvent) -> None:
+        del event
+        container = i3.get_tree().find_focused()
+        if (
+            container is None
+            or container_to_ignore(container)
+            or (
+                container.parent is not None
+                and (
+                    cast(i3ipc.Con, container.parent).ipc_data["rect"]["y"]
+                    != container.ipc_data["rect"]["y"]
+                )
+            )
         ):
             return
 
-        workspace_width = container.workspace().rect.width
-        container_width = container.rect.width
+        workspace_width = get_workspace_width(container)
+        container_width = get_container_width(container)
         size_delta = container_width % (workspace_width // n)
         if -n <= (size_delta - workspace_width // n):
             size_delta -= workspace_width // n
 
         _ = i3.command(f"resize set width {container_width - int(size_delta)}")
 
-    def up_to_n_colums(i3: i3ipc.Connection, _event: i3ipc.WindowEvent) -> None:
-        if container_to_ignore(container := i3.get_tree().find_focused()):
+    def up_to_n_colums(i3: i3ipc.Connection, event: i3ipc.events.IpcBaseEvent) -> None:
+        del event
+        container = i3.get_tree().find_focused()
+        if container is None or container_to_ignore(container):
             return
 
-        how_to_split: Literal["horizontal", "vertical"] = (
-            "horizontal"
-            if container.rect.width > 2 * container.workspace().rect.width // n - n
-            else "vertical"
-        )
+        if get_container_width(container) > 2 * get_workspace_width(container) // n - n:
+            how_to_split: Literal["horizontal", "vertical"] = "horizontal"
+        else:
+            how_to_split = "vertical"
 
         _ = i3.command(f"split {how_to_split}")
 

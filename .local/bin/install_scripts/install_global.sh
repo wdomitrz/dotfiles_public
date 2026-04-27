@@ -97,7 +97,7 @@ function install_nvim() {
 }
 
 function install_system_nvim() {
-  install_nvim_given_locations /opt /usr/bin sudo
+  install_nvim /opt /usr/bin sudo
 }
 
 function install_global_main() {

@@ -16,7 +16,7 @@ import textwrap
 from collections.abc import Sequence
 from dataclasses import dataclass
 
-import typer  # pyright: ignore[reportMissingImports]
+import typer
 
 PRIMARY_ORDER_DEFAULT: tuple[str, ...] = ("screen", "rdp", "DP", "HDMI", "eDP")
 DEFAULT_FAILSAFE_DPI = DEFAULT_GNOME_DPI = 96
@@ -305,25 +305,25 @@ class DpiSettings:
         )
 
 
-app = typer.Typer()  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType]
+app = typer.Typer()
 
 
 class Commands:
-    @app.command()  # pyright: ignore[reportUnknownMemberType, reportUntypedFunctionDecorator]
+    @app.command()
     @staticmethod
     def show_dpi(dpi: int | None = None) -> None:
         """Display inferred dpi."""
         print(DpiSettings.get_default_dpi(forced_dpi=dpi))
 
-    @app.command()  # pyright: ignore[reportUnknownMemberType, reportUntypedFunctionDecorator]
+    @app.command()
     @staticmethod
     def set_dpi(dpi: int | None = None) -> None:
         DpiSettings.set_dpi(DpiSettings.get_default_dpi(forced_dpi=dpi))
 
-    @app.callback(invoke_without_command=True)  # pyright: ignore[reportUnknownMemberType, reportUntypedFunctionDecorator]
+    @app.callback(invoke_without_command=True)
     @staticmethod
-    def set_display(ctx: typer.Context) -> None:  # pyright: ignore[reportUnknownParameterType, reportUnknownMemberType]
-        if ctx.invoked_subcommand is not None:  # pyright: ignore[reportUnknownMemberType]
+    def set_display(ctx: typer.Context) -> None:
+        if ctx.invoked_subcommand is not None:
             return
 
         GettingPrimaryDisplay.new(Display.get_all_displays()).set_primary()

@@ -11,7 +11,7 @@ import sys
 from dataclasses import dataclass
 from typing import NamedTuple, TypeAlias, cast
 
-import typer  # pyright: ignore[reportMissingImports]
+import typer
 
 JSONScalar: TypeAlias = None | bool | int | float | str
 JSON: TypeAlias = JSONScalar | list["JSON"] | dict[str, "JSON"]
@@ -136,4 +136,4 @@ def main(args: Args) -> None:
 
 
 if __name__ == "__main__":
-    typer.run(Args)  # pyright: ignore[reportUnknownMemberType]
+    typer.run(Args)

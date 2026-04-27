@@ -20,3 +20,5 @@
     detachedHead = false
 [push]
     autoSetupRemote = true
+[diff]
+	external = pdiff --git

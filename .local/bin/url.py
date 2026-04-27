@@ -3,7 +3,7 @@ import json
 from dataclasses import dataclass
 from urllib.parse import parse_qsl, urlparse
 
-import typer  # pyright: ignore[reportMissingImports]
+import typer
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -41,4 +41,4 @@ def main(args: Args) -> None:
 
 
 if __name__ == "__main__":
-    typer.run(Args)  # pyright: ignore[reportUnknownMemberType]
+    typer.run(Args)

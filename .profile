@@ -9,8 +9,9 @@ if [ -d "${HOME}/.local/bin" ]; then export PATH="${HOME}/.local/bin:${PATH}"; f
 # homebrew
 if [ -d "/home/linuxbrew/.linuxbrew" ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
 if [ -d "/opt/homebrew" ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
-# ghcup
-if [ -f "${HOME}/.ghcup/env" ]; then . "${HOME}/.ghcup/env"; fi
+for p in /opt/homebrew/opt/*/libexec/gnubin; do
+  if [ -d "${p}" ]; then export PATH="${p}:$PATH"; fi
+done
 
 export EDITOR=vim
 export VISUAL=vim

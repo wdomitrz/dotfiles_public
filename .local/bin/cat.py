@@ -29,7 +29,9 @@ def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> objec
         case ".pt":
             import torch
 
-            return torch.load(fp, map_location="cpu", weights_only=weights_only)
+            return cast(
+                object, torch.load(fp, map_location="cpu", weights_only=weights_only)
+            )
         case suffix:
             raise NotImplementedError(f"Unsupported {suffix=} for {fp}")
 

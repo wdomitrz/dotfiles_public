@@ -1,24 +1,18 @@
 [include]
-    path = ~/.config/git/user.config
-
+	path = ~/.config/git/user.config
 [core]
-    excludesfile = ~/.config/git/gitignore.sorted.txt
-
+	excludesfile = ~/.config/git/gitignore.sorted.txt
 [merge]
-    conflictstyle = diff3
-
+	conflictstyle = diff3
 [alias]
-    la = log --all --graph --oneline --decorate --date-order
-
+	la = log --all --graph --oneline --decorate --date-order
 [include]
-    path = ~/.config/git/gitconfig.local
-
+	path = ~/.config/git/gitconfig.local
 [credential]
-    helper = cache --timeout 7200
-
+	helper = cache --timeout 7200
 [advice]
-    detachedHead = false
+	detachedHead = false
 [push]
-    autoSetupRemote = true
+	autoSetupRemote = true
 [diff]
-    external = pdiff --git
+	external = pdiff git

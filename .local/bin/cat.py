@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 #
+# /// script
+# dependencies = [
+#   "typer",
+# ]
+# ///
+#
 # pyright: reportMissingImports = false
 # pyright: reportUnknownMemberType = false
 # pyright: reportUnknownVariableType = false
@@ -38,29 +44,28 @@ def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> objec
 
 @dataclass(frozen=True, kw_only=True)
 class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
     paths: list[Path]
     sep: str = "\t"
     weights_only: bool = False
     pd_show_index: bool = False
 
-    def __post_init__(self) -> None:
-        return main(self)
-
-
-def main(args: Args) -> None:
-    for fp in args.paths:
-        try:
-            data = cat(
-                fp,
-                sep=args.sep,
-                weights_only=args.weights_only,
-                pd_show_index=args.pd_show_index,
-            )
-            print(data)
-        except NotImplementedError as e:
-            print(e, file=sys.stderr)
-        except BrokenPipeError:
-            pass
+    def main(self) -> None:
+        for fp in self.paths:
+            try:
+                data = cat(
+                    fp,
+                    sep=self.sep,
+                    weights_only=self.weights_only,
+                    pd_show_index=self.pd_show_index,
+                )
+                print(data)
+            except NotImplementedError as e:
+                print(e, file=sys.stderr)
+            except BrokenPipeError:
+                pass
 
 
 if __name__ == "__main__":

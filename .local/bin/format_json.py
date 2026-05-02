@@ -3,6 +3,12 @@
 # Copyright (c) 2025 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
+#
+# /// script
+# dependencies = [
+#   "typer",
+# ]
+# ///
 
 from __future__ import annotations
 
@@ -118,21 +124,22 @@ class JSONDumper:
 
 @dataclass(kw_only=True, frozen=True)
 class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
     indent: int = 2
     sort_keys: bool = False
     line_length: int = 80
 
-    def __post_init__(self) -> None:
-        return main(self)
-
-
-def main(args: Args) -> None:
-    data = cast(JSON, json.loads(sys.stdin.read()))
-    if args.sort_keys:
-        data = cast(JSON, json.loads(json.dumps(data, sort_keys=True, indent=None)))
-    print(
-        JSONDumper(indent=" " * args.indent, line_length=args.line_length).dumps(data)
-    )
+    def main(self) -> None:
+        data = cast(JSON, json.loads(sys.stdin.read()))
+        if self.sort_keys:
+            data = cast(JSON, json.loads(json.dumps(data, sort_keys=True, indent=None)))
+        print(
+            JSONDumper(indent=" " * self.indent, line_length=self.line_length).dumps(
+                data
+            )
+        )
 
 
 if __name__ == "__main__":

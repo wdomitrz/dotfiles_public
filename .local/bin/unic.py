@@ -1,13 +1,33 @@
 #!/usr/bin/env python3
-import sys
+#
+# /// script
+# dependencies = [
+#   "typer",
+# ]
+# ///
+
 import unicodedata
+from dataclasses import dataclass
 
-assert len(sys.argv) == 2
+import typer
 
-c = chr(int(sys.argv[1], 0))
 
-print(c)
-try:
-    print(unicodedata.name(c))
-except ValueError:
-    print(f"No description for {c}")
+@dataclass(kw_only=True, frozen=True)
+class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
+    c: int
+
+    def main(self) -> None:
+        c = chr(self.c)
+        try:
+            print(f"{c!r}")
+            print(f"'{c}'")
+            print(unicodedata.name(c))
+        except ValueError:
+            print(f"No description for {c!r}")
+
+
+if __name__ == "__main__":
+    typer.run(Args)

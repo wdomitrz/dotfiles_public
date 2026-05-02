@@ -1,4 +1,1 @@
-#!/usr/bin/env bash
-set -eu
-
-exec "${HOME}"/.local/opt/pdiff/main.go "$@"
+../opt/pdiff/pdiff.py

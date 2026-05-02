@@ -4,6 +4,14 @@
 # AGPL License
 ################################################################
 #
+# /// script
+# dependencies = [
+#   "lsprotocol",
+#   "pygls",
+#   "typer",
+# ]
+# ///
+#
 # pyright: reportAny = false
 # pyright: reportMissingImports = false
 # pyright: reportUnknownArgumentType = false
@@ -72,15 +80,14 @@ def get_server(*, format_command: list[str]) -> LanguageServer:
 
 @dataclass(kw_only=True, frozen=True)
 class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
     format_command: list[str]
 
-    def __post_init__(self) -> None:
-        return main(self)
-
-
-def main(args: Args) -> None:
-    server = get_server(format_command=args.format_command)
-    return server.start_io()
+    def main(self) -> None:
+        server = get_server(format_command=self.format_command)
+        return server.start_io()
 
 
 if __name__ == "__main__":

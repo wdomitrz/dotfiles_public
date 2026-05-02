@@ -8,36 +8,39 @@ import typer
 
 @dataclass(frozen=True, kw_only=True)
 class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
     url: str
 
-    def __post_init__(self) -> None:
-        return main(self)
+    @classmethod
+    def to_info(cls, url: str) -> dict[str, int | str | dict[str, str]]:
+        parsed = urlparse(url)
+        return {
+            k: v
+            for k, v in dict(
+                original=url,
+                protocol=parsed.scheme,
+                username=parsed.username,
+                password=parsed.password,
+                hostname=parsed.hostname,
+                port=parsed.port,
+                path=parsed.path,
+                query=dict(parse_qsl(parsed.query)),
+                hash=parsed.fragment,
+            ).items()
+            if v is not None
+            and (not isinstance(v, (str, dict, list, tuple)) or len(v) != 0)
+        }
 
+    def main(self) -> None:
 
-def main(args: Args) -> None:
-    parsed = urlparse(args.url)
-
-    print(
-        json.dumps(
-            {
-                k: v
-                for k, v in dict(
-                    original=args.url,
-                    protocol=parsed.scheme,
-                    username=parsed.username,
-                    password=parsed.password,
-                    hostname=parsed.hostname,
-                    port=parsed.port,
-                    path=parsed.path,
-                    query=dict(parse_qsl(parsed.query)),
-                    hash=parsed.fragment,
-                ).items()
-                if v is not None
-                and (not isinstance(v, (str, dict, list, tuple)) or len(v) != 0)
-            },
-            indent=2,
+        print(
+            json.dumps(
+                self.to_info(self.url),
+                indent=2,
+            )
         )
-    )
 
 
 if __name__ == "__main__":

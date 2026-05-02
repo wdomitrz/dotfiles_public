@@ -84,7 +84,6 @@ gnome-sound-recorder
 gnome-sudoku
 gnome-system-monitor
 gnome-themes-extra
-golang
 gparted
 gpg
 gpm

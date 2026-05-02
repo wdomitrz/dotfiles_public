@@ -4,6 +4,14 @@
 # AGPL License
 ################################################################
 #
+# /// script
+# dependencies = [
+#   "lsprotocol",
+#   "pygls",
+#   "typer",
+# ]
+# ///
+#
 # pyright: reportAny = false
 # pyright: reportMissingImports = false
 # pyright: reportMissingTypeArgument = false
@@ -20,6 +28,7 @@ import logging
 import subprocess
 from dataclasses import dataclass
 
+import typer
 from lsprotocol.types import (
     TEXT_DOCUMENT_CODE_ACTION,
     TEXT_DOCUMENT_DIAGNOSTIC,
@@ -214,10 +223,15 @@ def get_server() -> LanguageServer:
     return server
 
 
-def main() -> None:
-    server = get_server()
-    return server.start_io()
+@dataclass(kw_only=True, frozen=True)
+class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
+    def main(self) -> None:
+        server = get_server()
+        return server.start_io()
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(Args)

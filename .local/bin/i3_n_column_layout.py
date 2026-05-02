@@ -3,6 +3,13 @@
 # Copyright (c) 2024 Witalis Domitrz <witekdomitrz@gmail.com>
 # AGPL License
 ################################################################
+#
+# /// script
+# dependencies = [
+#   "i3ipc",
+#   "typer",
+# ]
+# ///
 
 from dataclasses import dataclass
 from typing import Literal, cast
@@ -76,16 +83,15 @@ def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
 
 @dataclass(kw_only=True, frozen=True)
 class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
     number_of_columns: float = 2.0
 
-    def __post_init__(self) -> None:
-        return main(self)
-
-
-def main(args: Args):
-    i3 = i3ipc.Connection()
-    n_column_layout(i3, n=args.number_of_columns)
-    i3.main()
+    def main(self):
+        i3 = i3ipc.Connection()
+        n_column_layout(i3, n=self.number_of_columns)
+        i3.main()
 
 
 if __name__ == "__main__":

@@ -4,6 +4,12 @@
 # AGPL License
 ################################################################
 #
+# /// script
+# dependencies = [
+#   "typer",
+# ]
+# ///
+#
 # pyright: reportAny = false
 # pyright: reportDeprecated = false
 # pyright: reportMissingParameterType = false
@@ -28,6 +34,8 @@ import subprocess
 import sys
 from dataclasses import asdict, dataclass, replace
 from typing import Callable, Sequence
+
+import typer
 
 
 # Helper functions
@@ -347,12 +355,17 @@ def clicks_handler() -> None:
         multiprocessing.Process(target=handle_click, args=[line]).start()
 
 
-def main() -> None:
-    process = multiprocessing.Process(target=show_status_text)
-    process.start()
-    clicks_handler()
-    process.join()
+@dataclass(kw_only=True, frozen=True)
+class Args:
+    def __post_init__(self) -> None:
+        return self.main()
+
+    def main(self) -> None:
+        process = multiprocessing.Process(target=show_status_text)
+        process.start()
+        clicks_handler()
+        process.join()
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(Args)

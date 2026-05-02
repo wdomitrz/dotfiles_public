@@ -213,6 +213,7 @@
   "workbench.activityBar.location": "hidden",
   "workbench.editor.editorActionsLocation": "hidden",
   "workbench.editor.showTabs": "none",
+  "workbench.editor.useModal": "off",
   "workbench.enableExperiments": false,
   "workbench.layoutControl.enabled": false,
   "workbench.sideBar.location": "right",

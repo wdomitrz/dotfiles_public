@@ -3,7 +3,8 @@
 # https://github.com/Stunkymonkey/nautilus-open-any-terminal
 # GPL3 License
 
-# ruff: noqa: ANN001, ANN201, ANN202
+# ruff: noqa: PGH004
+# ruff: noqa
 # pyright: reportAttributeAccessIssue=false, reportUnknownVariableType=false, reportMissingImports=false, reportUnusedCallResult=false, reportUnknownParameterType=false, reportMissingParameterType=false, reportUnknownMemberType=false, reportUnusedParameter=false, reportUntypedBaseClass=false, reportMissingSuperCall=false, reportUnannotatedClassAttribute=false, reportOptionalSubscript=false,reportUnknownArgumentType=false, reportIgnoreCommentWithoutRule=false, reportMissingTypeStubs=false
 
 from gettext import gettext, textdomain

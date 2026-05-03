@@ -28,6 +28,3 @@
 [submodule ".local/state/nvim/site/pack/plugins/opt/findfile.nvim"]
 	path = .local/opt/findfile.nvim
 	url = https://github.com/wdomitrz/findfile.nvim
-[submodule ".local/opt/pdiff"]
-	path = .local/opt/pdiff
-	url = https://github.com/wdomitrz/pdiff

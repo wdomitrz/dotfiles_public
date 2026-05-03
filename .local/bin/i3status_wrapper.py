@@ -23,6 +23,8 @@
 # pyright: reportUnusedCallResult = false
 # pyright: reportUnusedParameter = false
 
+# ruff: noqa: SIM905
+
 import contextlib
 import functools
 import itertools
@@ -32,18 +34,29 @@ import operator
 import select
 import subprocess
 import sys
+from collections.abc import Callable, Iterator, Sequence
 from dataclasses import asdict, dataclass, replace
-from typing import Callable, Sequence
+from typing import Protocol, TypeAlias
 
 import typer
 
+StatusBlock: TypeAlias = dict[str, object]
+
+
+class ReadSource(Protocol):
+    def fileno(self) -> int: ...
+
+    def readline(self) -> str: ...
+
 
 # Helper functions
-def run_command_background(cmd: str | Sequence[str]) -> subprocess.Popen:
+def run_command_background(cmd: str | Sequence[str]) -> subprocess.Popen[bytes]:
     return subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def run_command_blocking(cmd: str | Sequence[str]) -> subprocess.CompletedProcess:
+def run_command_blocking(
+    cmd: str | Sequence[str],
+) -> subprocess.CompletedProcess[bytes]:
     return subprocess.run(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=False
     )
@@ -55,10 +68,11 @@ REFRESH_STATUS_CMD: Sequence[str] = "killall -SIGUSR1 i3status".split()
 # Click handling
 def run_command_on_click(
     cmd: str | Sequence[str],
+    *,
     accepted_button: int = 1,
     refresh: bool = False,
 ) -> Callable[..., None]:
-    def helper(button: int, **_) -> None:
+    def helper(button: int, **_: object) -> None:
         if button != accepted_button:
             return
         if not refresh:
@@ -70,8 +84,8 @@ def run_command_on_click(
     return helper
 
 
-def handle_volume(*, button: int, modifiers: list[str], **_) -> None:
-    if button == 3:
+def handle_volume(*, button: int, modifiers: list[str], **_: object) -> None:
+    if button == 3:  # noqa: PLR2004
         run_command_background("pavucontrol")
         return
     volume_mult = 1 if "Control" not in modifiers else 5
@@ -87,7 +101,8 @@ def handle_volume(*, button: int, modifiers: list[str], **_) -> None:
     run_command_background(REFRESH_STATUS_CMD)
 
 
-def handle_mic(*, button: int, modifiers: list[str], **_) -> None:
+def handle_mic(*, button: int, modifiers: list[str], **_: object) -> None:
+    del modifiers
     if button in [1, 2]:
         cmd = "pactl set-source-mute @DEFAULT_SOURCE@ toggle".split()
     else:
@@ -96,13 +111,21 @@ def handle_mic(*, button: int, modifiers: list[str], **_) -> None:
     run_command_background(REFRESH_STATUS_CMD)
 
 
-def handle_sound(*, instance: str, **data) -> None:
+def handle_sound(*, instance: str, **data: object) -> None:
+    button = data.get("button")
+    modifiers = data.get("modifiers")
+    if not isinstance(button, int) or not isinstance(modifiers, list):
+        return None
+
+    if not all(isinstance(modifier, str) for modifier in modifiers):
+        return None
+
     if instance.startswith("default"):
-        return handle_volume(instance=instance, **data)
+        return handle_volume(instance=instance, button=button, modifiers=modifiers)
     elif "Capture" in instance:
-        return handle_mic(instance=instance, **data)
+        return handle_mic(instance=instance, button=button, modifiers=modifiers)
     else:
-        return
+        return None
 
 
 @dataclass(kw_only=True, frozen=True)
@@ -235,8 +258,8 @@ def media_block() -> Block:
     )
 
 
-def add_no_internet_info(old_blocks: list[dict]) -> list[dict]:
-    def is_internet_block(block: dict) -> bool:
+def add_no_internet_info(old_blocks: list[StatusBlock]) -> list[StatusBlock]:
+    def is_internet_block(block: StatusBlock) -> bool:
         return block.get("name") in ["ipv6", "wireless", "ethernet"]
 
     internet_blocks = list(filter(is_internet_block, old_blocks))
@@ -259,7 +282,7 @@ def add_no_internet_info(old_blocks: list[dict]) -> list[dict]:
 BLOCKS_TO_ADD = ["terminal", "menu", "close"]
 
 
-def process_blocks(old_blocks: list[dict]) -> list[dict]:
+def process_blocks(old_blocks: list[StatusBlock]) -> list[StatusBlock]:
     return (
         [asdict(media_block())]
         + add_no_internet_info(old_blocks)
@@ -272,18 +295,20 @@ HEADER = {"version": 1, "click_events": True}
 I3STATUS_COMMANDS = ["i3status"]
 
 
-def combine_read_sources(read_sources: list):
+def combine_read_sources(
+    read_sources: Sequence[ReadSource],
+) -> Iterator[tuple[int, str]]:
     while True:
         ready_reads, _, _ = select.select(read_sources, [], [])
         for ready_read in ready_reads:
             yield ready_read.fileno(), ready_read.readline()
 
 
-def process_i3status_output(i3status_output: str) -> None | list[dict]:
+def process_i3status_output(i3status_output: str) -> None | list[StatusBlock]:
     i3status_output_str: str = i3status_output.strip().strip(",")
 
     try:
-        result: list[dict] = json.loads(i3status_output_str)
+        result: list[StatusBlock] = json.loads(i3status_output_str)
     except json.decoder.JSONDecodeError:
         return None
 
@@ -292,10 +317,12 @@ def process_i3status_output(i3status_output: str) -> None | list[dict]:
     return result
 
 
-def combine_i3status_outputs(i3status_outputs: list):
+def combine_i3status_outputs(
+    i3status_outputs: Sequence[ReadSource],
+) -> Iterator[list[StatusBlock]]:
     fileno_order: list[int] = [output.fileno() for output in i3status_outputs]
 
-    last_remembered_lists: dict[int, list[dict]] = {
+    last_remembered_lists: dict[int, list[StatusBlock]] = {
         fileno: [] for fileno in fileno_order
     }
     for fileno, output in combine_read_sources(i3status_outputs):
@@ -322,10 +349,13 @@ def show_status_text() -> None:
             )
             for i3status_command in I3STATUS_COMMANDS
         ]
+        i3status_outputs: list[ReadSource] = []
+        for i3status_process in i3status_processes:
+            if i3status_process.stdout is None:
+                raise RuntimeError("i3status process stdout was not captured")
+            i3status_outputs.append(i3status_process.stdout)
 
-        for unprocessed_data in combine_i3status_outputs(
-            [i3status_process.stdout for i3status_process in i3status_processes]
-        ):
+        for unprocessed_data in combine_i3status_outputs(i3status_outputs):
             data = process_blocks(unprocessed_data)
             print(
                 json.dumps(data, separators=(",", ":"), default=lambda v: str(type(v)))

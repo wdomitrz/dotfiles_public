@@ -36,7 +36,7 @@ def get_workspace_width(container: i3ipc.Con) -> int:
     return cast(int, workspace.rect.width)
 
 
-def n_column_layout(i3: i3ipc.Connection, *, n: int | float) -> None:
+def n_column_layout(i3: i3ipc.Connection, *, n: float) -> None:
     def resize_to_nth(i3: i3ipc.Connection, event: i3ipc.events.IpcBaseEvent) -> None:
         del event
         container = i3.get_tree().find_focused()
@@ -88,7 +88,7 @@ class Args:
 
     number_of_columns: float = 2.0
 
-    def main(self):
+    def main(self) -> None:
         i3 = i3ipc.Connection()
         n_column_layout(i3, n=self.number_of_columns)
         i3.main()

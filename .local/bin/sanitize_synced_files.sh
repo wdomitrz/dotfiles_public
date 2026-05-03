@@ -38,13 +38,14 @@ function lint_shell_files() {
 
 function lint_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
-    | xargs ruff check --quiet --extend-select I --fix
+    | xargs ruff check --quiet --extend-select I --fix \
+      --config "${HOME}"/.config/dotfiles/pyproject.toml
 }
 
 function type_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
     | xargs basedpyright --pythonversion 3.10 \
-      --project "${HOME}"/.config/dotfiles/pyrightconfig.json \
+      --project "${HOME}"/.config/dotfiles/pyproject.toml \
     | not grep --invert-match "0 errors, 0 warnings, 0 notes"
 }
 

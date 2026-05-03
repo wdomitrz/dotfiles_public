@@ -21,19 +21,19 @@ import typer
 def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> object:
     match fp.suffix:
         case ".parquet" | ".pqt" | ".pq":
-            import pandas as pd  # pyright: ignore[reportMissingTypeStubs]
+            import pandas as pd  # pyright: ignore[reportMissingTypeStubs]  # noqa: PLC0415
 
             return pd.read_parquet(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pickle" | ".pkl":
-            import pickle
+            import pickle  # noqa: PLC0415
 
             return cast(object, pickle.loads(fp.read_bytes()))
         case ".csv":
-            import pandas as pd  # pyright: ignore[reportMissingTypeStubs]
+            import pandas as pd  # pyright: ignore[reportMissingTypeStubs]  # noqa: PLC0415
 
             return pd.read_csv(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pt":
-            import torch
+            import torch  # noqa: PLC0415
 
             return cast(
                 object, torch.load(fp, map_location="cpu", weights_only=weights_only)
@@ -62,7 +62,7 @@ class Args:
                     pd_show_index=self.pd_show_index,
                 )
                 print(data)
-            except NotImplementedError as e:
+            except NotImplementedError as e:  # noqa: PERF203
                 print(e, file=sys.stderr)
             except BrokenPipeError:
                 pass

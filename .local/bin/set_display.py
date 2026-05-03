@@ -6,7 +6,6 @@
 
 from __future__ import annotations
 
-import glob
 import math
 import os
 import re
@@ -15,6 +14,7 @@ import tempfile
 import textwrap
 from collections.abc import Sequence
 from dataclasses import dataclass
+from pathlib import Path
 
 import typer
 
@@ -38,16 +38,16 @@ class Display:
 
     @staticmethod
     def is_laptop_display(name: str) -> bool:
-        return "eDP" == name[:3]
+        return name[:3] == "eDP"
 
     @staticmethod
     def is_laptop_display_open() -> bool:
-        state_files = glob.glob("/proc/acpi/button/lid/LID*/state")
+        state_files = list(Path("/proc/acpi/button/lid").glob("LID*/state"))
         if len(state_files) == 0:
             raise RuntimeError("No laptop screen")
 
         for fn in state_files:
-            with open(fn, encoding="utf-8") as f:
+            with fn.open(encoding="utf-8") as f:
                 if f.read().split()[1] == "open":
                     return True
         return False
@@ -56,13 +56,15 @@ class Display:
     def get_display_info(display_info_line: str) -> Display:
         name, connected_state, maybe_primary = display_info_line.split()[:3]
 
-        resolution_regex = re.compile(r"(\d+)i?x(\d+)i?(\+(\d+)\+(\d+))?")
+        resolution_regex = re.compile(
+            r"(?P<width>\d+)i?x(?P<height>\d+)i?(\+(?P<x>\d+)\+(?P<y>\d+))?"
+        )
         dimension_regex = re.compile(r"(\d+)mm\sx\s(\d+)mm")
 
         if (res := resolution_regex.search(display_info_line)) is not None:
-            resolution = (int(res.group(1)), int(res.group(2)))
-            if len(res.groups()) >= 5:
-                position = (int(res.group(4)), int(res.group(5)))
+            resolution = (int(res.group("width")), int(res.group("height")))
+            if res.group("x") is not None and res.group("y") is not None:
+                position = (int(res.group("x")), int(res.group("y")))
             else:
                 position = None
         else:
@@ -97,8 +99,7 @@ class Display:
             "xrandr",
             text=True,
             check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
         )
         return [
             Display.get_display_info(display_info_line)
@@ -180,15 +181,15 @@ class GettingPrimaryDisplay:
 class DpiSettings:
     @staticmethod
     def set_rofi_dpi(dpi: int) -> None:
-        config_dir = os.path.expanduser("~/.config/rofi")
-        if not os.path.isdir(config_dir):
+        config_dir = Path.home() / ".config" / "rofi"
+        if not config_dir.is_dir():
             return
 
+        config_path = config_dir / "config.rasi"
+        dpi_path = config_dir / "dpi.rasi"
         add_dpi_import = False
         try:
-            with open(
-                os.path.join(config_dir, "config.rasi"), "r", encoding="utf-8"
-            ) as rofi_config_file:
+            with config_path.open("r", encoding="utf-8") as rofi_config_file:
                 for line in rofi_config_file.readlines():
                     if line == '@import "dpi"\n':
                         break
@@ -197,9 +198,7 @@ class DpiSettings:
         except FileNotFoundError:
             add_dpi_import = True
         if add_dpi_import:
-            with open(
-                os.path.join(config_dir, "config.rasi"), "r+", encoding="utf-8"
-            ) as rofi_config_file:
+            with config_path.open("r+", encoding="utf-8") as rofi_config_file:
                 rofi_config_contents = rofi_config_file.read()
                 _ = rofi_config_file.seek(0)
                 _ = rofi_config_file.write(
@@ -211,9 +210,7 @@ class DpiSettings:
                     )
                 )
 
-        with open(
-            os.path.join(config_dir, "dpi.rasi"), "w+", encoding="utf-8"
-        ) as rofi_dpi_config_file:
+        with dpi_path.open("w+", encoding="utf-8") as rofi_dpi_config_file:
             _ = rofi_dpi_config_file.write(
                 textwrap.dedent(
                     f"""\
@@ -228,7 +225,10 @@ class DpiSettings:
     def set_gnome_text_scaling_factor(scaling_factor: float) -> None:
         _ = subprocess.run(
             [
-                *"gsettings set org.gnome.desktop.interface text-scaling-factor".split(),
+                "gsettings",
+                "set",
+                "org.gnome.desktop.interface",
+                "text-scaling-factor",
                 str(scaling_factor),
             ],
             check=False,
@@ -245,7 +245,9 @@ class DpiSettings:
                 )
             )
             _ = config_file.seek(0)
-            _ = subprocess.run(["xrdb", "-override", config_file.name], check=False)
+            _ = subprocess.run(
+                ["xrdb", "-override", Path(config_file.name)], check=False
+            )
 
     @classmethod
     def set_dpi(cls, dpi: int) -> None:
@@ -255,6 +257,7 @@ class DpiSettings:
 
     @staticmethod
     def get_my_dpi(
+        *,
         resolution: tuple[int, int] | None,
         size: tuple[int, int] | None,
         is_laptop: bool = False,

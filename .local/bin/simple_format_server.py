@@ -71,7 +71,7 @@ def get_server(*, format_command: list[str]) -> LanguageServer:
                 formated_file=doc.path,
                 stderr=e.stderr,
             )
-            logging.error("formatter error: %s", error_info)
+            logging.exception("formatter error: %s", error_info)
             ls.show_message_log(f"formatter error: {error_info}")
             return []
 

@@ -64,17 +64,18 @@ SEVERITY_MAPPING: dict[str, DiagnosticSeverity] = dict(
 def parse_replacement(
     *,
     column: int,
-    endColumn: int,
-    endLine: int,
-    insertionPoint: str,
+    end_column: int,
+    end_line: int,
+    insertion_point: str,
     line: int,
     precedence: int,
     replacement: str,
 ) -> TextEdit:
+    del insertion_point, precedence
     return TextEdit(
         range=Range(
             start=Position(line=line - 1, character=column - 1),
-            end=Position(line=endLine - 1, character=endColumn - 1),
+            end=Position(line=end_line - 1, character=end_column - 1),
         ),
         new_text=replacement,
     )
@@ -91,7 +92,16 @@ def parse_replacements(
         return None
 
     replacements: list[TextEdit | AnnotatedTextEdit] = [
-        parse_replacement(**r) for r in fix.get("replacements", [])
+        parse_replacement(
+            column=r["column"],
+            end_column=r["endColumn"],
+            end_line=r["endLine"],
+            insertion_point=r["insertionPoint"],
+            line=r["line"],
+            precedence=r["precedence"],
+            replacement=r["replacement"],
+        )
+        for r in fix.get("replacements", [])
     ]
     if len(replacements) == 0:
         return None
@@ -120,18 +130,19 @@ def parse_diagnostic(
     file_uri: str,
     file: str,
     line: int,
-    endLine: int,
+    end_line: int,
     column: int,
-    endColumn: int,
+    end_column: int,
     level: str,
     code: int,
     message: str,
     fix: None | dict[str, list],
 ) -> DiagnosticAndCodeAction:
+    del file
     diagnostic = Diagnostic(
         range=Range(
             start=Position(line - 1, column - 1),
-            end=Position(endLine - 1, endColumn - 1),
+            end=Position(end_line - 1, end_column - 1),
         ),
         message=message,
         severity=SEVERITY_MAPPING.get(level),
@@ -150,7 +161,7 @@ def parse_diagnostic(
 def lint(
     *, ls: LanguageServer, doc: TextDocument, file_uri: str
 ) -> list[DiagnosticAndCodeAction]:
-    DIAGNOSTICS_COMMAND = [
+    diagnostics_command = [
         "shellcheck",
         "-",
         "--exclude=SC1091,SC2312",
@@ -160,7 +171,7 @@ def lint(
     try:
         diagnostics = json.loads(
             subprocess.run(
-                DIAGNOSTICS_COMMAND,
+                diagnostics_command,
                 input=doc.source,
                 capture_output=True,
                 text=True,
@@ -168,15 +179,27 @@ def lint(
             ).stdout
         )
         return [
-            parse_diagnostic(file_uri=file_uri, **d) for d in diagnostics["comments"]
+            parse_diagnostic(
+                file_uri=file_uri,
+                file=d["file"],
+                line=d["line"],
+                end_line=d["endLine"],
+                column=d["column"],
+                end_column=d["endColumn"],
+                level=d["level"],
+                code=d["code"],
+                message=d["message"],
+                fix=d.get("fix"),
+            )
+            for d in diagnostics["comments"]
         ]
     except subprocess.CalledProcessError as e:
         error_info = dict(
-            diagnostics_command=DIAGNOSTICS_COMMAND,
+            diagnostics_command=diagnostics_command,
             formated_file=doc.path,
             stderr=e.stderr,
         )
-        logging.error("diagnostics error: %s", error_info)
+        logging.exception("diagnostics error: %s", error_info)
         ls.show_message_log(f"diagnostics error: {error_info}")
         return []
 

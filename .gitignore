@@ -16,7 +16,7 @@
 !.config/docker/my.dockerfile
 !.config/docker/my_base.dockerfile
 !.config/docker/test.dockerfile
-!.config/dotfiles/pyrightconfig.json
+!.config/dotfiles/pyproject.toml
 !.config/dpi/default_dpi_options.sorted_numeric.txt
 !.config/dunst/dunstrc
 !.config/etc/X11/xorg.conf.d/40_tap_to_click.conf
@@ -197,7 +197,6 @@
 !.local/bin/not
 !.local/bin/not_sudo
 !.local/bin/pasta
-!.local/bin/pdiff
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh
 !.local/bin/propagate_config_to.sh

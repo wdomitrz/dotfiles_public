@@ -216,6 +216,8 @@
   "workbench.editor.useModal": "off",
   "workbench.enableExperiments": false,
   "workbench.layoutControl.enabled": false,
+  "workbench.preferredDarkColorTheme": "Dark Modern",
+  "workbench.preferredLightColorTheme": "Light Modern",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "workbench.statusBar.visible": false,

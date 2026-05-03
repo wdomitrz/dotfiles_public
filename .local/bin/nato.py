@@ -63,7 +63,7 @@ class Nato:
     def nato_convert(cls, text: str) -> list[str]:
         return [cls.nato_alphabet.get(c, c) for c in text.lower()]
 
-    def main(self):
+    def main(self) -> None:
         match self.words:
             case ["-"]:
                 for line in sys.stdin:

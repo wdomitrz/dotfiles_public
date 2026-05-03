@@ -1,5 +1,17 @@
 [
   {
+    "command": "extension.vim_ctrl+u",
+    "comment": "vscode vim fix",
+    "key": "ctrl+u",
+    "when": "editorTextFocus && vim.active && vim.use<C-u> && !inDebugRepl"
+  },
+  {
+    "command": "extension.vim_ctrl+d",
+    "comment": "vscode vim fix",
+    "key": "ctrl+d",
+    "when": "editorTextFocus && vim.active && vim.use<C-d> && !inDebugRepl"
+  },
+  {
     "command": "extension.vim_escape",
     "comment": "Just in case",
     "key": "capslock",

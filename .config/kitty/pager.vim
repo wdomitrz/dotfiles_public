@@ -1,44 +1,30 @@
-set clipboard=unnamedplus
-set cmdheight=0 laststatus=0
+set laststatus=0 cmdheight=0
 
 enew
-setlocal noreadonly modifiable
-setlocal noswapfile bufhidden=wipe
+setlocal buftype=nofile bufhidden=wipe
 
-let s:top = str2nr($KITTY_PAGER_TOP)
-let s:cursor_line = str2nr($KITTY_PAGER_CURSOR_LINE)
-let s:cursor_col = str2nr($KITTY_PAGER_CURSOR_COL)
+let s:file = g:kitty_scrollback_file
+let s:top  = g:kitty_scrollback_top
+let s:line = g:kitty_scrollback_line
+let s:col  = g:kitty_scrollback_col
 
-if s:top <= 0 | let s:top = 1 | endif
-if s:cursor_col <= 0 | let s:cursor_col = 1 | endif
+let s:target_line = s:top + max([0, s:line - 1])
 
-if s:cursor_line <= 0
-    let s:target_line = s:top
-else
-    let s:target_line = s:top + s:cursor_line - 1
+if filereadable(s:file)
+    setlocal modifiable
+    let s:ch = nvim_open_term(0, {})
+    call chansend(s:ch, join(readfile(s:file, 'b'), "\n"))
+    call delete(s:file)
+    setlocal nomodifiable
 endif
 
-let s:chan = nvim_open_term(0, {})
-let s:data = join(readfile($KITTY_PAGER_FILE, 'b'), "\n")
-call chansend(s:chan, s:data)
-
-silent! call delete($KITTY_PAGER_FILE)
-
-silent! setlocal noreadonly nomodifiable nomodified
-
-noremap <silent> <buffer> q <cmd>qa!<CR>
+noremap <silent> q <cmd>qa!<CR>
 
 function! s:restore_position() abort
-    " Put the same terminal line at the top of the pager.
     call cursor(s:top, 1)
     normal! zt
-
-    " Convert Kitty's terminal/screen column to a real buffer byte column.
-    let l:byte_col = virtcol2col(0, s:target_line, s:cursor_col)
-    if l:byte_col <= 0 | let l:byte_col = 1 | endif
-
-    " Move the real Neovim cursor as a best effort.
-    call cursor(s:target_line, l:byte_col)
+    call cursor(s:target_line, virtcol2col(0, s:target_line, max([1, s:col])))
 endfunction
 
-call timer_start(100, {-> s:restore_position()})
+call timer_start(50, {-> s:restore_position()})
+autocmd BufLeave <buffer> qa!

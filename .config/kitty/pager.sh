@@ -5,14 +5,19 @@ top="${1:-1}"
 cursor_line="${2:-0}"
 cursor_col="${3:-1}"
 
-tmp="$(mktemp "${TMPDIR:-/tmp}/kitty-nvim-pager.XXXXXX")" || exit 1
-cat > "${tmp}"
-trap "rm -f '""${tmp}""'" EXIT
+tmp="$(mktemp 'kitty-pager.XXXXXX')"
+# shellcheck disable=SC2064
+trap "rm -f '${tmp}'" EXIT
 
-exec env \
-  KITTY_PAGER_FILE="${tmp}" \
-  KITTY_PAGER_TOP="${top}" \
-  KITTY_PAGER_CURSOR_LINE="${cursor_line}" \
-  KITTY_PAGER_CURSOR_COL="${cursor_col}" \
-  nvim -n --clean \
-  -S "${HOME}/.config/kitty/pager.vim"
+cat > "${tmp}"
+
+if command -v nvim > /dev/null 2>&1; then
+  exec nvim -u NONE \
+    -c "let g:kitty_scrollback_file = '${tmp}'" \
+    -c "let g:kitty_scrollback_top = ${top}" \
+    -c "let g:kitty_scrollback_line = ${cursor_line}" \
+    -c "let g:kitty_scrollback_col = ${cursor_col}" \
+    -S "${HOME}/.config/kitty/pager.vim"
+else
+  exec less -R "+${top}g" "${tmp}"
+fi

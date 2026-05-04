@@ -11,6 +11,8 @@
 *.synctex(busy)
 *.synctex.gz
 *.toc
+.claude
+.codex
 .flake8
 .ipynb_checkpoints
 .pylintrc

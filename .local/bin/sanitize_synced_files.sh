@@ -44,7 +44,7 @@ function lint_python_files() {
 
 function type_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
-    | xargs basedpyright --pythonversion 3.10 \
+    | xargs basedpyright \
       --project "${HOME}"/.config/dotfiles/pyproject.toml \
     | not grep --invert-match "0 errors, 0 warnings, 0 notes"
 }

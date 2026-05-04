@@ -3,7 +3,6 @@ acpi-call-dkms
 adwaita-icon-theme
 adwaita-qt
 adwaita-qt6
-alacritty
 apparmor
 apt
 apt-file
@@ -103,6 +102,7 @@ iputils-ping
 ipython3
 jq
 kazam
+kitty
 laptop-detect
 less
 libasound2-plugins

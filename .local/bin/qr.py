@@ -1,0 +1,1 @@
+../opt/qr_py/qr.py

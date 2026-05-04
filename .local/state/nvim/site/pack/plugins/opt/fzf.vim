@@ -1,1 +1,1 @@
-../../../../../../opt/fzf.vim
+../../../../../../opt/nvim_plugins/fzf.vim

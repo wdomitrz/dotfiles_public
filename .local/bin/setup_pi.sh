@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${HOME}"/.local/bin/install_scripts/print_and_run.sh
+source "${HOME}"/.local/bin/install_scripts/utils.sh
 
 function basic() {
   where="$1"
@@ -27,7 +27,7 @@ function config_ssh() {
   where="$1"
 
   copy_config_file "${where}" /etc/ssh/sshd_config.d/01_my_sshd.conf
-  ssh "${where}" 'sudo systemctl restart ssh.service'
+  ssh "${where}" 'sudo sshd -t && sudo systemctl restart ssh.service'
 }
 
 function update_packages() {

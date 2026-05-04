@@ -1,30 +1,33 @@
-[submodule ".local/state/nvim/site/pack/plugins/opt/vim-gitgutter"]
-	path = .local/opt/vim-gitgutter
+[submodule ".local/opt/nvim_plugins/vim-gitgutter"]
+	path = .local/opt/nvim_plugins/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule ".local/state/nvim/site/pack/plugins/opt/fzf"]
-	path = .local/opt/fzf
+[submodule ".local/opt/nvim_plugins/fzf"]
+	path = .local/opt/nvim_plugins/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule ".local/state/nvim/site/pack/plugins/opt/fzf.vim"]
-	path = .local/opt/fzf.vim
+[submodule ".local/opt/nvim_plugins/fzf.vim"]
+	path = .local/opt/nvim_plugins/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule ".local/state/nvim/site/pack/plugins/opt/vim-commentary"]
-	path = .local/opt/vim-commentary
+[submodule ".local/opt/nvim_plugins/vim-commentary"]
+	path = .local/opt/nvim_plugins/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule ".local/state/nvim/site/pack/plugins/opt/vim-sleuth"]
-	path = .local/opt/vim-sleuth
+[submodule ".local/opt/nvim_plugins/vim-sleuth"]
+	path = .local/opt/nvim_plugins/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth.git
-[submodule ".local/state/nvim/site/pack/plugins/opt/vim-surround"]
-	path = .local/opt/vim-surround
+[submodule ".local/opt/nvim_plugins/vim-surround"]
+	path = .local/opt/nvim_plugins/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".local/state/nvim/site/pack/plugins/opt/nvim-lspconfig"]
-	path = .local/opt/nvim-lspconfig
-	url = https://github.com/neovim/nvim-lspconfig
-[submodule ".local/state/nvim/site/pack/plugins/opt/vim-suda"]
-	path = .local/opt/vim-suda
-	url = https://github.com/lambdalisue/vim-suda
-[submodule ".local/state/nvim/site/pack/plugins/opt/theme_watcher.nvim"]
-	path = .local/opt/theme_watcher.nvim
-	url = https://github.com/wdomitrz/theme_watcher.nvim
-[submodule ".local/state/nvim/site/pack/plugins/opt/findfile.nvim"]
-	path = .local/opt/findfile.nvim
-	url = https://github.com/wdomitrz/findfile.nvim
+[submodule ".local/opt/nvim_plugins/nvim-lspconfig"]
+	path = .local/opt/nvim_plugins/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule ".local/opt/nvim_plugins/vim-suda"]
+	path = .local/opt/nvim_plugins/vim-suda
+	url = https://github.com/lambdalisue/vim-suda.git
+[submodule ".local/opt/nvim_plugins/theme_watcher.nvim"]
+	path = .local/opt/nvim_plugins/theme_watcher.nvim
+	url = https://github.com/wdomitrz/theme_watcher.nvim.git
+[submodule ".local/opt/nvim_plugins/findfile.nvim"]
+	path = .local/opt/nvim_plugins/findfile.nvim
+	url = https://github.com/wdomitrz/findfile.nvim.git
+[submodule ".local/opt/qr_py"]
+	path = .local/opt/qr_py
+	url = https://github.com/wdomitrz/qr_py

@@ -7,7 +7,7 @@ readonly public_repo=git@github.com:wdomitrz/dotfiles_public
 
 function get_public() {
   git remote add "${public_upstream}" "${public_repo}"
-  git fetch "${public_upstream}"
+  git fetch --depth=1 "${public_upstream}"
 }
 
 function checkout_public() {

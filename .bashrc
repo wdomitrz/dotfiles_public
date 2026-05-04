@@ -145,6 +145,7 @@ alias alert='alert '
 alias bb='bb '
 
 if [[ ${TERM-} == "alacritty" ]]; then alias clear='clear && printf "'"\E[3J"'"'; fi
+if [[ ${TERM-} == "xterm-kitty" ]]; then alias clear='clear && printf "'"\E[H\E[3J"'"'; fi
 
 function tempe() {
   temp_dir="$(mktemp -d --suffix=_tempe)"

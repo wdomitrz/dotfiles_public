@@ -6,9 +6,6 @@
 !.cache/vm_images/.keep
 !.config/Code/User/keybindings.json
 !.config/Code/User/settings.json
-!.config/alacritty/alacritty.toml
-!.config/alacritty/theme_dark.toml
-!.config/alacritty/theme_light.toml
 !.config/amethyst/amethyst.yml
 !.config/bat/config_dark.config
 !.config/bat/config_light.config
@@ -246,10 +243,6 @@
 !.local/bin/xsecurelock_saver_feh.sh
 !.local/bin/xterm
 !.local/opt/.keep
-!.local/opt/findfile.nvim
-!.local/opt/fzf
-!.local/opt/fzf.vim
-!.local/opt/nvim-lspconfig
 !.local/opt/nvim_plugins/findfile.nvim
 !.local/opt/nvim_plugins/fzf
 !.local/opt/nvim_plugins/fzf.vim
@@ -260,14 +253,7 @@
 !.local/opt/nvim_plugins/vim-sleuth
 !.local/opt/nvim_plugins/vim-suda
 !.local/opt/nvim_plugins/vim-surround
-!.local/opt/pdiff
 !.local/opt/qr_py
-!.local/opt/theme_watcher.nvim
-!.local/opt/vim-commentary
-!.local/opt/vim-gitgutter
-!.local/opt/vim-sleuth
-!.local/opt/vim-suda
-!.local/opt/vim-surround
 !.local/share/applications/.keep
 !.local/share/applications/my/app_switcher.desktop
 !.local/share/applications/my/blank_screen.desktop

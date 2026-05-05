@@ -7,30 +7,27 @@
 # ///
 #
 # pyright: reportMissingImports = false
+# pyright: reportMissingTypeStubs = false
 # pyright: reportUnknownMemberType = false
 # pyright: reportUnknownVariableType = false
 
+import pickle
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
 
+import pandas as pd
 import typer
 
 
 def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> object:
     match fp.suffix:
         case ".parquet" | ".pqt" | ".pq":
-            import pandas as pd  # pyright: ignore[reportMissingTypeStubs]  # noqa: PLC0415
-
             return pd.read_parquet(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pickle" | ".pkl":
-            import pickle  # noqa: PLC0415
-
             return cast(object, pickle.loads(fp.read_bytes()))
         case ".csv":
-            import pandas as pd  # pyright: ignore[reportMissingTypeStubs]  # noqa: PLC0415
-
             return pd.read_csv(fp).to_csv(sep=sep, index=pd_show_index)
         case ".pt":
             import torch  # noqa: PLC0415

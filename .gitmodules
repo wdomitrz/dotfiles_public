@@ -31,3 +31,6 @@
 [submodule ".local/opt/qr_py"]
 	path = .local/opt/qr_py
 	url = https://github.com/wdomitrz/qr_py.git
+[submodule ".local/opt/pdiff"]
+	path = .local/opt/pdiff
+	url = https://github.com/wdomitrz/pdiff.git

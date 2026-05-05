@@ -23,6 +23,8 @@
 # pyright: reportUnusedFunction = false
 # pyright: reportUnusedParameter = false
 
+from __future__ import annotations
+
 import json
 import logging
 import subprocess

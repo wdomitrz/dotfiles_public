@@ -253,6 +253,7 @@
 !.local/opt/nvim_plugins/vim-sleuth
 !.local/opt/nvim_plugins/vim-suda
 !.local/opt/nvim_plugins/vim-surround
+!.local/opt/pdiff
 !.local/opt/qr_py
 !.local/share/applications/.keep
 !.local/share/applications/my/app_switcher.desktop

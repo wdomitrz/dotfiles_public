@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+from __future__ import annotations
+
 import json
 from dataclasses import dataclass
 from urllib.parse import parse_qsl, urlparse
@@ -34,7 +37,6 @@ class Args:
         }
 
     def main(self) -> None:
-
         print(
             json.dumps(
                 self.to_info(self.url),

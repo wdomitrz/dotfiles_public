@@ -22,8 +22,10 @@
 # pyright: reportUnreachable = false
 # pyright: reportUnusedCallResult = false
 # pyright: reportUnusedParameter = false
-
+#
 # ruff: noqa: SIM905
+
+from __future__ import annotations
 
 import contextlib
 import functools

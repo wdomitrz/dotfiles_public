@@ -1,4 +1,5 @@
 set laststatus=0 cmdheight=0
+set clipboard=unnamedplus
 
 enew
 setlocal buftype=nofile bufhidden=wipe

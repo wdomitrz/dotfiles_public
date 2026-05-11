@@ -38,19 +38,24 @@ function lint_shell_files() {
 
 function lint_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
+    | grep -v -e ".local/opt/" \
     | xargs ruff check --quiet --extend-select I --fix \
       --config "${HOME}"/.config/dotfiles/pyproject.toml
 }
 
 function type_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
+    | grep -v -e ".local/opt/" \
     | xargs basedpyright \
       --project "${HOME}"/.config/dotfiles/pyproject.toml \
     | not grep --invert-match "0 errors, 0 warnings, 0 notes"
 }
 
 function get_all_files_without_extensions() {
-  for file in $(git-ls | grep -v -e '.local/opt/'); do
+  for file in $(
+    git-ls \
+      | grep -v -e ".local/opt/"
+  ); do
     [[ -L ${file} ]] && continue # Ignore links
     base_file_name="$(basename "${file}")"
     [[ ${base_file_name} == ?*.* ]] && continue    # Check if the file has an extension

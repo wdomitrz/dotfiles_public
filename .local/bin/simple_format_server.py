@@ -8,7 +8,6 @@
 # dependencies = [
 #   "lsprotocol",
 #   "pygls",
-#   "typer",
 # ]
 # ///
 #
@@ -22,11 +21,12 @@
 # pyright: reportUnusedCallResult = false
 # pyright: reportUnusedFunction = false
 
+import argparse
 import logging
 import subprocess
 from dataclasses import dataclass
+from typing import Self, cast
 
-import typer
 from lsprotocol.types import (
     TEXT_DOCUMENT_FORMATTING,
     DocumentFormattingParams,
@@ -80,15 +80,20 @@ def get_server(*, format_command: list[str]) -> LanguageServer:
 
 @dataclass(kw_only=True, frozen=True)
 class Args:
-    def __post_init__(self) -> None:
-        return self.main()
-
     format_command: list[str]
 
-    def main(self) -> None:
+    @classmethod
+    def from_args(cls, argv: list[str] | None = None) -> Self:
+        parser = argparse.ArgumentParser()
+        _ = parser.add_argument("format_command", nargs="+")
+        args = parser.parse_args(argv)
+        return cls(format_command=cast(list[str], args.format_command))
+
+    def run(self) -> int:
         server = get_server(format_command=self.format_command)
-        return server.start_io()
+        server.start_io()
+        return 0
 
 
 if __name__ == "__main__":
-    typer.run(Args)
+    raise SystemExit(Args.from_args().run())

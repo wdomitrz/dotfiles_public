@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
-#
-# /// script
-# dependencies = [
-#   "typer",
-# ]
-# ///
-
+import argparse
 import sys
 from dataclasses import dataclass
-from typing import ClassVar
-
-import typer
+from typing import ClassVar, Self, cast
 
 
 @dataclass(frozen=True, kw_only=True)
 class Nato:
-    def __post_init__(self) -> None:
-        return self.main()
-
     words: list[str]
+
+    @classmethod
+    def from_args(cls, argv: list[str] | None = None) -> Self:
+        parser = argparse.ArgumentParser()
+        _ = parser.add_argument("words", nargs="+")
+        args = parser.parse_args(argv)
+        return cls(words=cast(list[str], args.words))
 
     nato_alphabet: ClassVar[dict[str, str]] = {
         "0": "Zero",
@@ -63,16 +59,17 @@ class Nato:
     def nato_convert(cls, text: str) -> list[str]:
         return [cls.nato_alphabet.get(c, c) for c in text.lower()]
 
-    def main(self) -> None:
+    def run(self) -> int:
         match self.words:
             case ["-"]:
                 for line in sys.stdin:
                     print(*self.nato_convert(line), sep="\t")
             case words:
                 print(*self.nato_convert(" ".join(words)), sep="\t")
+        return 0
 
 
 Args = Nato
 
 if __name__ == "__main__":
-    typer.run(Args)
+    raise SystemExit(Args.from_args().run())

@@ -6,6 +6,7 @@
 
 from __future__ import annotations
 
+import argparse
 import math
 import os
 import re
@@ -15,8 +16,7 @@ import textwrap
 from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
-
-import typer
+from typing import Literal, Self, cast
 
 PRIMARY_ORDER_DEFAULT: tuple[str, ...] = ("screen", "rdp", "DP", "HDMI", "eDP")
 DEFAULT_FAILSAFE_DPI = DEFAULT_GNOME_DPI = 96
@@ -308,27 +308,44 @@ class DpiSettings:
         )
 
 
-app = typer.Typer()
+@dataclass(kw_only=True, frozen=True)
+class Args:
+    command: Literal["set-display", "show-dpi", "set-dpi"]
+    dpi: int | None
 
+    @classmethod
+    def from_args(cls, argv: list[str] | None = None) -> Self:
+        parser = argparse.ArgumentParser()
+        subparsers = parser.add_subparsers(dest="command")
+        parser.set_defaults(command="set-display", dpi=None)
 
-class Commands:
-    @app.command()
+        show_dpi_parser = subparsers.add_parser("show-dpi")
+        _ = show_dpi_parser.add_argument("--dpi", type=int)
+
+        set_dpi_parser = subparsers.add_parser("set-dpi")
+        _ = set_dpi_parser.add_argument("--dpi", type=int)
+
+        args = parser.parse_args(argv)
+        return cls(
+            command=cast(
+                Literal["set-display", "show-dpi", "set-dpi"],
+                args.command,
+            ),
+            dpi=cast(int | None, args.dpi),
+        )
+
+    def run(self) -> int:
+        match self.command:
+            case "show-dpi":
+                print(DpiSettings.get_default_dpi(forced_dpi=self.dpi))
+            case "set-dpi":
+                DpiSettings.set_dpi(DpiSettings.get_default_dpi(forced_dpi=self.dpi))
+            case "set-display":
+                self.set_display()
+        return 0
+
     @staticmethod
-    def show_dpi(dpi: int | None = None) -> None:
-        """Display inferred dpi."""
-        print(DpiSettings.get_default_dpi(forced_dpi=dpi))
-
-    @app.command()
-    @staticmethod
-    def set_dpi(dpi: int | None = None) -> None:
-        DpiSettings.set_dpi(DpiSettings.get_default_dpi(forced_dpi=dpi))
-
-    @app.callback(invoke_without_command=True)
-    @staticmethod
-    def set_display(ctx: typer.Context) -> None:
-        if ctx.invoked_subcommand is not None:
-            return
-
+    def set_display() -> None:
         GettingPrimaryDisplay.new(Display.get_all_displays()).set_primary()
         DpiSettings.set_dpi(DpiSettings.get_default_dpi())
 
@@ -340,4 +357,4 @@ class Commands:
 
 
 if __name__ == "__main__":
-    app()
+    raise SystemExit(Args.from_args().run())

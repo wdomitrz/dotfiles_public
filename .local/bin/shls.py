@@ -8,7 +8,6 @@
 # dependencies = [
 #   "lsprotocol",
 #   "pygls",
-#   "typer",
 # ]
 # ///
 #
@@ -25,12 +24,13 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import logging
 import subprocess
 from dataclasses import dataclass
+from typing import Self
 
-import typer
 from lsprotocol.types import (
     TEXT_DOCUMENT_CODE_ACTION,
     TEXT_DOCUMENT_DIAGNOSTIC,
@@ -250,13 +250,17 @@ def get_server() -> LanguageServer:
 
 @dataclass(kw_only=True, frozen=True)
 class Args:
-    def __post_init__(self) -> None:
-        return self.main()
+    @classmethod
+    def from_args(cls, argv: list[str] | None = None) -> Self:
+        parser = argparse.ArgumentParser()
+        _ = parser.parse_args(argv)
+        return cls()
 
-    def main(self) -> None:
+    def run(self) -> int:
         server = get_server()
-        return server.start_io()
+        server.start_io()
+        return 0
 
 
 if __name__ == "__main__":
-    typer.run(Args)
+    raise SystemExit(Args.from_args().run())

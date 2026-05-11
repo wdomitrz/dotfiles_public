@@ -1,24 +1,18 @@
 #!/usr/bin/env python3
 #
-# /// script
-# dependencies = [
-#   "typer",
-# ]
-# ///
-#
 # pyright: reportMissingImports = false
 # pyright: reportMissingTypeStubs = false
 # pyright: reportUnknownMemberType = false
 # pyright: reportUnknownVariableType = false
 
+import argparse
 import pickle
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import cast
+from typing import Self, cast
 
 import pandas as pd
-import typer
 
 
 def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> object:
@@ -41,15 +35,35 @@ def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> objec
 
 @dataclass(frozen=True, kw_only=True)
 class Args:
-    def __post_init__(self) -> None:
-        return self.main()
-
     paths: list[Path]
-    sep: str = "\t"
-    weights_only: bool = False
-    pd_show_index: bool = False
+    sep: str
+    weights_only: bool
+    pd_show_index: bool
 
-    def main(self) -> None:
+    @classmethod
+    def from_args(cls, argv: list[str] | None = None) -> Self:
+        parser = argparse.ArgumentParser()
+        _ = parser.add_argument("paths", nargs="+", type=Path)
+        _ = parser.add_argument("--sep", default="\t")
+        _ = parser.add_argument(
+            "--weights-only",
+            action=argparse.BooleanOptionalAction,
+            default=False,
+        )
+        _ = parser.add_argument(
+            "--pd-show-index",
+            action=argparse.BooleanOptionalAction,
+            default=False,
+        )
+        args = parser.parse_args(argv)
+        return cls(
+            paths=cast(list[Path], args.paths),
+            sep=cast(str, args.sep),
+            weights_only=cast(bool, args.weights_only),
+            pd_show_index=cast(bool, args.pd_show_index),
+        )
+
+    def run(self) -> int:
         for fp in self.paths:
             try:
                 data = cat(
@@ -63,7 +77,8 @@ class Args:
                 print(e, file=sys.stderr)
             except BrokenPipeError:
                 pass
+        return 0
 
 
 if __name__ == "__main__":
-    typer.run(Args)
+    raise SystemExit(Args.from_args().run())

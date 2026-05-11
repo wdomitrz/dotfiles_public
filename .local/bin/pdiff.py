@@ -1,1 +1,1 @@
-../opt/pdiff/pdiff.py
+../opt/my/pdiff/pdiff.py

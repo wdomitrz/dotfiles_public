@@ -1,1 +1,1 @@
-../opt/qr_py/qr.py
+../opt/my/qr_py/qr.py

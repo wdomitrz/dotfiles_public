@@ -23,14 +23,23 @@
 	path = .local/opt/nvim_plugins/vim-suda
 	url = https://github.com/lambdalisue/vim-suda.git
 [submodule ".local/opt/nvim_plugins/theme_watcher.nvim"]
-	path = .local/opt/nvim_plugins/theme_watcher.nvim
+	path = .local/opt/my/theme_watcher.nvim
 	url = https://github.com/wdomitrz/theme_watcher.nvim.git
 [submodule ".local/opt/nvim_plugins/findfile.nvim"]
-	path = .local/opt/nvim_plugins/findfile.nvim
+	path = .local/opt/my/findfile.nvim
 	url = https://github.com/wdomitrz/findfile.nvim.git
-[submodule ".local/opt/qr_py"]
-	path = .local/opt/qr_py
+[submodule ".local/opt/my/qr_py"]
+	path = .local/opt/my/qr_py
 	url = https://github.com/wdomitrz/qr_py.git
-[submodule ".local/opt/pdiff"]
-	path = .local/opt/pdiff
+[submodule ".local/opt/my/pdiff"]
+	path = .local/opt/my/pdiff
 	url = https://github.com/wdomitrz/pdiff.git
+[submodule ".local/opt/my/i3_n_column_layout"]
+	path = .local/opt/my/i3_n_column_layout
+	url = https://github.com/wdomitrz/i3_n_column_layout.git
+[submodule ".local/opt/my/format_json"]
+	path = .local/opt/my/format_json
+	url = https://github.com/wdomitrz/format_json.git
+[submodule ".local/opt/my/i3status_wrapper"]
+	path = .local/opt/my/i3status_wrapper
+	url = https://github.com/wdomitrz/i3status_wrapper.git

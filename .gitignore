@@ -243,6 +243,13 @@
 !.local/bin/xsecurelock_saver_feh.sh
 !.local/bin/xterm
 !.local/opt/.keep
+!.local/opt/my/findfile.nvim
+!.local/opt/my/format_json
+!.local/opt/my/i3_n_column_layout
+!.local/opt/my/i3status_wrapper
+!.local/opt/my/pdiff
+!.local/opt/my/qr_py
+!.local/opt/my/theme_watcher.nvim
 !.local/opt/nvim_plugins/findfile.nvim
 !.local/opt/nvim_plugins/fzf
 !.local/opt/nvim_plugins/fzf.vim
@@ -253,8 +260,6 @@
 !.local/opt/nvim_plugins/vim-sleuth
 !.local/opt/nvim_plugins/vim-suda
 !.local/opt/nvim_plugins/vim-surround
-!.local/opt/pdiff
-!.local/opt/qr_py
 !.local/share/applications/.keep
 !.local/share/applications/my/app_switcher.desktop
 !.local/share/applications/my/blank_screen.desktop

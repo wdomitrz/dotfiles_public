@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-[ ! $# -eq 1 ] && return 1
+[ $# -ne 1 ] && return 1
 destination="$1"
 
 ssh-copy-id "${destination}" 2> /dev/null

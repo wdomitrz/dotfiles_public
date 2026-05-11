@@ -167,7 +167,6 @@ python3-pandas
 python3-pil
 python3-pygls
 python3-tqdm
-python3-typer
 python3-venv
 qrterminal
 redshift-gtk

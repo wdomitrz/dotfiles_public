@@ -29,7 +29,6 @@ import json
 import logging
 import subprocess
 from dataclasses import dataclass
-from typing import Self
 
 from lsprotocol.types import (
     TEXT_DOCUMENT_CODE_ACTION,
@@ -54,6 +53,7 @@ from lsprotocol.types import (
 )
 from pygls.server import LanguageServer
 from pygls.workspace import TextDocument
+from typing_extensions import Self
 
 SEVERITY_MAPPING: dict[str, DiagnosticSeverity] = dict(
     error=DiagnosticSeverity.Error,

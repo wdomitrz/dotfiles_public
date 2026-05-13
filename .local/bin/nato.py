@@ -2,7 +2,9 @@
 import argparse
 import sys
 from dataclasses import dataclass
-from typing import ClassVar, Self, cast
+from typing import ClassVar, cast
+
+from typing_extensions import Self
 
 
 @dataclass(frozen=True, kw_only=True)

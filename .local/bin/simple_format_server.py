@@ -25,7 +25,7 @@ import argparse
 import logging
 import subprocess
 from dataclasses import dataclass
-from typing import Self, cast
+from typing import cast
 
 from lsprotocol.types import (
     TEXT_DOCUMENT_FORMATTING,
@@ -35,6 +35,7 @@ from lsprotocol.types import (
     TextEdit,
 )
 from pygls.server import LanguageServer
+from typing_extensions import Self
 
 
 def get_server(*, format_command: list[str]) -> LanguageServer:

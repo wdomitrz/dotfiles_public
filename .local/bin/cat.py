@@ -10,9 +10,10 @@ import pickle
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Self, cast
+from typing import cast
 
 import pandas as pd
+from typing_extensions import Self
 
 
 def cat(fp: Path, *, sep: str, weights_only: bool, pd_show_index: bool) -> object:

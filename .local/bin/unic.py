@@ -2,7 +2,9 @@
 import argparse
 import unicodedata
 from dataclasses import dataclass
-from typing import Self, cast
+from typing import cast
+
+from typing_extensions import Self
 
 
 @dataclass(kw_only=True, frozen=True)

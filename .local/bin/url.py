@@ -5,8 +5,10 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
-from typing import Self, cast
+from typing import cast
 from urllib.parse import parse_qsl, urlparse
+
+from typing_extensions import Self
 
 
 @dataclass(frozen=True, kw_only=True)

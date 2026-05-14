@@ -8,6 +8,7 @@
 # dependencies = [
 #   "lsprotocol",
 #   "pygls",
+#   "typing_extensions",
 # ]
 # ///
 #

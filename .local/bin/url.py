@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#
+# /// script
+# dependencies = [
+#   "typing_extensions",
+# ]
+# ///
 
 from __future__ import annotations
 

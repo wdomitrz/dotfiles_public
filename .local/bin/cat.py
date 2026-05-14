@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 #
+# /// script
+# dependencies = [
+#   "pandas",
+#   "torch",
+#   "typing_extensions",
+# ]
+# ///
+#
 # pyright: reportMissingImports = false
 # pyright: reportMissingTypeStubs = false
 # pyright: reportUnknownMemberType = false

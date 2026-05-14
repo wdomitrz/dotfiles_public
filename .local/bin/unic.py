@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+#
+# /// script
+# dependencies = [
+#   "typing_extensions",
+# ]
+# ///
+
 import argparse
 import unicodedata
 from dataclasses import dataclass

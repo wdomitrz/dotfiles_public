@@ -34,12 +34,3 @@
 [submodule ".local/opt/my/pdiff"]
 	path = .local/opt/my/pdiff
 	url = https://github.com/wdomitrz/pdiff.git
-[submodule ".local/opt/my/i3_n_column_layout"]
-	path = .local/opt/my/i3_n_column_layout
-	url = https://github.com/wdomitrz/i3_n_column_layout.git
-[submodule ".local/opt/my/format_json"]
-	path = .local/opt/my/format_json
-	url = https://github.com/wdomitrz/format_json.git
-[submodule ".local/opt/my/i3status_wrapper"]
-	path = .local/opt/my/i3status_wrapper
-	url = https://github.com/wdomitrz/i3status_wrapper.git

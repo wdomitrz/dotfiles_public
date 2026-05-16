@@ -5,7 +5,7 @@ top="${1:-1}"
 cursor_line="${2:-0}"
 cursor_col="${3:-1}"
 
-tmp="$(mktemp --suffix '.kitty-pager')"
+tmp="$(mktemp)"
 # shellcheck disable=SC2064
 trap "rm -f '${tmp}'" EXIT
 

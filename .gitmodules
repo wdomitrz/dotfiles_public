@@ -34,3 +34,9 @@
 [submodule ".local/opt/my/pdiff"]
 	path = .local/opt/my/pdiff
 	url = https://github.com/wdomitrz/pdiff.git
+[submodule ".local/opt/my/i3_n_column_layout"]
+	path = .local/opt/my/i3_n_column_layout
+	url = https://github.com/wdomitrz/i3_n_column_layout.git
+[submodule ".local/opt/my/mwm"]
+	path = .local/opt/my/mwm
+	url = https://github.com/wdomitrz/mwm.git

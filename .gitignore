@@ -244,6 +244,8 @@
 !.local/bin/xterm
 !.local/opt/.keep
 !.local/opt/my/findfile.nvim
+!.local/opt/my/i3_n_column_layout
+!.local/opt/my/mwm
 !.local/opt/my/pdiff
 !.local/opt/my/qr_py
 !.local/opt/my/theme_watcher.nvim

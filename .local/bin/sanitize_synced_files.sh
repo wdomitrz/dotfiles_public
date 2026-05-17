@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 function format_all_files() {
-  git-ls | grep -v '.local/opt/' | xargs format.sh files
+  git-ls | grep -v '.local/opt/' \
+    | xargs --delimiter '\n' --no-run-if-empty format.sh files
 }
 
 function lint_sources_files() {
@@ -24,7 +25,8 @@ function lint_shell_files() {
   git_root="$(git rev-parse --show-toplevel)"
   (
     # Automatically apply fixes
-    git-ls | grep "\.sh$" | xargs readlink -f \
+    git-ls | grep "\.sh$" \
+      | xargs --delimiter '\n' --no-run-if-empty readlink -f \
       | parallel shellcheck --exclude=SC1091,SC2312 --enable=all --format=diff \
       | sed "s|--- ${git_root}|--- a|g" \
       | sed "s|+++ ${git_root}|+++ b|g" \
@@ -37,16 +39,19 @@ function lint_shell_files() {
 }
 
 function lint_python_files() {
-  git-ls | grep "\.py$" | xargs readlink -f \
+  git-ls | grep "\.py$" \
+    | xargs --delimiter '\n' --no-run-if-empty readlink -f \
     | grep -v -e ".local/opt/" \
-    | xargs ruff check --quiet --extend-select I --fix \
+    | xargs --delimiter '\n' --no-run-if-empty \
+      ruff check --quiet --extend-select I --fix \
       --config "${HOME}"/.config/dotfiles/pyproject.toml
 }
 
 function type_python_files() {
   git-ls | grep "\.py$" | xargs readlink -f \
     | grep -v -e ".local/opt/" \
-    | xargs basedpyright \
+    | xargs --delimiter '\n' --no-run-if-empty \
+      basedpyright \
       --project "${HOME}"/.config/dotfiles/pyproject.toml \
     | not grep --invert-match "0 errors, 0 warnings, 0 notes"
 }
@@ -67,8 +72,8 @@ function get_all_files_without_extensions() {
 function get_all_files_covered_by_extension_links() {
   git-ls \
     | (grep ".config/extension_links/" || true) \
-    | xargs --no-run-if-empty readlink -f \
-    | xargs --no-run-if-empty realpath -q \
+    | xargs --delimiter '\n' --no-run-if-empty readlink -f \
+    | xargs --delimiter '\n' --no-run-if-empty realpath -q \
     | sed "s|^$(pwd)/||g"
 }
 
@@ -108,7 +113,7 @@ function create_extension_links() {
     mkdir -p "${git_root}/${link_dir}"
 
     echo "Creating extension link: ${link_path} -> ${prefix}${file}"
-    ln -s "${prefix}${file}" "${git_root}/${link_path}"
+    ln -s -- "${prefix}${file}" "${git_root}/${link_path}"
     git add --force --intent-to-add "${link_path}"
   done < <(comm -23 <(
     get_all_files_without_extensions | sort

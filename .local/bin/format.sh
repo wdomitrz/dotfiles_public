@@ -58,10 +58,18 @@ function format_stdin_main() {
   fi
   case "$1" in
     --filename)
+      if [[ $# -lt 2 ]]; then
+        echo "${FUNCNAME[*]}: Expected filename"
+        return 1
+      fi
       filetype="$(get_filetype "$2")"
       shift 2
       ;;
     --filetype)
+      if [[ $# -lt 2 ]]; then
+        echo "${FUNCNAME[*]}: Expected filetype"
+        return 1
+      fi
       filetype="$2"
       shift 2
       ;;

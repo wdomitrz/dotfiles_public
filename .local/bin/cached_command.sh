@@ -6,6 +6,10 @@ function usage_and_exit() {
   exit "$1"
 }
 
+if [[ $# -eq 0 ]]; then
+  usage_and_exit 1
+fi
+
 overwrite=false
 case "$1" in
   -h | --help)
@@ -17,10 +21,6 @@ case "$1" in
     ;;
   *) ;;
 esac
-
-if [[ $# -eq 0 ]]; then
-  usage_and_exit 1
-fi
 
 base_cache_dir="/run/user/$(id --user)"
 

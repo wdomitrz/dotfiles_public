@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 set -eu
 
+. "${HOME}"/.profile
+
 top="${1:-1}"
 cursor_line="${2:-0}"
 cursor_col="${3:-1}"

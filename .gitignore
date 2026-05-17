@@ -118,6 +118,7 @@
 !.config/packages/packages_main.sorted.txt
 !.config/packages/packages_nvidia.sorted.txt
 !.config/packages/packages_other.sorted.txt
+!.config/packages/packages_pi.sorted.txt
 !.config/redshift.conf
 !.config/rofi/config.rasi
 !.config/rofi/theme_dark.rasi
@@ -229,6 +230,7 @@
 !.local/bin/sleep_forever.sh
 !.local/bin/start_docker_server.sh
 !.local/bin/sync_backup.sh
+!.local/bin/tailscale_ssh_proxy.sh
 !.local/bin/terminal_pager
 !.local/bin/timer
 !.local/bin/today

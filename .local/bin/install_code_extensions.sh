@@ -7,13 +7,21 @@ if [[ $# -ge 1 ]]; then
 fi
 
 function list_extensions_to_install() {
-  jq --raw-output '."remote.SSH.defaultExtensions"[]' "${settings_file}"
+  jq --raw-output '."remote.SSH.defaultExtensions"[]?' "${settings_file}"
 }
 
-list_extensions_to_install \
-  | sed 's/^/--install-extension /g' | xargs --no-run-if-empty code --force \
-  | grep --invert-match '^Installing extensions...' \
-  | grep --invert-match ' is already installed.$'
+function install_extensions() {
+  list_extensions_to_install \
+    | sed 's/^/--install-extension /g' | xargs --no-run-if-empty code --force
+}
+
+install_output="$(install_extensions)"
+if [[ -n ${install_output} ]]; then
+  printf '%s\n' "${install_output}" \
+    | grep --invert-match --fixed-strings 'Installing extensions...' \
+    | grep --invert-match ' is already installed.$' \
+    || true
+fi
 
 comm -23 \
   <(code --list-extensions | grep --invert-match "Extensions installed on " | sort) \

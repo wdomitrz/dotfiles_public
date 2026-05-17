@@ -173,6 +173,7 @@ function main() {
 
   # Default values
   out_volume=40% && in_volume=100% && out_muted=1 && in_muted=0
+  out_filter= && in_filter=
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --help) set_audio_help ;;
@@ -186,6 +187,11 @@ function main() {
       *) echo "Unknown param $1" && exit 1 ;;
     esac
   done
+
+  if [[ -z ${out_filter} || -z ${in_filter} ]]; then
+    echo "Expected --both-filter or both --out-filter and --in-filter" >&2
+    return 1
+  fi
 
   set_cards "${out_filter}" "${in_filter}"
   # sink is out

@@ -32,6 +32,11 @@ function do_rest() {
 function main() {
   set -euo pipefail
 
+  if [[ $# -ne 2 ]]; then
+    echo "Usage: $0 <from_location> <host:to_location>" >&2
+    exit 1
+  fi
+
   from_location="$1"
   where_and_to_location="$2"
 

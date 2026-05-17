@@ -5,4 +5,4 @@ set -eou pipefail
   | sort --random-sort | head -n 1 \
   | exec xargs feh \
     --window-id "${XSCREENSAVER_WINDOW:?XSCREENSAVER_WINDOW not set}" \
-    --fullscreen --zoom fill --no-xinema
+    --fullscreen --zoom fill --no-xinerama

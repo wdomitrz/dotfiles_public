@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 scrollback_buffer_file="$(mktemp)"
-trap 'rm --f "${scrollback_buffer_file}"' EXIT
+trap 'rm -f -- "${scrollback_buffer_file}"' EXIT
 
 cat > "${scrollback_buffer_file}"
 

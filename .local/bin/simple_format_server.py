@@ -67,11 +67,18 @@ def get_server(*, format_command: list[str]) -> LanguageServer:
                     new_text=formatted_text,
                 )
             ]
-        except subprocess.CalledProcessError as e:
+        except (
+            OSError,
+            subprocess.CalledProcessError,
+            KeyError,
+            IndexError,
+            ValueError,
+        ) as e:
             error_info = dict(
                 format_command=format_command,
                 formated_file=doc.path,
-                stderr=e.stderr,
+                stderr=getattr(e, "stderr", None),
+                error=str(e),
             )
             logging.exception("formatter error: %s", error_info)
             ls.show_message_log(f"formatter error: {error_info}")

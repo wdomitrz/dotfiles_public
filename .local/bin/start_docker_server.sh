@@ -35,5 +35,6 @@ function start_docker_server_main() {
 export -f start_docker_server_main
 
 if [[ $# -ne 1 ]] || [[ ${1} != "--source-only" ]]; then
-  tmux new -s docker -d "start_docker_server_main $*"
+  printf -v tmux_command '%q ' start_docker_server_main "$@"
+  tmux new -s docker -d "${tmux_command}"
 fi

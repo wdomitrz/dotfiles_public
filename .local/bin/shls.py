@@ -172,15 +172,14 @@ def lint(
         "--format=json1",
     ]
     try:
-        diagnostics = json.loads(
-            subprocess.run(
-                diagnostics_command,
-                input=doc.source,
-                capture_output=True,
-                text=True,
-                check=False,
-            ).stdout
+        diagnostics_process = subprocess.run(
+            diagnostics_command,
+            input=doc.source,
+            capture_output=True,
+            text=True,
+            check=False,
         )
+        diagnostics = json.loads(diagnostics_process.stdout)
         return [
             parse_diagnostic(
                 file_uri=file_uri,
@@ -196,11 +195,11 @@ def lint(
             )
             for d in diagnostics["comments"]
         ]
-    except subprocess.CalledProcessError as e:
+    except (OSError, json.JSONDecodeError) as e:
         error_info = dict(
             diagnostics_command=diagnostics_command,
             formated_file=doc.path,
-            stderr=e.stderr,
+            error=str(e),
         )
         logging.exception("diagnostics error: %s", error_info)
         ls.show_message_log(f"diagnostics error: {error_info}")

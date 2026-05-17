@@ -2,6 +2,7 @@
 set -eu
 
 # Default values
+touchpad_name=
 reversed=false
 acceleration=0.4
 
@@ -14,6 +15,11 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+if [ -z "${touchpad_name}" ]; then
+  echo "usage: $0 --touchpad-name <name> [--reversed true|false] [--acceleration value]" >&2
+  exit 1
+fi
+
 xinput set-prop "${touchpad_name}" 'libinput Tapping Enabled' 1
 if ! "${reversed}"; then
   xinput set-prop "${touchpad_name}" 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
@@ -23,4 +29,4 @@ else
   xinput set-prop "${touchpad_name}" 'libinput Natural Scrolling Enabled' 1
 fi
 
-xinput set-prop 15 'libinput Accel Speed' "${acceleration}"
+xinput set-prop "${touchpad_name}" 'libinput Accel Speed' "${acceleration}"

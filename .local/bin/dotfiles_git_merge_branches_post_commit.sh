@@ -18,7 +18,7 @@ function merge_with_main_branch {
   if ! git merge --no-edit "${MAIN_BRANCH}"; then
     git status -s | grep "^DU " \
       | cut --delimiter ' ' --fields 2- \
-      | xargs git rm
+      | xargs --delimiter '\n' --no-run-if-empty git rm --
     git -c core.editor=true merge --continue
   fi
 }

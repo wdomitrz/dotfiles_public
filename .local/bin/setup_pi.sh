@@ -82,6 +82,11 @@ function all() {
 
 function main_setup_pi() {
   set -euo pipefail
+  if [[ $# -lt 1 ]]; then
+    echo "Usage: $0 <host> [--run-only <cmd>]" >&2
+    exit 1
+  fi
+
   where="$1"
   shift 1
 

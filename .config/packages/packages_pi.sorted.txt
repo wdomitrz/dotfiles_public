@@ -1,0 +1,7 @@
+cryptsetup
+git
+kitty-terminfo
+moreutils
+neovim
+tree
+unattended-upgrades

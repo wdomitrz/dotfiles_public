@@ -11,10 +11,15 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
-from typing import cast
+from typing import TypeAlias, cast
 from urllib.parse import parse_qsl, urlparse
 
 from typing_extensions import Self
+
+QueryValue: TypeAlias = str | list[str]
+QueryInfo: TypeAlias = dict[str, QueryValue]
+RawQueryInfo: TypeAlias = dict[str, list[str]]
+URLInfo: TypeAlias = dict[str, int | str | QueryInfo]
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -29,8 +34,15 @@ class Args:
         return cls(url=cast(str, args.url))
 
     @classmethod
-    def to_info(cls, url: str) -> dict[str, int | str | dict[str, str]]:
+    def to_info(cls, url: str) -> URLInfo:
         parsed = urlparse(url)
+        raw_query: RawQueryInfo = {}
+        for key, value in parse_qsl(parsed.query, keep_blank_values=True):
+            raw_query.setdefault(key, []).append(value)
+        query: QueryInfo = {
+            key: values[0] if len(values) == 1 else values
+            for key, values in raw_query.items()
+        }
         return {
             k: v
             for k, v in dict(
@@ -41,11 +53,10 @@ class Args:
                 hostname=parsed.hostname,
                 port=parsed.port,
                 path=parsed.path,
-                query=dict(parse_qsl(parsed.query)),
+                query=query,
                 hash=parsed.fragment,
             ).items()
-            if v is not None
-            and (not isinstance(v, (str, dict, list, tuple)) or len(v) != 0)
+            if v is not None and (not isinstance(v, (str, dict)) or len(v) != 0)
         }
 
     def run(self) -> int:

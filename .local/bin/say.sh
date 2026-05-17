@@ -13,7 +13,7 @@ while [[ $# -gt 0 ]]; do
     --stdin) use_stdin="$2" && shift 2 ;;
     --verbose) verbose="$2" && shift 2 ;;
     --dry-run) dry_run="$2" && shift 2 ;;
-    *) echo "Unsupported option: $2" && exit 1 ;;
+    *) echo "Unsupported option: $1" && exit 1 ;;
   esac
 done
 

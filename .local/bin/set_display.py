@@ -206,6 +206,7 @@ class DpiSettings:
         except FileNotFoundError:
             add_dpi_import = True
         if add_dpi_import:
+            config_path.touch(exist_ok=True)
             with config_path.open("r+", encoding="utf-8") as rofi_config_file:
                 rofi_config_contents = rofi_config_file.read()
                 _ = rofi_config_file.seek(0)

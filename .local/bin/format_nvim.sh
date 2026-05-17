@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 set -eu
+
+if [ "$#" -ne 1 ]; then
+  echo "usage: $0 <file-extension>" >&2
+  exit 1
+fi
+
 file_extension="$1"
 tmp_file="$(mktemp --suffix=."${file_extension}")"
 cat > "${tmp_file}"

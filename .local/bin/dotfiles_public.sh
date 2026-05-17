@@ -17,7 +17,7 @@ function checkout_public() {
 function update_to_local_copy() {
   git checkout "${local_public_branch}" -- "$(git rev-parse --show-toplevel)"
   git diff "${local_public_branch}" --name-only --diff-filter=A \
-    | xargs --no-run-if-empty git rm
+    | xargs --delimiter '\n' --no-run-if-empty git rm --
   git commit --message="."
 }
 
@@ -32,12 +32,12 @@ function push() {
 }
 
 function remove_remote() {
-  git remote remove "${public_upstream}"
+  git remote remove "${public_upstream}" || true
 }
 function cleanup() {
   starting_branch="$1"
-  git checkout "${starting_branch}" --
-  git branch --delete "${public_branch}"
+  git checkout "${starting_branch}" -- || true
+  git branch --delete --force "${public_branch}" || true
   remove_remote
 }
 

@@ -18,10 +18,10 @@ function format_stdin() {
   case "$1" in
     sh | bash | shellscript) format_sh ;;
     py | python) format_py ;;
-    c | cpp | cuda) format_c_cpp ;;
+    c | cpp | cuda | cuda-cpp) format_c_cpp ;;
     sorted_json) format_sorted_json ;;
     json | jsonc) format_json ;;
-    vim) format_vim ;;
+    vim | viml) format_vim ;;
     lua) format_lua ;;
     sorted_txt | sorted) format_sorted_txt ;;
     sorted_numeric_txt | sorted_numeric) format_sorted_numeric_txt ;;

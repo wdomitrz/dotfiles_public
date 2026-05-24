@@ -109,7 +109,7 @@ tnoremap <C-space>  <cmd>call Terminal_toggle()<cr>
 
 " LSP servers
 if has('nvim-0.11')
-    lua vim.lsp.config['shls'] = { cmd = { 'shls.py' }, filetypes = { 'bash', 'sh' } }
+    lua vim.lsp.config['shls'] = { cmd = { 'shls.sh' }, filetypes = { 'bash', 'sh' } }
     lua vim.lsp.enable('shls')
     lua vim.lsp.enable('basedpyright')
     lua vim.lsp.enable('ruff')

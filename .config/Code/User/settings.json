@@ -1,29 +1,12 @@
 {
-  "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "breadcrumbs.enabled": false,
   "cSpell.language": "en,pl",
   "cSpell.useGitignore": false,
   "chat.disableAIFeatures": true,
-  "custom-format.formatters": [
-    { "command": "format.sh stdin --filename $FILE", "language": "plaintext" },
-    { "command": "format.sh stdin --filetype c", "language": "c" },
-    { "command": "format.sh stdin --filetype cpp", "language": "cpp" },
-    { "command": "format.sh stdin --filetype cuda", "language": "cuda-cpp" },
-    { "command": "format.sh stdin --filetype json", "language": "json" },
-    { "command": "format.sh stdin --filetype jsonc", "language": "jsonc" },
-    { "command": "format.sh stdin --filetype lua", "language": "lua" },
-    { "command": "format.sh stdin --filetype py", "language": "python" },
-    { "command": "format.sh stdin --filetype sh", "language": "shellscript" },
-    { "command": "format.sh stdin --filetype vim", "language": "viml" }
-  ],
   "editor.acceptSuggestionOnEnter": "on",
   "editor.cursorBlinking": "solid",
   "editor.cursorSurroundingLines": 1024,
-  "editor.defaultFormatter": "Vehmloewff.custom-format",
+  "editor.defaultFormatter": "wdomitrz.simple-lsp-client",
   "editor.fontFamily": "'JetBrains Mono', monospace",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
@@ -79,22 +62,13 @@
   "notebook.formatOnSave.enabled": true,
   "path-autocomplete.triggerOutsideStrings": true,
   "remote.SSH.defaultExtensions": [
-    "charliermarsh.ruff",
-    "davidanson.vscode-markdownlint",
-    "dcasella.i3",
-    "detachhead.basedpyright",
-    "esbenp.prettier-vscode",
     "ionutvmi.path-autocomplete",
     "jacobdufault.fuzzy-search",
     "jimmyzjx.go-to-next-problem",
     "jimmyzjx.leaderkey",
     "jimmyzjx.remote-commons",
     "jimmyzjx.ripgrep",
-    "llvm-vs-code-extensions.vscode-clangd",
-    "mechatroner.rainbow-csv",
-    "ms-python.python",
     "ms-toolsai.jupyter",
-    "ms-toolsai.jupyter-keymap",
     "ms-toolsai.jupyter-renderers",
     "ms-vscode-remote.remote-ssh",
     "ms-vscode-remote.remote-ssh-edit",
@@ -103,10 +77,8 @@
     "stkb.rewrap",
     "streetsidesoftware.code-spell-checker",
     "streetsidesoftware.code-spell-checker-polish",
-    "timonwong.shellcheck",
-    "vehmloewff.custom-format",
     "vscodevim.vim",
-    "xadillax.viml"
+    "wdomitrz.simple-lsp-client"
   ],
   "remote.SSH.lockfilesInTmp": true,
   "remote.extensionKind": {
@@ -118,6 +90,38 @@
   "security.workspace.trust.startupPrompt": "always",
   "shellcheck.customArgs": ["--exclude=SC1091,SC2312", "--enable=all"],
   "shellcheck.disableVersionCheck": true,
+  "simpleLspClient.formatters": {
+    "format.sh": {
+      "cmd": ["format.sh", "stdin", "--filetype", "${filetype}"],
+      "filetypes": [
+        "c",
+        "cpp",
+        "cuda-cpp",
+        "json",
+        "jsonc",
+        "lua",
+        "python",
+        "shellscript",
+        "viml"
+      ]
+    },
+    "format_txt": {
+      "cmd": ["format.sh", "stdin", "--filename", "${file}"],
+      "filetypes": ["plaintext"]
+    }
+  },
+  "simpleLspClient.servers": {
+    "basedpyright": {
+      "cmd": ["basedpyright-langserver", "--stdio"],
+      "filetypes": ["python"]
+    },
+    "clangd": {
+      "cmd": ["clangd"],
+      "filetypes": ["c", "cpp", "objective-c", "objective-cpp"]
+    },
+    "ruff": { "cmd": ["ruff", "server"], "filetypes": ["python"] },
+    "shls": { "cmd": ["shls.sh"], "filetypes": ["shellscript"] }
+  },
   "telemetry.enableTelemetry": false,
   "telemetry.feedback.enabled": false,
   "telemetry.telemetryLevel": "off",

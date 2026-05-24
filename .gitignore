@@ -108,6 +108,8 @@
 !.config/i3/my_auto_run.sh
 !.config/i3status/config
 !.config/karabiner/karabiner.json
+!.config/keyboards/ADVANTAGE2/qwerty.txt
+!.config/keyboards/ADVANTAGE2/state.txt
 !.config/kitty/dark-theme.auto.conf
 !.config/kitty/kitty.conf
 !.config/kitty/light-theme.auto.conf
@@ -224,9 +226,9 @@
 !.local/bin/set_touchpad.sh
 !.local/bin/set_touchpads.sh
 !.local/bin/setup_pi.sh
-!.local/bin/shls.py
+!.local/bin/shls.sh
 !.local/bin/shutdown
-!.local/bin/simple_format_server.py
+!.local/bin/simple_lsp_server.py
 !.local/bin/sleep_forever.sh
 !.local/bin/start_docker_server.sh
 !.local/bin/sync_backup.sh
@@ -250,6 +252,7 @@
 !.local/opt/my/mwm
 !.local/opt/my/pdiff
 !.local/opt/my/qr_py
+!.local/opt/my/simple_lsp_server
 !.local/opt/my/theme_watcher.nvim
 !.local/opt/nvim_plugins/findfile.nvim
 !.local/opt/nvim_plugins/fzf

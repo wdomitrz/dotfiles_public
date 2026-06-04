@@ -65,7 +65,7 @@ function configure_tpm2_non_root_disk_unlock() {
   # sudo systemd-cryptenroll /dev/nvme0n1p3
   # For wiping unused slot
   # sudo systemd-cryptenroll --wipe-slot=1 /dev/nvme0n1p3
-  sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7+8 /dev/nvme0n1p3
+  sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7 /dev/nvme0n1p3
 }
 
 function config_global_start() {

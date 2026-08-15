@@ -38,6 +38,10 @@ function upgrade_packages() {
   ssh "$1" 'sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --yes --quiet=2'
 }
 
+function fix_locales() {
+  ssh "$1" 'sudo dpkg-reconfigure --frontend noninteractive locales'
+}
+
 function install_packages() {
   where="$1"
 
@@ -72,6 +76,7 @@ function all() {
 
   print_and_run basic "${where}"
   print_and_run config_ssh "${where}"
+  print_and_run fix_locales "${where}"
   print_and_run update_packages "${where}"
   print_and_run install_packages "${where}"
   print_and_run setup_udisk2_perms "${where}"

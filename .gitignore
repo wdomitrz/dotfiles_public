@@ -115,7 +115,6 @@
 !.config/kitty/light-theme.auto.conf
 !.config/kitty/pager.sh
 !.config/kitty/pager.vim
-!.config/mimeapps.list
 !.config/nvim/init.vim
 !.config/packages/packages_main.sorted.txt
 !.config/packages/packages_nvidia.sorted.txt

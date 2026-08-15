@@ -20,7 +20,7 @@ from typing import NamedTuple, TypeAlias, cast
 
 from typing_extensions import Self
 
-JSONScalar: TypeAlias = None | bool | int | float | str
+JSONScalar: TypeAlias = bool | int | float | str | None
 JSON: TypeAlias = JSONScalar | list["JSON"] | dict[str, "JSON"]
 
 

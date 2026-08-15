@@ -307,7 +307,7 @@ def combine_read_sources(
             yield ready_read.fileno(), ready_read.readline()
 
 
-def process_i3status_output(i3status_output: str) -> None | list[StatusBlock]:
+def process_i3status_output(i3status_output: str) -> list[StatusBlock] | None:
     i3status_output_str: str = i3status_output.strip().strip(",")
 
     try:

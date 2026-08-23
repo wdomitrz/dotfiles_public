@@ -9,4 +9,4 @@ fi
 HOST="$1"
 PORT="$2"
 
-exec nc --proxy-type socks5 --proxy localhost:1055 "${HOST}" "${PORT}"
+exec nc --proxy-type socks5 --proxy 127.0.0.1:1055 "${HOST}" "${PORT}"

@@ -201,7 +201,7 @@
 !.local/bin/not
 !.local/bin/not_sudo
 !.local/bin/pasta
-!.local/bin/pdiff.py
+!.local/bin/pdiff.rs
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh
 !.local/bin/propagate_config_to.sh
@@ -250,7 +250,6 @@
 !.local/opt/my/findfile.nvim
 !.local/opt/my/i3_n_column_layout
 !.local/opt/my/mwm
-!.local/opt/my/pdiff
 !.local/opt/my/qr_py
 !.local/opt/my/simple_lsp_server
 !.local/opt/my/theme_watcher.nvim

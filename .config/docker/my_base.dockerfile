@@ -9,12 +9,21 @@ RUN (echo "UsePAM yes" && cat /etc/ssh/sshd_config) | \
         sponge /etc/ssh/sshd_config
 
 # Mocks
+# For files owned by packages, divert them first so that apt upgrades
+# (e.g. dist-upgrade of util-linux/systemd) do not replace the mocks.
 RUN true && \
-    ln --force --symbolic /usr/bin/true /usr/bin/systemctl && \
     ln --force --symbolic /usr/bin/true /usr/local/sbin/update-grub && \
-    ln --force --symbolic /usr/bin/true /usr/sbin/mkswap && \
-    ln --force --symbolic /usr/bin/true /usr/sbin/swapon && \
+    dpkg-divert --local --rename --divert /usr/bin/systemctl.distrib \
+        /usr/bin/systemctl && \
+    ln --symbolic /usr/bin/true /usr/bin/systemctl && \
+    dpkg-divert --local --rename --divert /usr/sbin/mkswap.distrib \
+        /usr/sbin/mkswap && \
+    ln --symbolic /usr/bin/true /usr/sbin/mkswap && \
+    dpkg-divert --local --rename --divert /usr/sbin/swapon.distrib \
+        /usr/sbin/swapon && \
+    ln --symbolic /usr/bin/true /usr/sbin/swapon && \
     true
+
 
 # Add a new user
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \

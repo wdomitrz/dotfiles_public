@@ -15,4 +15,4 @@
 [push]
 	autoSetupRemote = true
 [diff]
-	external = pdiff.py git
+	external = pdiff.rs git

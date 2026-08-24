@@ -6,11 +6,13 @@
 
 set -eu
 
+builder="${RSCRIPT_BUILDER:-docker}"
 image=rscript-rust
 cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/rscript"
 stage=".rscript-incoming.$$" # unique per invocation
 
-# Runs inside the container; PKG, DEPS_TOML and STAGE via environment.
+# Runs in a fresh sh; PKG, DEPS_TOML, STAGE CACHE and WORK via
+# environment, the script source via stdin.
 # shellcheck disable=SC2016  # expanded inside the container, not here
 build_script='
 set -eu
@@ -19,18 +21,20 @@ step() {
   printf "==> %s\n" "$1" >&2
 }
 
+cd "${WORK}"
+
 mkdir -p src
 cat > src/main.rs
 
 cat > Cargo.toml <<TOML
 [package]
-name = "$PKG"
+name = "${PKG}"
 version = "0.0.0"
 edition = "2021"
 
 [profile.release]
 strip = true
-$DEPS_TOML
+${DEPS_TOML}
 TOML
 
 step "format: cargo fmt --check"
@@ -48,7 +52,7 @@ RUSTDOCFLAGS="-D warnings" cargo doc --no-deps
 step "build: cargo build --release"
 cargo build --release
 
-cp "target/release/$PKG" "/cache/${STAGE}"
+cp "target/release/${PKG}" "${CACHE}"/"${STAGE}"
 '
 
 verbose=0
@@ -86,9 +90,13 @@ usage() {
   cat << EOF
 usage: ${prog} [options] <script.rs> [args...]
 
-Compile and run a Rust source file in a docker rust container.
-fmt, clippy, tests and docs are checked on every rebuild; the binary
-is cached in ${cache_dir} until the source changes.
+Compile and run a Rust source file. fmt, clippy, tests and docs are
+checked on every rebuild; the binary is cached in ${cache_dir}
+until the source changes.
+
+Build backend via RSCRIPT_BUILDER (currently: ${builder}):
+  docker  build in a docker rust container (default)
+  locak   build with the local rust toolchain in a temp dir
 
 Dependencies via meta comments:
   //# dependencies:
@@ -106,7 +114,7 @@ As a shebang, first line of an executable .rs file:
 EOF
 }
 
-update_image() {
+ensure_toolchain_docker() {
   img_log=$({
     docker pull -q rust:1
     docker build -q -t "${image}" - << 'EOF'
@@ -122,11 +130,59 @@ EOF
   }
 }
 
+run_build_docker() {
+  [ "${#}" -eq 4 ] || exit 1
+  docker run --rm -i \
+    -u "$(id -u):$(id -g)" \
+    -e PKG="${1}" \
+    -e DEPS_TOML="${2}" \
+    -e STAGE="${stage}" \
+    -e CACHE=/cache \
+    -e WORK=/work \
+    -v "${3}":/cache \
+    -w /work \
+    "${image}" \
+    sh -c "${build_script}" < "${4}"
+}
+
+ensure_toolchain_local() {
+  for tool in 'cargo --version' 'cargo fmt --version' 'cargo clippy --version'; do
+    # shellcheck disable=SC2086  # intentional word splitting
+    tool_log=$(${tool} 2>&1) || {
+      printf 'missing %s\n%s\n' "${tool}" "${tool_log}" >&2
+      return 1
+    }
+  done
+}
+
+run_build_local() {
+  [ "${#}" -eq 4 ] || exit 1
+  workdir=$(mktemp -d "${TMPDIR:-/tmp}/rscript.XXXXXX") || return 1
+  _rc=0
+  PKG="${1}" \
+    DEPS_TOML="${2}" \
+    STAGE="${stage}" \
+    CACHE="${3}" \
+    WORK="${workdir}" \
+    sh -c "${build_script}" < "${4}" || _rc=${?}
+  rm -rf "${workdir}"
+  return "${_rc}"
+}
+
 needs_build() {
   [ "${#}" -eq 3 ] || exit 1
   { [ "${1}" -eq 1 ] || [ ! -x "${2}" ]; } && return 0
   # POSIX alternative to test's non-portable -nt.
-  [ -n "$(find "${3}" -newer "${2}")" ]
+  [ -n "$(find "${3}" -newer "${2}")" ] || return 1
+  # mtime mismatch: confirm against the digest stored at build time.
+  stored=$(cat "${2}.sha" 2> /dev/null) || return 0
+  current=$(digest_stdin < "${3}")
+  if [ "${current%% *}" != "${stored}" ]; then
+    return 0
+  fi
+  # Content unchanged despite the timestamp; refresh the binary's
+  # mtime so the next run takes the mtime fast path.
+  touch -- "${2}"
 }
 
 parse_deps() {
@@ -168,19 +224,6 @@ extract_deps() {
   fi
 }
 
-run_container() {
-  [ "${#}" -eq 4 ] || exit 1
-  docker run --rm -i \
-    -u "$(id -u):$(id -g)" \
-    -e PKG="${1}" \
-    -e DEPS_TOML="${2}" \
-    -e STAGE="${stage}" \
-    -v "${3}":/cache \
-    -w /work \
-    "${image}" \
-    sh -c "${build_script}" < "${4}"
-}
-
 build() {
   [ "${#}" -eq 3 ] || exit 1
   build_verbose=${1}
@@ -189,8 +232,8 @@ build() {
   script_name=${script_path##*/}
 
   # shellcheck disable=SC2310
-  if ! update_image; then
-    echo "rscript: image update failed" >&2
+  if ! "ensure_toolchain_${builder}"; then
+    echo "rscript: toolchain unavailable (${builder})" >&2
     exit 1
   fi
 
@@ -203,12 +246,12 @@ build() {
   build_log=""
   # shellcheck disable=SC2310
   if [ "${build_verbose}" -eq 0 ]; then
-    build_log=$(run_container \
+    build_log=$("run_build_${builder}" \
       "${pkg}" "${deps_toml}" \
       "${script_cache_dir}" "${script_path}" 2>&1) || rc=${?}
   else
     # shellcheck disable=SC2310
-    run_container \
+    "run_build_${builder}" \
       "${pkg}" "${deps_toml}" \
       "${script_cache_dir}" "${script_path}" >&2 || rc=${?}
   fi
@@ -224,10 +267,20 @@ build() {
   # last one wins; each staged file was written independently.
   bin="${script_cache_dir}/${script_name}"
   mv -f "${script_cache_dir}/${stage}" "${bin}"
+  src_sha=$(digest_stdin < "${script_path}")
+  printf '%s\n' "${src_sha%% *}" > "${script_cache_dir}/${script_name}.sha"
   printf '%s\n' "${bin}"
 }
 
 main() {
+  case ${builder} in
+    docker | local) ;;
+    *)
+      echo "rscipt: invalid RSCRIPT_BUILDER: ${builder}" >&2
+      exit 2
+      ;;
+  esac
+
   case ${0} in
     */*) self=${0} ;;
     *) self=$(command -v "${0}") ;;
@@ -287,7 +340,7 @@ main() {
     bin=$(build "${verbose}" "${script}" "${dir}")
   else
     [ -f "${script}" ] || {
-      rm -f -- "${bin}"
+      rm -f -- "${bin}" "${bin}.sha"
       rmdir "${dir}" 2> /dev/null || true
       echo "rscript: ${name}: no such file (stale binary removed)" >&2
       exit 1

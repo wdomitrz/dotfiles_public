@@ -56,6 +56,8 @@
 !.config/extension_links/.config/etc/default/tailscaled.unknown
 !.config/extension_links/.config/etc/network/interfaces.conf
 !.config/extension_links/.config/git/config.ini
+!.config/extension_links/.config/git/hooks/post-commit.sh
+!.config/extension_links/.config/git/hooks/pre-commit.sh
 !.config/extension_links/.config/i3/config.conf
 !.config/extension_links/.config/i3status/config.conf
 !.config/extension_links/.config/user_configs/.config/Signal/Preferences.json
@@ -166,7 +168,7 @@
 !.local/bin/fix_internet_post_install.sh
 !.local/bin/fix_touchpad.sh
 !.local/bin/format.sh
-!.local/bin/format_json.py
+!.local/bin/format_json.rs
 !.local/bin/format_nvim.sh
 !.local/bin/fzfcommandsearch
 !.local/bin/geoclue-2-agent
@@ -175,13 +177,13 @@
 !.local/bin/gla
 !.local/bin/i3_blank_screen.sh
 !.local/bin/i3_compositor.sh
-!.local/bin/i3_n_column_layout.py
+!.local/bin/i3_n_column_layout.rs
 !.local/bin/i3_res
 !.local/bin/i3_screen_locker.sh
 !.local/bin/i3_set_dpi.sh
 !.local/bin/i3_theme_detection
 !.local/bin/i3_xrl
-!.local/bin/i3status_wrapper.py
+!.local/bin/i3status_wrapper.rs
 !.local/bin/import
 !.local/bin/install_code_extensions.sh
 !.local/bin/install_scripts/config_global.sh
@@ -197,7 +199,7 @@
 !.local/bin/lock
 !.local/bin/lower
 !.local/bin/mksh
-!.local/bin/nato.py
+!.local/bin/nato.rs
 !.local/bin/not
 !.local/bin/not_sudo
 !.local/bin/pasta
@@ -237,10 +239,9 @@
 !.local/bin/timer
 !.local/bin/today
 !.local/bin/toggle_mouse.sh
-!.local/bin/unic.py
 !.local/bin/upload_server.sh
 !.local/bin/upper
-!.local/bin/url.py
+!.local/bin/url.rs
 !.local/bin/vi
 !.local/bin/vim
 !.local/bin/vimdiff
@@ -248,7 +249,6 @@
 !.local/bin/xterm
 !.local/opt/.keep
 !.local/opt/my/findfile.nvim
-!.local/opt/my/i3_n_column_layout
 !.local/opt/my/mwm
 !.local/opt/my/qr_py
 !.local/opt/my/simple_lsp_server

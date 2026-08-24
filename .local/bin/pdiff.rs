@@ -95,14 +95,14 @@ pub(crate) mod diff {
             }
         }
 
-        pub(crate) fn prev_size(&self) -> usize {
+        fn prev_size(&self) -> usize {
             match self.kind {
                 Kind::Same | Kind::Prev | Kind::Replace | Kind::MoveFrom => self.prev.len(),
                 Kind::Next | Kind::MoveTo => 0,
             }
         }
 
-        pub(crate) fn next_size(&self) -> usize {
+        fn next_size(&self) -> usize {
             match self.kind {
                 Kind::Same => self.prev.len(),
                 Kind::Next | Kind::Replace | Kind::MoveTo => self.next.len(),
@@ -110,15 +110,15 @@ pub(crate) mod diff {
             }
         }
 
-        pub(crate) fn advance(&self, prev_line: usize, next_line: usize) -> (usize, usize) {
+        fn advance(&self, prev_line: usize, next_line: usize) -> (usize, usize) {
             (prev_line + self.prev_size(), next_line + self.next_size())
         }
 
-        pub(crate) fn is_move_source_candidate(&self) -> bool {
+        fn is_move_source_candidate(&self) -> bool {
             self.kind == Kind::Prev && self.prev.len() >= MIN_MOVE_LINES
         }
 
-        pub(crate) fn is_move_target_candidate(&self) -> bool {
+        fn is_move_target_candidate(&self) -> bool {
             self.kind == Kind::Next && self.next.len() >= MIN_MOVE_LINES
         }
     }
@@ -147,7 +147,7 @@ pub(crate) mod diff {
             .collect()
     }
 
-    pub(crate) fn longest_increasing_subsequence(values: &[usize]) -> Vec<usize> {
+    fn longest_increasing_subsequence(values: &[usize]) -> Vec<usize> {
         if values.is_empty() {
             return Vec::new();
         }
@@ -443,10 +443,10 @@ pub(crate) mod diff {
     }
 
     pub(crate) struct Hunk {
-        pub(crate) prev_start: usize,
-        pub(crate) prev_size: usize,
-        pub(crate) next_start: usize,
-        pub(crate) next_size: usize,
+        prev_start: usize,
+        prev_size: usize,
+        next_start: usize,
+        next_size: usize,
         pub(crate) ranges: Vec<Range>,
     }
 
@@ -680,7 +680,7 @@ pub(crate) mod refine {
         lines
     }
 
-    pub(crate) fn tokenize(line: &str) -> Vec<String> {
+    fn tokenize(line: &str) -> Vec<String> {
         const DELIMITERS: &str = "\"{}[]#,.;()_";
         const PUNCT: &str = "=`+-/!@$%^&*:|<>";
         const NUMERIC_EXTRA: &str = "._,eE+-";
@@ -915,7 +915,7 @@ pub(crate) mod render {
         out.push('\n');
     }
 
-    pub(crate) fn refined_plain(line: &[Segment]) -> String {
+    fn refined_plain(line: &[Segment]) -> String {
         line.iter().map(|segment| segment.text.as_str()).collect()
     }
 
@@ -1408,7 +1408,7 @@ pub(crate) mod sources {
                 return Ok(String::new());
             }
 
-            let title = format!("pdiff -git {prev_name} {next_name}");
+            let title = format!("pdiff.rs git {prev_name} {next_name}");
             let mut out = String::new();
             if self.options.color {
                 out.push_str(&colored_line(&ansi("1", &title)));
@@ -1839,7 +1839,7 @@ fn main() -> ExitCode {
             return ExitCode::SUCCESS;
         }
         Err(cli::CliError::Message(message)) => {
-            eprintln!("pdiff: {message}");
+            eprintln!("pdiff.rs: {message}");
             return ExitCode::from(2);
         }
     };
@@ -1849,7 +1849,7 @@ fn main() -> ExitCode {
     match cli::execute(&command, &mut stdin.lock(), &mut stdout.lock(), tty) {
         Ok(code) => ExitCode::from(u8::try_from(code).unwrap_or(1)),
         Err(error) => {
-            eprintln!("pdiff: {error}");
+            eprintln!("pdiff.rs: {error}");
             ExitCode::FAILURE
         }
     }
@@ -2212,7 +2212,7 @@ mod tests {
         expect_lines(
             &out,
             &[
-                "\x1b[1mpdiff -git a/file.txt b/file.txt\x1b[0m",
+                "\x1b[1mpdiff.rs git a/file.txt b/file.txt\x1b[0m",
                 "index aaa111..bbb222",
                 "------ a/file.txt",
                 "++++++ b/file.txt",
@@ -2243,7 +2243,7 @@ mod tests {
         expect_lines(
             &out,
             &[
-                "\x1b[1mpdiff -git a/file.txt b/file.txt\x1b[0m",
+                "\x1b[1mpdiff.rs git a/file.txt b/file.txt\x1b[0m",
                 "index aaa111..bbb222",
                 "------ a/file.txt",
                 "++++++ b/file.txt",
@@ -2282,7 +2282,7 @@ mod tests {
         expect_lines(
             &out,
             &[
-                "\x1b[1mpdiff -git a/.local/opt/findfile.nvim b/.local/opt/nvim_plugins/findfile.nvim\x1b[0m",
+                "\x1b[1mpdiff.rs git a/.local/opt/findfile.nvim b/.local/opt/nvim_plugins/findfile.nvim\x1b[0m",
                 info,
             ],
         );

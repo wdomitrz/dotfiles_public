@@ -1,1 +1,0 @@
-../opt/my/i3_n_column_layout/i3_n_column_layout.py

@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -eu
 
-exec post_commit_hook.sh
+exec post_commit_hook.sh "$@"

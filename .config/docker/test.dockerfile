@@ -4,4 +4,4 @@ FROM my_base:local
 COPY --chown=user:user "./.git" "./.git"
 RUN git checkout -- .
 
-CMD ./.local/bin/sanitize_synced_files.sh
+CMD ["./.local/bin/sanitize_synced_files.sh"]

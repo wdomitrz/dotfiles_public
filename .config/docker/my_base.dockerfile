@@ -42,4 +42,4 @@ RUN git checkout -- .
 RUN USER=user ./.local/bin/install_scripts/main.sh
 
 EXPOSE 22
-CMD sudo /usr/sbin/sshd -D
+CMD ["sudo", "/usr/sbin/sshd", "-D"]

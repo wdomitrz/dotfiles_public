@@ -7,4 +7,4 @@ COPY --chown=user:user "./.git" "./.git"
 RUN git checkout -- .
 
 EXPOSE 22
-CMD sudo /usr/sbin/sshd -D
+CMD ["sudo", "/usr/sbin/sshd", "-D"]

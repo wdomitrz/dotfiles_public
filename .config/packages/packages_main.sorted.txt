@@ -193,6 +193,7 @@ tmux
 tp-smapi-dkms
 transmission
 tree
+uidmap
 unar
 unattended-upgrades
 units

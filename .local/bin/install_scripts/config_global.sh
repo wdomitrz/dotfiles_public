@@ -17,7 +17,7 @@ function reconfigure_tlp_post_config_copy() {
 }
 
 function add_user_to_groups() {
-  for group in sudo audio video users netdev bluetooth docker lpadmin nordvpn kvm input uinput libvirt; do
+  for group in sudo audio video users netdev bluetooth lpadmin nordvpn kvm input uinput libvirt; do
     sudo groupadd --force "${group}"
     sudo usermod --append --groups "${group}" "${USER}" \
       || echo "Adding to ${group} failed"

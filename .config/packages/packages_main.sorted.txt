@@ -39,10 +39,6 @@ dex
 dict
 diffutils
 dkms
-docker-buildx
-docker-cli
-docker-compose
-docker.io
 dosfstools
 drawing
 du-dust
@@ -148,6 +144,9 @@ pipewire
 pipewire-audio
 pipewire-pulse
 playerctl
+podman
+podman-compose
+podman-docker
 preload
 printer-driver-all
 progress

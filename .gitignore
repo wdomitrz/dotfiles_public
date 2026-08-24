@@ -27,11 +27,11 @@
 !.config/etc/apt/sources.list.d/signal.sources
 !.config/etc/apt/sources.list.d/tailscale.sources
 !.config/etc/apt/sources.list.d/vscode.sources
+!.config/etc/containers/nodocker
 !.config/etc/default/google-chrome
 !.config/etc/default/grub
 !.config/etc/default/keyboard
 !.config/etc/default/tailscaled
-!.config/etc/docker/daemon.json
 !.config/etc/grub.d/99_my_theme.sh
 !.config/etc/locale.gen
 !.config/etc/modprobe.d/hid_apple.conf
@@ -50,6 +50,7 @@
 !.config/extension_links/.config/Code/User/keybindings.json.sorted.json
 !.config/extension_links/.config/Code/User/settings.json.sorted.json
 !.config/extension_links/.config/dunst/dunstrc.ini
+!.config/extension_links/.config/etc/containers/nodocker.unknown
 !.config/extension_links/.config/etc/default/google-chrome.ini
 !.config/extension_links/.config/etc/default/grub.conf
 !.config/extension_links/.config/etc/default/keyboard.conf

@@ -1,1 +1,0 @@
-../opt/my/simple_lsp_server/simple_lsp_server.py

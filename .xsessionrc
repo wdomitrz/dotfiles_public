@@ -9,8 +9,6 @@ if [ -r "${HOME}/.profile" ]; then . "${HOME}/.profile"; fi
 # Unlock gnome-keyring
 if [ -n "${DESKTOP_SESSION-}" ]; then eval "$(gnome-keyring-daemon --start)" && export SSH_AUTH_SOCK; fi
 
-# Set keymap
-if [ -x "${HOME}/.local/bin/set_keymap.sh" ]; then "${HOME}/.local/bin/set_keymap.sh"; fi
+set_keymap.sh
 
-# Set display
-if [ -x "${HOME}/.local/bin/set_display.py" ]; then "${HOME}/.local/bin/set_display.py"; fi
+set_display.rs

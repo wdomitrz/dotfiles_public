@@ -207,6 +207,7 @@
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh
 !.local/bin/propagate_config_to.sh
+!.local/bin/qr.rs
 !.local/bin/qr_from_clipboard.sh
 !.local/bin/reboot
 !.local/bin/reboot_if_no_internet.sh
@@ -220,7 +221,7 @@
 !.local/bin/scratch
 !.local/bin/set_audio.sh
 !.local/bin/set_background.sh
-!.local/bin/set_display.py
+!.local/bin/set_display.rs
 !.local/bin/set_dpi.sh
 !.local/bin/set_keymap.sh
 !.local/bin/set_theme.sh
@@ -229,7 +230,7 @@
 !.local/bin/setup_pi.sh
 !.local/bin/shls.sh
 !.local/bin/shutdown
-!.local/bin/simple_lsp_server.py
+!.local/bin/simple_lsp_server.rs
 !.local/bin/sleep_forever.sh
 !.local/bin/start_docker_server.sh
 !.local/bin/sync_backup.sh
@@ -249,7 +250,6 @@
 !.local/opt/.keep
 !.local/opt/my/findfile.nvim
 !.local/opt/my/mwm
-!.local/opt/my/simple_lsp_server
 !.local/opt/my/theme_watcher.nvim
 !.local/opt/nvim_plugins/findfile.nvim
 !.local/opt/nvim_plugins/fzf

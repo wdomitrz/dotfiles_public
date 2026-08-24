@@ -11,9 +11,9 @@ image=rscript-rust
 cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/rscript"
 stage=".rscript-incoming.$$" # unique per invocation
 
-# Runs in a fresh sh; PKG, DEPS_TOML, STAGE CACHE and WORK via
+# Runs in a fresh sh; PKG, DEPS_TOML, STAGE, CACHE and WORK via
 # environment, the script source via stdin.
-# shellcheck disable=SC2016  # expanded inside the container, not here
+# shellcheck disable=SC2016  # expanded by the inner sh, not here
 build_script='
 set -eu
 
@@ -96,7 +96,7 @@ until the source changes.
 
 Build backend via RSCRIPT_BUILDER (currently: ${builder}):
   docker  build in a docker rust container (default)
-  locak   build with the local rust toolchain in a temp dir
+  local   build with the local rust toolchain in a temp dir
 
 Dependencies via meta comments:
   //# dependencies:
@@ -140,7 +140,6 @@ run_build_docker() {
     -e CACHE=/cache \
     -e WORK=/work \
     -v "${3}":/cache \
-    -w /work \
     "${image}" \
     sh -c "${build_script}" < "${4}"
 }
@@ -149,7 +148,7 @@ ensure_toolchain_local() {
   for tool in 'cargo --version' 'cargo fmt --version' 'cargo clippy --version'; do
     # shellcheck disable=SC2086  # intentional word splitting
     tool_log=$(${tool} 2>&1) || {
-      printf 'missing %s\n%s\n' "${tool}" "${tool_log}" >&2
+      printf 'missing: %s\n%s\n' "${tool}" "${tool_log}" >&2
       return 1
     }
   done
@@ -276,7 +275,7 @@ main() {
   case ${builder} in
     docker | local) ;;
     *)
-      echo "rscipt: invalid RSCRIPT_BUILDER: ${builder}" >&2
+      echo "rscript: invalid RSCRIPT_BUILDER: ${builder}" >&2
       exit 2
       ;;
   esac

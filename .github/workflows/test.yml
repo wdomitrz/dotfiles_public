@@ -17,4 +17,4 @@ jobs:
     - name: Sanitize
       run: |
         docker build --tag test:local --file ./.config/docker/test.dockerfile .
-        docker run --volume=/var/run/docker.sock:/var/run/docker.sock test:local
+        docker run test:local

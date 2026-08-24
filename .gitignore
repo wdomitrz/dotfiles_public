@@ -207,7 +207,6 @@
 !.local/bin/post_commit_hook.sh
 !.local/bin/pre_commit_hook.sh
 !.local/bin/propagate_config_to.sh
-!.local/bin/qr.py
 !.local/bin/qr_from_clipboard.sh
 !.local/bin/reboot
 !.local/bin/reboot_if_no_internet.sh
@@ -250,7 +249,6 @@
 !.local/opt/.keep
 !.local/opt/my/findfile.nvim
 !.local/opt/my/mwm
-!.local/opt/my/qr_py
 !.local/opt/my/simple_lsp_server
 !.local/opt/my/theme_watcher.nvim
 !.local/opt/nvim_plugins/findfile.nvim

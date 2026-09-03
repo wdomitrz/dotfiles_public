@@ -1,7 +1,10 @@
+crun
 cryptsetup
 git
 kitty-terminfo
 moreutils
 neovim
+podman-docker
 tree
+uidmap
 unattended-upgrades

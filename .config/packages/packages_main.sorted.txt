@@ -30,6 +30,7 @@ command-not-found
 compton
 coreutils
 cron
+crun
 cups
 curl
 dbus-user-session
@@ -144,8 +145,6 @@ pipewire
 pipewire-audio
 pipewire-pulse
 playerctl
-podman
-podman-compose
 podman-docker
 preload
 printer-driver-all

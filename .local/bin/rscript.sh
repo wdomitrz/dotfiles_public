@@ -133,6 +133,7 @@ EOF
 run_build_docker() {
   [ "${#}" -eq 4 ] || exit 1
   docker run --rm -i \
+    --network host \
     --userns=keep-id \
     -u "$(id -u):$(id -g)" \
     -e PKG="${1}" \

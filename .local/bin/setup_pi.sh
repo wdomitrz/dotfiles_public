@@ -30,6 +30,19 @@ function config_ssh() {
   ssh "${where}" 'sudo sshd -t && sudo systemctl restart ssh.service'
 }
 
+function config_podman() {
+  where="$1"
+
+  copy_config_file "${where}" /etc/containers/nodocker
+}
+
+function install_rscript() {
+  where="$1"
+
+  ssh "${where}" 'mkdir -p .local/bin/'
+  scp "${HOME}"/.local/bin/rscript.sh "${where}":.local/bin/
+}
+
 function update_packages() {
   ssh "$1" 'sudo DEBIAN_FRONTEND=noninteractive apt-get update --yes --quiet=2'
 }
@@ -76,13 +89,15 @@ function all() {
 
   print_and_run basic "${where}"
   print_and_run config_ssh "${where}"
+  print_and_run config_podman "${where}"
   print_and_run fix_locales "${where}"
   print_and_run update_packages "${where}"
   print_and_run install_packages "${where}"
+  print_and_run install_rscript "${where}"
   print_and_run setup_udisk2_perms "${where}"
   print_and_run setup_unattended_upgrades "${where}"
-  print_and_run setup_tailscale "${where}"
   print_and_run upgrade_packages "${where}"
+  print_and_run setup_tailscale "${where}"
 }
 
 function main_setup_pi() {

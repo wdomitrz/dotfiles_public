@@ -6,6 +6,12 @@
     "when": "editorTextFocus && vim.active && vim.use<C-u> && !inDebugRepl"
   },
   {
+    "command": "extension.vim_ctrl+k",
+    "comment": "<C-k> handled by vim",
+    "key": "ctrl+k",
+    "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
+  },
+  {
     "command": "extension.vim_ctrl+d",
     "comment": "vscode vim fix",
     "key": "ctrl+d",

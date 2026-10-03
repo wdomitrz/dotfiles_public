@@ -71,7 +71,6 @@
 !.config/extension_links/.local/bin/copy.sh
 !.config/extension_links/.local/bin/fzfcommandsearch.sh
 !.config/extension_links/.local/bin/git-ls.sh
-!.config/extension_links/.local/bin/gla.sh
 !.config/extension_links/.local/bin/i3_res.sh
 !.config/extension_links/.local/bin/i3_xrl.sh
 !.config/extension_links/.local/bin/line.sh
@@ -173,7 +172,6 @@
 !.local/bin/geoclue-2-agent
 !.local/bin/git-ls
 !.local/bin/git-prev_merge_commit.sh
-!.local/bin/gla
 !.local/bin/i3_blank_screen.sh
 !.local/bin/i3_compositor.sh
 !.local/bin/i3_n_column_layout.rs

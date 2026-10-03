@@ -154,6 +154,9 @@ function tempe() {
   cd "${temp_dir}" || false
 }
 
+# Git
+alias gla='git log --all --graph --oneline --decorate --date-order'
+
 # Package manager
 function pcyall() {
   sudo apt-get update --yes \

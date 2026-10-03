@@ -4,8 +4,6 @@
 	excludesfile = ~/.config/git/gitignore.sorted.txt
 [merge]
 	conflictstyle = diff3
-[alias]
-	la = log --all --graph --oneline --decorate --date-order
 [include]
 	path = ~/.config/git/gitconfig.local
 [credential]

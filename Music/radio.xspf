@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<playlist>
-	<trackList>
-		<track>
-			<title>Radio Chopin</title>
-			<location>https://stream85.polskieradio.pl/live/rytm.sdp/playlist.m3u8</location>
-		</track>
-	</trackList>
-</playlist>

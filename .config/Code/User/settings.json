@@ -27,7 +27,6 @@
     "vscodevim.vim": 1
   },
   "extensions.ignoreRecommendations": true,
-  "files.associations": { "**/i3/config": "i3" },
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.saveConflictResolution": "overwriteFileOnDisk",
@@ -80,16 +79,7 @@
     "vscodevim.vim",
     "wdomitrz.simple-lsp-client"
   ],
-  "remote.SSH.lockfilesInTmp": true,
-  "remote.extensionKind": {
-    "jimmyzjx.leaderkey": ["ui"],
-    "pub.name": ["ui"],
-    "vscodevim.vim": ["ui"]
-  },
   "security.workspace.trust.banner": "always",
-  "security.workspace.trust.startupPrompt": "always",
-  "shellcheck.customArgs": ["--exclude=SC1091,SC2312", "--enable=all"],
-  "shellcheck.disableVersionCheck": true,
   "simpleLspClient.formatters": {
     "format.sh": {
       "cmd": ["format.sh", "stdin", "--filetype", "${filetype}"],
@@ -122,20 +112,15 @@
     "ruff": { "cmd": ["ruff", "server"], "filetypes": ["python"] },
     "shls": { "cmd": ["shls.sh"], "filetypes": ["shellscript"] }
   },
-  "telemetry.enableTelemetry": false,
   "telemetry.feedback.enabled": false,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.cwd": "${relativeFileDirname}",
   "terminal.integrated.enableMultiLinePasteWarning": "never",
-  "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.suggest.enabled": false,
   "terminal.integrated.tabs.enabled": false,
   "update.showReleaseNotes": false,
-  "vim.handleKeys": { "<C-b>": false, "<C-l>": false },
+  "vim.handleKeys": { "<C-b>": false },
   "vim.hlsearch": true,
-  "vim.insertModeKeyBindingsNonRecursive": [
-    { "before": ["<C-a>"], "commands": ["editor.action.selectAll"] }
-  ],
   "vim.leader": "<space>",
   "vim.normalModeKeyBindingsNonRecursive": [
     { "comment": "normal/visual mode keybindings" },
@@ -211,7 +196,7 @@
   ],
   "window.autoDetectColorScheme": true,
   "window.commandCenter": false,
-  "window.menuBarVisibility": "toggle",
+  "window.menuBarVisibility": "hidden",
   "window.openFoldersInNewWindow": "off",
   "window.titleBarStyle": "native",
   "workbench.activityBar.location": "hidden",
@@ -219,10 +204,8 @@
   "workbench.editor.showTabs": "none",
   "workbench.editor.useModal": "off",
   "workbench.enableExperiments": false,
+  "workbench.experimental.modernUI": false,
   "workbench.layoutControl.enabled": false,
-  "workbench.preferredDarkColorTheme": "Dark Modern",
-  "workbench.preferredLightColorTheme": "Light Modern",
-  "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "workbench.statusBar.visible": false,
   "workbench.tips.enabled": false,

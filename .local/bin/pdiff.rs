@@ -2439,12 +2439,12 @@ mod tests {
             data: b"",
             color: true,
         };
-        assert!(refiner.render().is_empty());
+        assert_eq!(refiner.render(), "");
         let newlines = StdinRefiner {
             data: b"\n\n",
             color: false,
         };
-        assert!(newlines.render().is_empty());
+        assert_eq!(newlines.render(), "");
     }
 
     #[test]
@@ -2461,7 +2461,7 @@ mod tests {
     #[test]
     fn text_helpers_behave() {
         assert_eq!(split_lines(b"apple\nbanana\n"), ["apple", "banana"]);
-        assert!(split_lines(b"").is_empty());
+        assert_eq!(split_lines(b""), [] as [std::string::String; 0]);
         assert_eq!(split_lines(b"a\n\n"), ["a"]);
         let lines = vec!["x  = 1".to_string()];
         assert_eq!(normalize_lines(&lines), ["x=1"]);

@@ -125,12 +125,13 @@ function create_extension_links() {
 # Parallel execution with tracking processes ###################################
 function run_and_save() {
   set -euo pipefail
-  name="$1"
+  local name="$1"
   (
     "$@"
     echo -n "${name}"
     echo -e "\tdone"
   ) &
+  step_pids+=("$!")
 }
 
 function gitignore_regenerate() {
@@ -145,6 +146,7 @@ function sanitize_synced_main() {
   source "${HOME}"/.profile
   cd "$(git rev-parse --show-toplevel)" || return 1
 
+  local -a step_pids=()
   run_and_save gitignore_regenerate
   run_and_save lint_sources_files
   run_and_save lint_python_files
@@ -153,7 +155,12 @@ function sanitize_synced_main() {
   run_and_save lint_shell_files
   run_and_save format_all_files
   run_and_save type_python_files
-  wait
+  local status=0
+  local pid
+  for pid in "${step_pids[@]}"; do
+    wait "${pid}" || status=$?
+  done
+  return "${status}"
 }
 
 ################################################################################

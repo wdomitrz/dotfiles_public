@@ -4,11 +4,12 @@
     browser = google-chrome
 
     follow = none
+    ignore_dbusclose = true
 
-    width = 300
-    height = 300
-    origin = top-right
-    offset = 10x50
+    width = 600
+    height = (0, 600)
+    origin = center
+    offset = (0, 0)
     scale = 0
     notification_limit = 0
     progress_bar = true
@@ -52,3 +53,10 @@
     foreground = "#ffffff"
     frame_color = "#ff0000"
     timeout = 0
+
+[google_calendar]
+    desktop_entry = "google-chrome*"
+    body = "<a href=?https://calendar.google.com/*"
+    timeout = 0
+    override_dbus_timeout = 0
+    format = "<span font_desc='sans 24'><b>%s</b>\n%b</span>"

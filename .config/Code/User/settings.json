@@ -155,9 +155,14 @@
     { "comment": "normal mode keybindings" },
     { "before": ["u"], "commands": ["undo"] },
     { "before": ["<C-r>"], "commands": ["redo"] },
-    { "before": ["K"], "commands": ["editor.action.showHover"] }
+    { "before": ["K"], "commands": ["editor.action.showHover"] },
+    {
+      "before": ["<C-l>"],
+      "commands": ["cSpell.goToPreviousSpellingIssueAndSuggest"]
+    },
+    { "before": ["<C-S-k>"], "commands": ["editor.action.insertCursorAbove"] },
+    { "before": ["<C-S-j>"], "commands": ["editor.action.insertCursorBelow"] }
   ],
-  "vim.useCtrlKeys": true,
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
     { "comment": "normal/visual mode keybindings" },

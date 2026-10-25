@@ -1,26 +1,44 @@
 [
   {
-    "command": "extension.vim_ctrl+u",
-    "comment": "vscode vim fix",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "key": "ctrl+space",
+    "when": "terminal.active"
+  },
+  { "command": "workbench.action.terminal.new", "key": "ctrl+shift+space" },
+  {
+    "command": "workbench.action.terminal.split",
+    "key": "ctrl+\\",
+    "when": "terminalFocus"
+  },
+  { "comment": "Vim keybindings forwarding" },
+  {
+    "args": { "after": ["<C-u>"] },
+    "command": "vim.remap",
     "key": "ctrl+u",
     "when": "editorTextFocus && vim.active && vim.use<C-u> && !inDebugRepl"
   },
   {
-    "command": "extension.vim_ctrl+k",
-    "comment": "<C-k> handled by vim",
+    "args": { "after": ["<C-k>"] },
+    "command": "vim.remap",
     "key": "ctrl+k",
     "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
   },
   {
-    "command": "extension.vim_ctrl+d",
-    "comment": "vscode vim fix",
+    "args": { "after": ["<C-d>"] },
+    "command": "vim.remap",
     "key": "ctrl+d",
     "when": "editorTextFocus && vim.active && vim.use<C-d> && !inDebugRepl"
   },
   {
-    "command": "extension.vim_escape",
-    "comment": "Just in case",
-    "key": "capslock",
+    "args": { "after": ["<C-S-k>"] },
+    "command": "vim.remap",
+    "key": "ctrl+shift+k",
+    "when": "editorTextFocus && vim.active && !inDebugRepl"
+  },
+  {
+    "args": { "after": ["<C-S-j>"] },
+    "command": "vim.remap",
+    "key": "ctrl+shift+j",
     "when": "editorTextFocus && vim.active && !inDebugRepl"
   },
   {
@@ -39,40 +57,6 @@
     "comment": "Multi cursors",
     "key": "ctrl+shift+j",
     "when": "editorTextFocus"
-  },
-  {
-    "command": "selectPrevSuggestion",
-    "comment": "Scroll suggestions",
-    "key": "shift+tab",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
-  },
-  {
-    "command": "selectNextSuggestion",
-    "comment": "Scroll suggestions",
-    "key": "tab",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
-  },
-  {
-    "command": "workbench.action.terminal.toggleTerminal",
-    "comment": "Open drop-down terminal",
-    "key": "ctrl+space",
-    "when": "terminal.active"
-  },
-  {
-    "command": "workbench.action.terminal.new",
-    "comment": "New terminal",
-    "key": "ctrl+shift+space"
-  },
-  {
-    "command": "workbench.action.terminal.split",
-    "comment": "Split terminal",
-    "key": "ctrl+\\",
-    "when": "terminalFocus"
-  },
-  {
-    "command": "cSpell.goToPreviousSpellingIssueAndSuggest",
-    "comment": "Fix spelling",
-    "key": "ctrl+l"
   },
   { "comment": "Easy navigation in quick open/QuickPick" },
   {
@@ -119,12 +103,5 @@
     "command": "selectPrevCodeAction",
     "key": "ctrl+k",
     "when": "codeActionMenuVisible"
-  },
-  { "comment": "Add ctrl+h/l to navigate in file browser" },
-  {
-    "command": "file-browser.stepOut",
-    "key": "ctrl+h",
-    "when": "inFileBrowser"
-  },
-  { "command": "file-browser.stepIn", "key": "ctrl+l", "when": "inFileBrowser" }
+  }
 ]

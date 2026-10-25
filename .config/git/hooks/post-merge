@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -eu
+
+exec pre_commit_hook.sh "$@"

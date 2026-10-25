@@ -4,7 +4,6 @@
 !.bashrc
 !.cache/.keep
 !.cache/vm_images/.keep
-!.config/Code/User/keybindings.json
 !.config/Code/User/settings.json
 !.config/amethyst/amethyst.yml
 !.config/bat/config_dark.config
@@ -46,7 +45,6 @@
 !.config/extension_links/.Xclients.sh
 !.config/extension_links/.bash_logout.sh
 !.config/extension_links/.bashrc.sh
-!.config/extension_links/.config/Code/User/keybindings.json.sorted.json
 !.config/extension_links/.config/Code/User/settings.json.sorted.json
 !.config/extension_links/.config/dunst/dunstrc.ini
 !.config/extension_links/.config/etc/containers/nodocker.unknown

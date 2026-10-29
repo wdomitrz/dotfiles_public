@@ -6,7 +6,10 @@
 
 set -eu
 
-builder="${RSCRIPT_BUILDER:-docker}"
+case "$(uname)" in
+  Darwin) builder="${RSCRIPT_BUILDER:-local}" ;;
+  *) builder="${RSCRIPT_BUILDER:-docker}" ;;
+esac
 image=rscript-rust
 cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/rscript"
 stage=".rscript-incoming.$$" # unique per invocation

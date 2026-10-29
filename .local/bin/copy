@@ -1,2 +1,12 @@
 #!/usr/bin/env sh
-exec xclip -in -selection clipboard
+
+if command -v pbcopy > /dev/null 2>&1; then
+  exec pbcopy
+elif command -v xclip > /dev/null 2>&1; then
+  exec xclip -in -selection clipboard
+elif command -v xsel > /dev/null 2>&1; then
+  exec xsel --clipboard --input
+else
+  echo "Error: No supported clipboard utility found (pbcopy, xclip, or xsel)." >&2
+  exit 1
+fi

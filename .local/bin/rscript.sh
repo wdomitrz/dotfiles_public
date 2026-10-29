@@ -357,7 +357,11 @@ main() {
     exit 0
   }
 
-  exec "${bin}" "${@}"
+  if [ "${#}" -gt 0 ]; then
+    exec "${bin}" "${@}"
+  else
+    exec "${bin}"
+  fi
 }
 
 main "${@}"

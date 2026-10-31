@@ -167,6 +167,7 @@
     "streetsidesoftware.code-spell-checker-polish",
     "vscodevim.vim",
     "wdomitrz.one-settings",
+    "wdomitrz.rewraps",
     "wdomitrz.simple-lsp-client"
   ],
   "security.workspace.trust.banner": "always",

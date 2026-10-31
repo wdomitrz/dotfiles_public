@@ -302,6 +302,7 @@
   "workbench.enableExperiments": false,
   "workbench.experimental.modernUI": false,
   "workbench.layoutControl.enabled": false,
+  "workbench.reduceMotion": "on",
   "workbench.startupEditor": "none",
   "workbench.statusBar.visible": false,
   "workbench.tips.enabled": false,
